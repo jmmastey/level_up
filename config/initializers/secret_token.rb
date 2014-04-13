@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Learnenova::Application.config.secret_key_base = '0ddb015bf663adb1cdb2e46c3cd81df4ed6e950fea5f21f499f221dd3e2f29fb4aa4f14a7d4f6d999eec098becfa15e81201122a7055ef4c893849db7e0b4aa1'
+Learnenova::Application.config.secret_key_base = ENV["SECRET_KEY"]

@@ -19,6 +19,7 @@ gem 'interactor-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]
+  gem 'dotenv'
   gem 'foreman'
   gem 'guard-bundler'
   gem 'guard-cucumber'

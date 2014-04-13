@@ -269,6 +269,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner (= 1.0.1)
   devise
+  dotenv
   email_spec
   factory_girl_rails
   foreman

@@ -6,8 +6,8 @@ class EnrollUser
   end
 
   def perform
-    add_user_enrollment
-    send_welcome_email
+    fail!(message: "Couldn't add enrollment") unless add_user_enrollment
+    fail!(message: "Couldn't send email") unless send_welcome_email
   end
 
   private
@@ -17,8 +17,8 @@ class EnrollUser
   end
 
   def send_welcome_email
-    AdminMailer.confirm_enrollment(user: context[:user], course: context[:course]).deliver
-    UserMailer.confirm_enrollment(user: context[:user], course: context[:course]).deliver
+    AdminMailer.confirm_enrollment(context[:user], context[:course]).deliver &&
+    UserMailer.confirm_enrollment(context[:user], context[:course]).deliver
   end
 
 end
