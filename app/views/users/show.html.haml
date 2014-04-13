@@ -1,0 +1,6 @@
+%h3 User
+%p
+  User: #{@user.name}
+%p
+  Email: #{@user.email if @user.email}
+= link_to 'Edit account', edit_user_path
