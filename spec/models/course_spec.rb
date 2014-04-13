@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Course do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:course) { build(:course) }
+  let(:user) { build(:user) }
 end
