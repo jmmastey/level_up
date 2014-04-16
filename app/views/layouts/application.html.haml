@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Learnenova
+    %title learn.enova
     = stylesheet_link_tag   "//netdna.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css"
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
@@ -14,3 +14,12 @@
     = render partial: 'layouts/navigation'
     .container 
       = yield
+
+    %footer
+      .container
+        %p This is a project to give a common baseline to engineers at Enova.
+        %p That said, all facts, opinions and rants on this site are surely incorrect and not endorsed by anyone.
+        %p 
+          Send blame, hatemail and unending admiration and so forth to Joseph Mastey (
+          %a{href: 'mailto:jmastey@enova.com'} jmastey@enova.com
+          )

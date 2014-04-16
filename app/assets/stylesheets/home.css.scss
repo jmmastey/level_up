@@ -1,3 +1,21 @@
-.content {
-  padding-top:40px;
+footer {
+  margin-top:60px;
+  padding:40px 0px 20px;
+  border-top:1px solid #e5e5e5;
+
+  p {
+    text-align:center;
+  }
+}
+
+.resources {
+  .resource {
+    padding-bottom:10px;
+    border-bottom:1px solid #e5e5e5;
+
+    &.last {
+      border-bottom-width:0px;
+    }
+  }
+
 }

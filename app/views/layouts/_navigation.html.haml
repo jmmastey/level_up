@@ -1,6 +1,8 @@
-.navbar.navbar-fixed-top{role: "navigation"}
+.navbar.navbar-default{role: "navigation"}
   .container
-    %ul.nav.navbar-nav
+    .navbar-brand
+      %a{href:'/'} learn.enova
+    %ul.nav.navbar-nav.navbar-right
       - if user_signed_in?
         %li= link_to 'Logout', destroy_user_session_path
         %li= link_to 'Edit account', edit_user_registration_path
