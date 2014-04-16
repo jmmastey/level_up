@@ -2,24 +2,32 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Patrick Hand SC', cursive;
 }
 
-.resources {
-  .panel-heading {
-    h1, h2, h3, h4, h5, h6 {
-      margin:0px;
-      font-family: 'Patrick Hand SC', cursive;
-    }
-
-  }
-  .resource {
-    padding-bottom:10px;
-    border-bottom:1px solid #e5e5e5;
-
-    &.last {
-      border-bottom-width:0px;
-    }
+.module {
+  pre.prettyprint {
+    padding:6px;
+    border:1px solid #cccccc;
   }
 
+  .resources {
+    .panel-heading {
+      h1, h2, h3, h4, h5, h6 {
+        margin:0px;
+        font-family: 'Patrick Hand SC', cursive;
+      }
+
+    }
+
+    .resource {
+      padding-bottom:10px;
+      border-bottom:1px solid #e5e5e5;
+
+      &.last {
+        border-bottom-width:0px;
+      }
+    }
+  }
 }
+
 
 footer {
   margin-top:60px;
