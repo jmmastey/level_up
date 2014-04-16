@@ -2,15 +2,26 @@
   .page-header
     %h1 Linux and Shell Utilities
 
-  .row
-    %blockquote
-      %p This is some kind of short quip, because why not, amirite?
-      %small someone
+    .row
+      %blockquote
+        %p This is some kind of short quip, because why not, amirite?
+        %small someone
+
     .col-lg-8
       %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque gravida risus eget neque egestas, vitae condimentum velit tincidunt. Fusce pretium, orci ac iaculis consequat, risus nisl posuere nisl, sed laoreet arcu arcu sit amet sapien. Ut pellentesque, nunc vitae consectetur consectetur, leo mauris hendrerit lacus, non placerat ligula sapien quis erat. Cras sollicitudin mauris vitae quam ullamcorper, ut fringilla est tempus. Ut molestie tortor a urna venenatis vulputate. Morbi eleifend velit eget euismod iaculis. Aliquam erat volutpat. Pellentesque mattis tincidunt ultricies. Vivamus dui tellus, pharetra at auctor vitae, imperdiet at ipsum. Nulla facilisi. In suscipit tincidunt libero vitae dictum. Quisque sit amet ullamcorper orci, non posuere tellus. Mauris pulvinar, augue at blandit vehicula, justo eros laoreet mi, sed auctor eros lorem a justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas ornare eget dui eget dapibus.
-      %pre
-        ps aux | grep httpd
+      %pre.prettyprint
+        :preserve
+          ps aux | grep httpd
+
+      %pre.prettyprint
+        :preserve
+          def foo
+            puts 'bar' + 45
+          end
+          private :foo
+
       %p Nullam eu lorem elit. Vestibulum nec enim laoreet, elementum purus non, imperdiet velit. Pellentesque feugiat volutpat pretium. Aliquam pulvinar mi magna, ut pulvinar dolor elementum sed. Praesent quam lorem, scelerisque sit amet ipsum vitae, posuere facilisis tellus. Nam venenatis vulputate velit. Sed id elit lacus. Quisque hendrerit mauris leo, tincidunt pellentesque nisi ultricies eget.
+
       .page-header
         %h3 Checking on Processes
       %p Nullam vestibulum sed turpis et bibendum. Sed eu massa et enim malesuada semper. Ut sagittis purus risus, eget mattis est tempus nec. Ut consectetur, augue nec sodales iaculis, magna nibh pellentesque sapien, quis adipiscing erat massa id lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam malesuada malesuada purus, a auctor leo pretium ut. Nulla erat leo, posuere ut neque at, molestie mollis mauris. Praesent bibendum dignissim dolor a tempor. In rhoncus orci quis dolor malesuada placerat. Morbi rhoncus sit amet neque non rutrum. Curabitur tristique velit mauris, vel pharetra diam laoreet nec.
@@ -22,7 +33,7 @@
 
       %p Praesent quis dolor accumsan massa hendrerit posuere. Nulla tempus dapibus neque, a euismod felis mattis nec. Praesent consequat nisl pellentesque velit viverra, eu suscipit leo dignissim. Aliquam varius augue eu pulvinar adipiscing. Donec id mauris orci. Nunc volutpat lobortis orci a imperdiet. Nullam ullamcorper condimentum massa nec imperdiet. Pellentesque placerat in dui at rhoncus. Praesent nec egestas augue. Nam nec tempor libero. Cras suscipit imperdiet augue, id pretium augue adipiscing non. Duis ultrices convallis tortor eu mollis.
 
-    .col-lg-4.resources{ role: "complementary" }
+    .col-lg-4.resources{role:'complementary'}
       .bs-component
         .panel.panel-basic
           = render partial: 'resources/linux'
