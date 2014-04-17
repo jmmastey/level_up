@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :course do
-    handle "MyString"
-    name "MyString"
+    sequence(:name) { |n| "Course #{n}" }
+    sequence(:handle) { |n| "course_#{n}" }
   end
 end

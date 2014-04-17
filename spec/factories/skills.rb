@@ -2,9 +2,8 @@
 
 FactoryGirl.define do
   factory :skill do
-    handle "MyString"
-    name "MyString"
-    sample_solution "MyText"
+    sequence(:name) { |n| "Skill #{n}" }
+    sequence(:handle) { |n| "Skill_#{n}" }
 
     association :category
   end

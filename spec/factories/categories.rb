@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :category do
-    name "MyString"
-    handle "MyString"
+    sequence(:name) { |n| "Category #{n}" }
+    sequence(:handle) { |n| "category_#{n}" }
   end
 end
