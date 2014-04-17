@@ -2,8 +2,10 @@
 
 FactoryGirl.define do
   factory :skill do
+    handle "MyString"
     name "MyString"
-    code "MyString"
     sample_solution "MyText"
+
+    association :category
   end
 end

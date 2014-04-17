@@ -11,21 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140413195246) do
+ActiveRecord::Schema.define(version: 20140417175316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: true do |t|
+    t.string   "name",       limit: 200, null: false
+    t.string   "handle",     limit: 60,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "courses", force: true do |t|
-    t.string   "handle"
-    t.string   "title"
+    t.string   "name",       limit: 200, null: false
+    t.string   "handle",     limit: 60,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "courses_skills", force: true do |t|
-    t.integer "course_id"
-    t.integer "skill_id"
+    t.integer "course_id", null: false
+    t.integer "skill_id",  null: false
   end
 
   add_index "courses_skills", ["course_id"], name: "index_courses_skills_on_course_id", using: :btree
@@ -43,27 +50,28 @@ ActiveRecord::Schema.define(version: 20140413195246) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "skills", force: true do |t|
-    t.string   "name"
-    t.string   "code"
+    t.string   "name",            limit: 200, null: false
+    t.string   "handle",          limit: 60,  null: false
     t.text     "sample_solution"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",                   limit: 100,              null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

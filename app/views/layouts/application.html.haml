@@ -11,10 +11,11 @@
     = csrf_meta_tags
 
   %body
-    - flash.each do |name, msg|
-      %div, msg, class: name
-
     = render partial: 'layouts/navigation'
+
+    - flash.each do |name, msg|
+      %div{class:name}= msg
+      
     .container 
       = yield
 

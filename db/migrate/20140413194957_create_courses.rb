@@ -1,8 +1,8 @@
 class CreateCourses < ActiveRecord::Migration
   def change
     create_table :courses do |t|
-      t.string :handle
-      t.string :title
+      t.string :name, limit: 200, null: false
+      t.string :handle, limit: 60, null: false, unique: true, index: true
 
       t.timestamps
     end
