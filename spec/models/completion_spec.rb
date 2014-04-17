@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Category do
+describe Completion do
 
 end

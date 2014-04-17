@@ -1,0 +1,2 @@
+class Verifier < User
+end

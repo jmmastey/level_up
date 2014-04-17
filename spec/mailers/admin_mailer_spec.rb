@@ -9,7 +9,7 @@ describe AdminMailer do
   it "should confirm course enrollment" do
     mail.to.should include(ENV["ADMIN_EMAIL"])
     mail.body.should include(user.email)
-    mail.body.should include(course.title)
+    mail.body.should include(course.name)
   end
 
   it "should actually send the email" do
