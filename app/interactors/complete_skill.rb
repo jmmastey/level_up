@@ -5,7 +5,7 @@ class CompleteSkill
     context.fail!(message: "provide a valid user") unless context[:user].present?
     context.fail!(message: "provide a valid skill") unless context[:skill].present?
 
-    if context[:user].has_completed?(context[:skill])
+    if !failure? && context[:user].has_completed?(context[:skill])
       context.fail!(message: "cannot re-complete a skill")
     end
   end
