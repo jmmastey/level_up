@@ -104,7 +104,7 @@ describe User do
     let(:user) { create(:user) }
     let!(:course) { create(:course) }
     let!(:published_course) { create(:course, :published) }
-    let!(:hidden_course) { create(:course, status: :created) }
+    let!(:hidden_course) { create(:course, :created) }
 
 
     it "should retrieve enrolled courses" do
@@ -158,23 +158,20 @@ describe User do
 
 
   describe "categories" do
-    let(:user) { create(:user) }
-    let(:category) { create(:category) }
-    let(:course) { create(:course) }
+    let(:user)    { create(:user) }
+    let(:course)  { create(:course) }
+    let!(:skill)  { create(:skill, courses: [course]) }
 
     it "should retrieve categories for enrolled courses" do
-      create(:skill, category: category, courses: [course])
-
       course.enroll!(user)
-      user.categories.should eq([category])
+      user.categories.should eq([skill.category])
     end
 
     it "should only retrieve unique categories" do
-      create(:skill, category: category, courses: [course])
-      create(:skill, category: category, courses: [course])
+      create(:skill, category: skill.category, courses: [course]) # do it again!
 
       course.enroll!(user)
-      user.categories.should eq([category])
+      user.categories.should eq([skill.category])
     end
   end
 
