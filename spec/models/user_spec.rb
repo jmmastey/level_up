@@ -100,17 +100,12 @@ describe User do
 
   end
 
-  describe "enrollment" do
-
+  describe "courses" do
     let(:user) { create(:user) }
     let(:course) { create(:course) }
 
-    it "should not have any default enrollments" do
-      user.courses.should be_empty
-    end
-
-    it "should allow and store enrollment" do
-      user.add_role(:enrolled, course)
+    it "should retrieve enrolled courses" do
+      course.enroll!(user)
       user.courses.should include(course)
     end
 

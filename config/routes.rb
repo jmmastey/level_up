@@ -1,6 +1,6 @@
 Learnenova::Application.routes.draw do
   root to: "home#index"
-  get "/:module", to: "home#show"
+  get "/:module.html", to: "home#show"
 
   devise_for :users, controllers: {:registrations => "registrations"}
   resources :users

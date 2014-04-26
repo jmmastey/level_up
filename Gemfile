@@ -15,6 +15,7 @@ gem 'haml-rails'
 gem 'pg'
 gem 'rolify'
 gem 'interactor-rails'
+gem 'state_machine'
 
 group :development do
   gem 'better_errors'

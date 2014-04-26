@@ -5,4 +5,10 @@ FactoryGirl.define do
     sequence(:name) { |n| "Course #{n}" }
     sequence(:handle) { |n| "course_#{n}" }
   end
+
+  factory :published_course, class: Course do
+    sequence(:name) { |n| "Course #{n}" }
+    sequence(:handle) { |n| "course_#{n}" }
+    status :published
+  end
 end
