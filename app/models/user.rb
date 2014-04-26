@@ -2,18 +2,23 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   rolify
 
+  has_many :completions
+  has_many :skills, through: :completions
+
   def courses
-    Course.with_role(:enrolled, self)
+    Course.for_user(self)
   end
 
-  def skills(category = nil)
-    skills = Skill.completed_by(self)
-    skills = skills.for_category(category) if category.present?
-    skills
+  def categories
+    courses.map(&:categories).flatten.uniq
   end
 
   def has_completed?(skill)
-    Completion.exists? user: self, skill: skill
+    skills.include? skill
+  end
+
+  def admin?
+    self.has_role?(:admin)
   end
 
 end

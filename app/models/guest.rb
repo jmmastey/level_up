@@ -1,7 +1,7 @@
 class Guest
 
   def courses
-    Course.public
+    Course.published
   end
 
   def skills

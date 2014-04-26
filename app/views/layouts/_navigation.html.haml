@@ -7,10 +7,8 @@
     %ul.nav.navbar-nav.navbar-right
       - if user_signed_in?
         %li= link_to 'Logout', destroy_user_session_path
-        %li= link_to 'Edit account', edit_user_registration_path
+        %li= link_to "#{current_user.name} #{user_role} (edit)", edit_user_registration_path
+
       - else
         %li= link_to 'Sign in', new_user_session_path
         %li= link_to 'Sign up', new_user_registration_path 
-
-    - if user_signed_in?
-      .user= current_user.name

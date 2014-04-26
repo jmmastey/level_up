@@ -1,3 +1,5 @@
-- @courses.each do |course|
-  .course
-    %h3= course.name
+- if @courses.empty?
+  %p Sorry, there are no available courses for you to study. Please come back soon.
+- else
+  - @courses.each do |course|
+    = render course

@@ -1,6 +1,7 @@
 class Course < ActiveRecord::Base
   resourcify
   has_and_belongs_to_many :skills
+  has_many :categories, through: :skills
 
   validates_presence_of :name, :handle
   validates_uniqueness_of :handle
@@ -26,7 +27,21 @@ class Course < ActiveRecord::Base
   end
 
   def users
-    Course.with_role(:enrolled, self)
+    self.class.with_role(:enrolled, self)
+  end
+
+  def self.for_user(user)
+    self.published | enrolled_courses(user) | admin_courses(user)
+  end
+
+  protected
+
+  def self.enrolled_courses(user)
+    self.with_role(:enrolled, user)
+  end
+
+  def self.admin_courses(user)
+    user.admin? ? self.all : self.none
   end
 
 end

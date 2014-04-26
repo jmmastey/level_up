@@ -30,6 +30,19 @@ describe Course do
 
       Course.published.should include(course)
     end
+  end
 
+  describe "categories" do
+    let(:course) { create(:course) }
+    let(:category) { create(:category) }
+
+    it "should not belong to any categories by default" do
+      course.categories.should be_empty
+    end
+
+    it "should belong to the categories of its skills" do
+      create(:skill, category: category, courses: [course])
+      course.categories.should eq([category])
+    end
   end
 end

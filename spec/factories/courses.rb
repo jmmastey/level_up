@@ -7,8 +7,8 @@ FactoryGirl.define do
   end
 
   factory :published_course, class: Course do
-    sequence(:name) { |n| "Course #{n}" }
-    sequence(:handle) { |n| "course_#{n}" }
+    sequence(:name) { |n| "Published Course #{n}" }
+    sequence(:handle) { |n| "published_course_#{n}" }
     status :published
   end
 end

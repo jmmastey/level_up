@@ -9,5 +9,11 @@ class CoursesController < ApplicationController
   def current_user
     super || Guest.new
   end
+  helper_method :current_user
+
+  def user_signed_in?
+    current_user.is_a? User
+  end
+  helper_method :user_signed_in?
 
 end

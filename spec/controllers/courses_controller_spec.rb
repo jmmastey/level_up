@@ -1,21 +1,30 @@
 require 'spec_helper'
 
 describe CoursesController do
-  let(:course) { FactoryGirl.create(:course) }
-  let(:public_course) do
-    course = FactoryGirl.create(:course)
-    course.make_public!
-    course
-  end
 
   describe "GET index" do
-    it "should render the list of available courses" do
-      current_user = double("current user")
-      current_user.should_receive(:courses).and_return([course])
-      controller.should_receive(:current_user).and_return(current_user)
+    let!(:course) { create(:course) }
+    let!(:published_course) { create(:published_course) }
 
-      get "index"
-      response.should render_template("index")
+    describe "while not logged in" do
+      it "should render only publicly available courses" do
+        get "index"
+        response.should render_template(:index)
+        assigns(:courses).should eq([ published_course ])
+      end
+    end
+
+    describe "while logged in" do
+      login_user
+
+      it "should render the list of available courses" do
+        User.any_instance.should_receive(:courses).and_return([course, published_course])
+
+        get "index"
+        response.should render_template(:index)
+        assigns(:courses).should include(course)
+        assigns(:courses).should include(published_course)
+      end
     end
 
   end

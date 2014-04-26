@@ -102,11 +102,23 @@ describe User do
 
   describe "courses" do
     let(:user) { create(:user) }
-    let(:course) { create(:course) }
+    let!(:course) { create(:course) }
+    let!(:published_course) { create(:published_course) }
+    let!(:hidden_course) { create(:course, status: :created) }
+
 
     it "should retrieve enrolled courses" do
+      user.courses.to_a.should include(published_course)
+
       course.enroll!(user)
       user.courses.should include(course)
+    end
+
+    it "should show all courses to admins, but not to other users" do
+      user.courses.should eq([published_course])
+
+      user.add_role(:admin)
+      user.courses.should eq([published_course, course, hidden_course])
     end
 
   end
@@ -133,14 +145,36 @@ describe User do
       other_completion = create(:completion, user: user)
 
       # scope down on category
-      user.skills(category).should have(1).item
-      user.skills(category).should_not include(other_completion.skill)
+      user.skills.for_category(category).should have(1).item
+      user.skills.for_category(category).should_not include(other_completion.skill)
     end
 
     it "should check completion of a skill" do
       user.should_not have_completed(skill)
       create(:completion, user: user, skill: skill)
       user.should have_completed(skill)
+    end
+  end
+
+
+  describe "categories" do
+    let(:user) { create(:user) }
+    let(:category) { create(:category) }
+    let(:course) { create(:course) }
+
+    it "should retrieve categories for enrolled courses" do
+      create(:skill, category: category, courses: [course])
+
+      course.enroll!(user)
+      user.categories.should eq([category])
+    end
+
+    it "should only retrieve unique categories" do
+      create(:skill, category: category, courses: [course])
+      create(:skill, category: category, courses: [course])
+
+      course.enroll!(user)
+      user.categories.should eq([category])
     end
   end
 
