@@ -1,10 +1,10 @@
 Learnenova::Application.routes.draw do
   root to: "home#index"
+  get "/:module", to: "home#show"
 
   devise_for :users, controllers: {:registrations => "registrations"}
   resources :users
-  resources :modules
-
+  resources :courses, only: [:index, :show]
   resources :skills, only: [] do
     post "complete"
   end
