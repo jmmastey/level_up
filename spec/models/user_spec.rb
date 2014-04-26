@@ -116,4 +116,37 @@ describe User do
 
   end
 
+  describe "skills" do
+    let(:user)      { create(:user) }
+    let(:skill)     { create(:skill, category: category) }
+    let(:category)  { create(:category) }
+
+    it "should find skills that have been completed" do
+      user.skills.should be_empty
+
+      create(:completion, user: user, skill: skill)
+      user.should have(1).skill
+      user.skills.should include(skill)
+
+      other_completion = create(:completion, user: user)
+      user.should have(2).skills
+      user.skills.should include(skill)
+    end
+
+    it "should find skills by category" do
+      create(:completion, user: user, skill: skill)
+      other_completion = create(:completion, user: user)
+
+      # scope down on category
+      user.skills(category).should have(1).item
+      user.skills(category).should_not include(other_completion.skill)
+    end
+
+    it "should check completion of a skill" do
+      user.should_not have_completed(skill)
+      create(:completion, user: user, skill: skill)
+      user.should have_completed(skill)
+    end
+  end
+
 end

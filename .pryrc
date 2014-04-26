@@ -1,0 +1,1 @@
+include FactoryGirl::Syntax::Methods
