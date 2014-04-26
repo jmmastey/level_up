@@ -4,7 +4,7 @@ describe CoursesController do
 
   describe "GET index" do
     let!(:course) { create(:course) }
-    let!(:published_course) { create(:published_course) }
+    let!(:published_course) { create(:course, :published) }
 
     describe "while not logged in" do
       it "should render only publicly available courses" do

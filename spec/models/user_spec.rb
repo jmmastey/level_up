@@ -103,7 +103,7 @@ describe User do
   describe "courses" do
     let(:user) { create(:user) }
     let!(:course) { create(:course) }
-    let!(:published_course) { create(:published_course) }
+    let!(:published_course) { create(:course, :published) }
     let!(:hidden_course) { create(:course, status: :created) }
 
 

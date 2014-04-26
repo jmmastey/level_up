@@ -19,7 +19,7 @@ describe Course do
   describe "publishing" do
     it "should not be public by default" do
       course = create(:course)
-      published_course = create(:published_course)
+      published_course = create(:course, :published)
       Course.published.should_not include(course)
       Course.published.should include(published_course)
     end
