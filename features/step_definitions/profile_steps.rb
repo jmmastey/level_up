@@ -1,10 +1,9 @@
 Given /^a user exists with some training progress$/ do
   @user = FactoryGirl.create(:user, :enrolled)
-  skills = @user.courses.map(&:skills).flatten
 
   # now finish a few skills
-  skills.take(4).map do |skill|
-    FactoryGirl.create(:completion, :verified, user: @user, skill: skill)
+  Skill.all.take(4).map do |skill|
+    FactoryGirl.create(:completion, :verified, user: @user, skill: skill, created_at: Date.today)
   end
 end
 
@@ -17,7 +16,7 @@ Then /^I should see that user's profile/ do
 end
 
 Then /^I should see their pretty picture/ do
-
+  page.should have_css("img.gravatar")
 end
 
 Then /^I should see their skills/ do
@@ -27,3 +26,6 @@ Then /^I should see their skills/ do
   end
 end
 
+Then /^I should see a profile link in the header/ do
+  page.should have_css("header .profile")
+end

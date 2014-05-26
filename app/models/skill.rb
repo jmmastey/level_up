@@ -8,4 +8,9 @@ class Skill < ActiveRecord::Base
 
   scope :for_category, -> (category) { where(category: category) }
   scope :completed_by, -> (user) { joins(:completions).where(completions: { user: user }) }
+
+  def self.feed_for(user)
+    completed_by(user).where("completions.created_at > :created_at", created_at: 5.days.ago)
+  end
+
 end

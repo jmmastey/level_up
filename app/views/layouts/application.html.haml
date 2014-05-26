@@ -14,8 +14,8 @@
     = render partial: 'layouts/navigation'
 
     - flash.each do |name, msg|
-      %div{class:name}= msg
-      
+      %div{class: "alert alert-#{name}"}= msg
+
     .container 
       = yield
 

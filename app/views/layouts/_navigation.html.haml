@@ -1,4 +1,4 @@
-.navbar.navbar-default{role: "navigation"}
+%header.navbar.navbar-default{role: "navigation"}
   .container
     .navbar-brand
       %a{href:'/'}
@@ -7,7 +7,8 @@
     %ul.nav.navbar-nav.navbar-right
       - if user_signed_in?
         %li= link_to 'Logout', destroy_user_session_path
-        %li= link_to "#{current_user.name} #{user_role} (edit)", edit_user_registration_path
+        %li.profile= link_to "#{current_user.name} #{user_role}", user_path(current_user)
+        %li= link_to "(edit)", edit_user_registration_path
 
       - else
         %li= link_to 'Sign in', new_user_session_path

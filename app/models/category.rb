@@ -5,6 +5,7 @@ class Category < ActiveRecord::Base
   has_many :skills
 
   # so... wtf arel? this is more readable? in what fucking universe...
+  # also, coupling so hard to user / skill / completion is not great.
   def self.summarize_user(user)
     c   = Arel::Table.new(:categories)
     s   = Arel::Table.new(:skills)
