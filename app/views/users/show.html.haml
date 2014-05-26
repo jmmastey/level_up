@@ -1,6 +1,10 @@
-%h3 User
-%p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
-= link_to 'Edit account', edit_user_path
+- if current_user == @user
+  %p= link_to 'Edit account', edit_user_path
+
+.col-lg-8
+  %h3= "#{@user.name}'s Profile"
+  %h4 Recently Completed Skills
+
+.col-lg-4.skills
+  = render partial: 'skill_summary'
+

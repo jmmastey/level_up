@@ -7,12 +7,12 @@ describe Course do
     let(:course) { create(:course) }
 
     it "should not have any default enrollments" do
-      course.users.should be_empty
+      course.students.should be_empty
     end
 
     it "should allow and store enrollment" do
       course.enroll!(user)
-      course.users.should include(course)
+      course.students.should include(course)
     end
   end
 

@@ -16,6 +16,7 @@ gem 'pg'
 gem 'rolify'
 gem 'interactor-rails'
 gem 'state_machine'
+gem 'gravatar_image_tag'
 
 group :development do
   gem 'better_errors'

@@ -9,6 +9,7 @@ class Guest
   end
 
   def name
+    # NOOP
   end
 
 end

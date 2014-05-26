@@ -22,26 +22,26 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def enroll!(user)
-    user.add_role(:enrolled, self)
+  def enroll!(student)
+    student.add_role(:enrolled, self)
   end
 
-  def users
+  def students
     self.class.with_role(:enrolled, self)
   end
 
-  def self.for_user(user)
-    self.published | enrolled_courses(user) | admin_courses(user)
+  def self.for_student(student)
+    published | enrolled_courses(student) | admin_courses(student)
   end
 
   protected
 
-  def self.enrolled_courses(user)
-    self.with_role(:enrolled, user)
+  def self.enrolled_courses(student)
+    with_role(:enrolled, student)
   end
 
   def self.admin_courses(user)
-    user.admin? ? self.all : self.none
+    user.admin? ? all : none
   end
 
 end

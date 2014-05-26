@@ -5,8 +5,11 @@ class User < ActiveRecord::Base
   has_many :completions
   has_many :skills, through: :completions
 
+  validates_presence_of :name
+  validates_uniqueness_of :email
+
   def courses
-    Course.for_user(self)
+    Course.for_student(self)
   end
 
   def categories
@@ -18,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.has_role?(:admin)
+    has_role?(:admin)
   end
 
 end
