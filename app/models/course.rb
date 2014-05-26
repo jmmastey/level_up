@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   resourcify
+
   has_and_belongs_to_many :skills
   has_many :categories, through: :skills
 

@@ -1,8 +1,8 @@
 class Category < ActiveRecord::Base
+  has_many :skills
+
   validates_presence_of :name, :handle
   validates_uniqueness_of :handle
-
-  has_many :skills
 
   # so... wtf arel? this is more readable? in what fucking universe...
   # also, coupling so hard to user / skill / completion is not great.
@@ -28,14 +28,18 @@ class Category < ActiveRecord::Base
 
   def self.map_summary(summary)
     summary.inject({}) do |h,result|
-      h[result['handle']] = {
-        id:               result['id'].to_i,
-        name:             result['name'],
-        total_skills:     result['total_skills'].to_i,
-        total_completed:  result['total_completed'].to_i,
-        total_verified:   result['total_verified'].to_i,
-      }
-      h
+      h.update(result['handle'] =>  map_row(result))
     end
   end
+
+  def self.map_row(result)
+    {
+      id:               result['id'].to_i,
+      name:             result['name'],
+      total_skills:     result['total_skills'].to_i,
+      total_completed:  result['total_completed'].to_i,
+      total_verified:   result['total_verified'].to_i,
+    }
+  end
+
 end
