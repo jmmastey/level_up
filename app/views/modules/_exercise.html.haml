@@ -1,6 +1,18 @@
-.panel.panel-default
+.panel.panel-default.exercise
+  .panel-heading
+    %h3.panel-title
+      .fa.fa-question-circle
+      = "Exercise: #{block.skill.name} "
   .panel-body
-    %span.label.label-primary
-      %i.fa.fa-question-circle
-      Exercise
-    %span= exercise
+
+    %ol
+      - block.content.each do |contents|
+        %li= contents
+
+    .completion
+      - if user_signed_in?
+        .fa.fa-spinner.fa-spin.spinner
+        %button{ class: completion_classes(block), target: skill_complete_path(block.skill) }
+          %i.fa.fa-square-o
+          %i.fa.fa-check-square-o
+          Complete

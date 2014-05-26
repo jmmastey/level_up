@@ -12,6 +12,10 @@
       .page-header
         %h3 Everything is a File
 
+        = exercise_block_for "linux", "everything_is_a_file" do |e|
+          = e.question "Name some 'files' in a standard unix filesystem that aren't very file-like."
+          = e.question "Identify some places where we use file descriptors for non-file content (hint: sockets are a good example here)."
+
       .page-header
         %h3 Paths, Directories and Changing Path
 

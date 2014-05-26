@@ -1,3 +1,16 @@
-// Place all the styles related to the modules controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.completion {
+  float:right;
+
+  .spinner { display:none; margin-right:4px; }
+  &.active .spinner { display:inline; }
+
+  button {
+    .fa { margin-right:4px; } 
+
+    .fa-square-o { display:inline; }
+    .fa-check-square-o { display:none; }
+
+    &.completed .fa-square-o { display:none; }
+    &.completed .fa-check-square-o { display:inline; }
+  }
+}
