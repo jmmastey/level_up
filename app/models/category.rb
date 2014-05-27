@@ -19,6 +19,7 @@ class Category < ActiveRecord::Base
       .join(cp, Arel::Nodes::OuterJoin).on(cp[:skill_id].eq s[:id])
       .where(cp[:user_id].eq(user.id).or(cp[:user_id].eq nil))
       .group(c[:id], c[:name], c[:handle])
+      .order(c[:sort_order])
 
     result = connection.execute(query.to_sql)
     self.map_summary(result)

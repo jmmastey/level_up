@@ -37,9 +37,11 @@ CATEGORIES = [
   [ "8 Boxes", "8boxes" ],
 ]
 
+i = 0
 CATEGORIES.each do |cat|
-  Category.create name: cat[0], handle: cat[1]
+  Category.create name: cat[0], handle: cat[1], sort_order: i
   puts "category: #{cat[0]}"
+  i += 1
 end
 
 SKILLS = [
