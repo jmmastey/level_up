@@ -1,16 +1,22 @@
-.completion {
-  float:right;
+.exercise {
+  .panel-title .fa {
+    margin-right:4px;
+  }
 
-  .spinner { display:none; margin-right:4px; }
-  &.active .spinner { display:inline; }
+  .completion {
+    float:right;
 
-  button {
-    .fa { margin-right:4px; } 
+    .spinner { display:none; margin-right:4px; }
+    &.active .spinner { display:inline; }
 
-    .fa-square-o { display:inline; }
-    .fa-check-square-o { display:none; }
+    button {
+      .fa { margin-right:4px; } 
 
-    &.completed .fa-square-o { display:none; }
-    &.completed .fa-check-square-o { display:inline; }
+      .fa-square-o { display:inline; }
+      .fa-check-square-o { display:none; }
+
+      &.completed .fa-square-o { display:none; }
+      &.completed .fa-check-square-o { display:inline; }
+    }
   }
 }

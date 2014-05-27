@@ -5,7 +5,9 @@ Learnenova::Application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users, only: [:update, :show]
   resources :courses, only: [:index, :show]
+
   resources :skills, only: [] do
-    post "complete"
+    post "completion", to: "skills#complete", as: :complete
+    delete "completion", to: "skills#uncomplete", as: :uncomplete
   end
 end
