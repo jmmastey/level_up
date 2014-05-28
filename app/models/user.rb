@@ -24,4 +24,8 @@ class User < ActiveRecord::Base
     has_role?(:admin)
   end
 
+  def signed_in?
+    true
+  end
+
 end
