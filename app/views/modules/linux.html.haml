@@ -130,8 +130,12 @@
 
       .page-header
         %h3 Firewalls, iptables, and nmap
+        %p On most systems, and certainly on our production system, we limit traffic in and out of systems using a firewall. By allowing only whitelisted traffic to pass, we can eliminate large numbers of security vulnerabilities.
+        %p All modern Linux systems use iptables to manage traffic, which you can <a href='http://www.tecmint.com/basic-guide-on-iptables-linux-firewall-tips-commands/'>read about here</a>. We have wrappers to iptables on our systems, but you should be able to view the rules as the need arises.
+        %p Sometimes, it's not clear whether or not the firewall is blocking your traffic. From the host itself, the port may appear to be open, but requests are not being served properly. In this case, a good tool for "sniffing out" the misbehaving machine is nmap. You can use nmap to scan the machine and display a report of all ports that are open and listening. Find out more about nmap with this <a href='https://www.digitalocean.com/community/articles/how-to-use-nmap-to-scan-for-open-ports-on-your-vps'>fantastic tutorial</a>.
         = exercise_block_for "linux", "firewall" do |e|
           = e.question "On your development machine, see what rules are currently loaded in the firewall. If it's not running, shame on you, start it first."
+          = e.question "Explain why a whitelist approach is better than a blacklist approach for firewalls?"
         = exercise_block_for "linux", "nmap" do |e|
           = e.question "I can't hit the frontend to my development environment, and I think the firewall might be to blame. Scan vor.dev.cashnetusa.com and tell me which ports are currently listening for connections remotely."
 
