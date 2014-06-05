@@ -11,10 +11,6 @@ YAML.load(ENV['ROLES']).each do |role|
   Role.find_or_create_by_name(role)
   puts 'role: ' << role
 end
-puts 'DEFAULT USERS'
-user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
-puts 'user: ' << user.name
-user.add_role :admin
 
 CATEGORIES = [
   [ "Linux", "linux" ],
@@ -39,9 +35,20 @@ CATEGORIES = [
 
 i = 0
 CATEGORIES.each do |cat|
-  Category.create name: cat[0], handle: cat[1], sort_order: i
+  Category.create! name: cat[0], handle: cat[1], sort_order: i
   puts "category: #{cat[0]}"
   i += 1
+end
+
+COURSES = [
+  [ "Engineering Baseline I", "baseline_1" ],
+  [ "Engineering Baseline II", "baseline_2" ],
+  [ "Cnuapp Engineering", "cnuapp" ],
+  [ "8-box Engineering", "8_box" ],
+]
+COURSES.each do |course|
+  Course.create! name: course[0], handle: course[1], status: :published
+  puts "course: #{course[0]}"
 end
 
 SKILLS = [
@@ -269,4 +276,14 @@ SKILLS.each do |skill|
   cat = Category.find_by_handle! skill[0]
   Skill.create! category: cat, handle: skill[1], name: skill[2]
   puts "skill: #{skill[2]}"
+end
+
+if ENV['ADMIN_NAME']
+  puts 'DEFAULT USERS'
+  user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+  puts 'user: ' << user.name
+  user.add_role :admin
+  Course.all.each do |course|
+    course.enroll! user
+  end
 end
