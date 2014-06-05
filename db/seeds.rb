@@ -63,7 +63,7 @@ SKILLS = [
   [ "linux", "init_scripts", "Understands init scripts and can use init.d to start and stop services" ],
   [ "linux", "scp", "Can transfer files between hosts using scp" ],
   [ "linux", "git", "Fluently uses basic git" ],
-  [ "linux", "monitoring", "Knows why we use xenoss / nagios" ],
+  [ "linux", "monitoring", "Knows why we use zenoss / nagios" ],
   [ "linux", "proxies", "Knows why we use web proxies / nginx" ],
   [ "linux", "ntp", "Can resync time with ntp" ],
   [ "linux", "firewall", "Can check firewall settings with iptables" ],
