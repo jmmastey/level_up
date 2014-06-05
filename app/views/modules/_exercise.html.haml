@@ -10,7 +10,7 @@
         %li= contents
 
     .completion
-      - if user_signed_in?
+      - if signed_in?
         .fa.fa-spinner.fa-spin.spinner
         %button{ class: completion_classes(block), target: skill_complete_path(block.skill) }
           %i.fa.fa-square-o

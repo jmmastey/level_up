@@ -1,0 +1,7 @@
+%h4 Enrolled Courses
+- if enrolled_courses.empty? 
+  %p No enrolled courses yet.
+- else
+  %ul.enrolled_courses
+    - enrolled_courses.each do |course|
+      %li= course.name

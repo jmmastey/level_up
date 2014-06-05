@@ -9,15 +9,49 @@
 
     .col-lg-8
 
+      %p Enova is a Unix shop, which is to say that all production hardware (and most people's personal workstations) are some variant of Linux. As such, you'll need to understand some basic Unix utilities to control your development environment. Thankfully, you don't need to be a sysadmin to navigate the waters of application development on Unix, so this will be a simple course.
+
       .page-header
         %h3 Everything is a File
 
+        %p The first thing to understand when manipulating a Unix system is the principle that "Everything is a File". Ports and sockets, filesystems, directories and more are all treated as files for the purposes of manipulation. This is a benefit because it allows us a consistent way to manipulate I/O using common tools.
+
+        %p Read <a href='https://en.wikipedia.org/wiki/Everything_is_a_file'>the Wikipedia Article</a> for more details.
+
         = exercise_block_for "linux", "everything_is_a_file" do |e|
           = e.question "Name some 'files' in a standard unix filesystem that aren't very file-like."
-          = e.question "Identify some places where we use file descriptors for non-file content (hint: sockets are a good example here)."
+          = e.question "Identify some places where we use file descriptors for non-file content as part of the development process (hint: sockets are a good example here)."
+          = e.question "Postgres writes a file when it starts up to record some information about itself, called a 'pid file'. Find this file and display its contents."
 
       .page-header
-        %h3 Paths, Directories and Changing Path
+        %h3 Path and the Environment
+        %p We rely heavily on environment variables to influence the behavior of our applications. For instance, when starting a rails server, we often pass a variable that tells it whether to start in development, integration or production mode.
+
+        %p Path is also key to keeping control of your environment. By manipulating the path, we change which version of ruby and other utilities we're running on the fly. Oftentimes, when a command doesn't work the way you expected it to (or not at all), the problem lies in your execution path.
+
+        %p Read more about <a href='http://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html'>environment variables</a> at the Bash Guide.
+
+        %p Read more about <a href='https://kb.iu.edu/data/acar.html'>retrieving and manipulating the path</a>.
+
+
+        = exercise_block_for "linux", "environment" do |e|
+          = e.question "Demonstrate the command to view all environment variables, and then use grep to find the one called EDITOR. If it's not set, modify your initialization scripts to set it to 'vim'."
+          = e.question "Write a command that echoes the value of the PATH environment variable."
+          = e.question "Write the command that will tell you the full path of the script used when you execute 'ruby'"
+
+      .page-header
+        %h3 Getting Around the Filesystem: Absolute and Relative Paths
+        %p 
+
+        = exercise_block_for "linux", "navigation" do |e|
+          = e.question "Write a few commands demonstrating the difference between navigating to an absolute path versus a relative path."
+          = e.question ""
+
+      .page-header
+        %h3 Transferring Files Between Boxes
+
+      .page-header
+        %h3 Git. Just Git.
 
       .page-header
         %h3 Managing File Permissions
@@ -42,15 +76,6 @@
 
       .page-header
         %h3 Starting and Stopping Services
-
-      .page-header
-        %h3 Transferring Files Between Boxes
-
-      .page-header
-        %h3 Path and the Environment
-
-      .page-header
-        %h3 Git. Just Git.
 
       .page-header
         %h3 Monitoring Production Hardware

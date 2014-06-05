@@ -1,0 +1,7 @@
+.skill-table {
+  td { white-space:nowrap; }
+  td.completion div.progress {
+    min-width:150px;
+    margin-bottom:0px;
+  }
+}

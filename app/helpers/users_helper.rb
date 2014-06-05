@@ -3,7 +3,9 @@ module UsersHelper
   FEEDABLE_OBJECTS = [ Skill ]
 
   def user_category_summary
-    Category.summarize_user(user)
+    category_summary = Category.summarize_user(user)
+    categories_from_enrollments = user.categories
+    category_summary.select { |key,stats| categories_from_enrollments.include? key }
   end
 
   def user_feed_items
@@ -20,6 +22,10 @@ module UsersHelper
 
   def item_klass(item)
     item.class.to_s.downcase
+  end
+
+  def enrolled_courses
+    @enrolled ||= user.courses
   end
 
   protected

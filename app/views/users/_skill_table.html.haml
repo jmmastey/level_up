@@ -1,8 +1,16 @@
 %table.table.table-striped.table-hover
   %tr
     %th Category
-    %th Completion
+    %th{colspan: 2} Completion
   - user_category_summary.each do |handle, category|
     %tr{class: handle}
       %td= category[:name]
-      %td= "#{category[:total_completed]} / #{category[:total_skills]}"
+      %td.completion-stat
+        = "#{category[:total_completed]} / #{category[:total_skills]}"
+      %td.completion
+        .progress
+          - unless category[:total_completed] == category[:total_skills]
+            - completion = (category[:total_completed].to_f/category[:total_skills])*100
+            .progress-bar{style: "width:#{completion}%"}
+          - else
+            .progress-bar.progress-bar-success{style: 'width:100%'}

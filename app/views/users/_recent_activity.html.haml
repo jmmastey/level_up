@@ -1,0 +1,5 @@
+%h4 Recent Activity
+%ul.recent_activity
+  - user_feed_items.each do |feed_item|
+    %li{ class: feed_item_tags(feed_item) }
+      = render_feed_item(feed_item)

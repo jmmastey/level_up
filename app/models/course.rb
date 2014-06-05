@@ -35,6 +35,10 @@ class Course < ActiveRecord::Base
     published | enrolled_courses(student) | admin_courses(student)
   end
 
+  def has_enrolled?(student)
+    student.has_role?(:enrolled, self)
+  end
+
   protected
 
   def self.enrolled_courses(student)

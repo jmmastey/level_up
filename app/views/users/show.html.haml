@@ -1,12 +1,11 @@
-.col-lg-8
-  = gravatar_image_tag(@user.email, alt: @user.name, class: "gravatar")
+.col-lg-2
+  = gravatar_image_tag(@user.email, alt: @user.name, class: "gravatar", gravatar: { size: 160 })
+
+.col-lg-6
   %h3= "#{@user.name}'s Profile"
 
-  %h4 Recent Activity
-  %ul.recent_activity
-    - user_feed_items.each do |feed_item|
-      %li{ class: feed_item_tags(feed_item) }
-        = render_feed_item(feed_item)
+  = render partial: 'enrolled_courses'
+  = render partial: 'recent_activity'
 
 .col-lg-4.skills
   = render partial: 'skill_summary'

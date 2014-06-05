@@ -1,5 +1,8 @@
 - if @courses.empty?
   %p Sorry, there are no available courses for you to study. Please come back soon.
 - else
-  - @courses.each do |course|
-    = render course
+
+  .bs-component
+    .list-group
+      - @courses.each do |course|
+        = render course
