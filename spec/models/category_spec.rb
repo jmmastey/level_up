@@ -12,7 +12,7 @@ describe Category do
     let(:skill) { create(:skill, category: category) }
 
     it "should list all categories that exist" do
-      Category.summarize_user(user).should have(4).items
+      Category.summarize_user(user).length.should == 4
     end
 
     it "should have counts for skills" do

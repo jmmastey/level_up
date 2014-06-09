@@ -16,4 +16,12 @@ class Guest
     false
   end
 
+  def admin?
+    false
+  end
+
+  def roles
+    Role.where("1=0")
+  end
+
 end

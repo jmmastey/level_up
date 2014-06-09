@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CoursesController do
+describe CoursesController, type: :controller do
 
   describe "GET index" do
     let!(:course) { create(:course) }
@@ -15,7 +15,10 @@ describe CoursesController do
     end
 
     describe "while logged in" do
-      login_user
+      before (:each) do
+        @user = FactoryGirl.create(:user)
+        sign_in @user
+      end
 
       it "should render the list of available courses" do
         User.any_instance.should_receive(:courses).and_return([course, published_course])

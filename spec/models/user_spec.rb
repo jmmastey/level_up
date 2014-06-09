@@ -132,11 +132,11 @@ describe User do
       user.skills.should be_empty
 
       create(:completion, user: user, skill: skill)
-      user.should have(1).skill
+      user.skills.length.should == 1
       user.skills.should include(skill)
 
       other_completion = create(:completion, user: user)
-      user.should have(2).skills
+      user.reload.skills.length.should == 2
       user.skills.should include(skill)
     end
 
@@ -145,7 +145,7 @@ describe User do
       other_completion = create(:completion, user: user)
 
       # scope down on category
-      user.skills.for_category(category).should have(1).item
+      user.skills.for_category(category).length.should == 1
       user.skills.for_category(category).should_not include(other_completion.skill)
     end
 

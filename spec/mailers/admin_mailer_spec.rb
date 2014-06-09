@@ -13,7 +13,6 @@ describe AdminMailer do
   end
 
   it "should actually send the email" do
-    mail.deliver!
-    ActionMailer::Base.deliveries.size.should == 1
+    expect { mail.deliver! }.to change{ ActionMailer::Base.deliveries.size }.by(1)
   end
 end

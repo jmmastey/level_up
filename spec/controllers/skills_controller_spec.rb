@@ -1,7 +1,10 @@
 require 'spec_helper'
 
-describe SkillsController do
-  login_user
+describe SkillsController, type: :controller do
+  before (:each) do
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  end
 
   let(:skill) { FactoryGirl.create(:skill) }
 
@@ -14,7 +17,7 @@ describe SkillsController do
       response.should be_client_error
       response.content_type.should eq("application/json")
       body = JSON(response.body)
-      body['success'].should be_false
+      body['success'].should eq(false)
       body['error'].should match('provide a valid skill')
     end
 
@@ -28,7 +31,7 @@ describe SkillsController do
 
       response.should be_client_error
       body = JSON(response.body)
-      body['success'].should be_false
+      body['success'].should eq(false)
       body['error'].should match("invalid!")
     end
 
@@ -41,8 +44,8 @@ describe SkillsController do
 
       response.should be_success
       body = JSON(response.body)
-      body['success'].should be_true
-      body['complete'].should be_true
+      body['success'].should eq(true)
+      body['complete'].should eq(true)
     end
 
   end
@@ -56,7 +59,7 @@ describe SkillsController do
       response.should be_client_error
       response.content_type.should eq("application/json")
       body = JSON(response.body)
-      body['success'].should be_false
+      body['success'].should eq(false)
       body['error'].should match('provide a valid skill')
     end
 
@@ -70,7 +73,7 @@ describe SkillsController do
 
       response.should be_client_error
       body = JSON(response.body)
-      body['success'].should be_false
+      body['success'].should eq(false)
       body['error'].should match("invalid!")
     end
 
@@ -83,8 +86,8 @@ describe SkillsController do
 
       response.should be_success
       body = JSON(response.body)
-      body['success'].should be_true
-      body['complete'].should be_false
+      body['success'].should eq(true)
+      body['complete'].should eq(false)
     end
 
   end
