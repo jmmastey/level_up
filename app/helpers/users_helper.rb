@@ -3,7 +3,7 @@ module UsersHelper
   FEEDABLE_OBJECTS = [ Skill ]
 
   def user_category_summary
-    category_summary = Category.summarize_user(user)
+    category_summary = CategorySummary.summarize_user(user)
     categories_from_enrollments = user.categories
     category_summary.select { |key,stats| categories_from_enrollments.include? key }
   end

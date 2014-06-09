@@ -1,4 +1,4 @@
-$ ->
+init_modules = ->
   $(".exercise button").click ->
     self = $(this)
 
@@ -14,3 +14,6 @@ $ ->
         	self.addClass('completed')
         else
         	self.removeClass('completed')
+
+$(document).ready(init_modules)
+$(document).on('page:load', init_modules)
