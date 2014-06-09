@@ -294,7 +294,6 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   launchy
-  listen
   pg
   pry-rails
   pry-rescue
