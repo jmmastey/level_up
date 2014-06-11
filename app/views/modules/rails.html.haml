@@ -1,0 +1,18 @@
+.content.module
+  .page-header
+    %h1 Basic Ruby on Rails
+
+  .row
+    .col-lg-8
+
+      .page-header
+        %h3 Ruby Core
+
+        = exercise_block_for "rails", "docs" do |e|
+          = e.question ""
+
+
+    .col-lg-4.resources{role:'complementary'}
+      .bs-component
+        .panel.panel-basic
+          = render partial: 'modules/rails_resources'

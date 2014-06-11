@@ -1,7 +1,5 @@
 module ModulesHelper
 
-
-
   # exercise block helpers
 
   def exercise_block_for(category, skill)
@@ -9,8 +7,20 @@ module ModulesHelper
     skill     = Skill.find_by_handle skill
     ex_block  = ExerciseBlock.new(category, skill, [])
 
+
     yield ex_block
-    render_block(ex_block)
+    register_exercise_for skill
+    render_block ex_block
+  end
+
+  def current_skills
+    @skills ||= []
+  end
+
+  private
+
+  def register_exercise_for(skill)
+    current_skills << skill
   end
 
   def render_block(ex_block)

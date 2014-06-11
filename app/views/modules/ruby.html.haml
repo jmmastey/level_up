@@ -1,0 +1,51 @@
+.content.module
+  .page-header
+    %h1 Basic Ruby
+
+  .row
+    .col-lg-8
+
+      .page-header
+        %h3 Ruby Core
+
+        = exercise_block_for "ruby", "docs" do |e|
+          = e.question "Ruby core has so many more methods than you'll ever keep in your head. That's totally fine, but you need to know how to look up and use those functions. Use the ruby docs to find the docs for the String class. There's a method that lets you substitute a bunch of characters for a corresponding set of characters (it's not gsub). Find that method and use it in a code sample"
+
+        = exercise_block_for "ruby", "ruby_core" do |e|
+          = e.question "Let's write a ruby program so that we can play with the code. Do the 'dino_catalog' exercise."
+          = e.question "Make sure the catalog passes all the test cases."
+
+      .page-header
+        %h3 Stylish (and Sane) Ruby
+
+        = exercise_block_for "ruby", "style_guide" do |e|
+          = e.question "Fix the code example in the 'style_guide' exercise so that it conforms to the Ruby style guide."
+          = e.question "Go back and make sure that your dino_catalog code conforms to the style guide. Bonus points if it did already."
+
+        = exercise_block_for "ruby", "arrowhead" do |e|
+          = e.question "Look at the code in the arrowhead exercise. It currently fails to put error conditions near their conditions. Refactor it so that it isn't terrible anymore."
+          = e.question "Also go fix your dino_catalog code so that it conforms to this rule."
+
+        = exercise_block_for "ruby", "short_methods" do |e|
+          = e.question "We're going to continue rocking these exercises. The short_methods exercise seems apropos here."
+          = e.question "Your dino_catalog code is probably still offensive. Fix that."
+
+        = exercise_block_for "ruby", "meaningful_names" do |e|
+          = e.question "You're never going to guess how this goes. There's an exercise, it's called meaningful_names. Refactor!"
+          = e.question "Fix your dino_catalog code."
+
+      .page-header
+        %h3 Comments (and Why We Tend to Avoid Them)
+
+        = exercise_block_for "ruby", "comments" do |e|
+          = e.question "Take a break from the exercises for a bit. Explain why we say that 'comments lie'."
+          = e.question "If we don't trust comments, how do we explain our code adequately to others?"
+          = e.question "Assuming this doesn't give anything away, explain what 'self documenting code' means."
+
+        = exercise_block_for "ruby", "comments2" do |e|
+          = e.question "So, I lied above. Sometimes comments are actually necessary. Name (and defend) some cases where you should add comments to your code."
+
+    .col-lg-4.resources{role:'complementary'}
+      .bs-component
+        .panel.panel-basic
+          = render partial: 'modules/ruby_resources'

@@ -1,0 +1,6 @@
+.panel-heading
+  %h3 Exercises From This Lesson
+.panel-body
+  - current_skills.each do |skill|
+    %p
+      %a{href: "##{skill.handle}"}= skill.name

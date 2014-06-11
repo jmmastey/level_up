@@ -41,13 +41,13 @@ CATEGORIES.each do |cat|
 end
 
 COURSES = [
-  [ "Engineering Baseline I", "baseline_1" ],
-  [ "Engineering Baseline II", "baseline_2" ],
-  [ "Cnuapp Engineering", "cnuapp" ],
-  [ "8-box Engineering", "8_box" ],
+  [ "Engineering Baseline I", "baseline_1", "Description" ],
+  [ "Engineering Baseline II", "baseline_2", "Description" ],
+  [ "Cnuapp Engineering", "cnuapp", "Description" ],
+  [ "8-box Engineering", "8_box", "Description" ],
 ]
 COURSES.each do |course|
-  Course.create! name: course[0], handle: course[1], status: :published
+  Course.create! name: course[0], handle: course[1], description: course[2], status: :published
   puts "course: #{course[0]}"
 end
 
