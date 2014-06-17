@@ -4,7 +4,7 @@
 
   .row
     .col-lg-8
-      %p Enova is a Unix shop, which is to say that all production hardware (and most people's personal workstations) are some variant of Linux. As such, you'll need to understand some basic Unix utilities to control your development environment. Thankfully, you don't need to be a sysadmin to navigate the waters of application development on Unix, so this will be a simple course.
+      %p The Rails Prime stack runs on a Unix stack, which is to say that all production hardware (and most people's personal workstations) are some variant of that system. As such, you'll need to understand some basic Unix utilities to control your development environment. Thankfully, you don't need to be a sysadmin to navigate the waters of application development on Unix, so this will be a simple course.
 
       .page-header
         %h3 Getting Around the Filesystem: Absolute and Relative Paths
@@ -39,7 +39,7 @@
         %h3 Transferring Files Between Boxes
         %p Since we work on remote VMs, and often across the network, transferring of files across machines is a common task. Take a look at this <a href='https://linuxacademy.com/blog/linux/ssh-and-scp-howto-tips-tricks/'>SCP tutorial</a> to find out how to transfer files. 
         = exercise_block_for "linux", "navigation" do |e|
-          = e.question "Create a text file with your Enova username (e.g. jmastey.txt). Now transfer it to vor.dev.cashnetusa.com and put it into the /tmp directory. There is a default login (cnuapp/cnuapp) for that box."
+          = e.question "Create a text file with your email username (e.g. jmastey.txt). Now transfer it to vor.dev.cashnetusa.com and put it into the /tmp directory. There is a default login (cnuapp/cnuapp) for that box."
           = e.question "Delete your local copy, and then copy the file from the remote box back to your local machine."
 
       .page-header
@@ -108,7 +108,7 @@
 
       .page-header
         %h3 Monitoring Production Hardware
-        %p Enova has hundreds of virtual servers running our production and internal systems. That makes monitoring those servers for health into a big job. It's important that you understand how that monitoring works, because you may be responsible for helping define or fix some of the checks that they employ. It's also just kinda cool.
+        %p We have hundreds of virtual servers running our production and internal systems. That makes monitoring those servers for health into a big job. It's important that you understand how that monitoring works, because you may be responsible for helping define or fix some of the checks that they employ. It's also just kinda cool.
         %p Here's a handy <a href='https://www.youtube.com/watch?v=UjJKpDLYx18'>product demo</a> by Zenoss, the company we use to monitor our servers. We moved to that platform from Nagios, another popular platform for monitoring. Some of the reasons why <a href='http://www.techrepublic.com/blog/linux-and-open-source/system-monitoring-with-zenoss-takes-complexity-out-of-configuration/'>are here</a>.
         = exercise_block_for "linux", "monitoring" do |e|
           = e.question "Name some resources that you might monitor for a production host."
@@ -126,7 +126,7 @@
         %p If you don't manage the time on your system properly, your commits will appear to be from the future, and everyone will make fun of you. However, our tests tend to change system time in order to accomplish common tasks, so you may end up with a system whose time is not set correctly.
         %p Quick, read <a href='http://linux.die.net/man/8/ntpdate'>the man</a> to avoid total embarassment!
         = exercise_block_for "linux", "ntp" do |e|
-          = e.question "This one's easy. Demonstrate the command to reset your time using the internal Enova ntp servers."
+          = e.question "This one's easy. Demonstrate the command to reset your time using an external NTP server."
 
       .page-header
         %h3 Firewalls, iptables, and nmap

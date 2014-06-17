@@ -69,6 +69,7 @@ SKILLS = [
   [ "linux", "firewall", "Can check firewall settings with iptables" ],
   [ "linux", "nmap", "Can check open ports on a remote host with nmap" ],
 
+  [ "ruby", "ruby_core", "Fluently uses Ruby core functions" ],
   [ "ruby", "comments", "Knows why comments lie, and how to write self-documenting code" ],
   [ "ruby", "comments2", "Knows the cases where comments are really necessary" ],
   [ "ruby", "fivesecond", "Knows what the five second rule for code review is" ],
@@ -76,7 +77,6 @@ SKILLS = [
   [ "ruby", "meaningful_names", "Uses meaningful names for variables / methods / etc" ],
   [ "ruby", "short_methods", "Creates short methods and short lines of code" ],
   [ "ruby", "style_guide", "Develops according to the github style guide" ],
-  [ "ruby", "ruby_core", "Fluently uses Ruby core functions" ],
   [ "ruby", "arrowhead", "Puts errors near their test conditions (no arrowhead programming)" ],
 
   [ "ruby_2", "explodes", "Writes code that explodes early" ],
@@ -91,10 +91,10 @@ SKILLS = [
 
   [ "rails", "convention", "Understands how 'Convention Over Configuration' helps us" ],
   [ "rails", "basic_types", "Knows the location and purpose of models, views and controllers" ],
-  [ "rails", "rake", "Knows how to list and run rake tasks, and what things should be rake tasks" ],
-  [ "rails", "pry", "Can debug with pry" ],
   [ "rails", "helpers", "Knows how to use view helpers to aid clarity" ],
+  [ "rails", "rake", "Knows how to list and run rake tasks, and what things should be rake tasks" ],
   [ "rails", "test_conventions", "Knows the location and conventions for Rspec and Cucumber" ],
+  [ "rails", "pry", "Can debug with pry" ],
   [ "rails", "active_support", "Knows about the ActiveSupport extensions to core ruby" ],
 
   [ "rails_2", "default_route", "Understands how the default rails route causes problems" ],
@@ -179,7 +179,7 @@ SKILLS = [
   [ "engineering", "magic", "Doesn't use magic numbers or constants, knows why" ],
   [ "engineering", "commitments", "Understands commitments versus estimates" ],
   [ "engineering", "versioning", "Understands Semver, external APIs and breaking compatibility" ],
-  [ "engineering", "open_source", "Knows Enova's Open Source Policy" ],
+  [ "engineering", "open_source", "Knows The Open Source Policy" ],
   [ "engineering", "environments", "Knows why prod should be like development, and why it's not" ],
   [ "engineering", "debugging", "Can debug issues in legacy code" ],
   [ "engineering", "yagni", "Employs YAGNI (and knows when to violate it)" ],

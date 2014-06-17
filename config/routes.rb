@@ -1,4 +1,4 @@
-Learnenova::Application.routes.draw do
+Levelup::Application.routes.draw do
   root to: "home#index"
   get "/:module.html", to: "home#show"
 

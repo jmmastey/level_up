@@ -1,7 +1,7 @@
-learn.enova
+level.up
 =========
 
-An app to store and verify training material for engineers at Enova.
+An app to store and verify training material for engineers on the [Rails Prime Stack](http://words.steveklabnik.com/rails-has-two-default-stacks).
 
 Getting Started
 ---------------
@@ -22,4 +22,4 @@ Joseph Mastey <jmmastey@gmail.com>
 License
 -------
 
-learn.enova is released under the [MIT License](https://github.com/enova/learn.enova/blob/master/MIT-LICENSE).
+levelup is released under the [MIT License](https://github.com/jmmastey/levelup/blob/master/MIT-LICENSE).
