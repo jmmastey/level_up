@@ -1,38 +1,47 @@
 .content.module
   .page-header
-    %h1 Basic Ruby on Rails
+    %h1 Basic Test Engineering
 
   .row
     .col-lg-8
 
       .page-header
-        %h3 The Rails Philosophy
-        = exercise_block_for "rails", "convention" do |e|
+        %h3 The Testing Mindset
+        = exercise_block_for "test", "trustno1" do |e|
+          = e.question "Foo!"
+        = exercise_block_for "test", "tdd_bdd" do |e|
+          = e.question "Foo!"
+        = exercise_block_for "test", "redgreen" do |e|
+          = e.question "Foo!"
+        = exercise_block_for "test", "flapping" do |e|
           = e.question "Foo!"
 
       .page-header
-        %h3 Laying Out a Rails Application
-        = exercise_block_for "rails", "basic_types" do |e|
+        %h3 Your Toolbelt
+        = exercise_block_for "test", "capybara" do |e|
           = e.question "Foo!"
-        = exercise_block_for "rails", "helpers" do |e|
-          = e.question "Foo!"
-        = exercise_block_for "rails", "rake" do |e|
+        = exercise_block_for "test", "test_types" do |e|
           = e.question "Foo!"
 
       .page-header
-        %h3 Testing as a Way of Life
-        = exercise_block_for "rails", "test_conventions" do |e|
+        %h3 Strategies for Better Testing
+        = exercise_block_for "test", "wanttosee" do |e|
+          = e.question "Foo!"
+        = exercise_block_for "test", "meaningful" do |e|
+          = e.question "Foo!"
+        = exercise_block_for "test", "failtests" do |e|
           = e.question "Foo!"
 
       .page-header
-        %h3 And Other Miscellanea
-        = exercise_block_for "rails", "pry" do |e|
+        %h3 It's Not All Automatic
+        = exercise_block_for "test", "manual" do |e|
           = e.question "Foo!"
-        = exercise_block_for "rails", "active_support" do |e|
+        = exercise_block_for "test", "test_plans" do |e|
           = e.question "Foo!"
-
+        = exercise_block_for "test", "paths" do |e|
+          = e.question "Foo!"
 
     .col-lg-4.resources{role:'complementary'}
       .bs-component
         .panel.panel-basic
-          = render partial: 'modules/rails_resources'
+          = render partial: 'modules/test_resources'
