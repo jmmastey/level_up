@@ -8,38 +8,55 @@
       .page-header
         %h3 The Testing Mindset
         = exercise_block_for "test", "trustno1" do |e|
-          = e.question "Foo!"
-        = exercise_block_for "test", "tdd_bdd" do |e|
-          = e.question "Foo!"
+          = e.question "Developers are a tricksey bunch. Name some reasons why you shouldn't just trust the person who wrote the code."
+          = e.question "Name some distortions that you should watch out for when testing code."
+
         = exercise_block_for "test", "redgreen" do |e|
-          = e.question "Foo!"
+          = e.question "Explain how the red / green / refactor cycle works, and how it creates better code over time."
+
+        = exercise_block_for "test", "tdd_bdd" do |e|
+          = e.question "Here are the big ones. To demonstrate TDD, do the 'data_science' exercise. Make sure to write tests first."
+          = e.question "Once you've done that, to contrast BDD, do the 'game_catalog' exercise. Focus on the behavioral tests for this exercise."
+
         = exercise_block_for "test", "flapping" do |e|
-          = e.question "Foo!"
+          = e.question "First, tell me what a flapping test is. Then, explain some ways that flapping tests are more destructive than even failing or non-existent tests."
+          = e.question "Name some gotchas when writing tests that can cause them to become fragile, and how to fix those problems."
 
       .page-header
         %h3 Your Toolbelt
         = exercise_block_for "test", "capybara" do |e|
-          = e.question "Foo!"
+          = e.question "Explain what a capybara driver is, and what some benefits are of the default driver."
+          = e.question "Name a case where a driver other than the default would be necessary, then go implement it with your game_catalog code."
+
         = exercise_block_for "test", "test_types" do |e|
-          = e.question "Foo!"
+          = e.question "You've now written two types of tests. Name them, and explain the differences."
+          = e.question "Name the other type of test that you haven't written yet, and write an example of one."
 
       .page-header
         %h3 Strategies for Better Testing
         = exercise_block_for "test", "wanttosee" do |e|
-          = e.question "Foo!"
+          = e.question "Explain the theory around 'writing the code you want to see'."
+          = e.question "Create a short gist illustrating a place where violating this rule would cause you to write worse code."
+
         = exercise_block_for "test", "meaningful" do |e|
-          = e.question "Foo!"
+          = e.question "Write an example of a tautological test."
+          = e.question "Do the 'meaning_of_life' exercise."
+
         = exercise_block_for "test", "failtests" do |e|
-          = e.question "Foo!"
+          = e.question "Go check the tests you've written during this course. Try to change the system under test to make the tests pass. If they don't refactor them until they do."
 
       .page-header
         %h3 It's Not All Automatic
         = exercise_block_for "test", "manual" do |e|
-          = e.question "Foo!"
+          = e.question "Name some cases where manual testing is preferable or necessary to verify code."
+          = e.question "Name some strategies for manually testing code that constrain the time cost of testing."
+
         = exercise_block_for "test", "test_plans" do |e|
-          = e.question "Foo!"
+          = e.question "Do the 'shopping cart' activity."
+
         = exercise_block_for "test", "paths" do |e|
-          = e.question "Foo!"
+          = e.question "Go back to all the tests you've written for this course. Organize them according to what type of test they are."
+          = e.question "Think about what sort of tests you may have missed for the various paths, and add them to the code. Remember to write the test first."
 
     .col-lg-4.resources{role:'complementary'}
       .bs-component
