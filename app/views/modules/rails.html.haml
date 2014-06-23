@@ -9,31 +9,33 @@
         %h3 The Rails Philosophy
 
         = exercise_block_for "rails", "convention" do |e|
-          = e.question "TBD"
+          = e.question "Explain how \"convention over configuration\" allows us to be more productive as a group."
 
         = exercise_block_for "rails", "basic_types" do |e|
-          = e.question "TBD"
+          = e.question "Go complete the 'cyoa' exercise. It's a big one, but it should give you good practice and a base for the other exercises here."
 
         = exercise_block_for "rails", "active_support" do |e|
-          = e.question "TBD"
+          = e.question "Do the 'supportive' exercise."
+          = e.question "Refactor your rails app to make use of ActiveSupport extensions wherever it makes sense."
 
       .page-header
         %h3 Structuring Your App
 
         = exercise_block_for "rails", "helpers" do |e|
-          = e.question "TBD"
+          = e.question "Refactor your rails app to move any complicated logic from views into helpers."
 
         = exercise_block_for "rails", "rake" do |e|
-          = e.question "TBD"
+          = e.question "If you haven't already, add a few rake tasks to your rails app. Jobs that are run on a schedule are a good place to start."
 
         = exercise_block_for "rails", "test_conventions" do |e|
-          = e.question "TBD"
+          = e.question "Presumably you already wrote your app using TDD / BDD, so this should be an easy one. Just make sure you've followed the conventions for Rspec and Cucumber tests in your codebase."
 
       .page-header
         %h3 Nothing Works the Way You Think it Does
 
         = exercise_block_for "rails", "pry" do |e|
-          = e.question "TBD"
+          = e.question "If you've got any nagging issues inside your code, now is a great time to debug it using binding.pry."
+          = e.question "If not, try using pry to step through a request cycle from the app. Get familiar with breakpoints and stepping through code."
 
     .col-lg-4.resources{role:'complementary'}
       .bs-component
