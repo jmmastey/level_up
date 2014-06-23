@@ -1,17 +1,41 @@
 .content.module
   .page-header
-    %h1 Tests and Testing
+    %h1 Basic Ruby on Rails
 
   .row
     .col-lg-8
 
       .page-header
         %h3 The Rails Philosophy
-        = exercise_block_for "test", "trustno1" do |e|
 
-        = exercise_block_for "test", "trustno1" do |e|
+        = exercise_block_for "rails", "convention" do |e|
+          = e.question "TBD"
+
+        = exercise_block_for "rails", "basic_types" do |e|
+          = e.question "TBD"
+
+        = exercise_block_for "rails", "active_support" do |e|
+          = e.question "TBD"
+
+      .page-header
+        %h3 Structuring Your App
+
+        = exercise_block_for "rails", "helpers" do |e|
+          = e.question "TBD"
+
+        = exercise_block_for "rails", "rake" do |e|
+          = e.question "TBD"
+
+        = exercise_block_for "rails", "test_conventions" do |e|
+          = e.question "TBD"
+
+      .page-header
+        %h3 Nothing Works the Way You Think it Does
+
+        = exercise_block_for "rails", "pry" do |e|
+          = e.question "TBD"
 
     .col-lg-4.resources{role:'complementary'}
       .bs-component
         .panel.panel-basic
-          = render partial: 'modules/test_resources'
+          = render partial: 'modules/rails_resources'
