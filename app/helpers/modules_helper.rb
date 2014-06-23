@@ -27,6 +27,14 @@ module ModulesHelper
     render partial: 'modules/exercise', locals: { block: ex_block }
   end
 
+  def render_questions(questions)
+    if questions.length == 1
+      render partial: "modules/exercise_single_question", locals: { question: questions.first }
+    else
+      render partial: "modules/exercise_multi_question", locals: { questions: questions }
+    end
+  end
+
   def completion_classes(ex_block)
     if current_user.has_completed?(ex_block.skill)
       "btn btn-default completed"
@@ -35,9 +43,9 @@ module ModulesHelper
     end
   end
 
-  ExerciseBlock = Struct.new(:category, :skill, :content) do
+  ExerciseBlock = Struct.new(:category, :skill, :questions) do
     def question(text)
-      content << text
+      questions << text
       nil
     end
   end

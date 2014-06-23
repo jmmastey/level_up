@@ -5,9 +5,7 @@
       = "Exercise: #{block.skill.name} "
   .panel-body
 
-    %ol
-      - block.content.each do |contents|
-        %li= contents
+    = render_questions(block.questions)
 
     .completion
       - if signed_in?
