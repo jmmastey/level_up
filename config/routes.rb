@@ -1,5 +1,6 @@
 Levelup::Application.routes.draw do
   root to: "home#index"
+  get "/thedeal.html", to: "home#thedeal"
   get "/:module.html", to: "home#show"
 
   devise_for :users, controllers: { registrations: "registrations" }
