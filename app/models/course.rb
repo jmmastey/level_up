@@ -15,7 +15,11 @@ class Course < ActiveRecord::Base
     end
 
     event :publish do
-      transition [:created, :approved] => :published
+      transition [:created, :approved, :hidden] => :published
+    end
+
+    event :hide do
+      transition :published => :hidden
     end
 
     event :deprecate do
