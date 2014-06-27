@@ -13,6 +13,10 @@ module ModulesHelper
     render_block ex_block
   end
 
+  def exercise_link(exercise_name)
+    link_to(exercise_name.gsub('_', ' '), "http://github.com/jmmastey/level_up_exercises/tree/master/#{exercise_name}")
+  end
+
   def current_skills
     @skills ||= []
   end

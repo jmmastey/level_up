@@ -27,8 +27,8 @@
         %p Once you've got a little TDD under your belt, you will inevitably come to the question of "what should I write tests for first". This is a significant question for the layout of your application, but TDD has no opinions on the matter. That's where Behavior Driven Development comes in. We use BDD to define where to start and which things are worth testing in the precious limited time we have.
         %p Check the resources in the sidebar for some good BDD examples.
         = exercise_block_for "test", "tdd_bdd" do |e|
-          = e.question "Here are the big ones. To demonstrate TDD, do the 'data_science' exercise. Make sure to write tests first."
-          = e.question "Once you've done that, to contrast BDD, do the 'overlord' exercise. Focus on the behavioral tests for this exercise."
+          = e.question "Here are the big ones. To demonstrate TDD, do the #{exercise_link 'data_science'} exercise. Make sure to write tests first."
+          = e.question "Once you've done that, to contrast BDD, do the #{exercise_link 'overlord'} exercise. Focus on the behavioral tests for this exercise."
 
       .page-header
         %h3 Your Toolbelt
@@ -61,7 +61,7 @@
 
         %p One of the tools that might make you wrinkle your nose is a test plan. Planning your test process -- for your code or others' -- is a huge step toward doing good test work. Read <a href='http://googletesting.blogspot.com/2011/09/10-minute-test-plan.html'>this article</a> and spend some time thinking about how you're going to test your next software project.
         = exercise_block_for "test", "test_plans" do |e|
-          = e.question "Do the 'shopping cart' exercise."
+          = e.question "Do the #{exercise_link 'shopping_cart'} exercise."
 
         %p When you're thinking about your test plan, try thinking of the tests grouped by their outcomes. Take a look at <a href='http://www.nishantverma.com/2010/03/test-case-paths-happy-sad-bad.html'>this article</a> and think about the different "paths" of tests. Planning your test cases according to different paths is a great way to make sure that you cover all the necessary cases.
         = exercise_block_for "test", "paths" do |e|
@@ -80,7 +80,7 @@
         %p One common source of test crappiness is that the tests themselves are not exercising the System Under Test. Roll your eyes at the hyperbolic title and watch the Ruby Tapas on <a href='http://www.rubytapas.com/episodes/52-The-End-of-Mocking'>The End of Mocking</a> for more information.
         = exercise_block_for "test", "meaningful" do |e|
           = e.question "Write an example of a tautological test."
-          = e.question "Do the 'meaning_of_life' exercise."
+          = e.question "Do the #{exercise_link 'meaning_of_life'} exercise."
 
         %p Though I'm sure you would never do such a thing, another problem you're sure to see in other people's code is that they wrote the tests after writing the code, but never verified that the tests could ever fail. If a test has never been red, it is probably of low value.
         = exercise_block_for "test", "failtests" do |e|

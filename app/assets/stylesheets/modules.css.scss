@@ -1,4 +1,10 @@
 .exercise {
+  margin-bottom:30px;
+
+  &:last-child {
+    margin-bottom:20px;
+  }
+
   .panel-title .fa {
     margin-right:4px;
   }
