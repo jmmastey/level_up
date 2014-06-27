@@ -278,6 +278,23 @@ SKILLS.each do |skill|
   puts "skill: #{skill[2]}"
 end
 
+puts "course categories"
+COURSE_CATS = {
+  'baseline_1' => [ 'linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering', 'business', 'professionalism' ],
+  'baseline_2' => [ 'ruby_2', 'rails_2', 'test_2', 'data_2', 'interaction_2', 'engineering_2', ],
+  'cnuapp' => [ 'cnuapp' ],
+  '8_box' => [ '8boxes' ],
+}
+COURSE_CATS.each do |course, categories|
+  puts "#{course}: #{categories.join(', ')}"
+  categories = categories.map { |cat| Category.find_by_handle(cat).id }
+  skills = Skill.where(category_id: categories)
+  course = Course.find_by_handle(course)
+
+  course.skills = skills
+  course.save
+end
+
 if ENV['ADMIN_NAME']
   puts 'DEFAULT USERS'
   user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
