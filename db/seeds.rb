@@ -41,7 +41,7 @@ CATEGORIES.each do |cat|
 end
 
 COURSES = [
-  [ "Engineering Baseline I", "baseline_1", "Description" ],
+  [ "Engineering Baseline I", "baseline_1", "Learn to build and test a complete Ruby on Rails application. This isn't a basic intro: you will finish with some serious ruby chops." ],
   [ "Engineering Baseline II", "baseline_2", "Description" ],
   [ "Cnuapp Engineering", "cnuapp", "Description" ],
   [ "8-box Engineering", "8_box", "Description" ],

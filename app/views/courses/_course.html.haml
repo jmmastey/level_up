@@ -1,8 +1,12 @@
 .list-group-item{ class: ['course', course.handle] }
   - if signed_in? && course.has_enrolled?(current_user)
-    %a.btn.btn-primary.btn-lg Enrolled
+    %a.btn.btn-primary.btn-lg.register Enrolled
   - else
     = form_tag course_enroll_path(course), method: :post, class: 'register' do 
       %button.btn.btn-primary.btn-lg Enroll
   %h3= course.name
   %p.description= course.description
+  %h5 Categories Covered
+  %ul.categories
+    - course.categories.each do |category|
+      %li= category

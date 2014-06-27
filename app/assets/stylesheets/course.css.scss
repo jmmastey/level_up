@@ -1,4 +1,9 @@
-.course-list
-  .course .register {
-    float:right;
+.course-list {
+  .course {
+    h3 { margin-top:10px; }
+    .register {
+      float:right;
+      margin-top:10px;
+    }
   }
+}
