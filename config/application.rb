@@ -1,4 +1,7 @@
+require 'dotenv'
 require File.expand_path('../boot', __FILE__)
+
+Dotenv.load
 
 require 'rails/all'
 
