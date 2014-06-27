@@ -1,1 +1,3 @@
-%p.categories= "Topics Covered: " + categories.sort_by(&:id).map(&:name).join(", ")
+%p.categories
+  %strong Topics Covered: 
+  = categories.sort_by(&:id).map(&:name).join(", ")
