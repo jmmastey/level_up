@@ -5,9 +5,8 @@ Levelup::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations" }
   resources :users, only: [:update, :show]
-  resources :courses, only: [:index, :show] do
-    post "enroll"
-  end
+  resources :courses, only: [:index, :show]
+  post "courses/:id/enroll", to: "courses#enroll", as: "enroll"
 
   resources :skills, only: [] do
     post "completion", to: "skills#complete", as: :complete
