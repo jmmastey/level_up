@@ -104,7 +104,7 @@
         %p Aside from user-space programs you're accustomed to, Linux environments also run many services in the background. On Debian -- our preferred flavor of Linux -- the way to manage those services is through the init system. The commands to start and stop services are well <a href='http://oreilly.com/openbook/debian/book/ch07_03.html'>standardized and documented</a>, so you shouldn't need to learn any new commands for most services.
         = exercise_block_for "linux", "init_scripts" do |e|
           = e.question "On a Linux development VM, use init scripts to restart sshd. Y'know, just in case."
-          = e.question "Let's pretend you just changed your nginx config, and want to reload the changes without stopping the service altogether. Invoke the init script without any arguments to see valid choices. Now run the correct init command to re-evaluate the config without stopping the server."
+          = e.question "Let's pretend you just changed your nginx config, and want to reload the changes without stopping the service altogether. Invoke the init script without any arguments to see valid choices. Now run the correct init command to parse and load the config without stopping the server."
 
       .page-header
         %h3 Monitoring Production Hardware
