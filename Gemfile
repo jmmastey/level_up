@@ -42,6 +42,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
+  gem 'poltergeist'
 end
 
 group :production do

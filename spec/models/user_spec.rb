@@ -118,7 +118,7 @@ describe User do
       user.courses.should eq([published_course])
 
       user.add_role(:admin)
-      user.courses.should eq([published_course, course, hidden_course])
+      user.courses.should eq([course, published_course, hidden_course])
     end
 
   end
