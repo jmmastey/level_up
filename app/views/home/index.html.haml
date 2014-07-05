@@ -1,4 +1,5 @@
 - unless @user_courses.empty?
+  %h2 Your Enrolled Courses
   = render collection: @user_courses, partial: 'course_modules', as: :course, locals: { summary: @category_summary }
 - else
   %p

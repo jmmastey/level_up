@@ -10,8 +10,9 @@
     .progress
       .progress-bar.progress-bar-success{style: "width: #{completion_percent}%" }
 
+  - categories = course.categories.reject(&:hidden?).sort_by(&:sort_order)
   .col-lg-6
-    - if course.categories.any?
+    - if categories.any?
       %ul.categories.list-group
-        - course.categories.sort_by(&:sort_order).each do |category|
+        - categories.each do |category|
           = render partial: 'course_completion', locals: { category: category, completion: summary[category.handle] }
