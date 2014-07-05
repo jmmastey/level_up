@@ -25,11 +25,6 @@ class CoursesController < ApplicationController
     @course = Course.published.find params[:id]
   end
 
-  def current_user
-    super || Guest.new
-  end
-  helper_method :current_user
-
   def signed_in?
     current_user.signed_in?
   end

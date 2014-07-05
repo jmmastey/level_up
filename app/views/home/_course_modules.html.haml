@@ -1,0 +1,7 @@
+.list-group-item{ class: ['course', course.handle] }
+  %h3= course.name
+  %p.description= course.description
+  - if course.categories.any?
+    .categories
+      - course.categories.each do |category|
+        %p= link_to(category.name, "/#{category.handle}.html")

@@ -1,11 +1,7 @@
-%p So... this is awkward. Being half-crippled means this is half-done. Still, here's some modules for you:
-
-%ul
-  %li 
-    %a{href:"/linux.html"} Basic Linux and Shell Utilities
-  %li
-    %a{href:"/ruby.html"} Basic Ruby
-  %li
-    %a{href:"/test.html"} Basic Test Engineering
-  %li
-    %a{href:"/rails.html"} Basic Ruby on Rails
+- unless @user_courses.empty?
+  = render collection: @user_courses, partial: 'course_modules', as: :course
+- else
+  %p
+    You haven't enrolled in any courses. Go
+    = link_to "take a look", courses_path
+    at what's on offer.

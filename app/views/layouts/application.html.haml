@@ -13,10 +13,10 @@
   %body
     = render partial: 'layouts/navigation'
 
-    - flash.each do |name, msg|
-      %div{class: "alert alert-#{name}"}= msg
-
     .container 
+      - flash.each do |name, msg|
+        %div{class: "alert alert-#{name}"}= msg
+
       = yield
 
     %footer

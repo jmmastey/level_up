@@ -36,18 +36,18 @@ class Course < ActiveRecord::Base
   end
 
   def self.for_student(student)
-    published | enrolled_courses(student) | admin_courses(student)
+    published | enrolled_courses_for(student) | admin_courses(student)
   end
 
   def has_enrolled?(student)
     student.has_role?(:enrolled, self)
   end
 
-  protected
-
-  def self.enrolled_courses(student)
+  def self.enrolled_courses_for(student)
     with_role(:enrolled, student)
   end
+
+  protected
 
   def self.admin_courses(user)
     user.admin? ? all : none
