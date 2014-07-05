@@ -36,7 +36,7 @@ class Course < ActiveRecord::Base
   end
 
   def self.for_student(student)
-    published | enrolled_courses_for(student) | admin_courses(student)
+    (published | enrolled_courses_for(student) | admin_courses(student)).sort_by(&:id)
   end
 
   def has_enrolled?(student)
@@ -44,7 +44,7 @@ class Course < ActiveRecord::Base
   end
 
   def self.enrolled_courses_for(student)
-    with_role(:enrolled, student)
+    with_role(:enrolled, student).sort_by(&:id)
   end
 
   protected

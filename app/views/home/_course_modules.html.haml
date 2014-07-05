@@ -13,5 +13,5 @@
   .col-lg-6
     - if course.categories.any?
       %ul.categories.list-group
-        - course.categories.each do |category|
+        - course.categories.sort_by(&:sort_order).each do |category|
           = render partial: 'course_completion', locals: { category: category, completion: summary[category.handle] }
