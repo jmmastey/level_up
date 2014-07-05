@@ -23,16 +23,15 @@ class CategorySummary < Category
 
   def self.summarize_course(course, user_summary)
     categories = course.categories.map(&:handle)
-    summary = { total: 0, completed: 0, verified: 0 }
-    user_summary.map do |handle, stats|
-      next unless categories.include? handle
+    user_summary.inject({ total: 0, completed: 0, verified: 0 }) do |summary, (handle, stats)|
+      next summary unless categories.include? handle
 
       summary[:total] += stats[:total_skills]
       summary[:completed] += stats[:total_completed]
       summary[:verified] += stats[:total_verified]
-    end
 
-    summary
+      summary
+    end
   end
 
   protected
