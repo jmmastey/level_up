@@ -21,6 +21,20 @@ class CategorySummary < Category
     self.map_summary(result)
   end
 
+  def self.summarize_course(course, user_summary)
+    categories = course.categories.map(&:handle)
+    summary = { total: 0, completed: 0, verified: 0 }
+    user_summary.map do |handle, stats|
+      next unless categories.include? handle
+
+      summary[:total] += stats[:total_skills]
+      summary[:completed] += stats[:total_completed]
+      summary[:verified] += stats[:total_verified]
+    end
+
+    summary
+  end
+
   protected
 
   def self.map_summary(summary)

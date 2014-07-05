@@ -1,7 +1,17 @@
-.list-group-item{ class: ['course', course.handle] }
-  %h3= course.name
-  %p.description= course.description
-  - if course.categories.any?
-    .categories
-      - course.categories.each do |category|
-        %p= link_to(category.name, "/#{category.handle}.html")
+- course_summary = CategorySummary.summarize_course(course, summary)
+- completion_percent = ((course_summary[:completed] / course_summary[:total].to_f) * 100).ceil
+
+.list-group-item.row{ class: ['course', course.handle] }
+  .col-lg-6
+    %h3= course.name
+    %p.description= course.description
+    %hr
+    %p.completion= "#{course_summary[:completed]} of #{course_summary[:total]} skills completed"
+    .progress
+      .progress-bar.progress-bar-success{style: "width: #{completion_percent}%" }
+
+  .col-lg-6
+    - if course.categories.any?
+      %ul.categories.list-group
+        - course.categories.each do |category|
+          = render partial: 'course_completion', locals: { category: category, completion: summary[category.handle] }

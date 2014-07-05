@@ -1,5 +1,5 @@
 - unless @user_courses.empty?
-  = render collection: @user_courses, partial: 'course_modules', as: :course
+  = render collection: @user_courses, partial: 'course_modules', as: :course, locals: { summary: @category_summary }
 - else
   %p
     You haven't enrolled in any courses. Go
