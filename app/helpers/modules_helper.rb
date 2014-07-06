@@ -3,18 +3,18 @@ module ModulesHelper
   # exercise block helpers
 
   def exercise_block_for(category, skill)
-    cat       = Category.find_by! handle: category
-    skill     = Skill.find_by! handle: skill
+    cat       = Category.find_by!(handle: category)
+    skill     = Skill.find_by!(handle: skill)
     ex_block  = ExerciseBlock.new(category, skill, [])
 
 
     yield ex_block
-    register_exercise_for skill
-    render_block ex_block
+    register_exercise_for(skill)
+    render_block(ex_block)
   end
 
   def exercise_link(exercise_name)
-    link_to exercise_name.titleize, exercise_url(exercise_name)
+    link_to(exercise_name.titleize, exercise_url(exercise_name))
   end
 
   def current_skills
@@ -36,10 +36,10 @@ module ModulesHelper
   end
 
   def render_questions(questions)
-    if questions.length == 1
-      render partial: "exercise/single_question", locals: { question: questions.first }
-    else
+    if questions.many?
       render partial: "exercise/multi_question", locals: { questions: questions }
+    else
+      render partial: "exercise/single_question", locals: { question: questions.first }
     end
   end
 
