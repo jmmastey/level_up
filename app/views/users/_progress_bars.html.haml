@@ -2,8 +2,8 @@
   %tr
     %th Category
     %th{colspan: 2} Completion
-  - user_category_summary.each do |handle, category|
-    %tr{class: handle}
+  - category_progress.each do |category|
+    %tr{class: category[:handle]}
       %td= category[:name]
       %td.completion-stat
         = "#{category[:total_completed]} / #{category[:total_skills]}"

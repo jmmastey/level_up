@@ -15,7 +15,7 @@ module CoursesHelper
   end
 
   def visible_categories_for(course)
-    course.categories.reject(&:hidden?).sort_by(&:sort_order)
+    Category.visible_categories_for(course)
   end
 
 end

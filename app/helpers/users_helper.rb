@@ -2,15 +2,20 @@ module UsersHelper
 
   FEEDABLE_OBJECTS = [ Completion ]
 
-  def user_category_summary
-    category_summary = CategorySummary.summarize_user(user)
-    categories_from_enrollments = user.categories
-    category_summary.select { |key,stats| categories_from_enrollments.include? key }
+  def category_progress
+    summary = CategorySummary.summarize_user(user)
+    categories = enrolled_courses.map { |c| Category.visible_categories_for(c) }.flatten
+
+    categories.map do |category|
+      summary[category.handle].merge(handle: category.handle)
+    end
   end
 
   def user_feed_items
     FEEDABLE_OBJECTS.map { |klass| klass.feed_for(user) }.flatten
   end
+
+  private
 
   def render_feed_item(item)
     send "render_#{item_klass(item)}_feed_item", item
@@ -25,13 +30,11 @@ module UsersHelper
   end
 
   def enrolled_courses
-    @enrolled ||= user.courses
+    @enrolled ||= Course.enrolled_courses_for(current_user)
   end
 
-  protected
-
   def render_completion_feed_item(completion)
-    "Completed #{completion.skill.name}"
+    "Completed '#{completion.skill.name}'"
   end
 
   def completion_tags(completion)

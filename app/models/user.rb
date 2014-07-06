@@ -12,10 +12,6 @@ class User < ActiveRecord::Base
     Course.for_student(self)
   end
 
-  def categories
-    courses.map(&:categories).flatten.uniq
-  end
-
   def has_completed?(skill)
     skills.include? skill
   end

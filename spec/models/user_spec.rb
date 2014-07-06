@@ -156,23 +156,4 @@ describe User do
     end
   end
 
-
-  describe "categories" do
-    let(:user)    { create(:user) }
-    let(:course)  { create(:course) }
-    let!(:skill)  { create(:skill, courses: [course]) }
-
-    it "should retrieve categories for enrolled courses" do
-      course.enroll!(user)
-      user.categories.should eq([skill.category])
-    end
-
-    it "should only retrieve unique categories" do
-      create(:skill, category: skill.category, courses: [course]) # do it again!
-
-      course.enroll!(user)
-      user.categories.should eq([skill.category])
-    end
-  end
-
 end

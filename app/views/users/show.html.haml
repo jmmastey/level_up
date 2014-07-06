@@ -1,12 +1,12 @@
 .col-lg-2
   = gravatar_image_tag(@user.email, alt: @user.name, class: "gravatar", gravatar: { size: 160 })
 
-.col-lg-6
+.col-lg-5
   %h3= "#{@user.name}'s Profile"
 
   = render partial: 'enrolled_courses'
   = render partial: 'recent_activity'
 
-.col-lg-4.skills
-  = render partial: 'skill_summary'
+.col-lg-5.skills
+  = render partial: 'progress'
 

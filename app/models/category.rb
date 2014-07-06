@@ -3,9 +3,12 @@ class Category < ActiveRecord::Base
 
   validates_presence_of :name, :handle
   validates_uniqueness_of :handle
-  scope :ordered, -> { order('sort_order asc') }
 
   def to_s
     name
+  end
+
+  def self.visible_categories_for(course)
+    course.categories.reject(&:hidden?).sort_by(&:sort_order)
   end
 end
