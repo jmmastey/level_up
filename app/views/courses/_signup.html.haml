@@ -1,3 +1,4 @@
+- categories = visible_categories_for(course) .map(&:name)
 .bs-component
   .list-group
     .list-group-item{ class: ['course', course.handle] }
@@ -9,4 +10,6 @@
 
       %h3= course.name
       %p.description= course.description
-      = render(partial: 'topics', locals: { categories: visible_categories_for(course) }) 
+      %p.topics
+        %strong Topics Covered:
+        = categories.join(", ")
