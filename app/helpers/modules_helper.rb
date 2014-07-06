@@ -1,7 +1,5 @@
 module ModulesHelper
 
-  # exercise block helpers
-
   def exercise_block_for(category, skill)
     cat       = Category.find_by!(handle: category)
     skill     = Skill.find_by!(handle: skill)
@@ -32,7 +30,7 @@ module ModulesHelper
   end
 
   def render_block(ex_block)
-    render partial: 'exercise/show', locals: { block: ex_block }
+    render partial: 'exercise/block', object: ex_block
   end
 
   def render_questions(questions)
