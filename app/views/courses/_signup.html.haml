@@ -1,5 +1,5 @@
 .list-group-item{ class: ['course', course.handle] }
-  - if signed_in? && course.has_enrolled?(current_user)
+  - if signed_in? && current_user.courses.include?(course)
     %a.btn.btn-primary.btn-lg.register Enrolled
   - else
     = form_tag enroll_path(course), method: :post, class: 'register' do 

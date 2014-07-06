@@ -30,7 +30,7 @@ module UsersHelper
   end
 
   def enrolled_courses
-    @enrolled ||= Course.enrolled_courses_for(current_user)
+    @enrolled ||= current_user.courses
   end
 
   def render_completion_feed_item(completion)

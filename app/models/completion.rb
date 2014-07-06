@@ -12,4 +12,5 @@ class Completion < ActiveRecord::Base
   def self.feed_for(user, date = 5.days.ago)
     recent(date).for_user(user).by_creation_date
   end
+
 end

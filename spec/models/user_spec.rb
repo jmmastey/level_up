@@ -100,29 +100,6 @@ describe User do
 
   end
 
-  describe "courses" do
-    let(:user) { create(:user) }
-    let!(:course) { create(:course) }
-    let!(:published_course) { create(:course, :published) }
-    let!(:hidden_course) { create(:course, :created) }
-
-
-    it "should retrieve enrolled courses" do
-      user.courses.to_a.should include(published_course)
-
-      course.enroll!(user)
-      user.courses.should include(course)
-    end
-
-    it "should show all courses to admins, but not to other users" do
-      user.courses.should eq([published_course])
-
-      user.add_role(:admin)
-      user.courses.should eq([course, published_course, hidden_course])
-    end
-
-  end
-
   describe "skills" do
     let(:user)      { create(:user) }
     let(:skill)     { create(:skill, category: category) }

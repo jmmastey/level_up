@@ -7,4 +7,5 @@ class Category < ActiveRecord::Base
   def self.visible_categories_for(course)
     course.categories.reject(&:hidden?).sort_by(&:sort_order)
   end
+
 end

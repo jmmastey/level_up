@@ -21,7 +21,7 @@ class Guest
   end
 
   def roles
-    Role.where("1=0")
+    Role.none
   end
 
 end

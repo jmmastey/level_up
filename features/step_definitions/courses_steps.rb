@@ -11,7 +11,8 @@ Given(/^there is an? (.*) course called "(.*)"$/) do |status, name|
 end
 
 Given(/^I am enrolled in "(.*)"$/) do |name|
-  Course.find_by_name(name).enroll!(current_user)
+  course = Course.where(name: name).first
+  Enrollment.create!(user: current_user, course: course)
 end
 
 When(/^I visit the courses page$/) do

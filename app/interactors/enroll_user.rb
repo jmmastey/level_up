@@ -13,7 +13,7 @@ class EnrollUser
   private
 
   def add_user_enrollment
-    context[:course].enroll! context[:user]
+    Enrollment.create(course: context[:course], user: context[:user])
   end
 
   def send_welcome_email

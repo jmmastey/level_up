@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
 
   # GET /
   def index
-    @courses = current_user.courses
+    @courses = Course.available_to(current_user)
   end
 
   # POST enroll

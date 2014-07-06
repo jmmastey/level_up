@@ -14,7 +14,7 @@ FactoryGirl.define do
     trait :enrolled do
       after(:create) do |instance|
         course = create(:course, :with_skills)
-        course.enroll! instance
+        Enrollment.create(course: course, user: instance)
       end
     end
   end

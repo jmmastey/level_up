@@ -3,7 +3,7 @@ class HomeController < ApplicationController
 
   def index
     if current_user.signed_in?
-      @courses = Course.enrolled_courses_for(current_user)
+      @courses = current_user.courses
       @category_summary = CategorySummary.summarize_user(current_user)
     else
       @courses = []

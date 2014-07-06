@@ -1,8 +1,8 @@
 class Course < ActiveRecord::Base
-  resourcify
-
   has_and_belongs_to_many :skills
+  has_many :enrollments
   has_many :categories, -> { uniq }, through: :skills
+  has_many :users, through: :enrollments
 
   validates_presence_of :name, :handle
   validates_uniqueness_of :handle
@@ -27,24 +27,8 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def enroll!(student)
-    student.add_role(:enrolled, self)
-  end
-
-  def students
-    self.class.with_role(:enrolled, self)
-  end
-
-  def self.for_student(student)
-    (published | enrolled_courses_for(student) | admin_courses(student)).sort_by(&:id)
-  end
-
-  def has_enrolled?(student)
-    student.has_role?(:enrolled, self)
-  end
-
-  def self.enrolled_courses_for(student)
-    with_role(:enrolled, student).sort_by(&:id)
+  def self.available_to(student)
+    (published | student.courses | admin_courses(student)).sort_by(&:id)
   end
 
   protected
