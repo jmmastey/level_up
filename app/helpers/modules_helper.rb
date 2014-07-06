@@ -37,9 +37,9 @@ module ModulesHelper
 
   def render_questions(questions)
     if questions.many?
-      render partial: "exercise/multi_question", locals: { questions: questions }
+      render partial: "exercise/questions", object: questions
     else
-      render partial: "exercise/single_question", locals: { question: questions.first }
+      render partial: "exercise/question", object: questions.first
     end
   end
 
