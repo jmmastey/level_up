@@ -7,4 +7,4 @@
 
   %h3= course.name
   %p.description= course.description
-  = render(partial: 'course_categories', locals: { categories: visible_categories_for(course) }) 
+  = render(partial: 'topics', locals: { categories: visible_categories_for(course) }) 

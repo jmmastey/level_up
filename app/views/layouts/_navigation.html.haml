@@ -1,11 +1,11 @@
-%header.navbar.navbar-default{role: "navigation"}
+%header.navbar.navbar-default{ role: "navigation" }
   .container
     .navbar-brand
-      %a{href:'/'}
+      %a{ href: root_path }
         %i.fa.fa-arrow-up
         Level UP
 
-    %button.navbar-toggle{type:'button', data: { toggle: 'collapse', target: '.navbar-collapse'}}
+    %button.navbar-toggle{ data: { toggle: 'collapse', target: '.navbar-collapse' } }
       %span.sr-only Toggle navigation
       %i.fa.fa-cog
 
@@ -18,5 +18,5 @@
           %li= link_to 'Logout', destroy_user_session_path, method: :delete
 
         - else
-          %li= link_to 'Sign in', new_user_session_path
-          %li= link_to 'Sign up', new_user_registration_path 
+          %li= link_to 'Sign In', new_user_session_path
+          %li= link_to 'Sign Up', new_user_registration_path 

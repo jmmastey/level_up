@@ -14,7 +14,7 @@ module ModulesHelper
   end
 
   def exercise_link(exercise_name)
-    link_to(exercise_name.gsub('_', ' '), "http://github.com/jmmastey/level_up_exercises/tree/master/#{exercise_name}")
+    link_to exercise_name.titleize, exercise_url(exercise_name)
   end
 
   def current_skills
@@ -23,19 +23,23 @@ module ModulesHelper
 
   private
 
+  def exercise_url(exercise)
+    "http://github.com/jmmastey/level_up_exercises/tree/master/#{exercise}"
+  end
+
   def register_exercise_for(skill)
     current_skills << skill
   end
 
   def render_block(ex_block)
-    render partial: 'modules/exercise', locals: { block: ex_block }
+    render partial: 'exercise/show', locals: { block: ex_block }
   end
 
   def render_questions(questions)
     if questions.length == 1
-      render partial: "modules/exercise_single_question", locals: { question: questions.first }
+      render partial: "exercise/single_question", locals: { question: questions.first }
     else
-      render partial: "modules/exercise_multi_question", locals: { questions: questions }
+      render partial: "exercise/multi_question", locals: { questions: questions }
     end
   end
 
