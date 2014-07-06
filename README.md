@@ -17,7 +17,7 @@ Contributions are very welcome. Fork, fix, submit pulls.
 Credits
 -------
 
-Joseph Mastey <jmmastey@gmail.com>
+See [the humans file](public/humans.txt)
 
 License
 -------
