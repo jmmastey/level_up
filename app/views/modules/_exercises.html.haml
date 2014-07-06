@@ -2,5 +2,6 @@
   %h3 Exercises From This Lesson
 .panel-body
   - current_skills.each do |skill|
-    %p
+    - klass = current_user.has_completed?(skill) ? "fa-check-circle-o" : "fa-circle-o"
+    %p{class: "fa #{klass}"}
       %a{href: "##{skill.handle}"}= skill.name
