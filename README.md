@@ -1,4 +1,4 @@
-level.up
+level_up
 =========
 
 An app to store and verify training material for engineers on the [Rails Prime Stack](http://words.steveklabnik.com/rails-has-two-default-stacks). Currently hosted at http://leveluprails.herokuapp.com.
