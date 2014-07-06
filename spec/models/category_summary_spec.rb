@@ -11,23 +11,22 @@ describe CategorySummary do
     let(:category) { create(:category) }
     let(:skill) { create(:skill, category: category) }
 
-    it "should list all categories that exist" do
-      CategorySummary.summarize_user(user).length.should == 4
+    it "lists all categories that exist" do
+      expect(CategorySummary.summarize_user(user)).to have(4).items
     end
 
-    it "should have counts for skills" do
+    it "counts skills" do
       summary = CategorySummary.summarize_user(user).values.first
-      summary.should include(:total_skills)
-      summary[:total_skills].should be(4)
+      expect(summary).to include(:total_skills)
+      expect(summary[:total_skills]).to be(4)
     end
 
-    it "should summarize completed and verified skills" do
+    it "summarizes completed and verified skills" do
       completion = create(:completion, :verified, user: user, skill: skill)
       summary = CategorySummary.summarize_user(user)
 
-      summary[category.handle][:total_completed].should be(1)
-      summary[category.handle][:total_verified].should be(1)
-
+      expect(summary[category.handle][:total_completed]).to be(1)
+      expect(summary[category.handle][:total_verified]).to be(1)
     end
   end
 

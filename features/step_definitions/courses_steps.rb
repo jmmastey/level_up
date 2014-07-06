@@ -19,7 +19,7 @@ When(/^I visit the courses page$/) do
   visit "/courses"
 end
 
-Then(/^I should see the (.*) course called "(.*)"$/) do |status, name|
+Then(/^I see the (.*) course called "(.*)"$/) do |status, name|
   course = create_course(status, name)
-  page.should have_content(course.name)
+  expect(page).to have_content(course.name)
 end

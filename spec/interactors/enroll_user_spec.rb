@@ -10,27 +10,25 @@ describe EnrollUser do
   context "when the interactor is a success" do
     let(:deliver) { true }
 
-    it "should allow a user to register for a course" do
-      EnrollUser.any_instance.should_receive(:send_welcome_email).and_return(true)
-
-      interactor.should be_success
-      user.courses.should include(course)
+    it "allows a user to register for a course" do
+      expect(interactor).to be_success
+      expect(user.courses).to include(course)
     end
 
-    it "should send welcome and notification emails" do
-      AdminMailer.should_receive(:confirm_enrollment).once.with(user, course).and_return(mail)
-      UserMailer.should_receive(:confirm_enrollment).once.with(user, course).and_return(mail)
+    it "sends welcome and notification emails" do
+      expect(AdminMailer).to receive(:confirm_enrollment).once.with(user, course).and_return(mail)
+      expect(UserMailer).to receive(:confirm_enrollment).once.with(user, course).and_return(mail)
 
-      interactor.should be_success
+      expect(interactor).to be_success
     end
   end
 
   context "when emails cannot be sent" do
     let(:deliver) { false }
-    it "should fail when emails cannot be sent properly" do
-      AdminMailer.should_receive(:confirm_enrollment).with(user, course).and_return(mail)
+    it "fails when emails cannot be sent properly" do
+      expect(AdminMailer).to receive(:confirm_enrollment).with(user, course).and_return(mail)
 
-      interactor.should_not be_success
+      expect(interactor).not_to be_success
     end
   end
 

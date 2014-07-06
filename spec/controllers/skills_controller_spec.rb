@@ -10,84 +10,84 @@ describe SkillsController, type: :controller do
 
   describe "POST 'completion'" do
     it "returns an unsuccessful response when passed an invalid skill" do
-      CompleteSkill.should_not_receive(:perform)
+      expect(CompleteSkill).not_to receive(:perform)
 
       post 'complete', skill_id: -1
 
-      response.should be_client_error
-      response.content_type.should eq("application/json")
+      expect(response).to be_client_error
+      expect(response.content_type).to eq("application/json")
       body = JSON(response.body)
-      body['success'].should eq(false)
-      body['error'].should match('provide a valid skill')
+      expect(body['success']).to eq(false)
+      expect(body['error']).to match('provide a valid skill')
     end
 
     it "returns an unsuccessful response when the action fails" do
       interactor = double('CompleteSkill')
-      interactor.should_receive(:success?).and_return(false)
-      interactor.should_receive(:message).and_return("invalid!")
-      CompleteSkill.should_receive(:perform).and_return(interactor)
+      expect(interactor).to receive(:success?).and_return(false)
+      expect(interactor).to receive(:message).and_return("invalid!")
+      expect(CompleteSkill).to receive(:perform).and_return(interactor)
 
       post 'complete', :skill_id => skill.id
 
-      response.should be_client_error
+      expect(response).to be_client_error
       body = JSON(response.body)
-      body['success'].should eq(false)
-      body['error'].should match("invalid!")
+      expect(body['success']).to eq(false)
+      expect(body['error']).to match("invalid!")
     end
 
     it "returns a successful response when passed a skill" do
       interactor = double("CompleteSkill")
-      interactor.should_receive(:success?).and_return(true)
-      CompleteSkill.should_receive(:perform).and_return(interactor)
+      expect(interactor).to receive(:success?).and_return(true)
+      expect(CompleteSkill).to receive(:perform).and_return(interactor)
 
       post 'complete', skill_id: skill.id
 
-      response.should be_success
+      expect(response).to be_success
       body = JSON(response.body)
-      body['success'].should eq(true)
-      body['complete'].should eq(true)
+      expect(body['success']).to eq(true)
+      expect(body['complete']).to eq(true)
     end
 
   end
 
   describe "DELETE 'completion'" do
     it "returns an unsuccessful response when passed an invalid skill" do
-      UncompleteSkill.should_not_receive(:perform)
+      expect(UncompleteSkill).not_to receive(:perform)
 
       delete 'uncomplete', skill_id: -1
 
-      response.should be_client_error
-      response.content_type.should eq("application/json")
+      expect(response).to be_client_error
+      expect(response.content_type).to eq("application/json")
       body = JSON(response.body)
-      body['success'].should eq(false)
-      body['error'].should match('provide a valid skill')
+      expect(body['success']).to eq(false)
+      expect(body['error']).to match('provide a valid skill')
     end
 
     it "returns an unsuccessful response when the action fails" do
       interactor = double('UncompleteSkill')
-      interactor.should_receive(:success?).and_return(false)
-      interactor.should_receive(:message).and_return("invalid!")
-      UncompleteSkill.should_receive(:perform).and_return(interactor)
+      expect(interactor).to receive(:success?).and_return(false)
+      expect(interactor).to receive(:message).and_return("invalid!")
+      expect(UncompleteSkill).to receive(:perform).and_return(interactor)
 
       delete 'uncomplete', :skill_id => skill.id
 
-      response.should be_client_error
+      expect(response).to be_client_error
       body = JSON(response.body)
-      body['success'].should eq(false)
-      body['error'].should match("invalid!")
+      expect(body['success']).to be false
+      expect(body['error']).to match("invalid!")
     end
 
     it "returns a successful response when passed a skill" do
       interactor = double("UncompleteSkill")
-      interactor.should_receive(:success?).and_return(true)
-      UncompleteSkill.should_receive(:perform).and_return(interactor)
+      expect(interactor).to receive(:success?).and_return(true)
+      expect(UncompleteSkill).to receive(:perform).and_return(interactor)
 
       delete 'uncomplete', skill_id: skill.id
 
-      response.should be_success
+      expect(response).to be_success
       body = JSON(response.body)
-      body['success'].should eq(true)
-      body['complete'].should eq(false)
+      expect(body['success']).to eq(true)
+      expect(body['complete']).to eq(false)
     end
 
   end

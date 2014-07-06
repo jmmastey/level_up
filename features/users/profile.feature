@@ -8,11 +8,11 @@ Feature: User profile
 
   Scenario: View profile link
     When I return to the site
-    Then I should see a profile link in the header
+    Then I see a profile link in the header
 
   Scenario: Viewing user progress
     Given a user exists with some training progress
     When I visit a user's profile page
-    Then I should see that user's profile
-    And I should see their skills
-    And I should see their pretty picture
+    Then I see that user's profile
+    And I see their skills
+    And I see their pretty picture

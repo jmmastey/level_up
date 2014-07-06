@@ -7,10 +7,10 @@ describe CoursesController, type: :controller do
     let!(:published_course) { create(:course, :published) }
 
     describe "while not logged in" do
-      it "should render only publicly available courses" do
+      it "renders only publicly available courses" do
         get "index"
-        response.should render_template(:index)
-        assigns(:courses).should eq([ published_course ])
+        expect(response).to render_template(:index)
+        expect(assigns(:courses)).to eq([ published_course ])
       end
     end
 
@@ -20,13 +20,13 @@ describe CoursesController, type: :controller do
         sign_in @user
       end
 
-      it "should render the list of available courses" do
-        User.any_instance.should_receive(:courses).and_return([course, published_course])
+      it "renders the list of available courses" do
+        expect(Course).to receive(:available_to).and_return([course, published_course])
 
         get "index"
-        response.should render_template(:index)
-        assigns(:courses).should include(course)
-        assigns(:courses).should include(published_course)
+        expect(response).to render_template(:index)
+        expect(assigns(:courses)).to include(course)
+        expect(assigns(:courses)).to include(published_course)
       end
     end
 

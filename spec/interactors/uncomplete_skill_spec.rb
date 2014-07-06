@@ -5,19 +5,19 @@ describe UncompleteSkill do
   let(:user)        { create(:user) }
   let(:skill)       { create(:skill) }
 
-  it "should allow the user to uncomplete a skill" do
+  it "allows the user to uncomplete a skill" do
     interactor = UncompleteSkill.perform(skill: skill, user: user)
-    interactor.should be_success
 
-    user.skills.should_not include(skill)
+    expect(interactor).to be_success
+    expect(user.skills).not_to include(skill)
   end
 
-  it "should not allow uncompletion for an incomplete skill" do
+  it "doesn't allow uncompletion for an incomplete skill" do
     completion = create(:completion)
     skill = create(:skill)
 
     interactor = UncompleteSkill.perform(skill: skill, user: user)
-    interactor.should be_failure
+    expect(interactor).to be_failure
   end
 
 end

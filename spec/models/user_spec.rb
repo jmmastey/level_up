@@ -11,42 +11,42 @@ describe User do
     }
   end
 
-  it "should create a new instance given a valid attribute" do
+  it "creates a new instance given a valid attribute" do
     User.create!(@attr)
   end
 
-  it "should require an email address" do
+  it "requires an email address" do
     no_email_user = User.new(@attr.merge(:email => ""))
-    no_email_user.should_not be_valid
+    expect(no_email_user).not_to be_valid
   end
 
-  it "should accept valid email addresses" do
+  it "accepts valid email addresses" do
     addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
     addresses.each do |address|
       valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
+      expect(valid_email_user).to be_valid
     end
   end
 
-  it "should reject invalid email addresses" do
+  it "rejects invalid email addresses" do
     addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
     addresses.each do |address|
       invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
+      expect(invalid_email_user).not_to be_valid
     end
   end
 
-  it "should reject duplicate email addresses" do
+  it "rejects duplicate email addresses" do
     User.create!(@attr)
     user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
+    expect(user_with_duplicate_email).not_to be_valid
   end
 
-  it "should reject email addresses identical up to case" do
+  it "rejects email addresses identical up to case" do
     upcased_email = @attr[:email].upcase
     User.create!(@attr.merge(:email => upcased_email))
     user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
+    expect(user_with_duplicate_email).not_to be_valid
   end
 
   describe "passwords" do
@@ -55,31 +55,31 @@ describe User do
       @user = User.new(@attr)
     end
 
-    it "should have a password attribute" do
-      @user.should respond_to(:password)
+    it "has a password attribute" do
+      expect(@user).to respond_to(:password)
     end
 
-    it "should have a password confirmation attribute" do
-      @user.should respond_to(:password_confirmation)
+    it "has a password confirmation attribute" do
+      expect(@user).to respond_to(:password_confirmation)
     end
   end
 
   describe "password validations" do
 
-    it "should require a password" do
-      User.new(@attr.merge(:password => "", :password_confirmation => "")).
-        should_not be_valid
+    it "requires a password" do
+      user = User.new(@attr.merge(:password => "", :password_confirmation => ""))
+      expect(user).not_to be_valid
     end
 
-    it "should require a matching password confirmation" do
-      User.new(@attr.merge(:password_confirmation => "invalid")).
-        should_not be_valid
+    it "requires a matching password confirmation" do
+      user = User.new(@attr.merge(:password_confirmation => "invalid"))
+      expect(user).not_to be_valid
     end
 
-    it "should reject short passwords" do
+    it "rejects short passwords" do
       short = "a" * 5
       hash = @attr.merge(:password => short, :password_confirmation => short)
-      User.new(hash).should_not be_valid
+      expect(User.new(hash)).not_to be_valid
     end
 
   end
@@ -90,12 +90,12 @@ describe User do
       @user = User.create!(@attr)
     end
 
-    it "should have an encrypted password attribute" do
-      @user.should respond_to(:encrypted_password)
+    it "has an encrypted password attribute" do
+      expect(@user).to respond_to(:encrypted_password)
     end
 
-    it "should set the encrypted password attribute" do
-      @user.encrypted_password.should_not be_blank
+    it "sets the encrypted password attribute" do
+      expect(@user.encrypted_password).not_to be_blank
     end
 
   end
@@ -105,31 +105,31 @@ describe User do
     let(:skill)     { create(:skill, category: category) }
     let(:category)  { create(:category) }
 
-    it "should find skills that have been completed" do
-      user.skills.should be_empty
+    it "finds skills that have been completed" do
+      expect(user.skills).to be_empty
 
       create(:completion, user: user, skill: skill)
-      user.skills.length.should == 1
-      user.skills.should include(skill)
+      expect(user).to have(1).skills
+      expect(user.skills).to match([skill])
 
       other_completion = create(:completion, user: user)
-      user.reload.skills.length.should == 2
-      user.skills.should include(skill)
+      expect(user.reload).to have(2).skills
+      expect(user.skills).to include(skill)
     end
 
-    it "should find skills by category" do
+    it "finds skills by category" do
       create(:completion, user: user, skill: skill)
       other_completion = create(:completion, user: user)
 
       # scope down on category
-      user.skills.for_category(category).length.should == 1
-      user.skills.for_category(category).should_not include(other_completion.skill)
+      expect(user.skills.for_category(category)).to have(1).item
+      expect(user.skills.for_category(category)).not_to include(other_completion.skill)
     end
 
-    it "should check completion of a skill" do
-      user.should_not have_completed(skill)
+    it "checks completion of a skill" do
+      expect(user).not_to have_completed(skill)
       create(:completion, user: user, skill: skill)
-      user.should have_completed(skill)
+      expect(user).to have_completed(skill)
     end
   end
 
