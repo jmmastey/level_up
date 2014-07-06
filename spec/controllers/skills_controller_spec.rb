@@ -17,7 +17,7 @@ describe SkillsController, type: :controller do
       expect(response).to be_client_error
       expect(response.content_type).to eq("application/json")
       body = JSON(response.body)
-      expect(body['success']).to eq(false)
+      expect(body['success']).to be false
       expect(body['error']).to match('provide a valid skill')
     end
 
@@ -31,7 +31,7 @@ describe SkillsController, type: :controller do
 
       expect(response).to be_client_error
       body = JSON(response.body)
-      expect(body['success']).to eq(false)
+      expect(body['success']).to be false
       expect(body['error']).to match("invalid!")
     end
 
@@ -44,8 +44,8 @@ describe SkillsController, type: :controller do
 
       expect(response).to be_success
       body = JSON(response.body)
-      expect(body['success']).to eq(true)
-      expect(body['complete']).to eq(true)
+      expect(body['success']).to be true
+      expect(body['complete']).to be true
     end
 
   end
@@ -59,7 +59,7 @@ describe SkillsController, type: :controller do
       expect(response).to be_client_error
       expect(response.content_type).to eq("application/json")
       body = JSON(response.body)
-      expect(body['success']).to eq(false)
+      expect(body['success']).to be false
       expect(body['error']).to match('provide a valid skill')
     end
 
@@ -86,8 +86,8 @@ describe SkillsController, type: :controller do
 
       expect(response).to be_success
       body = JSON(response.body)
-      expect(body['success']).to eq(true)
-      expect(body['complete']).to eq(false)
+      expect(body['success']).to be true
+      expect(body['complete']).to be false
     end
 
   end
