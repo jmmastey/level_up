@@ -1,10 +1,12 @@
-.list-group-item{ class: ['course', course.handle] }
-  - if signed_in? && current_user.courses.include?(course)
-    %a.btn.btn-primary.btn-lg.register Enrolled
-  - else
-    = form_tag enroll_path(course), method: :post, class: 'register' do 
-      %button.btn.btn-primary.btn-lg Enroll
+.bs-component
+  .list-group
+    .list-group-item{ class: ['course', course.handle] }
+      - if signed_in? && current_user.courses.include?(course)
+        %a.btn.btn-primary.btn-lg.register Enrolled
+      - else
+        = form_tag enroll_path(course), method: :post, class: 'register' do 
+          %button.btn.btn-primary.btn-lg Enroll
 
-  %h3= course.name
-  %p.description= course.description
-  = render(partial: 'topics', locals: { categories: visible_categories_for(course) }) 
+      %h3= course.name
+      %p.description= course.description
+      = render(partial: 'topics', locals: { categories: visible_categories_for(course) }) 

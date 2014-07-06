@@ -2,6 +2,4 @@
   %p Sorry, there are no available courses for you to study. Please come back soon.
 
 - else
-  .bs-component
-    .list-group.course-list
-      = render collection: @courses, partial: 'signup', as: :course
+  = render collection: @courses, partial: 'signup', as: :course
