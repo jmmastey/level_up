@@ -3,8 +3,8 @@ module ModulesHelper
   # exercise block helpers
 
   def exercise_block_for(category, skill)
-    cat       = Category.find_by_handle category
-    skill     = Skill.find_by_handle skill
+    cat       = Category.find_by! handle: category
+    skill     = Skill.find_by! handle: skill
     ex_block  = ExerciseBlock.new(category, skill, [])
 
 
