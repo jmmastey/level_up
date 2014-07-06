@@ -26,15 +26,19 @@ class CategorySummary < Category
     user_summary.inject({ total: 0, completed: 0, verified: 0 }) do |summary, (handle, stats)|
       next summary unless categories.include? handle
 
-      summary[:total] += stats[:total_skills]
-      summary[:completed] += stats[:total_completed]
-      summary[:verified] += stats[:total_verified]
-
-      summary
+      add_to_stat_total(stats, summary)
     end
   end
 
   protected
+
+  def self.add_to_stat_total(stats, summary)
+    summary[:total]     += stats[:total_skills]
+    summary[:completed] += stats[:total_completed]
+    summary[:verified]  += stats[:total_verified]
+
+    summary
+  end
 
   def self.map_summary(summary)
     summary.inject({}) do |h,result|
