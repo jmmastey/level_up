@@ -1,8 +1,7 @@
 - if @courses.empty?
   %p Sorry, there are no available courses for you to study. Please come back soon.
-- else
 
+- else
   .bs-component
     .list-group.course-list
-      - @courses.each do |course|
-        = render course
+      = render collection: @courses, partial: 'course_signup', as: :course

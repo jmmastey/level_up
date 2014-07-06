@@ -1,0 +1,10 @@
+.list-group-item{ class: ['course', course.handle] }
+  - if signed_in? && course.has_enrolled?(current_user)
+    %a.btn.btn-primary.btn-lg.register Enrolled
+  - else
+    = form_tag enroll_path(course), method: :post, class: 'register' do 
+      %button.btn.btn-primary.btn-lg Enroll
+
+  %h3= course.name
+  %p.description= course.description
+  = render(partial: 'course_categories', locals: { categories: visible_categories_for(course) }) 

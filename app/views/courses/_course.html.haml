@@ -1,10 +1,14 @@
-.list-group-item{ class: ['course', course.handle] }
-  - if signed_in? && course.has_enrolled?(current_user)
-    %a.btn.btn-primary.btn-lg.register Enrolled
-  - else
-    = form_tag enroll_path(course), method: :post, class: 'register' do 
-      %button.btn.btn-primary.btn-lg Enroll
-  %h3= course.name
-  %p.description= course.description
-  - if course.categories.any?
-    = render(partial: 'course_categories', locals: { categories: course.categories }) 
+.list-group-item.row{ class: ['course', course.handle] }
+  .col-lg-6
+    %h3= course.name
+    %p.description= course.description
+    %hr
+
+    - summary = course_summary_for(course)
+    %p.completion= "#{summary[:completed]} of #{summary[:total]} skills completed"
+    .progress
+      .progress-bar.progress-bar-success{style: "width: #{completion_percent_for(course)}%" }
+
+  .col-lg-6
+    %ul.categories.list-group
+      = render collection: visible_categories_for(course), partial: 'courses/progress', as: :category

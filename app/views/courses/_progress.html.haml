@@ -1,0 +1,4 @@
+- completion = category_summary[category.handle]
+%li.list-group-item
+  = link_to category.name, module_path(category.handle)
+  %span.badge #{completion[:total_completed]} of #{completion[:total_skills]}
