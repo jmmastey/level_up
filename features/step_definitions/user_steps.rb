@@ -122,6 +122,7 @@ When /^I sign in with a wrong password$/ do
 end
 
 When /^I edit my account details$/ do
+  visit user_path(@user)
   click_link "edit-profile"
   fill_in "Name", :with => "newname"
   fill_in "user_current_password", :with => @visitor[:password]

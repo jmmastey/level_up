@@ -3,6 +3,7 @@
 
 .col-lg-5
   %h3= "#{@user.name}'s Profile"
+  %span= link_to "Edit Profile", edit_user_registration_path, id: 'edit-profile'
 
   = render partial: 'enrolled_courses'
   = render partial: 'recent_activity'
