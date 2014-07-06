@@ -1,6 +1,6 @@
 module UsersHelper
 
-  FEEDABLE_OBJECTS = [ Skill ]
+  FEEDABLE_OBJECTS = [ Completion ]
 
   def user_category_summary
     category_summary = CategorySummary.summarize_user(user)
@@ -30,12 +30,12 @@ module UsersHelper
 
   protected
 
-  def render_skill_feed_item(skill)
-    "Completed #{skill.name}"
+  def render_completion_feed_item(completion)
+    "Completed #{completion.skill.name}"
   end
 
-  def skill_tags(skill)
-    ["skill", "completed", skill.handle]
+  def completion_tags(completion)
+    ["skill", "completed", completion.skill.handle]
   end
 
 end

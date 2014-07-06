@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  helper :courses
 
   def index
     if current_user.signed_in?
