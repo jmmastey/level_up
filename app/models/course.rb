@@ -28,13 +28,8 @@ class Course < ActiveRecord::Base
   end
 
   def self.available_to(student)
-    (published | student.courses | admin_courses(student)).sort_by(&:id)
-  end
-
-  protected
-
-  def self.admin_courses(user)
-    user.admin? ? all : none
+    admin_courses = student.admin? ? all : none
+    (published | student.courses | admin_courses).sort_by(&:id)
   end
 
 end

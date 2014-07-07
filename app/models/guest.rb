@@ -24,4 +24,8 @@ class Guest
     Role.none
   end
 
+  def has_completed?(skill)
+    false
+  end
+
 end
