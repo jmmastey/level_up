@@ -5,7 +5,6 @@ module UsersHelper
     categories = enrolled_courses.map { |c| Category.visible_categories_for(c) }.flatten
 
     categories.map do |category|
-      summary[category.handle] ||= {} # FIXME: drops entire categories...
       summary[category.handle].merge(handle: category.handle)
     end
   end

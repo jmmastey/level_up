@@ -12,9 +12,9 @@ class CategorySummary < Category
       .project(cp[:id].count.as("total_completed"))
       .project(cp[:verified_on].count.as("total_verified"))
       .join(s).on(s[:category_id].eq c[:id])
-      .join(cp, Arel::Nodes::OuterJoin).on(cp[:skill_id].eq s[:id])
-      .where(cp[:user_id].eq(user.id).or(cp[:user_id].eq nil))
-      .group(c[:id], c[:name], c[:handle])
+      .join(cp, Arel::Nodes::OuterJoin).on(
+        cp[:skill_id].eq(s[:id]).and(cp[:user_id].eq user.id)
+      ).group(c[:id], c[:name], c[:handle])
       .order(c[:sort_order])
 
     result = connection.execute(query.to_sql)
