@@ -1,4 +1,8 @@
+- feed_items = feed_items_for(user)
 %h4 Recent Activity
-%ul.recent_activity
-  - user_feed_items.each do |feed_item|
-    %li{ class: feed_item[:tags] }= feed_item[:label]
+- if feed_items.empty?
+  %p Nothing lately. Sad, innit?
+- else
+  %ul.recent_activity
+    - feed_items.each do |feed_item|
+      %li{ class: feed_item[:tags] }= feed_item[:label]

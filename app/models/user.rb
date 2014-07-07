@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :email
 
+  scope :by_activity_date, -> { order("updated_at desc") }
+
   def has_completed?(skill)
     skills.include? skill
   end

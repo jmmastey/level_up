@@ -1,8 +1,10 @@
 module UsersHelper
 
-  def category_progress
+  FEED_LENGTH = 10
+
+  def category_progress_for(user)
     summary = CategorySummary.summarize_user(user)
-    categories = enrolled_courses.map { |c| Category.visible_categories_for(c) }.flatten
+    categories = user.courses.map { |c| Category.visible_categories_for(c) }.flatten
 
     categories.map do |category|
       summary[category.handle].merge(handle: category.handle)
@@ -11,14 +13,9 @@ module UsersHelper
 
   FEEDABLE_OBJECTS = [ Completion, Enrollment ]
 
-  def user_feed_items
-    FEEDABLE_OBJECTS.map { |klass| klass.decorated_feed_for(user) }.flatten
-  end
-
-  private
-
-  def enrolled_courses
-    @enrolled ||= current_user.courses
+  def feed_items_for(user)
+    objects = FEEDABLE_OBJECTS.map { |klass| klass.decorated_feed_for(user) }
+    objects.flatten.take(FEED_LENGTH)
   end
 
 end

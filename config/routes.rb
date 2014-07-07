@@ -4,7 +4,7 @@ Levelup::Application.routes.draw do
   get "/:module.html", to: "home#show", as: :module
 
   devise_for :users, controllers: { registrations: "registrations" }
-  resources :users, only: [:update, :show]
+  resources :users, only: [:index, :update, :show]
   resources :courses, only: [:index, :show]
   post "courses/:id/enroll", to: "courses#enroll", as: "enroll"
 
