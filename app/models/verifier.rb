@@ -1,2 +1,0 @@
-class Verifier < User
-end
