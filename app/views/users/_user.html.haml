@@ -1,9 +1,10 @@
-.row.jumbotron
+.row.jumbotron{class: "user-#{user.id}"}
   .col-lg-2
     = gravatar_image_tag(user.email, alt: user.name, class: "gravatar", gravatar: { size: 160 })
 
   .col-lg-5
-    %h3= user.name
+    %h3
+      %a{href: user_path(user)}= user.name
 
     = render partial: 'enrolled_courses', locals: { user: user }
     = render partial: 'recent_activity', locals: { user: user }
