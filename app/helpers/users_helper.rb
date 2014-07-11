@@ -3,7 +3,7 @@ module UsersHelper
   FEED_LENGTH = 10
 
   def category_progress_for(user)
-    CategorySummary.category_summary(user)
+    Summaries.for_category(user)
   end
 
   FEEDABLE_OBJECTS = [ Completion, Enrollment ]

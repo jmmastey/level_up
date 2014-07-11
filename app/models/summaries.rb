@@ -1,12 +1,13 @@
-class CategorySummary
+module Summaries
 
-  def self.user_summary(user)
-    mapped_summary(user_summary_query(user))
+  def self.for_user(user)
+    return [] unless user.signed_in?
+    user_map(user_summary_data(user))
   end
 
-  def self.course_summary(course, user)
+  def self.for_course(course, user)
     summary = { total: 0, completed: 0, verified: 0 }
-    user_summary(user).each do |category, stats|
+    for_user(user).each do |category, stats|
       next unless category_in_course?(course, category)
 
       summary[:total]     += stats[:total_skills]
@@ -17,8 +18,8 @@ class CategorySummary
     summary
   end
 
-  def self.category_summary(user)
-    summary     = user_summary(user)
+  def self.for_category(user)
+    summary     = for_user(user)
     categories  = Category.by_courses(user.courses).sorted
 
     categories.map do |category|
@@ -32,7 +33,7 @@ class CategorySummary
     course.categories.where(handle: category).any?
   end
 
-  def self.user_summary_query(user)
+  def self.user_summary_data(user)
     categories  = Category.summarize
     skills      = Skill.summarize(categories)
     completions = Completion.summarize(skills, user)
@@ -40,7 +41,7 @@ class CategorySummary
     connection.execute(completions.to_sql)
   end
 
-  def self.mapped_summary(summary)
+  def self.user_map(summary)
     summary = summary.map do |cat|
       [cat['handle'], category_map(cat)]
     end

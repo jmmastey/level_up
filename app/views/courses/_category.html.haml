@@ -1,4 +1,4 @@
-- completion = category_summary[category.handle] || { total_completed: 0, total_skills: 0 }
+- completion = user_summary[category.handle] || { total_completed: 0, total_skills: 0 }
 %li.list-group-item
   = link_to category.name, module_path(category.handle)
   - if completion[:total_completed] == completion[:total_skills]

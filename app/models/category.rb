@@ -5,9 +5,9 @@ class Category < ActiveRecord::Base
   validates_presence_of :name, :handle
   validates_uniqueness_of :handle
 
-  default_scope -> { where(hidden: false) }
+  default_scope -> { sorted.where(hidden: false) }
   scope :sorted, -> { order(:sort_order) }
-  scope :by_courses, -> (courses) { includes(:courses).where([ "courses.id IN (?)", Array(courses).map(&:id)]) }
+  scope :by_courses, -> (courses) { includes(:courses).where(id: courses.map(&:id)) }
 
   def self.summarize
     table = self.arel_table

@@ -1,11 +1,11 @@
 module CoursesHelper
 
-  def category_summary
-    @category_summary ||= CategorySummary.user_summary(current_user)
+  def user_summary
+    @user_summary ||= Summaries.for_user(current_user)
   end
 
   def course_summary_for(course)
-    CategorySummary.course_summary(course, current_user)
+    Summaries.for_course(course, current_user)
   end
 
   def completion_percent_for(course)
