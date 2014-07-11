@@ -4,6 +4,11 @@ module CoursesHelper
     @user_summary ||= Summaries.for_user(current_user)
   end
 
+  def category_completion(category)
+    return { total_completed: 0, total_skills: 0 } unless current_user.signed_in?
+    user_summary[category.handle]
+  end
+
   def course_summary_for(course)
     Summaries.for_course(course, current_user)
   end
