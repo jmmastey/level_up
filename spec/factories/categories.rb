@@ -5,6 +5,9 @@ FactoryGirl.define do
     sequence(:name)   { |n| "Category #{n}" }
     sequence(:handle) { |n| "category_#{n}" }
 
+    sequence(:sort_order)
+    hidden(false)
+
     trait(:skilled) do
       after(:create) do |category|
         create_list(:skill, 4, category: category)

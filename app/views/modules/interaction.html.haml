@@ -1,0 +1,18 @@
+.content.module
+  .page-header
+    %h1 Basic Interaction Design
+
+  .row
+    .col-lg-8
+      %p Interaction Yay!
+
+      .page-header
+        %h3 Organizing Your Code
+        %p There's not much to say for this one, navigating the filesystem is possibly the most basic thing you can do. If not a Mac / Linux user, you've probably still done this before. That said, take a moment to review some basics. A really common error for newer engineers is to accidentally conflate absolute and relative path when running commands.
+        = exercise_block_for "interaction", "smacss" do |e|
+          = e.question "Reorganize your code according to the smacss guide. Use short, modular classes to declare functionality."
+
+    .col-lg-4.resources{role:'complementary'}
+      .bs-component
+        .panel.panel-basic
+          = render partial: 'modules/linux_resources'

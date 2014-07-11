@@ -3,12 +3,7 @@ module UsersHelper
   FEED_LENGTH = 10
 
   def category_progress_for(user)
-    summary = CategorySummary.summarize_user(user)
-    categories = user.courses.map { |c| Category.visible_categories_for(c) }.flatten
-
-    categories.map do |category|
-      summary[category.handle].merge(handle: category.handle)
-    end
+    CategorySummary.category_summary(user)
   end
 
   FEEDABLE_OBJECTS = [ Completion, Enrollment ]

@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
     if current_user.signed_in?
       @courses = current_user.courses
-      @category_summary = CategorySummary.summarize_user(current_user)
+      @category_summary = CategorySummary.user_summary(current_user)
     else
       @courses = []
       @category_summary = []

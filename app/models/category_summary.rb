@@ -1,52 +1,53 @@
-class CategorySummary < Category
+class CategorySummary
 
-  # so... wtf arel? this is more readable? in what fucking universe...
-  # also, coupling so hard to user / skill / completion is not great.
-  def self.summarize_user(user)
-    c   = Arel::Table.new(:categories)
-    s   = Arel::Table.new(:skills)
-    cp  = Arel::Table.new(:completions)
-
-    query = c.project(c[:id], c[:name], c[:handle])
-      .project(s[:id].count.as("total_skills"))
-      .project(cp[:id].count.as("total_completed"))
-      .project(cp[:verified_on].count.as("total_verified"))
-      .join(s).on(s[:category_id].eq c[:id])
-      .join(cp, Arel::Nodes::OuterJoin).on(
-        cp[:skill_id].eq(s[:id]).and(cp[:user_id].eq user.id)
-      ).group(c[:id], c[:name], c[:handle])
-      .order(c[:sort_order])
-
-    result = connection.execute(query.to_sql)
-    self.map_summary(result)
+  def self.user_summary(user)
+    mapped_summary(user_summary_query(user))
   end
 
-  def self.summarize_course(course, user_summary)
-    categories = course.categories.map(&:handle)
-    user_summary.inject({ total: 0, completed: 0, verified: 0 }) do |summary, (handle, stats)|
-      next summary unless categories.include? handle
+  def self.course_summary(course, user)
+    summary = { total: 0, completed: 0, verified: 0 }
+    user_summary(user).each do |category, stats|
+      next unless category_in_course?(course, category)
 
-      add_to_stat_total(stats, summary)
+      summary[:total]     += stats[:total_skills]
+      summary[:completed] += stats[:total_completed]
+      summary[:verified]  += stats[:total_verified]
+    end
+
+    summary
+  end
+
+  def self.category_summary(user)
+    summary     = user_summary(user)
+    categories  = Category.by_courses(user.courses).sorted
+
+    categories.map do |category|
+      summary[category.handle].merge(handle: category.handle)
     end
   end
 
   protected
 
-  def self.add_to_stat_total(stats, summary)
-    summary[:total]     += stats[:total_skills]
-    summary[:completed] += stats[:total_completed]
-    summary[:verified]  += stats[:total_verified]
-
-    summary
+  def self.category_in_course?(course, category)
+    course.categories.where(handle: category).any?
   end
 
-  def self.map_summary(summary)
-    summary.inject({}) do |h,result|
-      h.update(result['handle'] =>  map_row(result))
+  def self.user_summary_query(user)
+    categories  = Category.summarize
+    skills      = Skill.summarize(categories)
+    completions = Completion.summarize(skills, user)
+
+    connection.execute(completions.to_sql)
+  end
+
+  def self.mapped_summary(summary)
+    summary = summary.map do |cat|
+      [cat['handle'], category_map(cat)]
     end
+    Hash[summary]
   end
 
-  def self.map_row(result)
+  def self.category_map(result)
     {
       id:               result['id'].to_i,
       name:             result['name'],
@@ -54,6 +55,10 @@ class CategorySummary < Category
       total_completed:  result['total_completed'].to_i,
       total_verified:   result['total_verified'].to_i,
     }
+  end
+
+  def self.connection
+    ActiveRecord::Base.connection
   end
 
 end

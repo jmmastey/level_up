@@ -1,4 +1,4 @@
-- categories = visible_categories_for(course) .map(&:name)
+- categories = course.categories.map(&:name)
 .bs-component
   .list-group
     .list-group-item{ class: ['course', course.handle] }

@@ -16,7 +16,11 @@ Given(/^I am enrolled in "(.*)"$/) do |name|
 end
 
 When(/^I visit the courses page$/) do
-  visit "/courses"
+  visit courses_path
+end
+
+When(/^I visit the homepage$/) do
+  visit root_path
 end
 
 Then(/^I see the (.*) course called "(.*)"$/) do |status, name|
