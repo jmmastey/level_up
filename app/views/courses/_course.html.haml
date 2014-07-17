@@ -11,4 +11,4 @@
 
   .col-lg-6
     %ul.categories.list-group
-      = render collection: course.categories, partial: 'courses/category'
+      = render collection: course.categories.sorted, partial: 'courses/category'

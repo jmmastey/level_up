@@ -59,14 +59,14 @@
           = e.question "Name some cases where manual testing is preferable or necessary to verify code."
           = e.question "Name some strategies for manually testing code that constrain the time cost of testing."
 
-        %p One of the tools that might make you wrinkle your nose is a test plan. Planning your test process -- for your code or others' -- is a huge step toward doing good test work. Read <a href='http://googletesting.blogspot.com/2011/09/10-minute-test-plan.html'>this article</a> and spend some time thinking about how you're going to test your next software project.
-        = exercise_block_for "test", "test_plans" do |e|
-          = e.question "Do the #{exercise_link 'shopping_cart'} exercise."
-
         %p When you're thinking about your test plan, try thinking of the tests grouped by their outcomes. Take a look at <a href='http://www.nishantverma.com/2010/03/test-case-paths-happy-sad-bad.html'>this article</a> and think about the different "paths" of tests. Planning your test cases according to different paths is a great way to make sure that you cover all the necessary cases.
         = exercise_block_for "test", "paths" do |e|
           = e.question "Go back to all the tests you've written for this course. Organize them according to what type of test they are."
           = e.question "Think about what sort of tests you may have missed for the various paths, and add them to the code."
+
+        %p One of the tools that might make you wrinkle your nose is a test plan. Planning your test process -- for your code or others' -- is a huge step toward doing good test work. Read <a href='http://googletesting.blogspot.com/2011/09/10-minute-test-plan.html'>this article</a> and spend some time thinking about how you're going to test your next software project.
+        = exercise_block_for "test", "test_plans" do |e|
+          = e.question "Do the #{exercise_link 'shopping_cart'} exercise."
 
       .page-header
         %h3 Strategies for Better Testing

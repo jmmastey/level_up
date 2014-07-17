@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   validates_presence_of :name, :handle
   validates_uniqueness_of :handle
 
-  default_scope -> { sorted.where(hidden: false) }
+  default_scope -> { where(hidden: false) }
   scope :sorted, -> { order(:sort_order) }
   scope :by_courses, -> (courses) { includes(:courses).where(id: courses.map(&:id)) }
 

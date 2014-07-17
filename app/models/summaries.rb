@@ -1,7 +1,7 @@
 module Summaries
 
   def self.for_user(user)
-    return [] unless user.signed_in?
+    return [] if user.courses.empty?
     user_map(user_summary_data(user))
   end
 

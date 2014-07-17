@@ -2,7 +2,7 @@
 .bs-component
   .list-group
     .list-group-item{ class: ['course', course.handle] }
-      - if signed_in? && current_user.courses.include?(course)
+      - if current_user.courses.include?(course)
         %a.btn.btn-primary.btn-lg.register Enrolled
       - else
         = form_tag enroll_path(course), method: :post, class: 'register' do 

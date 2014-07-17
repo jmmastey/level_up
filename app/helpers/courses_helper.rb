@@ -5,7 +5,10 @@ module CoursesHelper
   end
 
   def category_completion(category)
-    return { total_completed: 0, total_skills: 0 } unless current_user.signed_in?
+    if current_user.courses.empty?
+      return { total_completed: 0, total_skills: 0 }
+    end
+
     user_summary[category.handle]
   end
 
