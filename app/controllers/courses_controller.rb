@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
     if interactor.failure?
       flash[:error] = interactor.message
       redirect_back and return
-    else
+    end
 
     respond_with @course
   end
