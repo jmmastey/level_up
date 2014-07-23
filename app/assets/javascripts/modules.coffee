@@ -15,10 +15,10 @@ init_modules = ->
         handle = ".dot-" + self.parents(".panel").eq(0).attr('id')
         if response.complete
         	self.addClass('completed')
-          $(handle).removeClass(uncompletedClass).addClass(completedClass)
+        	$(handle).removeClass(uncompletedClass).addClass(completedClass)
         else
         	self.removeClass('completed')
-          $(handle).removeClass(completedClass).addClass(uncompletedClass)
+        	$(handle).removeClass(completedClass).addClass(uncompletedClass)
 
 $(document).ready(init_modules)
 $(document).on('page:load', init_modules)
