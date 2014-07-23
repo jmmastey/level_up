@@ -1,0 +1,42 @@
+.content.module
+  .page-header
+    %h1 Basic Data Engineering
+
+  .row
+    .col-lg-8
+      %p 
+
+      .page-header
+        %h3 What It's All About
+        %p 
+        = exercise_block_for "data", "apis" do |e|
+          = e.question ""
+          
+      .page-header
+        %h3 Database Things After All
+        %p 
+        = exercise_block_for "data", "sql" do |e|
+          = e.question ""
+        = exercise_block_for "data", "psql" do |e|
+          = e.question ""
+        = exercise_block_for "data", "migrations" do |e|
+          = e.question ""
+
+      .page-header
+        %h3 Danger, Will Robinson!
+        %p 
+        = exercise_block_for "data", "quality" do |e|
+          = e.question ""
+        = exercise_block_for "data", "calculate" do |e|
+          = e.question ""
+        = exercise_block_for "data", "explain" do |e|
+          = e.question ""
+        = exercise_block_for "data", "column_size" do |e|
+          = e.question ""
+        = exercise_block_for "data", "indices" do |e|
+          = e.question ""
+
+    .col-lg-4.resources{role:'complementary'}
+      .bs-component
+        .panel.panel-basic
+          = render partial: 'modules/interaction_resources'

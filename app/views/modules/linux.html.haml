@@ -54,7 +54,7 @@
         %h3 Managing File Permissions
         %p File permissions are the Unixy way of preventing total chaos and destruction on your system. So they're good. In source control, these permissions are tracked and held consistent across machines to make sure that only specified users can access resources.
         %p Beyond that, any time you download an executable, like a shell script, your OS will probably use permissions to stop you from executing that file. If you want to run that sweet sweet script, you're going to need to learn to change them.
-        %p For more information, read this lovely <a href='http://nixtuts.info/commands/Chmod%26Chown.html'>chmod and chown tutorial</a>.
+        %p For more information, read this lovely <a href='http://linuxfrombeginning.wordpress.com/2008/09/25/linux-command-9-chown-chgrp-chmod/'>chmod and chown tutorial</a>.
         = exercise_block_for "linux", "file_permissions" do |e|
           = e.question "Use touch to create a new file in the /tmp directory. What permissions do user / group / and world have to that file by default?"
           = e.question "Use chown to change ownership of that file to the root user and root group."
