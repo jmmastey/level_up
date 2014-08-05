@@ -28,7 +28,7 @@
         %p While you're off in the clouds (snerk) thinking about data, your humble database will still be patiently waiting for you, its passion for serving you data kindling like the kind of low burning flame the could keep a man warm on a cold...
         %p Sorry, got a little carried away. Let's do some SQL.
         = exercise_block_for "data", "sql" do |e|
-          = e.question "Do the #{exercise_link('sequel')} exercise."
+          = e.question "Do Part 1 of the #{exercise_link('yadda')} exercise."
         %p When you're not sure what's going on at the database level, Rails encourages you to drop into the SQL prompt to root around. We'll also be using that prompt to discover new things about the performance of our application. It's like the fuel to the proverbial fire of... nevermind.
         = exercise_block_for "data", "psql" do |e|
           = e.question "Demonstrate the Rails command to enter the psql shell."
@@ -46,17 +46,18 @@
         %p First, let's talk about your performance. You won't get far writing applications before you find yourself in a bit of a query performance pickle. Sure, you can put it off for a while with your caches and whathaveyou, but you'll get there, and once you do, you need to know about explain. Explain is going to guide you through the mess and you'll come out smelling like a rose, and who doesn't want that?
         %p Take a look at <a href='http://robots.thoughtbot.com/why-postgres-wont-always-use-an-index'>this article</a> on how to use explain and how to interpret the results.
         = exercise_block_for "data", "explain" do |e|
-          = e.question "Write a complex sql select statement using outer joins and a complicated where clause."
-          = e.question "Use the explain command to show how that query is executed."
+          = e.question "Do Parts 2 and 3 of the #{exercise_link('yadda')} exercise."
           = e.question "Explain what the cost numbers mean for a given query plan."
         %p Next, let's talk a little bit about size. First: get your mind out of the gutter. Column size, kid. Column size. If you don't size your columns correctly, you're going to be in for a world of hurt later on.
         = exercise_block_for "data", "column_size" do |e|
           = e.question "Explain the problem with default column sizes and why we try to size columns properly."
-          = e.question "Contrariwise, what are the dangers of sizing columns inappropriately."
+          = e.question "Contrariwise, explain the dangers of sizing columns inappropriately."
+          = e.question "Make sure your yadda schema is well normalized and sized."
         %p Finally, indices. Can't turn that one into some kind of filthy dreck, can you? Eh? Anyway, indices are one of the most common performance optimizations we make in database land. They allow for near-instantaneous executions of queries when used correctly. Or when used incorrectly, they screw your performance entirely. Maybe let's do that correclty?
         = exercise_block_for "data", "indices" do |e|
           = e.question "Explain the tradeoff that indices allow us to make."
           = e.question "Show how indices are stored on the filesystem, and explain how that affects the database's ability to use multi-column indices for a given query."
+          = e.question "Do Part 4 of the #{exercise_link('yadda')} exercise."
 
     .col-lg-4.resources{role:'complementary'}
       .bs-component
