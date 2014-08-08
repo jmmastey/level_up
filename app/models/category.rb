@@ -15,6 +15,7 @@ class Category < ActiveRecord::Base
     attributes = [table[:id], table[:name], table[:handle]]
 
     table.project(attributes).group(attributes).order(table[:sort_order])
+         .where(table[:hidden].eq(false))
   end
 
 end
