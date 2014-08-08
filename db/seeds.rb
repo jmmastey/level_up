@@ -7,7 +7,7 @@ YAML.load(ENV['ROLES']).each do |role|
 end
 
 CATEGORIES = [
-  [ "Basic Linux and Shell Utilities", "linux" ],
+  [ "Basic Linux and Shell", "linux" ],
   [ "Basic Ruby", "ruby" ],
   [ "Basic Test Engineering", "test" ],
   [ "Basic Rails", "rails" ],
