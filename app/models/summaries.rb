@@ -1,7 +1,7 @@
 module Summaries
 
   def self.for_user(user)
-    return [] if user.courses.empty?
+    return {} if user.courses.empty?
     user_map(user_summary_data(user))
   end
 
@@ -52,6 +52,7 @@ module Summaries
     {
       id:               result['id'].to_i,
       name:             result['name'],
+      handle:           result['handle'],
       total_skills:     result['total_skills'].to_i,
       total_completed:  result['total_completed'].to_i,
       total_verified:   result['total_verified'].to_i,

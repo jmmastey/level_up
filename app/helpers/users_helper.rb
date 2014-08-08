@@ -9,7 +9,7 @@ module UsersHelper
   end
 
   def category_progress_for(user)
-    Summaries.for_category(user)
+    Summaries.for_user(user).values
   end
 
 end
