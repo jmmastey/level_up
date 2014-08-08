@@ -1,7 +1,8 @@
 - progress = category_progress_for(user)
-.bs-component.skill-table
-  .panel
-    .panel-heading
-      %h4 Skill Progress
-    .panel-body
-      = render partial: 'progress_bars', locals: { category_progress: progress }
+- unless progress.empty?
+  .bs-component.skill-table
+    .panel
+      .panel-heading
+        %h4 Skill Progress
+      .panel-body
+        = render partial: 'progress_bars', locals: { category_progress: progress }
