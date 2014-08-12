@@ -2,7 +2,8 @@ module Summaries
 
   def self.for_user(user)
     return {} if user.courses.empty?
-    user_map(user_summary_data(user))
+    output = user_map(user_summary_data(user))
+    filter_by_enrollment(output, user)
   end
 
   def self.for_course(course, user)
@@ -28,6 +29,14 @@ module Summaries
   end
 
   protected
+
+  # in a long line of "forgive me" comments, fuck all of this.
+  # i'm exhausted, and at least this is well factored enough
+  # that I can pull it out later.
+  def self.filter_by_enrollment(summary_data, user)
+    categories = user.courses.map(&:categories).flatten.map(&:handle)
+    summary_data.select { |key, data| categories.include? key }
+  end
 
   def self.category_in_course?(course, category)
     course.categories.where(handle: category).any?
