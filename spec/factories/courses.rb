@@ -10,7 +10,7 @@ FactoryGirl.define do
     trait(:created)   { status :created }
 
     trait(:with_skills) do
-      skills { |skills| create_list(:skill, 5) }
+      skills { create_list(:skill, 5) }
     end
   end
 end

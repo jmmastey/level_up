@@ -14,10 +14,10 @@ class CoursesController < ApplicationController
 
     if interactor.failure?
       flash[:error] = interactor.message
-      redirect_back and return
+      redirect_back
+    else
+      respond_with @course
     end
-
-    respond_with @course
   end
 
   private
@@ -25,5 +25,4 @@ class CoursesController < ApplicationController
   def set_course # yarr
     @course = Course.published.find(params[:id])
   end
-
 end

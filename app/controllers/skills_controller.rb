@@ -36,5 +36,4 @@ class SkillsController < ApplicationController
   def skill
     @skill ||= params[:skill_id].present? && Skill.find_by_id(params[:skill_id])
   end
-
 end

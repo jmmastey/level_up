@@ -3,7 +3,6 @@
 require 'rack/utils'
 
 module StatusMatchers
-
   # We will use this simple class as our matcher engine
   class BeStatus
     def initialize(status)
@@ -42,8 +41,8 @@ module StatusMatchers
     server_error: 500..599
   }
 
-  # The Rack::Utils::SYMBOL_TO_STATUS_CODE contains all the 
-  # Rack::Utils::HTTP_STATUS_CODES already changed to symbols, 
+  # The Rack::Utils::SYMBOL_TO_STATUS_CODE contains all the
+  # Rack::Utils::HTTP_STATUS_CODES already changed to symbols,
   # it's easier to use that
   SYMBOL_TO_STATUS_CODE =
     Rack::Utils::SYMBOL_TO_STATUS_CODE.merge(STATUS_CODE_RANGES)

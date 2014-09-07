@@ -33,9 +33,7 @@ describe Summaries do
   end
 
   describe "#for_category" do
-    it "tracks completion across categories" do
-      summary = Summaries.for_category(user)
-    end
+    xit "tracks completion across categories"
   end
 
 end

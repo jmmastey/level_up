@@ -4,10 +4,10 @@ describe User do
 
   before(:each) do
     @attr = {
-      :name => "Example User",
-      :email => "user@example.com",
-      :password => "changeme",
-      :password_confirmation => "changeme"
+      name: "Example User",
+      email: "user@example.com",
+      password: "changeme",
+      password_confirmation: "changeme"
     }
   end
 
@@ -16,22 +16,22 @@ describe User do
   end
 
   it "requires an email address" do
-    no_email_user = User.new(@attr.merge(:email => ""))
+    no_email_user = User.new(@attr.merge(email: ""))
     expect(no_email_user).not_to be_valid
   end
 
   it "accepts valid email addresses" do
-    addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
+    addresses = %w(user@foo.com THE_USER@foo.bar.org first.last@foo.jp)
     addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
+      valid_email_user = User.new(@attr.merge(email: address))
       expect(valid_email_user).to be_valid
     end
   end
 
   it "rejects invalid email addresses" do
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
+    addresses = %w(user@foo,com user_at_foo.org example.user@foo.)
     addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
+      invalid_email_user = User.new(@attr.merge(email: address))
       expect(invalid_email_user).not_to be_valid
     end
   end
@@ -44,7 +44,7 @@ describe User do
 
   it "rejects email addresses identical up to case" do
     upcased_email = @attr[:email].upcase
-    User.create!(@attr.merge(:email => upcased_email))
+    User.create!(@attr.merge(email: upcased_email))
     user_with_duplicate_email = User.new(@attr)
     expect(user_with_duplicate_email).not_to be_valid
   end
@@ -67,18 +67,18 @@ describe User do
   describe "password validations" do
 
     it "requires a password" do
-      user = User.new(@attr.merge(:password => "", :password_confirmation => ""))
+      user = User.new(@attr.merge(password: "", password_confirmation: ""))
       expect(user).not_to be_valid
     end
 
     it "requires a matching password confirmation" do
-      user = User.new(@attr.merge(:password_confirmation => "invalid"))
+      user = User.new(@attr.merge(password_confirmation: "invalid"))
       expect(user).not_to be_valid
     end
 
     it "rejects short passwords" do
       short = "a" * 5
-      hash = @attr.merge(:password => short, :password_confirmation => short)
+      hash = @attr.merge(password: short, password_confirmation: short)
       expect(User.new(hash)).not_to be_valid
     end
 
@@ -110,11 +110,11 @@ describe User do
 
       create(:completion, user: user, skill: skill)
       expect(user).to have(1).skills
-      expect(user.skills).to match([skill])
-
-      other_completion = create(:completion, user: user)
-      expect(user.reload).to have(2).skills
       expect(user.skills).to include(skill)
+
+      completion = create(:completion, user: user)
+      expect(user.reload).to have(2).skills
+      expect(user.skills).to include(completion.skill)
     end
 
     it "finds skills by category" do

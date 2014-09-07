@@ -10,12 +10,12 @@ describe CoursesController, type: :controller do
       it "renders only publicly available courses" do
         get "index"
         expect(response).to render_template(:index)
-        expect(assigns(:courses)).to eq([ published_course ])
+        expect(assigns(:courses)).to eq([published_course])
       end
     end
 
     describe "while logged in" do
-      before (:each) do
+      before :each do
         @user = FactoryGirl.create(:user)
         sign_in @user
       end

@@ -20,5 +20,4 @@ class EnrollUser
     AdminMailer.confirm_enrollment(context[:user], context[:course]).deliver &&
     UserMailer.confirm_enrollment(context[:user], context[:course]).deliver
   end
-
 end

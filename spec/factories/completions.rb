@@ -3,9 +3,9 @@ FactoryGirl.define do
     association :skill
     association :user
 
-    trait(:verified) {
-      created_at  2.weeks.ago
+    trait(:verified) do
+      created_at 2.weeks.ago
       verified_on 1.week.ago
-    }
+    end
   end
 end

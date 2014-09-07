@@ -13,7 +13,6 @@ describe UncompleteSkill do
   end
 
   it "doesn't allow uncompletion for an incomplete skill" do
-    completion = create(:completion)
     skill = create(:skill)
 
     interactor = UncompleteSkill.perform(skill: skill, user: user)
