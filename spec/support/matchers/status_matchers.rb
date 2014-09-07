@@ -1,4 +1,4 @@
-# unless we're in a non-rack environment 
+# unless we're in a non-rack environment
 # (which is unlikely when testing status codes, nonetheless possible)
 require 'rack/utils'
 

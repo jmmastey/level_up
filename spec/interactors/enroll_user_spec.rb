@@ -16,8 +16,10 @@ describe EnrollUser do
     end
 
     it "sends welcome and notification emails" do
-      expect(AdminMailer).to receive(:confirm_enrollment).once.with(user, course).and_return(mail)
-      expect(UserMailer).to receive(:confirm_enrollment).once.with(user, course).and_return(mail)
+      expect(AdminMailer).to receive(:confirm_enrollment).once
+        .with(user, course).and_return(mail)
+      expect(UserMailer).to receive(:confirm_enrollment).once
+        .with(user, course).and_return(mail)
 
       expect(interactor).to be_success
     end
@@ -26,7 +28,8 @@ describe EnrollUser do
   context "when emails cannot be sent" do
     let(:deliver) { false }
     it "fails when emails cannot be sent properly" do
-      expect(AdminMailer).to receive(:confirm_enrollment).with(user, course).and_return(mail)
+      expect(AdminMailer).to receive(:confirm_enrollment)
+        .with(user, course).and_return(mail)
 
       expect(interactor).not_to be_success
     end

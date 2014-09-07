@@ -3,7 +3,8 @@ Given /^a user exists with some training progress$/ do
 
   # now finish a few skills
   Skill.all.take(4).map do |skill|
-    FactoryGirl.create(:completion, :verified, user: @user, skill: skill, created_at: Date.today)
+    FactoryGirl.create(:completion, :verified, user: @user,
+                       skill: skill, created_at: Date.today)
   end
 end
 

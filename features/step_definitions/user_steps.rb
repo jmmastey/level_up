@@ -147,7 +147,7 @@ Then /^I am signed out$/ do
 end
 
 Then /^I see an unconfirmed account message$/ do
-  expect(page).to have_content "You have to confirm your account before continuing."
+  expect(page).to have_content "You have to confirm your account"
 end
 
 Then /^I see a successful sign in message$/ do

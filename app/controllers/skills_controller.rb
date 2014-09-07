@@ -3,35 +3,28 @@ class SkillsController < ApplicationController
 
   # POST skill/:skill_id/completion
   def complete
-    unless skill
-      render json: { success: false, error: 'provide a valid skill' }, status: :unprocessable_entity
-      return
-    end
-
+    return render_bad_response('provide a valid skill') unless skill
     interactor = CompleteSkill.perform(user: current_user, skill: skill)
-    if interactor.success?
-      render json: { success: true, complete: true }
-    else
-      render json: { success: false, error: interactor.message }, status: :unprocessable_entity
-    end
+    return render_bad_response(interactor.message) if interactor.failure?
+
+    render json: { success: true, complete: true }
   end
 
   # DELETE skill/:skill_id/completion
   def uncomplete
-    unless skill
-      render json: { success: false, error: 'provide a valid skill' }, status: :unprocessable_entity
-      return
-    end
-
+    return render_bad_response('provide a valid skill') unless skill
     interactor = UncompleteSkill.perform(user: current_user, skill: skill)
-    if interactor.success?
-      render json: { success: true, complete: false }
-    else
-      render json: { success: false, error: interactor.message }, status: :unprocessable_entity
-    end
+    return render_bad_response(interactor.message) if interactor.failure?
+
+    render json: { success: true, complete: false }
   end
 
   private
+
+  def render_bad_response(message)
+    render json: { success: false, error: message },
+           status: :unprocessable_entity
+  end
 
   def skill
     @skill ||= params[:skill_id].present? && Skill.find_by_id(params[:skill_id])
