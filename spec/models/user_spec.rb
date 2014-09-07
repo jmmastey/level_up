@@ -119,11 +119,11 @@ describe User do
 
     it "finds skills by category" do
       create(:completion, user: user, skill: skill)
-      other_completion = create(:completion, user: user)
+      other = create(:completion, user: user)
 
       # scope down on category
       expect(user.skills.for_category(category)).to have(1).item
-      expect(user.skills.for_category(category)).not_to include(other_completion.skill)
+      expect(user.skills.for_category(category)).not_to include(other.skill)
     end
 
     it "checks completion of a skill" do

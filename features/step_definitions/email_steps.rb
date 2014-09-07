@@ -26,9 +26,6 @@
 
 module EmailHelpers
   def current_email_address
-    # Replace with your a way to find your current email. e.g @current_user.email
-    # last_email_address will return the last email address used by email spec to find an email.
-    # Note that last_email_address will be reset after each Scenario.
     last_email_address || "example@example.com"
   end
 end
@@ -57,11 +54,17 @@ Then /^(?:I|they|"([^"]*?)") have (an|no|\d+) emails?$/ do |address, amount|
 end
 
 Then /^(?:I|they|"([^"]*?)") receive (an|no|\d+) emails? with subject "([^"]*?)"$/ do |address, amount, subject|
-  expect(unread_emails_for(address).select { |m| m.subject =~ Regexp.new(Regexp.escape(subject)) }.size).to == parse_email_count(amount)
+  unread = unread_emails_for(address).select do |m|
+    m.subject =~ Regexp.new(Regexp.escape(subject))
+  end
+  expect(unread.size).to == parse_email_count(amount)
 end
 
 Then /^(?:I|they|"([^"]*?)") receive (an|no|\d+) emails? with subject \/([^"]*?)\/$/ do |address, amount, subject|
-  expect(unread_emails_for(address).select { |m| m.subject =~ Regexp.new(subject) }.size).to == parse_email_count(amount)
+  unread = unread_emails_for(address).select do |m|
+    m.subject =~ Regexp.new(subject)
+  end
+  expect(unread.size).to == parse_email_count(amount)
 end
 
 Then /^(?:I|they|"([^"]*?)") receive an email with the following body:$/ do |address, expected_body|
@@ -117,12 +120,12 @@ Then /^(?:I|they) see the email delivered from "([^"]*?)"$/ do |text|
   expect(current_email).to be_delivered_from(text)
 end
 
-Then /^(?:I|they) see "([^\"]*)" in the email "([^"]*?)" header$/ do |text, name|
-  expect(current_email).to have_header(name, text)
+Then /^(?:I|they) see "([^\"]*)" in the email "([^"]*?)" header$/ do |txt, name|
+  expect(current_email).to have_header(name, txt)
 end
 
-Then /^(?:I|they) see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |text, name|
-  expect(current_email).to have_header(name, Regexp.new(text))
+Then /^(?:I|they) see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |txt, nm|
+  expect(current_email).to have_header(nm, Regexp.new(txt))
 end
 
 Then /^I see it is a multi\-part email$/ do
@@ -145,20 +148,25 @@ Then /^(?:I|they) see (an|no|\d+) attachments? with the email$/ do |amount|
   expect(current_email_attachments.size).to == parse_email_count(amount)
 end
 
-Then /^there be (an|no|\d+) attachments? named "([^"]*?)"$/ do |amount, filename|
-  expect(current_email_attachments.select { |a| a.filename == filename }.size).to == parse_email_count(amount)
+Then /^there be (an|no|\d+) attachments? named "([^"]*?)"$/ do |count, filename|
+  attachments = current_email_attachments.select { |a| a.filename == filename }
+  expect(attachments.size).to == parse_email_count(count)
 end
 
 Then /^attachment (\d+) is named "([^"]*?)"$/ do |index, filename|
   expect(current_email_attachments[(index.to_i - 1)].filename).to == filename
 end
 
-Then /^there are (an|no|\d+) attachments? of type "([^"]*?)"$/ do |amount, content_type|
-  expect(current_email_attachments.select { |a| a.content_type.include?(content_type) }.size).to == parse_email_count(amount)
+Then /^there are (an|no|\d+) attachments? of type "([^"]*?)"$/ do |amount, type|
+  attachments = current_email_attachments.select do |attachment|
+    attachment.content_type.include?(type)
+  end
+  expect(attachments.size).to == parse_email_count(amount)
 end
 
 Then /^attachment (\d+) are of type "([^"]*?)"$/ do |index, content_type|
-  expect(current_email_attachments[(index.to_i - 1)].content_type).to include(content_type)
+  type = current_email_attachments[(index.to_i - 1)].content_type
+  expect(type).to include(content_type)
 end
 
 Then /^all attachments are not blank$/ do
@@ -175,19 +183,13 @@ end
 # Interact with Email Contents
 #
 
-When /^(?:I|they|"([^"]*?)") follows? "([^"]*?)" in the email$/ do |address, link|
-  visit_in_email(link, address)
+When /^(?:I|they|"([^"]*?)") follows? "([^"]*?)" in the email$/ do |add, link|
+  visit_in_email(link, add)
 end
 
 When /^(?:I|they) click the first link in the email$/ do
   click_first_link_in_email
 end
-
-#
-# Debugging
-# These only work with Rails and OSx ATM since EmailViewer uses RAILS_ROOT and OSx's 'open' command.
-# Patches accepted. ;)
-#
 
 Then /^save and open current email$/ do
   EmailSpec::EmailViewer.save_and_open_email(current_email)

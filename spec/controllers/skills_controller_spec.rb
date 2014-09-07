@@ -23,7 +23,7 @@ describe SkillsController, type: :controller do
 
     it "returns an unsuccessful response when the action fails" do
       interactor = double('CompleteSkill')
-      expect(interactor).to receive(:success?).and_return(false)
+      expect(interactor).to receive(:failure?).and_return(true)
       expect(interactor).to receive(:message).and_return("invalid!")
       expect(CompleteSkill).to receive(:perform).and_return(interactor)
 
@@ -37,7 +37,7 @@ describe SkillsController, type: :controller do
 
     it "returns a successful response when passed a skill" do
       interactor = double("CompleteSkill")
-      expect(interactor).to receive(:success?).and_return(true)
+      expect(interactor).to receive(:failure?).and_return(false)
       expect(CompleteSkill).to receive(:perform).and_return(interactor)
 
       post 'complete', skill_id: skill.id
@@ -65,7 +65,7 @@ describe SkillsController, type: :controller do
 
     it "returns an unsuccessful response when the action fails" do
       interactor = double('UncompleteSkill')
-      expect(interactor).to receive(:success?).and_return(false)
+      expect(interactor).to receive(:failure?).and_return(true)
       expect(interactor).to receive(:message).and_return("invalid!")
       expect(UncompleteSkill).to receive(:perform).and_return(interactor)
 
@@ -79,7 +79,7 @@ describe SkillsController, type: :controller do
 
     it "returns a successful response when passed a skill" do
       interactor = double("UncompleteSkill")
-      expect(interactor).to receive(:success?).and_return(true)
+      expect(interactor).to receive(:failure?).and_return(false)
       expect(UncompleteSkill).to receive(:perform).and_return(interactor)
 
       delete 'uncomplete', skill_id: skill.id

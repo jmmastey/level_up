@@ -21,7 +21,8 @@ describe CoursesController, type: :controller do
       end
 
       it "renders the list of available courses" do
-        expect(Course).to receive(:available_to).and_return([course, published_course])
+        expect(Course).to receive(:available_to)
+          .and_return([course, published_course])
 
         get "index"
         expect(response).to render_template(:index)

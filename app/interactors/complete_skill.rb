@@ -2,12 +2,11 @@ class CompleteSkill
   include Interactor
 
   def setup
-    context.fail!(message: "provide a valid user") unless context[:user].present?
-    context.fail!(message: "provide a valid skill") unless context[:skill].present?
+    context.fail!(message: "provide a valid user") unless context[:user]
+    context.fail!(message: "provide a valid skill") unless context[:skill]
 
-    if !failure? && context[:user].has_completed?(context[:skill])
-      context.fail!(message: "cannot re-complete a skill")
-    end
+    return if failure? || !context[:user].has_completed?(context[:skill])
+    context.fail!(message: "cannot re-complete a skill")
   end
 
   def perform
