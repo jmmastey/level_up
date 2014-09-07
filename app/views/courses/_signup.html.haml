@@ -1,4 +1,4 @@
-- categories = course.categories.map(&:name)
+- categories = course.categories.sorted.map(&:name)
 .bs-component
   .list-group
     .list-group-item{ class: ['course', course.handle] }

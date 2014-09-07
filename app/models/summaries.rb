@@ -2,7 +2,8 @@ module Summaries
 
   def self.for_user(user)
     return {} if user.courses.empty?
-    user_map(user_summary_data(user))
+    output = user_map(user_summary_data(user))
+    filter_by_enrollment(output, user)
   end
 
   def self.for_course(course, user)
@@ -29,16 +30,37 @@ module Summaries
 
   protected
 
+  # in a long line of "forgive me" comments, fuck all of this.
+  # i'm exhausted, and at least this is well factored enough
+  # that I can pull it out later.
+  def self.filter_by_enrollment(summary_data, user)
+    categories = user.courses.map(&:categories).flatten.map(&:handle)
+    summary_data.select { |key, data| categories.include? key }
+  end
+
   def self.category_in_course?(course, category)
     course.categories.where(handle: category).any?
   end
 
   def self.user_summary_data(user)
-    categories  = Category.summarize
-    skills      = Skill.summarize(categories)
-    completions = Completion.summarize(skills, user)
+    connection.execute(summary_join(user).to_sql)
+  end
 
-    connection.execute(completions.to_sql)
+  def self.summary_join(user)
+    Category
+      .joins(:skills)
+      .joins(ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin))
+        .project(summary_fields)
+        .project(Completion[:verified_on].count.as("total_verified"))
+        .project(Completion[:id].count.as("total_completed"))
+        .project(Skill[:id].count.as("total_skills"))
+      .where(Completion[:user_id].eq(nil).or(Completion[:user_id].eq(user.id)))
+      .group(summary_fields)
+      .order(:sort_order)
+  end
+
+  def self.summary_fields
+    [Category[:id], Category[:name], Category[:handle]]
   end
 
   def self.user_map(summary)

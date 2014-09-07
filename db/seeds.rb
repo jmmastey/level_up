@@ -14,7 +14,7 @@ CATEGORIES = [
   [ "Basic Interaction Design", "interaction" ],
   [ "Basic Data Engineering", "data" ],
   [ "Engineering Principles", "engineering" ],
-  [ "Business", "business" ],
+  [ "Learning the Business", "business" ],
   [ "Professionalism", "professionalism" ],
   [ "Intermediate Ruby", "ruby_2" ],
   [ "Intermediate Test Engineering", "test_2" ],
@@ -37,8 +37,7 @@ end
 COURSES = [
   [ "Engineering Baseline I", "baseline_1", "Learn to build and test a complete Ruby on Rails application. This isn't a basic intro: you will finish with some serious ruby chops." ],
   [ "Engineering Baseline II", "baseline_2", "Description" ],
-  [ "Cnuapp Engineering", "cnuapp", "Description" ],
-  [ "8-box Engineering", "8_box", "Description" ],
+  [ "Engineering at Enova", "enova", "Learn more about engineering as it happens at Enova." ],
 ]
 COURSES.each do |course|
   Course.create! name: course[0], handle: course[1], description: course[2], status: :published
@@ -273,10 +272,9 @@ end
 
 puts "course categories"
 COURSE_CATS = {
-  'baseline_1' => [ 'linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering', 'business', 'professionalism' ],
+  'baseline_1' => [ 'linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering', 'professionalism' ],
   'baseline_2' => [ 'ruby_2', 'rails_2', 'test_2', 'data_2', 'interaction_2', 'engineering_2', ],
-  'cnuapp' => [ 'cnuapp' ],
-  '8_box' => [ '8boxes' ],
+  'enova' => [ 'business', 'cnuapp', '8boxes' ],
 }
 COURSE_CATS.each do |course, categories|
   puts "#{course}: #{categories.join(', ')}"

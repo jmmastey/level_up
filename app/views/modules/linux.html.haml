@@ -39,7 +39,7 @@
         %h3 Transferring Files Between Boxes
         %p Since we work on remote VMs, and often across the network, transferring of files across machines is a common task. Take a look at this <a href='https://linuxacademy.com/blog/linux/ssh-and-scp-howto-tips-tricks/'>SCP tutorial</a> to find out how to transfer files. 
         = exercise_block_for "linux", "scp" do |e|
-          = e.question "Create a text file with your email username (e.g. jmastey.txt). Now transfer it to a linux machine (try Virtualbox if you don't have one) and put it into the /tmp directory. There is a default login (cnuapp/cnuapp) for that box."
+          = e.question "Create a text file with your email username (e.g. jmastey.txt). Now transfer it to a linux machine (try Virtualbox if you don't have one) and put it into the /tmp directory."
           = e.question "Delete your local copy, and then copy the file from the remote box back to your local machine."
 
       .page-header
