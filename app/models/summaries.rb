@@ -46,16 +46,20 @@ module Summaries
   end
 
   def self.summary_join(user)
-    Category
-      .joins(:skills)
-      .joins(ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin))
-        .project(summary_fields)
+    summary_tables.project(summary_fields)
         .project(Completion[:verified_on].count.as("total_verified"))
         .project(Completion[:id].count.as("total_completed"))
         .project(Skill[:id].count.as("total_skills"))
-      .where(Completion[:user_id].eq(nil).or(Completion[:user_id].eq(user.id)))
       .group(summary_fields)
       .order(:sort_order)
+  end
+
+  def self.summary_tables
+    Category
+      .joins(:skills)
+      .joins(ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin)) do |_, conditions|
+        conditions.and(Completion[:user_id].eq(user.id))
+      end
   end
 
   def self.summary_fields
