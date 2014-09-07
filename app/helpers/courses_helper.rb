@@ -1,5 +1,4 @@
 module CoursesHelper
-
   def user_summary
     @user_summary ||= Summaries.for_user(current_user)
   end
@@ -22,5 +21,4 @@ module CoursesHelper
 
     ((summary[:completed] / summary[:total].to_f) * 100).ceil
   end
-
 end

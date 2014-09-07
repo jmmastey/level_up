@@ -1,10 +1,7 @@
 module ModulesHelper
-
   def exercise_block_for(category, skill)
-    cat       = Category.find_by!(handle: category)
     skill     = Skill.find_by!(handle: skill)
     ex_block  = ExerciseBlock.new(category, skill, [])
-
 
     yield ex_block
     register_exercise_for(skill)
@@ -55,5 +52,4 @@ module ModulesHelper
       nil
     end
   end
-
 end

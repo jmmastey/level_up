@@ -13,5 +13,4 @@ class Enrollment < ActiveRecord::Base
       item: item,
     }
   end
-
 end

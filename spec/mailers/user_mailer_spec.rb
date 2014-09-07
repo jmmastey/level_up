@@ -11,6 +11,6 @@ describe UserMailer do
   end
 
   it "actually sends the email" do
-    expect { mail.deliver! }.to change{ ActionMailer::Base.deliveries.size }.by(1)
+    expect { mail.deliver! }.to change { ActionMailer::Base.deliveries.size }.by(1)
   end
 end

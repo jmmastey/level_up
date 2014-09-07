@@ -1,0 +1,36 @@
+AllCops:
+  Exclude:
+    - db/*
+    - lib/tasks/cucumber.rake
+    
+# C: Missing top-level module documentation comment.
+Style/Documentation:
+  Enabled: false
+
+# C: Prefer reduce over inject.
+Style/CollectionMethods:
+  Enabled: false
+
+# C: Use each_with_object instead of inject.
+Style/EachWithObject:
+  Enabled: false
+
+# C: Prefer single-quoted strings when you don't need string interpolation or special symbols
+Style/StringLiterals:
+  Enabled: false
+
+
+# temporary while there are bigger questions
+Metrics/LineLength:
+  Enabled: false
+
+# I like trailing commas, thanks.
+Style/TrailingComma:
+  Enabled: false
+
+# all the cuke syntax fails
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false

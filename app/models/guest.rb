@@ -1,5 +1,4 @@
 class Guest
-
   def courses
     Course.none
   end
@@ -24,8 +23,7 @@ class Guest
     Role.none
   end
 
-  def has_completed?(skill)
+  def has_completed?(_skill)
     false
   end
-
 end

@@ -1,5 +1,4 @@
 module Summaries
-
   def self.for_user(user)
     return {} if user.courses.empty?
     output = user_map(user_summary_data(user))
@@ -35,7 +34,7 @@ module Summaries
   # that I can pull it out later.
   def self.filter_by_enrollment(summary_data, user)
     categories = user.courses.map(&:categories).flatten.map(&:handle)
-    summary_data.select { |key, data| categories.include? key }
+    summary_data.select { |key, _| categories.include? key }
   end
 
   def self.category_in_course?(course, category)
@@ -84,5 +83,4 @@ module Summaries
   def self.connection
     ActiveRecord::Base.connection
   end
-
 end

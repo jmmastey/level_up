@@ -8,7 +8,6 @@ module Feedable
   end
 
   module ClassMethods
-
     def feed_for(user)
       recent.for_user(user).by_creation_date
     end
@@ -24,7 +23,5 @@ module Feedable
         item: item,
       }
     end
-
   end
-
 end

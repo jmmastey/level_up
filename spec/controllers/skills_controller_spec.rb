@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SkillsController, type: :controller do
-  before (:each) do
+  before :each do
     @user = FactoryGirl.create(:user)
     sign_in @user
   end
@@ -27,7 +27,7 @@ describe SkillsController, type: :controller do
       expect(interactor).to receive(:message).and_return("invalid!")
       expect(CompleteSkill).to receive(:perform).and_return(interactor)
 
-      post 'complete', :skill_id => skill.id
+      post 'complete', skill_id: skill.id
 
       expect(response).to be_client_error
       body = JSON(response.body)
@@ -69,7 +69,7 @@ describe SkillsController, type: :controller do
       expect(interactor).to receive(:message).and_return("invalid!")
       expect(UncompleteSkill).to receive(:perform).and_return(interactor)
 
-      delete 'uncomplete', :skill_id => skill.id
+      delete 'uncomplete', skill_id: skill.id
 
       expect(response).to be_client_error
       body = JSON(response.body)

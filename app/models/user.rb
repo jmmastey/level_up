@@ -24,5 +24,4 @@ class User < ActiveRecord::Base
   def signed_in?
     true
   end
-
 end

@@ -10,15 +10,14 @@ class Course < ActiveRecord::Base
   scope :published, -> { where(status: :published) }
 
   state_machine :status, initial: :created do
-    event :approve    do transition :created => :approved end
-    event :publish    do transition [:created, :approved, :hidden] => :published end
-    event :hide       do transition :published => :hidden end
-    event :deprecate  do transition :published => :deprecated end
+    event(:approve)   { transition created: :approved }
+    event(:publish)   { transition [:created, :approved, :hidden] => :published }
+    event(:hide)      { transition published: :hidden }
+    event(:deprecate) { transition published: :deprecated }
   end
 
   def self.available_to(student)
     admin_courses = student.admin? ? all : none
     (published | student.courses | admin_courses).sort_by(&:id)
   end
-
 end
