@@ -18,6 +18,7 @@ gem 'rolify'
 gem 'interactor-rails'
 gem 'state_machine'
 gem 'gravatar_image_tag'
+gem 'arel-helpers'
 
 group :development do
   gem 'better_errors'

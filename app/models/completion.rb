@@ -1,4 +1,5 @@
 class Completion < ActiveRecord::Base
+  include ArelHelpers::ArelTable
   include Feedable
 
   belongs_to :user, touch: true
@@ -13,15 +14,4 @@ class Completion < ActiveRecord::Base
       item: item,
     }
   end
-
-  def self.summarize(skills, user)
-    table = self.arel_table
-    skill_table = Skill.arel_table
-
-    completion = table[:skill_id].eq(skill_table[:id]).and(table[:user_id].eq user.id)
-    skills.join(table, Arel::Nodes::OuterJoin).on(completion)
-      .project(table[:verified_on].count.as("total_verified"))
-      .project(table[:id].count.as("total_completed"))
-  end
-
 end

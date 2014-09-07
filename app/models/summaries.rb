@@ -43,11 +43,24 @@ module Summaries
   end
 
   def self.user_summary_data(user)
-    categories  = Category.summarize
-    skills      = Skill.summarize(categories)
-    completions = Completion.summarize(skills, user)
+    connection.execute(summary_join(user).to_sql)
+  end
 
-    connection.execute(completions.to_sql)
+  def self.summary_join(user)
+    Category
+      .joins(:skills)
+      .joins(ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin))
+        .project(summary_fields)
+        .project(Completion[:verified_on].count.as("total_verified"))
+        .project(Completion[:id].count.as("total_completed"))
+        .project(Skill[:id].count.as("total_skills"))
+      .where(Completion[:user_id].eq(nil).or(Completion[:user_id].eq(user.id)))
+      .group(summary_fields)
+      .order(:sort_order)
+  end
+
+  def self.summary_fields
+    [Category[:id], Category[:name], Category[:handle]]
   end
 
   def self.user_map(summary)
