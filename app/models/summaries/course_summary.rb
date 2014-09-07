@@ -1,6 +1,5 @@
 module Summaries
   class CourseSummary < Summaries::Base
-
     def initialize(course, user)
       @data = { total: 0, completed: 0, verified: 0 }
       summarize_for(course, user)

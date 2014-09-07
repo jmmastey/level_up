@@ -18,7 +18,7 @@ module Summaries
     # i'm exhausted, and at least this is well factored enough
     # that I can pull it out later.
     def filter_by_enrollment(summary_data, user)
-     categories = user.courses.map(&:categories).flatten.map(&:handle)
+      categories = user.courses.map(&:categories).flatten.map(&:handle)
       summary_data.select { |key, _| categories.include? key }
     end
 
@@ -27,19 +27,18 @@ module Summaries
     end
 
     def summary_join(user)
-      summary_tables.project(summary_fields)
+      summary_tables(user).project(summary_fields)
         .project(Completion[:verified_on].count.as("total_verified"))
         .project(Completion[:id].count.as("total_completed"))
         .project(Skill[:id].count.as("total_skills"))
       .group(summary_fields).order(:sort_order)
     end
 
-    def summary_tables
+    def summary_tables(user)
+      outer = ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin)
       Category
         .joins(:skills)
-        .joins(ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin)) do |_, conditions|
-          conditions.and(Completion[:user_id].eq(user.id))
-        end
+        .joins(outer) { |_, cond| cond.and(Completion[:user_id].eq(user.id)) }
     end
 
     def summary_fields
