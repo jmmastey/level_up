@@ -26,13 +26,14 @@ config.secret_key = 'f6a7f92d27a0a5a43bd2b10b1b4c1c56313acd913ed1ab2e35b'
 
 Copy /config/database.yml.example into a new database.yml (which is in .gitignore) and fill in with your settings.
 
+You may need to create a new role in psql and then run the final steps to set up the database.
+
 ### Final steps
 
-TODO
 - bundle install
 - bundle exec rake db:create
 - bundle exec rake db:setup
-- TODO....
+- bundle exec rails s
 
 Contributing
 ------------
