@@ -3,9 +3,9 @@
   .list-group
     .list-group-item{ class: ['course', course.handle] }
       - if current_user.courses.include?(course)
-        %a.btn.btn-primary.btn-lg.register Enrolled
+        = link_to 'Enrolled', course, class: 'btn btn-primary btn-lg register'
       - else
-        = form_tag enroll_path(course), method: :post, class: 'register' do 
+        = form_tag enroll_path(course), method: :post, class: 'register' do
           %button.btn.btn-primary.btn-lg Enroll
 
       %h3= course.name
@@ -13,3 +13,4 @@
       %p.topics
         %strong Topics Covered:
         = categories.join(", ")
+      %p= link_to "View Course", course
