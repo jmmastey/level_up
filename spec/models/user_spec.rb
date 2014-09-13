@@ -7,7 +7,7 @@ describe User do
       name: "Example User",
       email: "user@example.com",
       password: "changeme",
-      password_confirmation: "changeme"
+      password_confirmation: "changeme",
     }
   end
 
