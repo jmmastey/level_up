@@ -19,6 +19,7 @@ gem 'interactor-rails'
 gem 'state_machine'
 gem 'gravatar_image_tag'
 gem 'arel-helpers'
+gem 'puma', ">= 2.0"
 
 group :development do
   gem 'better_errors'
@@ -50,7 +51,6 @@ group :development, :test do
 end
 
 group :production do
-  gem 'puma', ">= 2.0"
   gem 'rails_12factor'
 end
 
