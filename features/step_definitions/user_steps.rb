@@ -29,13 +29,17 @@ end
 
 def sign_up
   delete_user
+  fill_sign_up_form
+  find_user
+end
+
+def fill_sign_up_form
   visit '/users/sign_up'
   fill_in "Name", with: @visitor[:name]
   fill_in "Email", with: @visitor[:email]
   fill_in "user_password", with: @visitor[:password]
   fill_in "user_password_confirmation", with: @visitor[:password_confirmation]
   click_button "Sign up"
-  find_user
 end
 
 def sign_in

@@ -7,7 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:name, :email, :password, :password_confirmation,
-               :current_password)
+        :current_password)
     end
   end
 end

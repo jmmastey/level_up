@@ -46,8 +46,7 @@ module Summaries
     end
 
     def category_map(result)
-      {
-        id:               result['id'].to_i,
+      { id:               result['id'].to_i,
         name:             result['name'],
         handle:           result['handle'],
         total_skills:     result['total_skills'].to_i,

@@ -10,16 +10,12 @@ module StatusMatchers
     end
 
     def matches?(target)
-      if defined?(target.status)
-        @target = target.status
-      else
-        @target = target
-      end
+      @target = target_status(target)
 
       if @status.is_a?(Range)
-        return @status.include?(@target)
+        @status.include?(@target)
       else
-        return @target == @status
+        @target == @status
       end
     end
 
@@ -29,6 +25,16 @@ module StatusMatchers
 
     def failure_message_for_should_not
       "expected #{@target} not to be Status #{@status}"
+    end
+
+    private
+
+    def target_status(target)
+      if defined?(target.status)
+        target.status
+      else
+        target
+      end
     end
   end
 

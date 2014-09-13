@@ -38,9 +38,34 @@ Lint/AmbiguousRegexpLiteral:
   Exclude:
     - 'features/step_definitions/*'
 
+# generated file, ignore
 Style/RegexpLiteral:
   Exclude:
     - 'Guardfile'
+
+# align multi-line params with previous line
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+# indent `when` clause one step from `case`
+Style/CaseIndentation:
+  IndentOneStep: true
+
+# don't force crappy var names for reduce/inject loops...
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# stop nesting so hard.
+Metrics/BlockNesting:
+    Max: 2
+
+# short methods, man...
+Metrics/MethodLength:
+  Max: 7
+
+# fewer parameters
+Metrics/ParameterLists:
+  Max: 3
 
 Style/PredicateName:
   Exclude:

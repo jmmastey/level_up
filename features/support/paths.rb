@@ -7,10 +7,10 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-    when /the home\s?page/ then '/'
-    when /the sign up page/ then '/users/sign_up'
-    when /the sign in page/ then '/users/sign_in'
-    else dereference_page_name(page_name)
+      when /the home\s?page/ then '/'
+      when /the sign up page/ then '/users/sign_up'
+      when /the sign in page/ then '/users/sign_in'
+      else dereference_page_name(page_name)
     end
   end
 
