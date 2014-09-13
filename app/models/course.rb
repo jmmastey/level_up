@@ -10,9 +10,9 @@ class Course < ActiveRecord::Base
   scope :published, -> { where(status: :published) }
 
   state_machine :status, initial: :created do
-    event(:approve)   { transition created: :approved }
-    event(:publish)   { transition [:created, :approved, :hidden] => :published }
-    event(:hide)      { transition published: :hidden }
+    event(:approve)  { transition created: :approved }
+    event(:publish)  { transition [:created, :approved, :hidden] => :published }
+    event(:hide)     { transition published: :hidden }
     event(:deprecate) { transition published: :deprecated }
   end
 

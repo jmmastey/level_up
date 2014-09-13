@@ -8,7 +8,7 @@ module Summaries
 
     private
 
-    alias :to_h :data
+    alias_method :to_h, :data
 
     def connection
       ActiveRecord::Base.connection

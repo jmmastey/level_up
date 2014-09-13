@@ -2,34 +2,47 @@ AllCops:
   Exclude:
     - lib/tasks/cucumber.rake
     - features/step_definitions/email_steps.rb
+    - 'db/**/*'
     
 # C: Missing top-level module documentation comment.
 Style/Documentation:
   Enabled: false
 
-# C: Prefer reduce over inject.
+# C: Prefer inject over reduce.
 Style/CollectionMethods:
-  Enabled: false
+  PreferredMethods:
+    reduce: 'inject'
 
 # C: Use each_with_object instead of inject.
 Style/EachWithObject:
   Enabled: false
 
-# C: Prefer single-quoted strings when you don't need string interpolation or special symbols
+# don't enforce single- or double-quotes
 Style/StringLiterals:
   Enabled: false
 
-# I like trailing commas, thanks.
+# library method, leave the violation
+Style/PerlBackrefs:
+  Exclude:
+    - features/support/paths.rb
+
 Style/TrailingComma:
-  Enabled: false
+  EnforcedStyleForMultiline: comma
 
 # This never works for validations
 Style/AlignHash:
-  Enabled: false
+  EnforcedLastArgumentHashStyle: ignore_implicit
 
 # all the cuke syntax fails
 Lint/AmbiguousRegexpLiteral:
-  Enabled: false
+  Exclude:
+    - 'features/step_definitions/*'
 
 Style/RegexpLiteral:
-  Enabled: false
+  Exclude:
+    - 'Guardfile'
+
+Style/PredicateName:
+  Exclude:
+    - app/models/user.rb
+    - app/models/guest.rb

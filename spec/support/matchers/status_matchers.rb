@@ -38,7 +38,7 @@ module StatusMatchers
     success: 200..299,
     redirection: 300..399,
     client_error: 400..499,
-    server_error: 500..599
+    server_error: 500..599,
   }
 
   # The Rack::Utils::SYMBOL_TO_STATUS_CODE contains all the
