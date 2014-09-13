@@ -2,7 +2,7 @@ module Feedable
   extend ActiveSupport::Concern
 
   included do
-    scope :for_user, -> (user) { where(user_id: user.id) }
+    scope :for_user, ->(user) { where(user_id: user.id) }
     scope :recent, -> { where("created_at > :at", at: 5.days.ago) }
     scope :by_creation_date, -> { order("created_at desc") }
   end

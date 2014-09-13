@@ -57,7 +57,7 @@ Style/SingleLineBlockParams:
 
 # stop nesting so hard.
 Metrics/BlockNesting:
-    Max: 2
+  Max: 2
 
 # short methods, man...
 Metrics/MethodLength:
