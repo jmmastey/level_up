@@ -1,14 +1,14 @@
 module Summaries
   class Base
-    attr_reader :data
-
     def initialize(*_args)
       @data = {}
     end
 
-    private
+    def to_h
+      @data || {}
+    end
 
-    alias_method :to_h, :data
+    private
 
     def connection
       ActiveRecord::Base.connection

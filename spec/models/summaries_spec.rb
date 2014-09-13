@@ -21,6 +21,9 @@ describe Summaries do
       expect(summary[:total_completed]).to eq(1)
       expect(summary[:total_verified]).to eq(1)
     end
+
+    xit "skips categories you're not enrolled for"
+    xit "only tracks your completion stats"
   end
 
   describe "#for_course" do

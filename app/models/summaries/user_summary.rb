@@ -1,57 +1,56 @@
 module Summaries
   class UserSummary < Summaries::Base
     def initialize(user)
-      super
-
       return if user.courses.empty?
-      output  = user_map(user_summary_data(user))
-      @data   = filter_by_enrollment(output, user)
+
+      @user   = user
+      @data   = filter_by_enrollment(user_summary_data)
     end
 
     private
 
-    def user_map(summary)
-      Hash[summary.map { |cat| [cat['handle'], category_map(cat)] }]
+    def filter_by_enrollment(summary_data)
+      summary_data.inject({}) do |hash, category|
+        next hash unless user_categories.include? category['handle']
+
+        hash[category['handle']] = typecast_results_for(category)
+        hash
+      end
     end
 
-    # in a long line of "forgive me" comments, fuck all of this.
-    # i'm exhausted, and at least this is well factored enough
-    # that I can pull it out later.
-    def filter_by_enrollment(summary_data, user)
-      categories = user.courses.map(&:categories).flatten.map(&:handle)
-      summary_data.select { |key, _| categories.include? key }
+    def user_categories
+      @user_categories ||= @user.courses.map(&:categories).flatten.map(&:handle)
     end
 
-    def user_summary_data(user)
-      connection.execute(summary_join(user).to_sql)
+    def user_summary_data
+      connection.execute(selected_user_stats.to_sql)
     end
 
-    def summary_join(user)
-      summary_tables(user).project(summary_fields)
+    # it's just like a big SQL query, but harder to read!
+    def selected_user_stats
+      joined_tables
+        .project([Category[:id], Category[:name], Category[:handle]])
         .project(Completion[:verified_on].count.as("total_verified"))
         .project(Completion[:id].count.as("total_completed"))
         .project(Skill[:id].count.as("total_skills"))
-      .group(summary_fields).order(:sort_order)
+      .group(Category[:id], Category[:name], Category[:handle])
+      .order(:sort_order)
     end
 
-    def summary_tables(user)
+    def joined_tables
       outer = ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin)
       Category
         .joins(:skills)
-        .joins(outer) { |_, cond| cond.and(Completion[:user_id].eq(user.id)) }
+        .joins(outer) { |_, cond| cond.and(Completion[:user_id].eq(@user.id)) }
     end
 
-    def summary_fields
-      [Category[:id], Category[:name], Category[:handle]]
-    end
-
-    def category_map(result)
-      { id:               result['id'].to_i,
-        name:             result['name'],
-        handle:           result['handle'],
-        total_skills:     result['total_skills'].to_i,
-        total_completed:  result['total_completed'].to_i,
-        total_verified:   result['total_verified'].to_i,
+    def typecast_results_for(category)
+      { id:               category['id'].to_i,
+        name:             category['name'],
+        handle:           category['handle'],
+        total_skills:     category['total_skills'].to_i,
+        total_completed:  category['total_completed'].to_i,
+        total_verified:   category['total_verified'].to_i,
       }
     end
   end
