@@ -22,8 +22,13 @@ describe Summaries do
       expect(summary[:total_verified]).to eq(1)
     end
 
-    xit "skips categories you're not enrolled for"
-    xit "only tracks your completion stats"
+    it "only tracks your completion stats" do
+      create(:completion, skill: category.skills.first)
+
+      summary = Summaries.for_user(user)[category.handle]
+      expect(summary[:total_skills]).to eq(category.skills.length)
+      expect(summary[:total_completed]).to eq(1)
+    end
   end
 
   describe "#for_course" do

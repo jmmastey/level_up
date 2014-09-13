@@ -38,10 +38,12 @@ module Summaries
     end
 
     def joined_tables
-      outer = ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin)
-      Category
-        .joins(:skills)
-        .joins(outer) { |_, cond| cond.and(Completion[:user_id].eq(@user.id)) }
+      # adds a filter for user_id. impressive how hard this is.
+      outer = ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin) do |_, cond|
+        cond.and(Completion[:user_id].eq(@user.id))
+      end
+
+      Category.joins(:skills).joins(outer)
     end
 
     def typecast_results_for(category)
