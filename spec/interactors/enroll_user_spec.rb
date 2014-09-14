@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EnrollUser do
   let(:course) { create(:course) }
   let(:user) { create(:user) }
-  let(:interactor) { EnrollUser.perform(course: course, user: user) }
+  let(:interactor) { EnrollUser.call(course: course, user: user) }
 
   let(:mail) { double("AdminMailer", deliver: deliver) }
 

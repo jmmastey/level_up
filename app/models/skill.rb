@@ -1,5 +1,6 @@
 class Skill < ActiveRecord::Base
   include ArelHelpers::ArelTable
+  include ArelHelpers::JoinAssociation
 
   has_and_belongs_to_many :courses
   has_many :completions

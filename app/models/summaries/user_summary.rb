@@ -39,9 +39,8 @@ module Summaries
 
     def joined_tables
       # adds a filter for user_id. impressive how hard this is.
-      outer = ArelHelpers.join_association(Skill, :completions, Arel::OuterJoin) do |_, cond|
-        cond.and(Completion[:user_id].eq(@user.id))
-      end
+      filter  = ->(_, cond) { cond.and(Completion[:user_id].eq(@user.id)) }
+      outer   = Skill.join_association(:completions, Arel::OuterJoin, &filter)
 
       Category.joins(:skills).joins(outer)
     end

@@ -6,7 +6,7 @@ describe CompleteSkill do
   let(:user)      { create(:user) }
 
   it "allows the user to complete a skill" do
-    interactor = CompleteSkill.perform(skill: skill, user: user)
+    interactor = CompleteSkill.call(skill: skill, user: user)
     expect(interactor).to be_success
 
     expect(user.skills(skill.category)).to include(skill)
@@ -15,8 +15,8 @@ describe CompleteSkill do
   it "doesn't allow completions to exist twice" do
     create(:completion, skill: skill, user: user)
 
-    interactor = CompleteSkill.perform(skill: skill, user: user)
-    expect(interactor).to be_failure
+    interactor = CompleteSkill.call(skill: skill, user: user)
+    expect(interactor).not_to be_success
   end
 
 end

@@ -36,6 +36,7 @@ describe Course do
 
   describe "course visibility" do
     let(:user) { create(:user) }
+    let(:admin) { create(:user, :admin) }
     let!(:published) { create(:course, :published) }
     let!(:hidden) { create(:course, :created) }
 
@@ -49,9 +50,7 @@ describe Course do
 
     it "shows all courses to admins, but not to other users" do
       expect(Course.available_to(user)).to eq([published])
-
-      user.add_role(:admin)
-      expect(Course.available_to(user)).to eq([published, hidden])
+      expect(Course.available_to(admin)).to eq([published, hidden])
     end
 
   end
