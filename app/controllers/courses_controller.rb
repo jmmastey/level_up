@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
 
   # POST enroll
   def enroll
-    interactor = EnrollUser.perform(user: current_user, course: @course)
+    interactor = EnrollUser.call(user: current_user, course: @course)
 
     if interactor.failure?
       flash[:error] = interactor.message
