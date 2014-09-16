@@ -12,9 +12,9 @@ Feature: Show courses
 
   Scenario: View courses as a registered user
     Given I am logged in
-    And there is a published course called "Test 1"
-    And there is an approved course called "Test 2"
-    And I am enrolled in "Test 2"
+    And there is a published course called "Test 3"
+    And there is an approved course called "Test 4"
+    And I am enrolled in "Test 4"
     When I visit the courses page
-    Then I see the published course called "Test 1" 
-    And I see the approved course called "Test 2"
+    Then I see the published course called "Test 3" 
+    And I see the approved course called "Test 4"
