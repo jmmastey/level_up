@@ -1,2 +1,7 @@
 inherit_from:
   - .hound.yml
+
+require: rubocop-rspec
+
+RSpec/DescribedClass:
+  Enabled: false

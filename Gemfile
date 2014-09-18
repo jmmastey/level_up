@@ -38,6 +38,7 @@ group :development do
   gem 'rb-fsevent', require: false
   gem 'rb-inotify', require: false
   gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :development, :test do

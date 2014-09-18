@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe User do
 
-  before(:each) do
-    @attr = {
+  let(:attr) do
+    {
       name: "Example User",
       email: "user@example.com",
       password: "changeme",
@@ -12,18 +12,18 @@ describe User do
   end
 
   it "creates a new instance given a valid attribute" do
-    User.create!(@attr)
+    User.create!(attr)
   end
 
   it "requires an email address" do
-    no_email_user = User.new(@attr.merge(email: ""))
+    no_email_user = User.new(attr.merge(email: ""))
     expect(no_email_user).not_to be_valid
   end
 
   it "accepts valid email addresses" do
     addresses = %w(user@foo.com THE_USER@foo.bar.org first.last@foo.jp)
     addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(email: address))
+      valid_email_user = User.new(attr.merge(email: address))
       expect(valid_email_user).to be_valid
     end
   end
@@ -31,71 +31,66 @@ describe User do
   it "rejects invalid email addresses" do
     addresses = %w(user@foo,com user_at_foo.org example.user@foo.)
     addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(email: address))
+      invalid_email_user = User.new(attr.merge(email: address))
       expect(invalid_email_user).not_to be_valid
     end
   end
 
   it "rejects duplicate email addresses" do
-    User.create!(@attr)
-    user_with_duplicate_email = User.new(@attr)
+    User.create!(attr)
+    user_with_duplicate_email = User.new(attr)
     expect(user_with_duplicate_email).not_to be_valid
   end
 
   it "rejects email addresses identical up to case" do
-    upcased_email = @attr[:email].upcase
-    User.create!(@attr.merge(email: upcased_email))
-    user_with_duplicate_email = User.new(@attr)
+    upcased_email = attr[:email].upcase
+    User.create!(attr.merge(email: upcased_email))
+    user_with_duplicate_email = User.new(attr)
     expect(user_with_duplicate_email).not_to be_valid
   end
 
   describe "passwords" do
 
-    before(:each) do
-      @user = User.new(@attr)
-    end
+    let(:user) { User.new(attr) }
 
     it "has a password attribute" do
-      expect(@user).to respond_to(:password)
+      expect(user).to respond_to(:password)
     end
 
     it "has a password confirmation attribute" do
-      expect(@user).to respond_to(:password_confirmation)
+      expect(user).to respond_to(:password_confirmation)
     end
   end
 
   describe "password validations" do
 
     it "requires a password" do
-      user = User.new(@attr.merge(password: "", password_confirmation: ""))
+      user = User.new(attr.merge(password: "", password_confirmation: ""))
       expect(user).not_to be_valid
     end
 
     it "requires a matching password confirmation" do
-      user = User.new(@attr.merge(password_confirmation: "invalid"))
+      user = User.new(attr.merge(password_confirmation: "invalid"))
       expect(user).not_to be_valid
     end
 
     it "rejects short passwords" do
       short = "a" * 5
-      hash = @attr.merge(password: short, password_confirmation: short)
+      hash = attr.merge(password: short, password_confirmation: short)
       expect(User.new(hash)).not_to be_valid
     end
 
   end
 
   describe "password encryption" do
-
-    before(:each) do
-      @user = User.create!(@attr)
-    end
+    let(:user) { User.create!(attr) }
 
     it "has an encrypted password attribute" do
-      expect(@user).to respond_to(:encrypted_password)
+      expect(user).to respond_to(:encrypted_password)
     end
 
     it "sets the encrypted password attribute" do
-      expect(@user.encrypted_password).not_to be_blank
+      expect(user.encrypted_password).not_to be_blank
     end
 
   end
