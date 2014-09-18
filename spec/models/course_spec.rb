@@ -49,8 +49,8 @@ describe Course do
     end
 
     it "shows all courses to admins, but not to other users" do
-      expect(Course.available_to(user)).to eq([published])
-      expect(Course.available_to(admin)).to eq([published, hidden])
+      expect(Course.available_to(user)).to include(published)
+      expect(Course.available_to(admin)).to include(published, hidden)
     end
 
   end
