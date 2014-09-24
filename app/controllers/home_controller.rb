@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   end
 
   def show
-    render "modules/#{params[:module]}"
+    render "modules/#{@module.handle}"
   end
 
   private
