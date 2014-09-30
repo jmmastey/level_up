@@ -48,8 +48,8 @@
         %p Different teams use different workflows, but most look something like <a href='http://nvie.com/posts/a-successful-git-branching-model/'>this article</a>. You should be using topic branches and a similar flow as you work.
         = exercise_block_for "linux", "git" do |e|
           = e.question "Go run through <a href='https://try.github.io/'>Try Git</a> to get up to speed."
-          = e.question "Clone the exercises repo (see the sidebar) to get ready for the other modules."
-          = e.question "Now that you know what this means: create a topic branch called 'just_git' and push it to github. Issue a pull request against the upstream repo."
+          = e.question "Fork the exercises repo (see the sidebar) to get ready for the other modules."
+          = e.question "Now that you know what this means: create a topic branch called 'just_git', add some additional text, and push it to github. Issue a pull request against the upstream repo."
 
 
       .page-header
@@ -119,7 +119,7 @@
 
       .page-header
         %h3 Why We Use Web Proxies
-        %p In a complicated network environment, we use proxies all the time. Even within a single node, we usually have a proxy set up to listen for the machine and proxy requests back to the actual software. You need to know how they work, and where we use them, in order to understand how requests actually reach our systems. There are some critical caveats to use of these proxies that you may need to know about.
+        %p In a complicated network environment, we use proxies all the time. Even within a single node, we usually have a proxy set up to listen for the machine and proxy requests back to the actual software. You need to know how they work, and where we use them, in order to understand how requests actually reach our systems. There are some critical caveats to use of these proxies that you may need to know about. Learn more about <a href='http://nginx.org/en/docs/beginners_guide.html'>nginx and proxies</a>.
         = exercise_block_for "linux", "proxies" do |e|
           = e.question "Draw a little diagram or ASCII art or whatever moves you, showing all the proxies between a production customer and the actual application webserver."
           = e.question "How can we use proxies to better service to our customers?"
