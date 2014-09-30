@@ -7,7 +7,7 @@ init_modules = ->
     self.parent(".completion").addClass("active")
     method = if self.hasClass('completed') then 'delete' else 'post'
 
-    $.ajax self.attr("target"),
+    $.ajax self.data("target"),
       method: method,
       dataType: 'json',
       complete: -> self.parent(".completion").removeClass("active"),

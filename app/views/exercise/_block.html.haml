@@ -10,7 +10,7 @@
     .completion
       - if current_user.signed_in?
         .fa.fa-spinner.fa-spin.spinner
-        %button{ class: completion_classes(block), target: skill_complete_path(block.skill) }
+        %button{ 'class' => completion_classes(block), 'data-target' => skill_complete_path(block.skill) }
           %i.fa.fa-square-o
           %i.fa.fa-check-square-o
           Complete
