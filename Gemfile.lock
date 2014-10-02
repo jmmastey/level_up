@@ -21,6 +21,10 @@ GEM
       activemodel (= 4.1.5)
       activesupport (= 4.1.5)
       arel (~> 5.0.0)
+    activerecord-session_store (0.1.0)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
     activesupport (4.1.5)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -92,6 +96,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.4)
     foreman (0.75.0)
       dotenv (~> 0.11.1)
@@ -124,6 +130,7 @@ GEM
       activesupport (>= 4.0.1)
       haml (>= 3.1, < 5.0)
       railties (>= 4.0.1)
+    hashie (3.3.1)
     hike (1.2.3)
     hitimes (1.2.2)
     hpricot (0.8.6)
@@ -149,6 +156,7 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.1)
+    jwt (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     listen (2.7.9)
@@ -165,8 +173,27 @@ GEM
     minitest (5.4.1)
     multi_json (1.10.1)
     multi_test (0.1.1)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
+    oauth2 (1.0.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-github (1.1.2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.2.0)
+      faraday (>= 0.8, < 0.10)
+      multi_json (~> 1.3)
+      oauth2 (~> 1.0)
+      omniauth (~> 1.2)
     orm_adapter (0.5.0)
     parser (2.2.0.pre.4)
       ast (>= 1.1, < 3.0)
@@ -300,6 +327,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-session_store
   arel-helpers
   binding_of_caller
   bootstrap-sass
@@ -326,6 +354,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   launchy
+  omniauth-github
   pg
   poltergeist
   pry-rails

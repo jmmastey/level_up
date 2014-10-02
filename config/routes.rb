@@ -3,7 +3,8 @@ Levelup::Application.routes.draw do
   get "/thedeal.html", to: "home#thedeal"
   get "/:module.html", to: "home#show", as: :module
 
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: { registrations: "registrations",
+                                    omniauth_callbacks: "omniauth_callbacks" }
   resources :users, only: [:index, :update, :show]
   resources :courses, only: [:index, :show]
   post "courses/:id/enroll", to: "courses#enroll", as: "enroll"
