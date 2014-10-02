@@ -128,4 +128,61 @@ describe User do
     end
   end
 
+  describe "#from_omniauth" do
+    let(:attrs) { { email: "tom@test.com", name: "Tom PW" } }
+    let(:info) { double("info", email: attrs[:email], name: attrs[:name]) }
+    let(:auth) { double("github", provider: "github", uid: "1", info: info) }
+
+    context "with a new user" do
+      it "creates the new user with the provided info" do
+        expect(User).to receive(:create)
+          .with(hash_including(email: attrs[:email], uid: "1"))
+          .and_call_original
+        User.from_omniauth(auth)
+      end
+
+      it "saves the user params" do
+        user = User.from_omniauth(auth)
+        expect(user).to have_attributes(
+          email: attrs[:email],
+          name: attrs[:name],
+          provider: "github",
+          uid: "1",
+        )
+      end
+
+      it "returns the new user" do
+        user = User.from_omniauth(auth)
+        expect(user).to be_persisted
+      end
+    end
+
+    context "when the user registered before" do
+      let!(:old_user) { create(:user, email: attrs[:email]) }
+
+      it "finds the old user" do
+        user = User.from_omniauth(auth)
+        expect(user).to eq(old_user)
+      end
+
+      it "doesn't try to create a new user" do
+        expect(User).not_to receive(:create)
+        User.from_omniauth(auth)
+      end
+    end
+
+    context "when the user oauth'd before" do
+      let!(:old_user) { create(:user, provider: "github", uid: "1") }
+
+      it "finds the old user" do
+        user = User.from_omniauth(auth)
+        expect(user).to eq(old_user)
+      end
+
+      it "doesn't try to create a new user" do
+        expect(User).not_to receive(:create)
+        User.from_omniauth(auth)
+      end
+    end
+  end
 end

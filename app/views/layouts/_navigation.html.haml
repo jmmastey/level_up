@@ -19,5 +19,9 @@
 
         - else
           %li= link_to 'Sign In', new_user_session_path
+          %li.github-signin
+            = link_to user_omniauth_authorize_path(:github) do
+              %i.fa.fa-github-square
+              %span.support Log in with Github
           %li= link_to 'Sign Up', new_user_registration_path 
           %li= link_to 'What\'s The Deal', '/thedeal.html'

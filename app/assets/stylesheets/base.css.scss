@@ -14,6 +14,11 @@
   background-color:#28b62c;
 }
 
+.nav li.github-signin {
+  a { padding-left:0px; }
+  span.support { display:none }
+}
+
 footer {
   /*background:#1a1a1a; figure out sticky footer first */
   margin-top:60px;
