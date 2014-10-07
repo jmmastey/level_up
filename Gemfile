@@ -22,6 +22,7 @@ gem 'arel-helpers'
 gem 'puma', ">= 2.0"
 gem 'omniauth-github'
 gem 'activerecord-session_store'
+gem 'psych'
 
 group :development do
   # gem 'better_errors'
