@@ -20,7 +20,7 @@ FactoryGirl.define do
 
     trait :skilled do
       after(:create) do |instance|
-        create(:completion, user: instance)
+        create_list(:completion, 2, user: instance)
       end
     end
   end
