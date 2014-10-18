@@ -17,5 +17,11 @@ FactoryGirl.define do
         Enrollment.create(course: course, user: instance)
       end
     end
+
+    trait :skilled do
+      after(:create) do |instance|
+        create_list(:completion, 2, user: instance)
+      end
+    end
   end
 end

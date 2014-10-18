@@ -1,3 +1,6 @@
+.col-lg-12.linkback
+  = link_to "← Back to Users List", :back
+
 .col-lg-2
   = gravatar_image_tag(@user.email, alt: @user.name, class: "gravatar", gravatar: { size: 160 })
 

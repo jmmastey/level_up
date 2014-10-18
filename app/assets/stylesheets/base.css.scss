@@ -19,6 +19,16 @@
   span.support { display:none }
 }
 
+.pagination > .active > span {
+  color: #ffffff;
+  background-color: #158cba;
+  border-color: #127ba3;
+}
+
+.linkback {
+  margin-bottom:10px;
+}
+
 footer {
   /*background:#1a1a1a; figure out sticky footer first */
   margin-top:60px;

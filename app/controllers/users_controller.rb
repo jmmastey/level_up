@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :find_user, only: [:show, :update]
 
   def index
-    @users = User.by_activity_date
+    @users = User.with_completions.by_activity_date.page(params[:page])
   end
 
   def update

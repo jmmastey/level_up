@@ -8,9 +8,9 @@ Given /^a user exists with some training progress$/ do
   end
 end
 
-Given /^there are other users$/ do
+Given /^there are other users with completions$/ do
   @users = []
-  2.times { @users << FactoryGirl.create(:user, :enrolled) }
+  2.times { @users << FactoryGirl.create(:user, :skilled) }
   @user = @users.first
 end
 
@@ -45,8 +45,9 @@ Then /^I see a profile link in the header$/ do
   expect(page).to have_css("header .profile")
 end
 
-Then /^I see all the other users$/ do
+Then /^I see all the other users with completions$/ do
   @users.each do |user|
     expect(page).to have_css(".user-#{user.id}")
+    expect(all(".user-#{user.id}")).to have(1).item
   end
 end
