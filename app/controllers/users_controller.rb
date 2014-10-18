@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :find_user, only: [:show, :update]
 
   def index
-    @users = User.by_activity_date
+    @users = User.with_competions.by_activity_date
   end
 
   def update
