@@ -4,6 +4,10 @@
 
 /* TEAM */
   Site: Joseph Mastey
+  Contributors:
+    Ashton Thomas
+    John McConnell
+    Ryan Cowan
 
 /* THANKS */
   Chuck Lauer Vose (@vosechu) for the Inspiration
