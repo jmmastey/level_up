@@ -1,0 +1,78 @@
+.content.module
+  .page-header
+    %h1 Performance and Scaling
+
+  .row
+    .col-lg-8
+      %p 
+
+      .page-header
+        %h3 Detection
+        = exercise_block_for "scaling", "remote" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "diagnose" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "premature" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "profile" do |e|
+          = e.question ""
+
+      .page-header
+        %h3 Refactoring
+        = exercise_block_for "scaling", "import" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "loop_invariant" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "wrong_work" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "include" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "pluck" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "batches" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "method_cache" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "slow_tests" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "scope" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "all" do |e|
+          = e.question ""
+
+      .page-header
+        %h3 Features
+        = exercise_block_for "scaling", "memoization" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "n_plus_one" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "cache_expiry" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "chunk_caching" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "page_caching" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "pagination" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "serializers" do |e|
+          = e.question ""
+
+      .page-header
+        %h3 Platform
+        = exercise_block_for "scaling", "thread" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "redis" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "sidekiq" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "mongrel" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "cdn" do |e|
+          = e.question ""
+        = exercise_block_for "scaling", "faraday" do |e|
+          = e.question ""
+
+    .col-lg-4.resources{role:'complementary'}
+      .bs-component
+        .panel.panel-basic
+          = render partial: 'modules/scaling_resources'

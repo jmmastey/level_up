@@ -25,6 +25,7 @@ CATEGORIES = [
   ["Professionalism II", "professionalism_2"],
   ["Cnuapp", "cnuapp"],
   ["8 Boxes", "8boxes"],
+  ["Performance and Scaling", "scaling"]
 ]
 
 i = 0
@@ -38,6 +39,7 @@ COURSES = [
   ["Engineering Baseline I", "baseline_1", "Learn to build and test a complete Ruby on Rails application. This isn't a basic intro: you will finish with some serious ruby chops."],
   ["Engineering Baseline II", "baseline_2", "Description"],
   ["Engineering at Enova", "enova", "Learn more about engineering as it happens at Enova."],
+  ["Performance and Scaling", "scaling", "Take a realistic Rails app and learn to scale it in real world circumstances. You'll cover all the basic best practices in performance and scalability for the Rails world."],
 ]
 COURSES.each do |course|
   Course.create! name: course[0], handle: course[1], description: course[2], status: :published
@@ -263,11 +265,43 @@ SKILLS = [
   ["8boxes", "shared", "Knows what shared assets are and how to work with them"],
   ["8boxes", "rulesets", "Understands how rulesets work and how they override each other"],
   ["8boxes", "lifecycle", "Understands the application -> agreement -> loan lifecycle"],
+
+  ["scaling", "remote", "Knows how to run the application in a production-like environment"],
+  ["scaling", "diagnose", "Knows common tools used to diagnose performance issues"],
+  ["scaling", "premature", "Understands how to tell when optimization is premature and choose appropriate optimizations"],
+  ["scaling", "profile", "Uses basic load profiling tools for Rails projects"],
+  ["scaling", "import", "Uses basic optimization techniques to speed up seed generation"],
+  ["scaling", "loop_invariant", "Optimizes inefficient loops by moving invariants outside the loop"],
+  ["scaling", "wrong_work", "Recognizes where and how to move computation into the database."],
+  ["scaling", "include", "Optimizes frequently used array inclusion checks"],
+  ["scaling", "pluck", "Uses ActiveRecord methods to limit data retrieved from the database"],
+  ["scaling", "batches", "Properly batches expensive work"],
+  ["scaling", "method_cache", "Understands the ruby method cache"],
+  ["scaling", "slow_tests", "Refactors unit tests for speed"],
+  ["scaling", "scope", "Knows why default scopes can be nonperformant and can refactor them out"],
+  ["scaling", "all", "Refactors controller list methods to retrieve manageable data amounts"],
+  ["scaling", "memoization", "Uses simple memoize techniques to cache expensive computations"],
+  ["scaling", "n_plus_one", "Uses Rails' built in facilities to solve n+1 SQL loading problems"],
+  ["scaling", "cache_expiry", "Configures Rails models and relationships to be suitable for caching"],
+  ["scaling", "chunk_caching", "Refactors views to perform page chunk caching"],
+  ["scaling", "page_caching", "Refactors views to perform whole page caching"],
+  ["scaling", "pagination", "Uses pagination to increase performance"],
+  ["scaling", "serializers", "Uses Postgres serializers to reduce workload"],
+  ["scaling", "thread", "Identifies and fix basic thread-safety issues and use threads"],
+  ["scaling", "redis", "Knows why we use redis, and can use it to cache expensive calls`"],
+  ["scaling", "sidekiq", "Defers execution of expensive code using Sidekiq"],
+  ["scaling", "mongrel", "Knows the differences between common webservers and can choose an appropriate one"],
+  ["scaling", "cdn", "Configures and deploy to a CDN"],
+  ["scaling", "faraday", "Understands request caching and can implement it via Faraday"],
 ]
+
 SKILLS.each do |skill|
-  cat = Category.find_by_handle! skill[0]
-  Skill.create! category: cat, handle: skill[1], name: skill[2]
-  #puts "skill: #{skill[2]}"
+  begin
+    cat = Category.find_by_handle! skill[0]
+    Skill.create! category: cat, handle: skill[1], name: skill[2]
+  rescue
+    puts "failed to create skill: #{skill[2]}"
+  end
 end
 
 #puts "course categories"
@@ -275,6 +309,7 @@ COURSE_CATS = {
   baseline_1: ['linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering', 'professionalism'],
   baseline_2: ['ruby_2', 'rails_2', 'test_2', 'data_2', 'interaction_2', 'engineering_2'],
   enova: ['business', 'cnuapp', '8boxes'],
+  scaling: ['scaling'],
 }
 COURSE_CATS.each do |course, categories|
   #puts "#{course}: #{categories.join(', ')}"
