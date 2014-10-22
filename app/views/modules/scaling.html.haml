@@ -11,10 +11,17 @@
       .page-header
         %h3 Detection and Your Environment
         %p There is really one main reason why our Rails apps don't get optimized properly: we aren't really the users. While we run our applications locally to develop and test them, we usually aren't the primary users of the app. Even when we do use them, we tend not to be "extreme" users of the app. Let's take a look at some ways that we can start to understand the pain that we're inflicting on our users and get a grip on what needs to be optimized.
+        %p So, the first thing we're going to do is to move into a production-like environment so that we can observe performance characteristics when not running on a production system.
         = exercise_block_for "scaling", "remote" do |e|
-          = e.question "Get off localhost."
+          = e.question "Get off localhost. Deploy the application to some other environment. Heroku, a virtual machine, doesn't matter."
+          = e.question "Seed the \"production\" and development databases and compare performance between the two. How different are they? What contributes to that difference?"
+        %p Now that we can start to feel some of the pain, let's focus on how to diagnose performance problems. While you should start to see some of these issues on your own, as a developer you are still not well equipped as an "average" user. To get an idea of what problems your customers are facing, you should be using regular monitoring tools as part of your workflow
+        %p There are several such tools, but we'll focus on just one for now. <a href='http://newrelic.com'>New Relic</a> is a popular monitoring tool that can keep track of your application performance for you. With their paid plans, you can also do extensive tracing of transactions and pages from your application.
         = exercise_block_for "scaling", "diagnose" do |e|
-          = e.question "Diagnose performance problems (splunk? newrelic? generating realistic load?"
+          = e.question "Sign up for a free NewRelic account. No need to provide payment credentials or anything here."
+          = e.question "Install the NewRelic client in the app. Deploy with the client enabled, or at least run it in development mode."
+          = e.question "If you're not a junior engineer, make sure your license key isn't checked into source control. C'mon, what are you thinking?"
+        %p 
         = exercise_block_for "scaling", "premature" do |e|
           = e.question "Quantifying problems before trying to fix them."
         = exercise_block_for "scaling", "profile" do |e|
