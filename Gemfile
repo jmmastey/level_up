@@ -25,6 +25,7 @@ gem 'activerecord-session_store'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'newrelic_rpm'
+gem 'rack-mini-profiler'
 
 group :development do
   # gem 'better_errors'
