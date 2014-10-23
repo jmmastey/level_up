@@ -46,6 +46,14 @@ group :development do
   gem 'rubocop-rspec'
 end
 
+group :test do
+  gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner', '1.0.1'
+  gem 'email_spec'
+  gem 'launchy'
+end
+
 group :development, :test do
   gem 'rcodetools'
   gem 'factory_girl_rails'
@@ -58,12 +66,4 @@ end
 
 group :production do
   gem 'rails_12factor'
-end
-
-group :test do
-  gem 'capybara'
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner', '1.0.1'
-  gem 'email_spec'
-  gem 'launchy'
 end

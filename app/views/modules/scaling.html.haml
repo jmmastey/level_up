@@ -7,12 +7,17 @@
       %p Performance testing occupies an interesting space in web development. As developers, we tend to do both too much and not enough of this kind of testing. Too much in that we make half-baked assumptions about what parts of our code will be slow, and do silly amounts of work to "optimize" them. And then not enough, because the actual bottlenecks in our programs tend to go forgotten.
       %p In this performance lab, we're going to take a look at a real-ish Rails application. This application is built primarily using the default Rails generators, and has some common warts that you would expect to see on any Rails site. We'll move through a series of optimizations, quantifying each one as we move along. You should get into the habit of testing your assumptions around optimization, or you'll twist your codebase into contortions for no reason. This stuff isn't free -- you could be spending this time developing new features.
       %p Still, if you want to stand a chance of writing a Rails application that sees real usage in the real world, these kind of optimizations will eventually be necessary. Rails has a reputation of being slow, but it's not deserved, as we'll see.
+      %p 
+        For this module, we're good to mess with a test codebase from the exercises repo. If you haven't already, clone that repo and check out the 
+        = exercise_link('art')
+        exercise. Poke around the codebase and see if you can identify any problems with the codebase before we even begin. Make sure that you can spin up the app, and preferably run the seed generation for the app, so that you have a starting number of records to work with.
 
       .page-header
         %h3 Detection and Your Environment
         %p There is really one main reason why our Rails apps don't get optimized properly: we aren't really the users. While we run our applications locally to develop and test them, we usually aren't the primary users of the app. Even when we do use them, we tend not to be "extreme" users of the app. Let's take a look at some ways that we can start to understand the pain that we're inflicting on our users and get a grip on what needs to be optimized.
         %p So, the first thing we're going to do is to move into a production-like environment so that we can observe performance characteristics when not running on a production system.
         = exercise_block_for "scaling", "remote" do |e|
+          = e.question "If you didn't read above, we're working with the #{exercise_link('art')} codebase. Clone it, seed it, run it."
           = e.question "Get off localhost. Deploy the application to some other environment. Heroku, a virtual machine, doesn't matter."
           = e.question "Seed the \"production\" and development databases and compare performance between the two. How different are they? What contributes to that difference?"
         %p Now that we can start to feel some of the pain, let's focus on how to diagnose performance problems. While you should start to see some of these issues on your own, as a developer you are still not well equipped as an "average" user. To get an idea of what problems your customers are facing, you should be using regular monitoring tools as part of your workflow
@@ -21,10 +26,17 @@
           = e.question "Sign up for a free NewRelic account. No need to provide payment credentials or anything here."
           = e.question "Install the NewRelic client in the app. Deploy with the client enabled, or at least run it in development mode."
           = e.question "If you're not a junior engineer, make sure your license key isn't checked into source control. C'mon, what are you thinking?"
-        %p 
+        %p To choose an appropriate problem to tackle, we will often use tools like NewRelic to see where customers are spending their time. Monitoring tools like these can be configured to warn us when performance crosses a preset boundary.
+        %p The common alternative to this approach is honestly just to guess. When developing a feature, we may use it over and over and notice that the performance under a development load is insufficient, and then spend time optimizing it. There are a few problems to this approach. Firstly, our development load is typically not realistic, nor is our usaage of the application. We risk optimizing parts of our application that will never be strained under realistic situations.
+        %p A second problem we face is that our testing does not tend to take into account the frequency with which a real user interacts with certain parts of our app. We may prefer to optimize a view that takes 200ms to render over one that takes 30ms to render, but if the latter is called hundreds of times more often, this optimization will fall far short. This is doubly problematic as our changes might interact with both views to make them consistently 50ms.
         = exercise_block_for "scaling", "premature" do |e|
-          = e.question "Quantifying problems before trying to fix them."
+          = e.question "Without consulting new relic, take another walk around the codebase. Can you identify any problematic areas that might need optimization?"
+          = e.question "Now walk around the app in the browser. Retrieve some pages in HTML, and then in JSON. Imagine yourself as a real user, or as an API client."
+          = e.question "Take a look back at NewRelic, especially under Transactions. Were your suspicions correct? Identify problem areas based on quantitative output."
+        %p Once we've identified potential problems in our application, either by monitoring or by user feedback, we need to decide how to fix the problem. Despite being a test-focused (to the point of being test-obsessed) culture, the Rails prime stack has surprisingly lacking tooling around performance testing. There used to be a <a href='https://github.com/rails/rails-perftest'>type of Test::Unit test for performance</a>, but it was still relatively hard to work with, and provided no assertions around performance. We don't want to pull in all of Test::Unit for a small gain, so we're out of luck.
+        %p So instead, we'll need to use NewRelic again to help us benchmark. To do so, we'll run in development mode and use our existing test suite to benchmark our changes.
         = exercise_block_for "scaling", "profile" do |e|
+          = e.question "Make sure that "
           = e.question "More realistic load profiles."
 
       .page-header
@@ -86,6 +98,14 @@
           = e.question "Serve assets from nginx"
         = exercise_block_for "scaling", "faraday" do |e|
           = e.question "Adding SOA-caching via Faraday"
+
+      .page-header
+        %h3 Some Other Things to Think About
+        %p You've finished and done all the basic optimizations for a Rails app. Fantastic job! You should now have all the tools you need to do the most common types of optimizations for Rails. As you move forward and use these tools, remember that performance is always dependant on a specific situation. There are other techniques not covered in this training that may be necessary for your specific circumstances. Pay attention to your monitoring and make sure you use the right tool for the job. Here are a few examples of situations where other optimizations might be helpful:
+        %ul
+          %li When your app servers are under load, they run out of CPU resources, but have tons of memory remaining. Shift some expensive calculations to be stored in memory until the load scales linearly between your resources. In the reverse situation (CPUs idle, memory constrained), remove some caching and compute some values on the fly.
+          %li You've optimized your database queries, and shifted some values into an intermediate cache like redis, but you still can't get enough performance from your database. You may want to consider partitioning or another scaling methodology for your database. If your databases have significant load from read-only users, consider write-slaves as a possible fix.
+          %li Your servers are not under significant load, but response times slow unreasonably when there are multiple users. Generate moar pumas.
 
     .col-lg-4.resources{role:'complementary'}
       .bs-component
