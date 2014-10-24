@@ -1,5 +1,5 @@
 language: ruby
 rvm:
-  - "2.1.0"
-  - rbx
+  - 2.1.0
+  - rbx-2.2.10
 script: bundle exec rake

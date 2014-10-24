@@ -48,6 +48,7 @@ group :development do
 end
 
 group :test do
+  gem 'rake'
   gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner', '1.0.1'
