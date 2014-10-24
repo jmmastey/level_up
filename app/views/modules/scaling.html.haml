@@ -34,70 +34,83 @@
           = e.question "Now walk around the app in the browser. Retrieve some pages in HTML, and then in JSON. Imagine yourself as a real user, or as an API client."
           = e.question "Take a look back at NewRelic, especially under Transactions. Were your suspicions correct? Identify problem areas based on quantitative output."
         %p Once we've identified potential problems in our application, either by monitoring or by user feedback, we need to decide how to fix the problem. Despite being a test-focused (to the point of being test-obsessed) culture, the Rails prime stack has surprisingly lacking tooling around performance testing. There used to be a <a href='https://github.com/rails/rails-perftest'>type of Test::Unit test for performance</a>, but it was still relatively hard to work with, and provided no assertions around performance. We don't want to pull in all of Test::Unit for a small gain, so we're out of luck.
-        %p So instead, we'll need to use NewRelic again to help us benchmark. To do so, we'll run in development mode and use our existing test suite to benchmark our changes.
+        %p So instead, we'll use three tools to measure performance improvements: the <a href='http://www.ruby-doc.org/stdlib-1.9.3/libdoc/benchmark/rdoc/Benchmark.html'>Benchmark library</a>, <a href='https://github.com/MiniProfiler/rack-mini-profiler'>MiniProfiler</a>, and NewRelic running in developer mode.
         = exercise_block_for "scaling", "profile" do |e|
-          = e.question "Make sure that "
-          = e.question "More realistic load profiles."
+          = e.question "Install the rack-mini-profiler gem in your development and \"production\" environment."
+          = e.question "Pick a problem controller action from the NewRelic interface to focus on."
+          = e.question "View the problem from both the development and production environments. Is the performance trace similar? Can you identify areas that would benefit from optimization?"
+          = e.question "Identify a model or SQL query related performance problem from the application."
+          = e.question "Use Benchmark.measure to run the problematic model code several thousand times. We need to do this to get consistent timing performance."
+          = e.question "Take a look at the benchmark output and identify the relevant metrics to pay attention to." 
 
       .page-header
         %h3 Basic Refactoring
-        %p Before we go writing new code or using obscure features to fix our codebase, let's cover some basic refactoring techniques that we can use to fix some performance issues. Most of these fixes aren't even specific to Rails or Ruby. Remember to write code to quantitatively test whether your optimizations are doing any real good.
-        %a{href: "https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance"}
-        = exercise_block_for "scaling", "import" do |e|
-          = e.question "Scale seed data properly."
-        = exercise_block_for "scaling", "loop_invariant" do |e|
-          = e.question "Array inside a loop, string copies within a loop: COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }"
+        %p Most fixes for performance will either focus on using features in Rails or adding to the platform. That said, there are some basic refactoring techniques that we can use to fix issues. Most of these fixes aren't even specific to Rails or Ruby. Remember to test performance before and after these optimizations.
+        %p First let's take a look at a common pattern for database interaction. In the common case of needing to summarize data from the database, the naive approach is to collect all the objects and perform the summary in Ruby code. While this is conceptually simple, it leads to poor performance as needless data and objects are manipulated. Read <a href='http://www.devarticles.com/c/a/Ruby-on-Rails/Calculating-Statistics-with-Active-Record/'>this article</a> on calculating stats and let's fix the issue.
         = exercise_block_for "scaling", "wrong_work" do |e|
-          = e.question "Move computation into the database"
-        = exercise_block_for "scaling", "include" do |e|
-          = e.question "Use || instead of .include? for small arrays"
+          = e.question "Take a look at the method Performance#average_rating. Run it in a console. How many queries are executed? How much time do they take?"
+          = e.question "Generate a quick benchmark for the method and take note of average time. Remember to run hundreds of times, at least, to average out variations."
+          = e.question "Fix the method so that it does aggregation in the database and compare with the previous timing results." 
+          = e.question "Do the same for Performer#average_rating. Notice how many queries are run from that method when executing in a console. Why is this different?"
+        %p Even when you do need to load objects from the database, you may not need to load all fields from those objects. By default, when you ask for a record or collection of records from ActiveRecord, it will include all fields for that record. We can use the ActiveRecord <a href='http://guides.rubyonrails.org/active_record_querying.html#pluck'>pluck method</a> to return a much smaller set of data instead.
         = exercise_block_for "scaling", "pluck" do |e|
-          = e.question "Use .pluck and other useful library calls (delete_all versus destroy_all)"
+          = e.question "Take a look at the homepage of the application. Only one query is executed, but it is an expensive one. What problem does this cause?"
+          = e.question "Refactor the controller method to use the pluck method instead. You will have to modify the view to accommodate an array rather than an object."
+          = e.question "How does this impact performance of the page? What are some downsides of this approach?"
+          = e.question "Try using the .select method instead. How does this compare to the pluck approach?"
+          = e.question "On the ActiveRecord Querying resource listed above, take a look at other querying methods available. Where could you use them to increase performance?"
+        = exercise_block_for "scaling", "slow_tests" do |e|
+          = e.question "@TODO: Slow unit tests, refactor to remove tons of extra data"
+        = exercise_block_for "scaling", "scope" do |e|
+          = e.question "@TODO: Remove unnecessary default scope that sorts on an expensive key"
+        = exercise_block_for "scaling", "all" do |e|
+          = e.question "@TODO: Switch from User.all"
+        = exercise_block_for "scaling", "memoization" do |e|
+          = e.question "@TODO: Simple memoize"
         = exercise_block_for "scaling", "batches" do |e|
-          = e.question "Move to batch processing, configure batch size"
+          = e.question "@TODO: Move to batch processing, configure batch size"
+        = exercise_block_for "scaling", "include" do |e|
+          = e.question "@TODO: Use || instead of .include? for small arrays"
+        = exercise_block_for "scaling", "loop_invariant" do |e|
+          = e.question "@TODO: Array inside a loop, string copies within a loop: COUNTRY_CODE_MAP.detect? { |k,v| [k.downcase, v.downcase].include? string.downcase }"
         %p
           %a{href: "https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md"}
         = exercise_block_for "scaling", "method_cache" do |e|
-          = e.question "Remove method cache clear by way of OpenStruct creation"
-        = exercise_block_for "scaling", "slow_tests" do |e|
-          = e.question "Slow unit tests, refactor to remove tons of extra data"
-        = exercise_block_for "scaling", "scope" do |e|
-          = e.question "Remove unnecessary default scope that sorts on an expensive key"
-        = exercise_block_for "scaling", "all" do |e|
-          = e.question "Switch from User.all"
-        = exercise_block_for "scaling", "memoization" do |e|
-          = e.question "Simple memoize"
+          = e.question "@TODO: Remove method cache clear by way of OpenStruct creation"
 
       .page-header
         %h3 Rails Features
         %p Now that we've plucked some of the low hanging fruit, let's talk about Rails features that we can use to help us optimize our code. Rails has had a reputation for being slow for years now, and while you may need to consider alternatives if you reach Twitter-scale, almost any site can get reasonable performance out of Rails with a little forethought. Let's take a look at the toolbox you get for using Rails.
+        %a{href: "https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance"}
+        = exercise_block_for "scaling", "import" do |e|
+          = e.question "@TODO: Scale seed data properly."
         = exercise_block_for "scaling", "n_plus_one" do |e|
-          = e.question "Solve an n+1 SQL loading problem"
+          = e.question "@TODO: Solve an n+1 SQL loading problem"
         = exercise_block_for "scaling", "cache_expiry" do |e|
-          = e.question "Cache expiration keys and touch:true"
+          = e.question "@TODO: Cache expiration keys and touch:true"
         = exercise_block_for "scaling", "chunk_caching" do |e|
-          = e.question "Add page chunk caching"
+          = e.question "@TODO: Add page chunk caching"
         = exercise_block_for "scaling", "page_caching" do |e|
-          = e.question "Add whole-page caching (move a dynamic block to JSON)"
+          = e.question "@TODO: Add whole-page caching (move a dynamic block to JSON)"
         = exercise_block_for "scaling", "pagination" do |e|
-          = e.question "Pagination?"
+          = e.question "@TODO: Pagination?"
         = exercise_block_for "scaling", "serializers" do |e|
-          = e.question "Move to http://github.com/dockyard/postgres_ext-serializers"
+          = e.question "@TODO: Move to http://github.com/dockyard/postgres_ext-serializers"
 
       .page-header
         %h3 Platform
         = exercise_block_for "scaling", "thread" do |e|
-          = e.question "Fix a non-threadsafe issue and move to Rubinius?"
+          = e.question "@TODO: Fix a non-threadsafe issue and move to Rubinius?"
         = exercise_block_for "scaling", "redis" do |e|
-          = e.question "Add redis, memoize some methods into redis"
+          = e.question "@TODO: Add redis, memoize some methods into redis"
         = exercise_block_for "scaling", "sidekiq" do |e|
-          = e.question "Defer execution using Sidekiq"
+          = e.question "@TODO: Defer execution using Sidekiq"
         = exercise_block_for "scaling", "mongrel" do |e|
-          = e.question "Switch to a pack of Mongrels?"
+          = e.question "@TODO: Switch to a pack of Mongrels?"
         = exercise_block_for "scaling", "cdn" do |e|
-          = e.question "Serve assets from nginx"
+          = e.question "@TODO: Serve assets from nginx"
         = exercise_block_for "scaling", "faraday" do |e|
-          = e.question "Adding SOA-caching via Faraday"
+          = e.question "@TODO: Adding SOA-caching via Faraday"
 
       .page-header
         %h3 Some Other Things to Think About
