@@ -8,7 +8,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
-gem 'jbuilder', '~> 1.2'
 gem 'bootstrap-sass'
 gem 'cancan'
 gem 'devise'
@@ -28,13 +27,9 @@ gem 'newrelic_rpm'
 gem 'rack-mini-profiler'
 
 group :development do
-  gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
   gem 'dotenv'
   gem 'foreman'
-  gem 'html2haml'
-  gem 'hub', require: false
   gem 'quiet_assets'
-  gem 'rails_layout'
   gem 'rubocop'
   gem 'rubocop-rspec'
 end
@@ -45,14 +40,11 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
-  gem 'launchy'
 end
 
 group :development, :test do
-  gem 'rcodetools'
   gem 'factory_girl_rails'
   gem 'pry-rails'
-  gem 'pry-rescue'
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
   gem 'poltergeist'

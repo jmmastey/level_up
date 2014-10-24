@@ -4,5 +4,5 @@ rvm:
 bundler_args: --without production
 cache: bundler
 before_script:
-    - psql -c 'create user learnenova_test with superuser;' -U postgres
+    - psql -c 'create user levelup with superuser;' -U postgres
     - rake db:{create,migrate,seed}
