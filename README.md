@@ -14,16 +14,10 @@ may not be stored in source control for competitive purposes.
 ### .env
 Copy the /.env.example into a new /.env file (which is in .gitignore) and fill in with your settings.
 
-
-### Database
-
-Copy /config/database.yml.example into a new database.yml (which is in .gitignore) and fill in with your settings. You may need to create a new role in psql and then run the final steps to set up the database.
-
 ### Final steps
 
 - bundle install
-- bundle exec rake db:create
-- bundle exec rake db:setup
+- bundle exec rake db:{create,setup,seed}
 - foreman start
 
 Contributing
