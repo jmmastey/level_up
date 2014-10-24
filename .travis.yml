@@ -2,4 +2,7 @@ language: ruby
 rvm:
   - 2.1.0
   - rbx-2.2.10
-script: bundle exec rake
+bundler_args: --without production
+before_script:
+    - psql -c 'create user learnenova_test with superuser;' -U postgres
+    - rake db:{create,migrate,seed}
