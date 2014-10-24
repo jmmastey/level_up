@@ -59,10 +59,20 @@
           = e.question "How does this impact performance of the page? What are some downsides of this approach?"
           = e.question "Try using the .select method instead. How does this compare to the pluck approach?"
           = e.question "On the ActiveRecord Querying resource listed above, take a look at other querying methods available. Where could you use them to increase performance?"
+        %p When testing, we may run into a related performance issue. We tend to create many objects because it's so easy to do with FactoryGirl. Each of those objects has to run through a complete object save, access the database, and then later be loaded back into the application during the test.
+        %p Instead, we should create only the minimum number of objects necessary to complete a test. When applicable, it is sometimes even possible to build an object without saving it. Let's see if we can reduce the object creation count in our tests.
         = exercise_block_for "scaling", "slow_tests" do |e|
-          = e.question "@TODO: Slow unit tests, refactor to remove tons of extra data"
+          = e.question "Thankfully, tests come with built in timing. Time the performance_spec.rb test as it is currently written."
+          = e.question "Refactor the test to create WAY fewer objects. Are there any risks to this approach?"
+          = e.question "Do the same for the performer_spec.rb test."
+          = e.question "Are there any other tests that can be eliminated entirely to reduce the footprint of the test?"
+          = e.question "Is it really a big deal to remove such a relatively small number of objects from one test?"
+        %p Rails scoping is a fantastic feature to improve encapsulation and code readability. One of the features we get as part of scoping is the "default scope". This scope applies to all queries, and can be useful for cases where only a subset of a table will ever be retrieved.
+        %p That said, a common error that developers make is to perform sorting or other expensive computations within the default scope. These computations are propagated through the rest of the app, even when they aren't necessary. See <a href='http://rails-bestpractices.com/posts/806-default_scope-is-evil'>This article</a> for more details. Let's fix this issue.
         = exercise_block_for "scaling", "scope" do |e|
-          = e.question "@TODO: Remove unnecessary default scope that sorts on an expensive key"
+          = e.question "Take a look at the Show model, which has a sorted default scope. Create a benchmark that shows the time difference between executing Show.all with and without this scope."
+          = e.question "We added that scope for the shows#all action, but it is unnecessary for other parts of the application. Name some places where this scope might be accidentally included and affect the application."
+          = e.question "Move the default_scope into another named scope and update the shows#all action accordingly."
         = exercise_block_for "scaling", "all" do |e|
           = e.question "@TODO: Switch from User.all"
         = exercise_block_for "scaling", "memoization" do |e|
