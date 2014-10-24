@@ -27,6 +27,9 @@ gem 'will_paginate-bootstrap'
 gem 'newrelic_rpm'
 gem 'rack-mini-profiler'
 
+# I do not understand this issue.
+gem 'ffi', '1.9.4', git: 'git@github.com:ffi/ffi.git', tag: '1.9.4'
+
 group :development do
   # gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
