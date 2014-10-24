@@ -285,7 +285,7 @@ SKILLS = [
   ["scaling", "n_plus_one", "Uses Rails' built in facilities to solve n+1 SQL loading problems"],
   ["scaling", "cache_expiry", "Configures Rails models and relationships to be suitable for caching"],
   ["scaling", "chunk_caching", "Refactors views to perform page chunk caching"],
-  ["scaling", "page_caching", "Refactors views to perform whole page caching"],
+  ["scaling", "russian_doll", "Uses Russian Doll caching to achieve several layers of caching performance"],
   ["scaling", "pagination", "Uses pagination to increase performance"],
   ["scaling", "serializers", "Uses Postgres serializers to reduce workload"],
   ["scaling", "thread", "Identifies and fix basic thread-safety issues and use threads"],

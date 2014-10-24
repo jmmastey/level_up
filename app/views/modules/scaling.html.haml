@@ -110,13 +110,26 @@
         %p Here's another big one; you're about to get a bunch of credit all at once. Did you know that Rails already has <a href='http://guides.rubyonrails.org/caching_with_rails.html'>a well implemented caching system</a> built into its rendering system? Oh, you did? Fine, follow along anyway. We're going to do a few exercises in a row that should make even expensive page loads faster.
         %p First, we'll make our models suitable for caching. It's been said that one of the two hardest problems in computer science is cache invalidation (along with naming and off-by-one errors). Since we're using ActiveRecord, we actually have <a href='https://signalvnoise.com/posts/3113-how-key-based-cache-expiration-works'>a fairly robust way to handle this problem</a>, but it'll require some foresight on our part.
         = exercise_block_for "scaling", "cache_expiry" do |e|
-          = e.question "@TODO: Cache expiration keys and touch:true"
+          = e.question "Take a look at the homepage of the site (home#trending). This page meets our business needs, but it takes a ton of resources to do so. We'll need to optimize it heavily to get any performance at all."
+          = e.question "Update the relevant models using the \"touch\" directive so that new reviews cause the relevant show to get a new updated_at date."
+          = e.question "What are the implications of making this change on a site that potentially generates many reviews?"
+          = e.question "While you're at it, use this change to simplify the Show#trending method. It should no longer require a manual SQL query."
+        %p You've now created the conditions necessary to start caching. We'll start by caching specific fragments of a page.
         = exercise_block_for "scaling", "chunk_caching" do |e|
-          = e.question "@TODO: Add page chunk caching"
-        = exercise_block_for "scaling", "page_caching" do |e|
-          = e.question "@TODO: Add whole-page caching (move a dynamic block to JSON)"
+          = e.question "Make sure your fragment cache is configured to use memcache, as deployment platforms like Heroku don't allow you to use the filesystem."
+          = e.question "Profile the homepage and notice the number of queries and execution time for the page."
+          = e.question "Update the homepage so that trending shows are successfully cached. Make sure that new reviews or changes to the show cause the cache to be invalidated."
+          = e.question "Is the page more performant yet? What happens when the view partial changes?"
+        %p We're now caching individual show renders, but we can do even better. For a highly trafficked site, we should consider caching content for a set period of time. If we can cache a page without running any queries -- even for a few minutes -- we should see significant returns on our response time. This is another change that affects the behavior of the site in a way that isn't transparent, but is necessary for higher-traffic situations.
+        = exercise_block_for "scaling", "russian_doll" do |e|
+          = e.question "We're going to use the same caching mechanism in a different way to provide another layer of caching. Profile the homepage again."
+          = e.question "Add another cache directive around the entire trending shows view. Rather than using AR models for the cache key, make the cache expire every five minutes."
+          = e.question "Check performance again. Make sure that the trending shows are only loaded one time when the cache misses."
+        %p We talked previously about displaying only recent reviews as a way to load less data. We'd like to do something like this for our "list" actions, but users want access to all records, not just the first few. We can still limit the number of records we return by paginating results. There is an easy-to-add <a href='https://github.com/mislav/will_paginate'>pagination gem</a> available to do this for us.
         = exercise_block_for "scaling", "pagination" do |e|
-          = e.question "@TODO: Pagination?"
+          = e.question "Visit the users#index page and profile the page. How many queries are executed?"
+          = e.question "Add the will_paginate gem to your project. Configure the users#index page to return a limited set of results. How does this affect the profile?"
+          = e.question "If you're feeling courageous, find a way to add that pagination to the users#index json renderer."
         = exercise_block_for "scaling", "serializers" do |e|
           = e.question "@TODO: Move to http://github.com/dockyard/postgres_ext-serializers"
 
