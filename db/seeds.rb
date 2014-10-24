@@ -280,7 +280,7 @@ SKILLS = [
   ["scaling", "method_cache", "Understands the ruby method cache"],
   ["scaling", "slow_tests", "Refactors unit tests for speed"],
   ["scaling", "scope", "Knows why default scopes can be nonperformant and can refactor them out"],
-  ["scaling", "all", "Refactors controller list methods to retrieve manageable data amounts"],
+  ["scaling", "all", "Refactors controller methods to retrieve manageable data amounts"],
   ["scaling", "memoization", "Uses simple memoize techniques to cache expensive computations"],
   ["scaling", "n_plus_one", "Uses Rails' built in facilities to solve n+1 SQL loading problems"],
   ["scaling", "cache_expiry", "Configures Rails models and relationships to be suitable for caching"],
