@@ -1,7 +1,8 @@
 ## Seed the basic courses, plus some enrollment and such.
 
 #puts 'ROLES'
-YAML.load(ENV['ROLES']).each do |role|
+roles = ENV['ROLES'] || ['admin']
+YAML.load(roles).each do |role|
   Role.find_or_create_by(name: role)
   #puts 'role: ' << role
 end

@@ -6,3 +6,5 @@ cache: bundler
 before_script:
     - psql -c 'create user levelup with superuser;' -U postgres
     - rake db:{create,migrate,seed}
+env:
+  - SECRET_KEY=f2fbcc06ac38f6f3a6383045f25856d
