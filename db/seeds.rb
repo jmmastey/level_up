@@ -289,7 +289,7 @@ SKILLS = [
   ["scaling", "pagination", "Uses pagination to increase performance"],
   ["scaling", "serializers", "Uses Postgres serializers to reduce workload"],
   ["scaling", "thread", "Identifies and fix basic thread-safety issues and use threads"],
-  ["scaling", "redis", "Knows why we use redis, and can use it to cache expensive calls`"],
+  ["scaling", "redis", "Knows why we use redis, and can use it to cache expensive calls"],
   ["scaling", "sidekiq", "Defers execution of expensive code using Sidekiq"],
   ["scaling", "mongrel", "Knows the differences between common webservers and can choose an appropriate one"],
   ["scaling", "cdn", "Configures and deploy to a CDN"],

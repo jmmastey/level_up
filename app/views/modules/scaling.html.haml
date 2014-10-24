@@ -125,7 +125,7 @@
           = e.question "We're going to use the same caching mechanism in a different way to provide another layer of caching. Profile the homepage again."
           = e.question "Add another cache directive around the entire trending shows view. Rather than using AR models for the cache key, make the cache expire every five minutes."
           = e.question "Check performance again. Make sure that the trending shows are only loaded one time when the cache misses."
-        %p We talked previously about displaying only recent reviews as a way to load less data. We'd like to do something like this for our "list" actions, but users want access to all records, not just the first few. We can still limit the number of records we return by paginating results. There is an easy-to-add <a href='https://github.com/mislav/will_paginate'>pagination gem</a> available to do this for us.
+        %p We talked previously about displaying only recent reviews as a way to load less data. We'd like to do something like this for our "list" actions, but users want access to all records, not just the first few. We can still limit the number of records we return by paginating results. There is an easy-to-add <a href='https://github.com/mislav/will_paginate'>pagination gem</a> available to do this for us, making this one of the largest trivial optimizations we can perform.
         = exercise_block_for "scaling", "pagination" do |e|
           = e.question "Visit the users#index page and profile the page. How many queries are executed?"
           = e.question "Add the will_paginate gem to your project. Configure the users#index page to return a limited set of results. How does this affect the profile?"
@@ -135,16 +135,22 @@
 
       .page-header
         %h3 Platform
+        %p Now that we've wrested performance out of the application through refactors, let's add some power to the application platform. This is our final set of refactors, and should lower our resource consumption significantly. By doing so, we'll be able to reduce the number of servers necessary to serve requests.
+        %p Let's start with something simple. The default Rails webserver -- Webrick -- is pathetically slow and single threaded. It's trivial to upgrade so let's do that now.
+        = exercise_block_for "scaling", "mongrel" do |e|
+          = e.question "Add the mongrel gem to your gemfile. Restart the server with mongrel."
+          = e.question "It will be hard to test the performance difference when clicking around the app. See if you can generate enough load on your \"production\" server to see the difference in NewRelic."
+        %p Assets don't change, so they don't need to be served by Rails at all. Rather than dealing with the entire Rails stack for every asset request, let's configure another proxy to serve those assets instead. When running our own server, we typically use nginx to serve static assets. As of writing, Heroku has a <a href='https://addons.heroku.com/cloudinary'>free CDN option</a> that we can use to test.
+        = exercise_block_for "scaling", "cdn" do |e|
+          = e.question "Monitor the Rails logs for your production site and observe that static assets take up resources."
+          = e.question "Set up the Cloudinary CDN to serve assets instead. You'll probably need to generate assets after every release. Observe that you are no longer using Rails threads to serve assets."
+          = e.question "Set up nginx on your local machine to serve static assets and observe the same."
         = exercise_block_for "scaling", "thread" do |e|
           = e.question "@TODO: Fix a non-threadsafe issue and move to Rubinius?"
         = exercise_block_for "scaling", "redis" do |e|
           = e.question "@TODO: Add redis, memoize some methods into redis"
         = exercise_block_for "scaling", "sidekiq" do |e|
           = e.question "@TODO: Defer execution using Sidekiq"
-        = exercise_block_for "scaling", "mongrel" do |e|
-          = e.question "@TODO: Switch to a pack of Mongrels?"
-        = exercise_block_for "scaling", "cdn" do |e|
-          = e.question "@TODO: Serve assets from nginx"
         = exercise_block_for "scaling", "faraday" do |e|
           = e.question "@TODO: Adding SOA-caching via Faraday"
 
