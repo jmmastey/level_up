@@ -54,7 +54,7 @@
           = e.question "Do the same for Performer#average_rating. Notice how many queries are run from that method when executing in a console. Why is this different?"
         %p Even when you do need to load objects from the database, you may not need to load all fields from those objects. By default, when you ask for a record or collection of records from ActiveRecord, it will include all fields for that record. We can use the ActiveRecord <a href='http://guides.rubyonrails.org/active_record_querying.html#pluck'>pluck method</a> to return a much smaller set of data instead.
         = exercise_block_for "scaling", "pluck" do |e|
-          = e.question "Take a look at the homepage of the application. Only one query is executed, but it is an expensive one. What problem does this cause?"
+          = e.question "Take a look at the shows#index of the application. Only one query is executed, but it is an expensive one. What problem does this cause?"
           = e.question "Refactor the controller method to use the pluck method instead. You will have to modify the view to accommodate an array rather than an object."
           = e.question "How does this impact performance of the page? What are some downsides of this approach?"
           = e.question "Try using the .select method instead. How does this compare to the pluck approach?"
@@ -97,11 +97,18 @@
       .page-header
         %h3 Rails Features
         %p Now that we've plucked some of the low hanging fruit, let's talk about Rails features that we can use to help us optimize our code. Rails has had a reputation for being slow for years now, and while you may need to consider alternatives if you reach Twitter-scale, almost any site can get reasonable performance out of Rails with a little forethought. Let's take a look at the toolbox you get for using Rails.
-        %a{href: "https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance"}
-        = exercise_block_for "scaling", "import" do |e|
-          = e.question "@TODO: Scale seed data properly."
+        %p We'll start with the biggun. If you research performance optimization in Rails (I did), there is one problem that gets covered over and over again online. This is because it causes significant slowdowns of your code, and also because it's really easy to fix in the space of a blog post. It's called the N+1 Problem, and you can read more about it <a href='https://www.codemy.net/posts/optimizing-your-rails-app-part-1-n-1-queries'>here</a>. Take a gander and get ready for some easy wins.
         = exercise_block_for "scaling", "n_plus_one" do |e|
-          = e.question "@TODO: Solve an n+1 SQL loading problem"
+          = e.question "Load the reviews#index.json action and check out either the profiler or even just the rails server log. It should be immediately obvious how bad this action is."
+          = e.question "Use the technique you learned from the article to fix this situation. Compare performance."
+          = e.question "This is a change you could make at several different levels: the controller, the model relationship, a new scope. Which one should you choose? Why?"
+        %p When we first started working with this codebase, I asked you to seed the database so that we could start working with a larger dataset. Really, this was a silly lie on my part. The dataset we're generating is almost embarassingly small. Let's fix that. Read <a href='https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance'>this article</a> for some ways to fix the performance of our imports.
+        = exercise_block_for "scaling", "import" do |e|
+          = e.question "Time the seed script, either with a benchmark or the unix time command."
+          = e.question "Fix the seeds script to use the techniques from the article. You may have to get creative about your data generation."
+          = e.question "See if you can push up the number of records by an order of magnitude or two while maintaining performance."
+        %p Here's another big one; you're about to get a bunch of credit all at once. Did you know that Rails already has <a href='http://guides.rubyonrails.org/caching_with_rails.html'>a well implemented caching system</a> built into its rendering system? Oh, you did? Fine, follow along anyway. We're going to do a few exercises in a row that should make even expensive page loads faster.
+        %p First, we'll make our models suitable for caching. It's been said that one of the two hardest problems in computer science is cache invalidation (along with naming and off-by-one errors). Since we're using ActiveRecord, we actually have <a href='https://signalvnoise.com/posts/3113-how-key-based-cache-expiration-works'>a fairly robust way to handle this problem</a>, but it'll require some foresight on our part.
         = exercise_block_for "scaling", "cache_expiry" do |e|
           = e.question "@TODO: Cache expiration keys and touch:true"
         = exercise_block_for "scaling", "chunk_caching" do |e|
