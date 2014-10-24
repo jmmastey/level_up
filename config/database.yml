@@ -1,0 +1,22 @@
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: levelup_development
+  pool:     5
+  username: levelup
+  password:
+  template: template0
+
+test: &test
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: levelup_test
+  pool:     5
+  username: levelup
+  password:
+  template: template0
+
+cucumber:
+  <<: *test
