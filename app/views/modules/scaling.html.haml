@@ -73,8 +73,13 @@
           = e.question "Take a look at the Show model, which has a sorted default scope. Create a benchmark that shows the time difference between executing Show.all with and without this scope."
           = e.question "We added that scope for the shows#all action, but it is unnecessary for other parts of the application. Name some places where this scope might be accidentally included and affect the application."
           = e.question "Move the default_scope into another named scope and update the shows#all action accordingly."
+          = e.question "What else might alleviate the concern with having a sorting scope?"
+        %p The default Rails generators (and perhaps you) are somewhat lazy about what data they choose to render. Their default behavior is to render all records and associations for a given object. This might be fine -- and probably has no problems when you test it locally with a few records -- but will cause problems for outlier users who can have hundreds or thousands or records associated with their account.
+        %p This refactor will not be transparent to the application. We're going to make a business decision on how much data we should display to the user. Still, judicious inclusion of data on a page is not only performant, it's also more usable.
         = exercise_block_for "scaling", "all" do |e|
-          = e.question "@TODO: Switch from User.all"
+          = e.question "Generate a user with several hundred reviews. View the user's \"show\" page. Profile the performance of the page. How many partials does it render?"
+          = e.question "Create a new scope on Review that displays only reviews in the last few days. Reference that scope instead in the user view. Change the title to \"Most Recent Reviews\" How does performance compare?"
+          = e.question "We've now added a potentially expensive sort operation to the mix. Is there anything we can to do mitigate the cost of sorting the data when the database may be extremely large?"
         = exercise_block_for "scaling", "memoization" do |e|
           = e.question "@TODO: Simple memoize"
         = exercise_block_for "scaling", "batches" do |e|
