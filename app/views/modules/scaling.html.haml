@@ -80,6 +80,7 @@
           = e.question "Generate a user with several hundred reviews. View the user's \"show\" page. Profile the performance of the page. How many partials does it render?"
           = e.question "Create a new scope on Review that displays only reviews in the last few days. Reference that scope instead in the user view. Change the title to \"Most Recent Reviews\" How does performance compare?"
           = e.question "We've now added a potentially expensive sort operation to the mix. Is there anything we can to do mitigate the cost of sorting the data when the database may be extremely large?"
+          = e.question "Are there other places where we can apply this technique? Model.all is usually a red flag here."
         = exercise_block_for "scaling", "memoization" do |e|
           = e.question "@TODO: Simple memoize"
         = exercise_block_for "scaling", "batches" do |e|
