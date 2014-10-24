@@ -40,8 +40,4 @@ describe Summaries do
     end
   end
 
-  describe "#for_category" do
-    xit "tracks completion across categories"
-  end
-
 end
