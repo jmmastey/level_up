@@ -38,10 +38,10 @@ class User < ActiveRecord::Base
   end
 
   def self.existing_user_from_omniauth(auth)
-    user = where(email: auth.info.email)
-    return unless user.exists?
+    user = find_by(email: auth.info.email)
+    return unless user
 
-    user.first.tap do |new_user|
+    user.tap do |new_user|
       new_user.provider = auth.provider
       new_user.uid = auth.uid
       new_user.save!
