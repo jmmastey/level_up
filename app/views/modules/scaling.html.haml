@@ -161,6 +161,7 @@
           %li When your app servers are under load, they run out of CPU resources, but have tons of memory remaining. Shift some expensive calculations to be stored in memory until the load scales linearly between your resources. In the reverse situation (CPUs idle, memory constrained), remove some caching and compute some values on the fly.
           %li You've optimized your database queries, and shifted some values into an intermediate cache like redis, but you still can't get enough performance from your database. You may want to consider partitioning or another scaling methodology for your database. If your databases have significant load from read-only users, consider write-slaves as a possible fix.
           %li Your servers are not under significant load, but response times slow unreasonably when there are multiple users. Generate moar pumas.
+        %p TODO: big finish
 
     .col-lg-4.resources{role:'complementary'}
       .bs-component
