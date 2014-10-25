@@ -13,10 +13,6 @@ Style/CollectionMethods:
   PreferredMethods:
     reduce: 'inject'
 
-# C: Use each_with_object instead of inject.
-Style/EachWithObject:
-  Enabled: false
-
 # don't enforce single- or double-quotes
 Style/StringLiterals:
   Enabled: false

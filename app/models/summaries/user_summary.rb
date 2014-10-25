@@ -10,11 +10,9 @@ module Summaries
     private
 
     def filter_by_enrollment(summary_data)
-      summary_data.inject({}) do |hash, category|
-        next hash unless user_categories.include? category['handle']
-
+      summary_data.each_with_object({}) do |category, hash|
+        next unless user_categories.include? category['handle']
         hash[category['handle']] = typecast_results_for(category)
-        hash
       end
     end
 
