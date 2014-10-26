@@ -6,4 +6,9 @@ class AdminMailer < ActionMailer::Base
     @course = course
     mail(subject: "User enrollment for #{course.handle}")
   end
+
+  def send_feedback(user, page, message)
+    @user, @page, @message = user, page, message
+    mail(from: user.email, subject: "Feedback from #{user.name}")
+  end
 end

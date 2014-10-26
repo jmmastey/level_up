@@ -11,6 +11,19 @@ class HomeController < ApplicationController
     render "modules/#{@module.handle}"
   end
 
+  # POST /send_feedback
+  def send_feedback
+    interactor = SendFeedback.call(user: current_user, page: request.referrer,
+                                   message: params['referrer'])
+
+    if interactor.failure?
+      render json: { success: false, error: interactor.message },
+             status: :unprocessable_entity
+    else
+      render json: { success: true, complete: false }
+    end
+  end
+
   private
 
   def find_module

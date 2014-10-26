@@ -1,0 +1,13 @@
+<a href="#feedback" role="button" class="btn" data-toggle="modal">Give Feedback</a>
+
+#feedback.modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal"} ×
+        %h4.modal-title Send Feedback
+      .modal-body
+        Body!
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal"} Close
+        %button.btn.btn-primary Send Feedback
