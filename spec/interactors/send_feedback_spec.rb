@@ -15,7 +15,6 @@ describe SendFeedback do
       expect(AdminMailer).to receive(:send_feedback).once
         .with(user, page, message).and_return(mail)
 
-      expect(interactor.message).to be_nil
       expect(interactor).to be_success
     end
   end
