@@ -99,10 +99,6 @@
           = e.question "Using any of your benchmarking and profiling tools, take a look at the reviews#index.json action. Notice that the application shows us a sentiment for each review. This is done using the average rating for a show."
           = e.question "Create a benchmark for retrieving all review sentiments for a performance with many reviews. Observe that we retrieve the average rating from the database every single time."
           = e.question "Memoize the result of Review.recent_ratings, making sure to scope the memoized result to the proper performance ID. How does this affect our performance?"
-        %p
-          %a{href: "https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md"}
-        = exercise_block_for "scaling", "method_cache" do |e|
-          = e.question "@TODO: Remove method cache clear by way of OpenStruct creation"
         %p We should always start by writing our models in a well-normalized way, and Rails makes this pretty simple. Writing normalized models will help us create a well-designed data model that reflects the domain of our application accurately. In some cases, though, sticking entirely to that model is insufficient for performance reasons. Later we'll look at caching strategies that can help us with this performance, but there is another simpler option that can sometimes be simpler and easier to implement. By <a href='http://highscalability.com/scaling-secret-2-denormalizing-your-way-speed-and-profit'>denormalizing</a> our data, we can get pretty fantastic speeds without dealing with cache complications.
         = exercise_block_for "scaling", "denormalize" do |e|
           = e.question "Run the shows#view.json action. Notice how we get a count of the show's reviews? This probably has acceptable performance. Look at shows#index.json instead. Now that we're running the method over and over performance isn't so good anymore."
@@ -110,6 +106,12 @@
           = e.question "Create a new num_review attribute on the Show model to keep track of the number of reviews. Update that attribute whenever a new review is created or destroyed. How does our benchmark fare?"
           = e.question "Note that we haven't actually reduced total work, we've increased it. Where did the work go?"
           = e.question "Are there other complications we've created in our data model? Are they worth it? Can we mitigate them?"
+        %p As a final refactor, let's take a critical eye to some of Ruby's dynamism. The ability to define new methods is a huge strength that we leverage often in Ruby. Unfortunately, this strength comes ith some caveats. Looking up methods is an expensive operation, so Ruby caches the result of those lookups at the language level. When we define a new method, it expires that entire cache, slowing down all our performance.
+        %p No problem, don't define any new methods, right? Well, as it turns out, the libraries you use (core and otherwise) may do it for you, in which case you're pretty much hosed. As an example, the <a href='http://www.ruby-doc.org/stdlib-2.1.3/libdoc/ostruct/rdoc/OpenStruct.html'>OpenStruct core library</a> defines new methods as its primary method of operation. Take a look at <a href="https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md">this article</a> for more examples that clear the cache. Let's fix this.
+        = exercise_block_for "scaling", "method_cache" do |e|
+          = e.question "Our app can export an ical formatted list of upcoming performances (look at performance#calendar). It does so by creating OpenStruct instances for each performance, which is needlessly costly. Benchmark the calendar rendering. It need not be via the controller action."
+          = e.question "Switch the page to use a hash. Or even make a change so that all the OpenStructs are created at once. How does this affect our benchmark?"
+          = e.question "See if you can find any other places where you can remove method cache clearing."
 
       .page-header
         %h3 Rails Features
@@ -176,8 +178,13 @@
           = e.question "Reduce that overhead by deferring the calculation of the num_reviews attribute to happen asynchronously."
           = e.question "This will mean that our attribute is not immediately \"in sync\" with the normalized data. Is that okay in this instance? Are there other instances where it would not be acceptable?"
           = e.question "If you're up for it, do the same for the recommendations provided by the UserRecommender."
-        = exercise_block_for "scaling", "faraday" do |e|
-          = e.question "@TODO: Adding SOA-caching via Faraday"
+        %p We've performed only optimizations on the server side so far. This is partly because modern Rails already does a solid job of caching for the user. The default Rails installation will outut Etags and cache headers that will be respected by all modern browsers (and even <a href='https://github.com/plataformatec/faraday-http-cache'>some client library software</a>). Let's see if we can leverage this for some extra performance.
+        %p We're going to throw an extra cache layer in front of our Rails app. We'll be using <a href='http://www.slatestudio.com/blog/p/caching-in-rails-4-applications#2-http-caching-with-varnish'>Varnish</a>, a popular HTTP cache, and asking it to perform additional caching for us. By doing this, our cache will work across customers and save additional headache. First, we need to modify our code a bit for Rails' <a href='http://guides.rubyonrails.org/caching_with_rails.html#conditional-get-support'>conditional get support</a>.
+        = exercise_block_for "scaling", "http_cache" do |e|
+          = e.question "Take a look at the performers#index page, both as HTML and JSON. Using your browser, verify that Rails is sending Etags based on the rendered page. If you request the page a second time, your browser should receive a 304 Not Modified response. This does require the entire page to be rendered both times, unfortunately."
+          = e.question "Use the fresh_when call to conditionally return a Not Modified code to the browser. You may need the group_cache_key gem to make this work. Verify in the logs that you are not rendering the view on a cache hit."
+          = e.question "Add Varnish to your now-impressive Procfile, and configure it as a proxy for your application. Use your test and the Rails logs to verify that Varnish now serves repeat requests."
+          = e.question "As the article above mentions, Varnish will by default only work with requests that do not forward session cookies. What can we do with to make sure that we still get good performance out of our cache? You may want to try Rack Cache as an alternative that respects user sessions better."
         = exercise_block_for "scaling", "thread" do |e|
           = e.question "@TODO: Fix a non-threadsafe issue and move to Rubinius?"
 

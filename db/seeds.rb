@@ -291,7 +291,7 @@ SKILLS = [
   ["scaling", "sidekiq", "Defers execution of expensive code using Sidekiq"],
   ["scaling", "mongrel", "Knows the differences between common webservers and can choose an appropriate one"],
   ["scaling", "cdn", "Configures and deploy to a CDN"],
-  ["scaling", "faraday", "Understands request caching and can implement it via Faraday"],
+  ["scaling", "http_cache", "Uses common HTTP caching functionality"],
 ]
 
 SKILLS.each do |skill|
@@ -305,9 +305,9 @@ end
 
 #puts "course categories"
 COURSE_CATS = {
-  baseline_1: ['linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering', 'professionalism'],
+  baseline_1: ['linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering'],
   baseline_2: ['ruby_2', 'rails_2', 'test_2', 'data_2', 'interaction_2', 'engineering_2'],
-  enova: ['business', 'cnuapp', '8boxes'],
+  enova: ['business', 'cnuapp', '8boxes', 'professionalism', 'professionalism_2'],
   scaling: ['scaling'],
 }
 COURSE_CATS.each do |course, categories|
