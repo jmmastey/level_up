@@ -9,7 +9,8 @@ class SendFeedback
   end
 
   def call
-    message = AdminMailer.send_feedback(context.user, context.name, context.page, context.message)
+    c = context
+    message = AdminMailer.send_feedback(c.user, c.name, c.page, c.message)
     unless message.deliver
       context.fail!(message: "unable to send email: #{context.inspect}")
     end
@@ -20,8 +21,6 @@ class SendFeedback
   private
 
   def fail_unless_var_present(var)
-    unless context.send(var)
-      context.fail!(message: "provide a valid #{var}")
-    end
+    context.fail!(message: "provide a valid #{var}") unless context.send(var)
   end
 end

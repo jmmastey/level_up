@@ -1,28 +1,14 @@
-<a href="#feedback_form" role="button" class="btn feedback-link" data-toggle="modal">Give Feedback</a>
-
-#feedback_form.modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{"data-dismiss" => "modal"} ×
-        %h4.modal-title Send Feedback
-      .modal-body
-        %form.form-horizontal{target: feedback_path}
-          %fieldset
-            .form-group
-              %label.col-lg-4{for: "feedback-name"} Your Name
-              .col-lg-8
-                %input.form-control{name: "name", id: "feedback-name", value: current_user.name}
-            .form-group
-              %label.col-lg-4{for: "feedback-page"} Current Page
-              .col-lg-8
-                %input.form-control{name: "page", id: "feedback-page", value: request.fullpath }
-            .form-group
-              %label.col-lg-4{for: "feedback-message"} Feedback
-              .col-lg-8
-                %textarea.form-control{name: "message", id: "feedback-message"}
-
-
-      .modal-footer
-        %button.btn.btn-default{"data-dismiss" => "modal"} Close
-        %button.btn.btn-primary.submit Send Feedback
+%form.form-horizontal{target: feedback_path}
+  %fieldset
+    .form-group
+      %label.col-lg-4{for: "name"} Your Name
+      .col-lg-8
+        %input.form-control{name: "name", id: "name", value: current_user.name}
+    .form-group
+      %label.col-lg-4{for: "page"} Current Page
+      .col-lg-8
+        %input.form-control{name: "page", id: "page", value: request.fullpath }
+    .form-group
+      %label.col-lg-4{for: "message"} Feedback
+      .col-lg-8
+        %textarea.form-control{name: "message", id: "message"}

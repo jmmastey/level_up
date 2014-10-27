@@ -5,8 +5,9 @@ describe SendFeedback do
   let(:name) { user.name }
   let(:page) { "page" }
   let(:message) { "message" }
+  let(:params) { { user: user, name: name, page: page, message: message } }
 
-  let(:interactor) { SendFeedback.call(user: user, name: name, page: page, message: message) }
+  let(:interactor) { SendFeedback.call(params) }
   let(:mail) { double("AdminMailer", deliver: deliver) }
 
   context "when the interactor is a success" do

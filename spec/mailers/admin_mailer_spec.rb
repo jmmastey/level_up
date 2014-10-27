@@ -24,9 +24,9 @@ describe AdminMailer do
   end
 
   describe ".send_feedback" do
-    let(:page) { "users/laughing_man" }
+    let(:page) { "/feedback.html" }
     let(:name) { user.name }
-    let(:message) { "I thought what I'd do was, I'd pretend I was one of those deaf-mutes." }
+    let(:message) { "This is my feedback message." }
     let(:mail) { AdminMailer.send_feedback(user, name, page, message) }
 
     context "from real user" do
