@@ -13,8 +13,7 @@ class HomeController < ApplicationController
 
   # POST /send_feedback
   def send_feedback
-    interactor = SendFeedback.call(user: current_user, page: request.referrer,
-                                   message: params['referrer'])
+    interactor = SendFeedback.call(feedback_params)
 
     if interactor.failure?
       render json: { success: false, error: interactor.message },
@@ -25,6 +24,10 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def feedback_params
+    params.permit(:name, :page, :message).to_h.merge(user: current_user)
+  end
 
   def find_module
     @module = Category.find_by!(handle: params[:module])

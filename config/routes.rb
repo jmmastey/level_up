@@ -10,7 +10,7 @@ Levelup::Application.routes.draw do
   resources :courses, only: [:index, :show]
 
   post "courses/:id/enroll", to: "courses#enroll", as: "enroll"
-  post "send_feedback", to: "home#send_feedback", as: "feedback_path"
+  post "send_feedback", to: "home#send_feedback", as: "feedback"
 
   resources :skills, only: [] do
     post "completion", to: "skills#complete", as: :complete

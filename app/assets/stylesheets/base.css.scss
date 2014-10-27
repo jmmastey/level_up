@@ -29,6 +29,20 @@
   margin-bottom:10px;
 }
 
+.feedback-link {
+  position:fixed;
+  bottom:0px;
+  right:3em;
+  background-color:white;
+  border:1px solid #ccc;
+  border-width:1px 1px 0px;
+  border-radius:4px 4px 0px 0px;
+
+  &:hover {
+    border-bottom-width:0px;
+  }
+}
+
 footer {
   /*background:#1a1a1a; figure out sticky footer first */
   margin-top:60px;

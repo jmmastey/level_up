@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe SendFeedback do
   let(:user) { create(:user) }
+  let(:name) { user.name }
   let(:page) { "page" }
   let(:message) { "message" }
 
-  let(:interactor) { SendFeedback.call(user: user, page: page, message: message) }
+  let(:interactor) { SendFeedback.call(user: user, name: name, page: page, message: message) }
   let(:mail) { double("AdminMailer", deliver: deliver) }
 
   context "when the interactor is a success" do
@@ -13,7 +14,7 @@ describe SendFeedback do
 
     it "sends feedback emails" do
       expect(AdminMailer).to receive(:send_feedback).once
-        .with(user, page, message).and_return(mail)
+        .with(user, name, page, message).and_return(mail)
 
       expect(interactor).to be_success
     end
@@ -24,7 +25,7 @@ describe SendFeedback do
 
     it "fails when emails cannot be sent properly" do
       expect(AdminMailer).to receive(:send_feedback).once
-        .with(user, page, message).and_return(mail)
+        .with(user, name, page, message).and_return(mail)
 
       expect(interactor).not_to be_success
     end
