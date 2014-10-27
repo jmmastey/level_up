@@ -274,26 +274,24 @@ SKILLS = [
   ["scaling", "import", "Uses basic optimization techniques to speed up seed generation"],
   ["scaling", "loop_invariant", "Optimizes inefficient loops by moving invariants outside the loop"],
   ["scaling", "wrong_work", "Recognizes where and how to move computation into the database."],
-  ["scaling", "include", "Optimizes frequently used array inclusion checks"],
   ["scaling", "pluck", "Uses ActiveRecord methods to limit data retrieved from the database"],
-  ["scaling", "batches", "Properly batches expensive work"],
   ["scaling", "method_cache", "Understands the ruby method cache"],
+  ["scaling", "denormalize", "Understands the tradeoffs in denormalizing computations"],
   ["scaling", "slow_tests", "Refactors unit tests for speed"],
   ["scaling", "scope", "Knows why default scopes can be nonperformant and can refactor them out"],
-  ["scaling", "all", "Refactors controller list methods to retrieve manageable data amounts"],
+  ["scaling", "all", "Refactors controller methods to retrieve manageable data amounts"],
   ["scaling", "memoization", "Uses simple memoize techniques to cache expensive computations"],
   ["scaling", "n_plus_one", "Uses Rails' built in facilities to solve n+1 SQL loading problems"],
   ["scaling", "cache_expiry", "Configures Rails models and relationships to be suitable for caching"],
   ["scaling", "chunk_caching", "Refactors views to perform page chunk caching"],
-  ["scaling", "page_caching", "Refactors views to perform whole page caching"],
+  ["scaling", "russian_doll", "Uses Russian Doll caching to achieve several layers of caching performance"],
   ["scaling", "pagination", "Uses pagination to increase performance"],
-  ["scaling", "serializers", "Uses Postgres serializers to reduce workload"],
   ["scaling", "thread", "Identifies and fix basic thread-safety issues and use threads"],
-  ["scaling", "redis", "Knows why we use redis, and can use it to cache expensive calls`"],
+  ["scaling", "redis", "Knows why we use redis, and can use it to cache expensive calls"],
   ["scaling", "sidekiq", "Defers execution of expensive code using Sidekiq"],
   ["scaling", "mongrel", "Knows the differences between common webservers and can choose an appropriate one"],
   ["scaling", "cdn", "Configures and deploy to a CDN"],
-  ["scaling", "faraday", "Understands request caching and can implement it via Faraday"],
+  ["scaling", "http_cache", "Uses common HTTP caching functionality"],
 ]
 
 SKILLS.each do |skill|
@@ -307,9 +305,9 @@ end
 
 #puts "course categories"
 COURSE_CATS = {
-  baseline_1: ['linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering', 'professionalism'],
+  baseline_1: ['linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering'],
   baseline_2: ['ruby_2', 'rails_2', 'test_2', 'data_2', 'interaction_2', 'engineering_2'],
-  enova: ['business', 'cnuapp', '8boxes'],
+  enova: ['business', 'cnuapp', '8boxes', 'professionalism', 'professionalism_2'],
   scaling: ['scaling'],
 }
 COURSE_CATS.each do |course, categories|
