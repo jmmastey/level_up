@@ -6,9 +6,9 @@ init_home = ->
       dataType: 'json',
       complete: -> $("#feedback_form").modal("hide")
       data: {
-        name: $("#feedback-name", form).val(),
-        page: $("#feedback-page", form).val(),
-        message: $("#feedback-message", form).val(),
+        name: $("#name", form).val(),
+        page: $("#page", form).val(),
+        message: $("#message", form).val(),
       }
 
 $(document).ready(init_home)
