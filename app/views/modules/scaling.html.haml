@@ -186,7 +186,7 @@
           = e.question "Add Varnish to your now-impressive Procfile, and configure it as a proxy for your application. Use your test and the Rails logs to verify that Varnish now serves repeat requests."
           = e.question "As the article above mentions, Varnish will by default only work with requests that do not forward session cookies. What can we do with to make sure that we still get good performance out of our cache? You may want to try Rack Cache as an alternative that respects user sessions better."
         = exercise_block_for "scaling", "thread" do |e|
-          = e.question "@TODO: Fix a non-threadsafe issue and move to Rubinius?"
+          = e.question "Work in progress. Sit tight. You can skip this one for now."
 
       .page-header
         %h3 Conclusion - Some Other Things to Think About
