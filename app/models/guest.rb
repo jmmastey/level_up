@@ -8,7 +8,11 @@ class Guest
   end
 
   def name
-    # NOOP
+    "Guest"
+  end
+
+  def email
+    ENV["GMAIL_USERNAME"]
   end
 
   def signed_in?

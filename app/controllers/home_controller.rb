@@ -11,7 +11,23 @@ class HomeController < ApplicationController
     render "modules/#{@module.handle}"
   end
 
+  # POST /send_feedback
+  def send_feedback
+    interactor = SendFeedback.call(feedback_params)
+
+    if interactor.failure?
+      render json: { success: false, error: interactor.message },
+             status: :unprocessable_entity
+    else
+      render json: { success: true, complete: false }
+    end
+  end
+
   private
+
+  def feedback_params
+    params.permit(:name, :page, :message).to_h.merge(user: current_user)
+  end
 
   def find_module
     @module = Category.find_by!(handle: params[:module])

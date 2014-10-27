@@ -1,0 +1,5 @@
+%p= "#{@name} (#{@user.email}) sent some feedback:"
+%ul
+  %li= "<strong>When:</strong>: #{Time.now}".html_safe
+  %li= "<strong>Page:</strong>: #{@page}".html_safe
+  %li= "<strong>Message:</strong>: #{@message}".html_safe

@@ -1,0 +1,14 @@
+%form.form-horizontal{target: feedback_path}
+  %fieldset
+    .form-group
+      %label.col-lg-4{for: "name"} Your Name
+      .col-lg-8
+        %input.form-control{name: "name", id: "name", value: current_user.name}
+    .form-group
+      %label.col-lg-4{for: "page"} Current Page
+      .col-lg-8
+        %input.form-control{name: "page", id: "page", value: request.fullpath }
+    .form-group
+      %label.col-lg-4{for: "message"} Feedback
+      .col-lg-8
+        %textarea.form-control{name: "message", id: "message"}

@@ -5,9 +5,12 @@ Levelup::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations",
                                     omniauth_callbacks: "omniauth_callbacks" }
+
   resources :users, only: [:index, :update, :show]
   resources :courses, only: [:index, :show]
+
   post "courses/:id/enroll", to: "courses#enroll", as: "enroll"
+  post "send_feedback", to: "home#send_feedback", as: "feedback"
 
   resources :skills, only: [] do
     post "completion", to: "skills#complete", as: :complete
