@@ -2,7 +2,9 @@ require "spec_helper"
 
 describe AdminMailer do
   let(:user) { build(:user) }
-  let(:admin_email) { ENV["ADMIN_EMAIL"] }
+  let(:admin_email) do
+    ENV["ADMIN_EMAIL"] || ENV["GMAIL_USERNAME"] || "test@test.com"
+  end
 
   def deliveries
     ActionMailer::Base.deliveries.size
@@ -46,7 +48,7 @@ describe AdminMailer do
       let(:user) { Guest.new }
 
       it "sends from a default address" do
-        expect(mail.from).to include(admin_email)
+        expect(mail.from).to include(user.email)
       end
     end
   end

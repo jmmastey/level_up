@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
-  default from: ENV["ADMIN_EMAIL"]
+  default_email = ENV["ADMIN_EMAIL"] || ENV["GMAIL_USERNAME"] || "test@test.com"
+  default from: default_email
 
   def confirm_enrollment(user, course)
     @user = user

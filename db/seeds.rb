@@ -1,10 +1,8 @@
 ## Seed the basic courses, plus some enrollment and such.
 
-#puts 'ROLES'
-roles = ENV['ROLES'] || ['admin']
+roles = ENV['ROLES'] || "['admin']"
 YAML.load(roles).each do |role|
   Role.find_or_create_by(name: role)
-  #puts 'role: ' << role
 end
 
 CATEGORIES = [
@@ -32,7 +30,6 @@ CATEGORIES = [
 i = 0
 CATEGORIES.each do |cat|
   Category.create! name: cat[0], handle: cat[1], sort_order: i
-  #puts "category: #{cat[0]}"
   i += 1
 end
 
@@ -44,7 +41,6 @@ COURSES = [
 ]
 COURSES.each do |course|
   Course.create! name: course[0], handle: course[1], description: course[2], status: :published
-  #puts "course: #{course[0]}"
 end
 
 SKILLS = [
@@ -303,7 +299,6 @@ SKILLS.each do |skill|
   end
 end
 
-#puts "course categories"
 COURSE_CATS = {
   baseline_1: ['linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering'],
   baseline_2: ['ruby_2', 'rails_2', 'test_2', 'data_2', 'interaction_2', 'engineering_2'],
@@ -311,7 +306,6 @@ COURSE_CATS = {
   scaling: ['scaling'],
 }
 COURSE_CATS.each do |course, categories|
-  #puts "#{course}: #{categories.join(', ')}"
   categories = categories.map { |cat| Category.find_by_handle(cat).id }
   skills = Skill.where(category_id: categories)
   course = Course.find_by_handle(course)
@@ -321,13 +315,11 @@ COURSE_CATS.each do |course, categories|
 end
 
 if ENV['ADMIN_NAME']
-  #puts 'DEFAULT USERS'
   user = User.create(name: ENV['ADMIN_NAME'].dup,
                      email: ENV['ADMIN_EMAIL'].dup,
                      password: ENV['ADMIN_PASSWORD'].dup,
                      password_confirmation: ENV['ADMIN_PASSWORD'].dup)
 
-  #puts 'user: ' << user.name
   user.add_role :admin
   Course.all.each do |course|
     Enrollment.create!(course: course, user: user)
