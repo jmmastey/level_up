@@ -12,7 +12,7 @@ class Guest
   end
 
   def email
-    ENV["GMAIL_USERNAME"]
+    "test@test.com"
   end
 
   def signed_in?

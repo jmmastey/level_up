@@ -6,19 +6,14 @@ An app to store and verify training material for engineers on the [Rails Prime S
 Getting Started
 ---------------
 
-Clone the repo, run rake to test. Deploy at will. Some content modules
-may not be stored in source control for competitive purposes.
+Clone the repo, bundle install, create db, run rake to test. Deploy at will.
+There is a Procfile provided for foreman. Feel free to create a `.env` file
+for the environment. Some content modules may not be stored in source control
+for competitive purposes.
 
-## Configuring
-
-### .env
-Copy the /.env.example into a new /.env file (which is in .gitignore) and fill in with your settings.
-
-### Final steps
-
-- bundle install
-- bundle exec rake db:{create,setup,seed}
-- foreman start
+    bundle install
+    bundle exec rake db:{setup,seed}
+    foreman start
 
 Contributing
 ------------

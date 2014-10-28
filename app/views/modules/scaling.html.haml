@@ -2,6 +2,10 @@
   .page-header
     %h1 Performance and Scaling
 
+  .alert.alert-dismissable.alert-info
+    %button.close{"data-dismiss" => "alert"} x
+    <strong>Hey There!</strong> This module is still being actively tested. It should be fully functional and accurate, but please use the feedback button below to report anything -- good or bad -- that strikes you.
+
   .row
     .col-lg-8
       %p Performance testing occupies an interesting space in web development. As developers, we tend to do both too much and not enough of this kind of testing. Too much in that we make half-baked assumptions about what parts of our code will be slow, and do silly amounts of work to "optimize" them. And then not enough, because the actual bottlenecks in our programs tend to go forgotten.
