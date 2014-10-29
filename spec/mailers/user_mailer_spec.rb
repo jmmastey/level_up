@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe UserMailer do
   let(:user) { build(:user) }
-  let(:course) { build(:course) }
+  let(:course) { create(:course) }
   let(:mail) { UserMailer.confirm_enrollment(user, course) }
 
   it "confirms course enrollment" do
