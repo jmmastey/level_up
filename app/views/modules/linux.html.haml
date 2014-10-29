@@ -119,7 +119,7 @@
 
       .page-header
         %h3 Why We Use Web Proxies
-        %p In a complicated network environment, we use proxies all the time. Even within a single node, we usually have a proxy set up to listen for the machine and proxy requests back to the actual software. You need to know how they work, and where we use them, in order to understand how requests actually reach our systems. There are some critical caveats to use of these proxies that you may need to know about. Learn more about <a href='http://nginx.org/en/docs/beginners_guide.html'>nginx and proxies</a>.
+        %p In a complicated network environment, we use proxies all the time. Even within a single node, we usually have a proxy set up to listen for the machine and proxy requests back to the actual software. You need to know how they work, and where we use them, in order to understand how requests actually reach our systems. There are some critical caveats to use of these proxies that you may need to know about. Learn more about <a href='https://medium.com/@jmmastey/proxies-and-you-2846c5fc0c7b'>common types of proxies</a> we work with.
         = exercise_block_for "linux", "proxies" do |e|
           = e.question "Draw a little diagram or ASCII art or whatever moves you, showing all the proxies between a production customer and the actual application webserver."
           = e.question "How can we use proxies to better service to our customers?"
