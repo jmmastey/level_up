@@ -1,7 +1,7 @@
 level_up
 =========
 
-An app to store and verify training material for engineers on the [Rails Prime Stack](http://words.steveklabnik.com/rails-has-two-default-stacks). Currently hosted at http://leveluprails.herokuapp.com.
+An app to store and verify training material for engineers on the [Rails Prime Stack](http://words.steveklabnik.com/rails-has-two-default-stacks). Currently hosted at http://leveluprails.com.
 
 Getting Started
 ---------------
@@ -28,4 +28,4 @@ See [the humans file](public/humans.txt)
 License
 -------
 
-levelup is released under the [MIT License](https://github.com/jmmastey/levelup/blob/master/MIT-LICENSE).
+levelup is released under the [MIT License](https://github.com/jmmastey/level_up/blob/master/MIT-LICENSE).
