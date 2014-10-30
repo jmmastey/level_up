@@ -10,7 +10,5 @@ class Category < ActiveRecord::Base
   default_scope -> { where(hidden: false) }
   scope :hidden, -> { where(hidden: true) }
   scope :sorted, -> { order(:sort_order) }
-  scope :by_courses, ->(c) do
-    includes(:courses).where(courses: {id: c.map(&:id)}).uniq
-  end
+  scope :by_courses, ->(c) { includes(:courses).where("courses.id" => c).uniq }
 end

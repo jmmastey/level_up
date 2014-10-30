@@ -10,7 +10,7 @@ module ModulesHelper
   end
 
   def skill_object_from(handle)
-    @module.skills.detect { |s| s.handle == handle }
+    @module.skills.find { |s| s.handle == handle }
   end
 
   def exercise_link(exercise_name)

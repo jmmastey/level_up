@@ -1,5 +1,5 @@
 module UsersHelper
-  FEED_LENGTH = 10
+  FEED_LENGTH = 50
   FEEDABLE_OBJECTS = [Completion, Enrollment]
 
   def feed_items_for(user)

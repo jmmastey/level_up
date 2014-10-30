@@ -19,8 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_real_domain
-    if request.host =~ /herokuapp./
-      redirect_to request.url.gsub(/herokuapp./, '')
-    end
+    return unless request.host =~ /herokuapp./
+    redirect_to request.url.gsub(/herokuapp./, '')
   end
 end
