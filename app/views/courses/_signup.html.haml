@@ -1,16 +1,17 @@
 - categories = course.categories.sorted.map(&:name)
-.bs-component
-  .list-group
-    .list-group-item{ class: ['course', course.handle] }
-      - if current_user.courses.include?(course)
-        = link_to 'Enrolled', course, class: 'btn btn-primary btn-lg register'
-      - else
-        = form_tag enroll_path(course), method: :post, class: 'register' do
-          %button.btn.btn-primary.btn-lg Enroll
+.col-lg-4
+  .bs-component
+    .list-group
+      .list-group-item{ class: ['course', course.handle] }
 
-      %h3= course.name
-      %p.description= course.description
-      %p.topics
-        %strong Topics Covered:
-        = categories.join(", ")
-      %p= link_to "View Course", course
+        %h3= course.name
+        %p.description= course.description
+        %p.topics
+          %strong Topics Covered:
+          = categories.join(", ")
+
+        - if current_user.courses.include?(course)
+          = link_to 'View course', course, class: 'btn btn-primary btn-lg register'
+        - else
+          = form_tag enroll_path(course), method: :post, class: 'register' do
+            %button.btn.btn-primary.btn-lg Enroll
