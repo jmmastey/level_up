@@ -1,11 +1,16 @@
 module ModulesHelper
-  def exercise_block_for(category, skill)
-    skill     = Skill.find_by!(handle: skill)
+  def exercise_block_for(category, handle)
+    skill     = skill_object_from(handle)
     ex_block  = ExerciseBlock.new(category, skill, [])
 
     yield ex_block
     register_exercise_for(skill)
+
     render_block(ex_block)
+  end
+
+  def skill_object_from(handle)
+    @module.skills.detect { |s| s.handle == handle }
   end
 
   def exercise_link(exercise_name)

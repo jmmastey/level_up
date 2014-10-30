@@ -124,7 +124,7 @@ describe User do
     it "checks completion of a skill" do
       expect(user).not_to have_completed(skill)
       create(:completion, user: user, skill: skill)
-      expect(user).to have_completed(skill)
+      expect(user.reload).to have_completed(skill)
     end
   end
 

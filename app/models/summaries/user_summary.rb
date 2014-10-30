@@ -17,7 +17,7 @@ module Summaries
     end
 
     def user_categories
-      @user_categories ||= @user.courses.map(&:categories).flatten.map(&:handle)
+      @user_categories ||= Category.by_courses(@user.courses).pluck(:handle)
     end
 
     def user_summary_data

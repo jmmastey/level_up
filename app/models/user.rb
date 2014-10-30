@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   }
 
   def has_completed?(skill)
-    skills.include? skill
+    skills.pluck(:id).include? skill.id
   end
 
   def admin?
