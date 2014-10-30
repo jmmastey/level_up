@@ -5,3 +5,22 @@
     margin-bottom:0px;
   }
 }
+
+.user-profile {
+  h3 { margin-top:0px; }
+  img { width:100%; }
+  .progress { margin-bottom: 13px; }
+  .activity-feed {
+    margin-top:5px;
+    line-height:10px;
+    padding-left:1px;
+    .item {
+      width:6px;
+      height:6px;
+      background-color:green;
+      display:inline-block;
+      &.skill { background-color: #9CAB8d; }
+      &.enrollment { background-color: #D9BFA8; }
+    }
+  }
+}

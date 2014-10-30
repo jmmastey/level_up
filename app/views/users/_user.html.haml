@@ -1,14 +1,18 @@
-.row.jumbotron{class: "user-#{user.id}"}
-  .col-lg-2
-    = gravatar_image_tag(user.email, alt: user.name, class: "gravatar", gravatar: { size: 160 })
+= cache user do
+  .col-lg-4
+    .user-profile.panel.panel-default{class: "user-#{user.id}"}
+      .panel-body
+        .row
+          .col-lg-4
+            = gravatar_image_tag(user.email, alt: user.name, class: "gravatar", gravatar: { size: 100 })
+            .activity-feed
+              - feed_items_for(user).each do |item|
+                .item{class: item[:tags].join(" "), title: item[:label], data: {toggle: "tooltip", placement: "top"}} &nbsp;
 
-  .col-lg-5
-    %h3
-      %a{href: user_path(user)}= user.name
-
-    = render partial: 'enrolled_courses', locals: { user: user }
-    = render partial: 'recent_activity', locals: { user: user }
-
-  .col-lg-5.skills
-    = render partial: 'progress', locals: { user: user }
-
+          .col-lg-8
+            %h4
+              %a{href: user_path(user)}= user.name
+            - user.courses.take(2).each do |course|
+              %h5= course.name
+              .progress
+                .progress-bar{style: "width:#{completion_percent_for(course)}%"}

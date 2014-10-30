@@ -1,4 +1,5 @@
 = will_paginate @users, renderer: BootstrapPagination::Rails
-= render @users
+- @users.in_groups_of(3, false) do |user_group|
+  .row= render user_group
 .userlist-info= page_entries_info @users
 = will_paginate @users, renderer: BootstrapPagination::Rails
