@@ -6,15 +6,15 @@ YAML.load(roles).each do |role|
 end
 
 CATEGORIES = [
-  ["Basic Linux and Shell", "linux"],
+  ["Linux and Shell Utilities", "linux"],
   ["Basic Ruby", "ruby"],
   ["Basic Test Engineering", "test"],
-  ["Basic Rails", "rails"],
+  ["Basic Ruby on Rails", "rails"],
   ["Basic Interaction Design", "interaction"],
   ["Basic Data Engineering", "data"],
   ["Engineering Principles", "engineering"],
   ["Learning the Business", "business"],
-  ["Professionalism", "professionalism"],
+  ["Professionalism in Engineering", "professionalism"],
   ["Intermediate Ruby", "ruby_2"],
   ["Intermediate Test Engineering", "test_2"],
   ["Intermediate Rails", "rails_2"],
