@@ -5,6 +5,8 @@ FactoryGirl.define do
     sequence(:name)   { |n| "Category #{n}" }
     sequence(:handle) { |n| "category_#{n}" }
 
+    difficulty { rand(1..10) }
+
     sequence(:sort_order)
     hidden(false)
 

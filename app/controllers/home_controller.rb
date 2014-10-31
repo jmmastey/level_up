@@ -6,10 +6,6 @@ class HomeController < ApplicationController
     @courses = current_user.courses
   end
 
-  def show
-    render "modules/#{@module.handle}"
-  end
-
   # POST /send_feedback
   def send_feedback
     interactor = SendFeedback.call(feedback_params)

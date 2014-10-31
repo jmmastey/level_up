@@ -1,0 +1,23 @@
+%p This section is called Interaction, not User Interface, for a reason. As you'll see in the second part of the Interaction series, there are more interfaces than just the user interface, and building the markup is the simple part. There are entire subdisciplines within UI that deal with human factors that can make the difference between a successful application and a failure.
+%p However, we're still going to start small. This lesson is an introduction to UI building, so that you have the basic building blocks you need for later lessons.
+
+.page-header
+  %h3 Building a Base
+  %p The first thing we'll do is use basic markup to build an interface. If you haven't done any work with HTML and UIs before, this may take a bit of time and adjustment to learn. Don't worry about making it perfect, though. Focus on getting a solid, basic implementation in place.
+  = exercise_block_for "interaction", "markup" do |e|
+    = e.question "Do the #{exercise_link('pmail')} exercise. You'll be building the basic CSS, Javascript and HTML to work with later."
+
+.page-header
+  %h3 Making It Make Sense
+  %p You can write a perfectly functional website in div tags and Twitter Bootstrap classes. You can, but everyone will laugh at you. The real meat of HTML is using semantic elements to define the structure of your document. It's more than an issue of pedantry; Google <a href='https://programmers.stackexchange.com/questions/165618/why-is-semantic-markup-given-more-weight-for-search-engines#165631'>uses the structure of your document</a> to determine its contents, as do the browsers used by disabled users. That means that defining a semantic (and therefore accessible) document is sometimes a matter of law.
+  %p Thankfully, semantic markup isn't very difficult to learn. Take a look at the resources for a few sites and refresh your knowledge of which tag is right for the job.
+  = exercise_block_for "interaction", "semantic" do |e|
+    = e.question "If it isn't already, refactor your Pmail code so that you are using semantic tags for your content."
+
+  %p Similarly to semantic markup, logical class and ID usage makes your document more accessible. It also makes it easy to manipulate the design of the page. If you use poor classes and IDs, or use them incorrectly, you will pretty quickly find yourself digging deeper and more desperately into your CSS to make trivial changes.
+  %p SMACSS, a system for organizing CSS, proposes both some rules for organizing your CSS and for naming your elements to avoid this problem. <a href='https://smacss.com/'>Read the guide</a> and attaine enlightenment.
+  = exercise_block_for "interaction", "classes" do |e|
+    = e.question "Go back through your Pmail code and refactor it so that your class and ID names are semantic. Remember that most things don't deserve IDs."
+    = e.question "Name a few things that are often given IDs, but probably don't deserve them."
+  = exercise_block_for "interaction", "smacss" do |e|
+    = e.question "Reorganize your code according to the smacss guide. Use short, modular classes to declare functionality."

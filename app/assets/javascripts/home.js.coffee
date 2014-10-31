@@ -1,5 +1,6 @@
 init_home = ->
   $('.activity-feed .item').tooltip()
+  $('.difficulty .fa').tooltip()
   $("#feedback_form .submit").click ->
     form = $("#feedback_form form").eq(0)
     $.ajax form.attr("target"),

@@ -4,8 +4,9 @@ class Category < ActiveRecord::Base
   has_many :skills
   has_many :courses, -> { uniq }, through: :skills
 
-  validates_presence_of :name, :handle
-  validates_uniqueness_of :handle
+  validates :name, presence: true
+  validates :handle, presence: true, uniqueness: true
+  validates :difficulty, allow_nil: true, inclusion: { in: 1..10 }
 
   default_scope -> { where(hidden: false) }
   scope :hidden, -> { where(hidden: true) }
