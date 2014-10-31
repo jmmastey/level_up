@@ -10,4 +10,6 @@ before_script:
   - psql -c 'create user levelup with superuser;' -U postgres
   - bundle exec rake db:{create,migrate}
 env:
-  - SECRET_KEY=f2fbcc06ac38f6f3a6383045f25856d
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    - SECRET_KEY=f2fbcc06ac38f6f3a6383045f25856d
