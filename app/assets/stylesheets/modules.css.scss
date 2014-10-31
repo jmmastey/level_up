@@ -51,3 +51,21 @@
     }
   }
 }
+
+.difficulty {
+  margin:0px 5px 5px;
+  .rating { display:inline-block; margin-right:5px; }
+  .dot {
+    width:6px;
+    height:6px;
+    background-color:green;
+    display:inline-block;
+    border:1px solid #666;
+    position:relative;
+    top:9px;
+    &.hard { background-color: #666; }
+    &.easy { background-color: #fff; }
+  }
+  .exercise-count { display:inline-block; margin-left:5px; }
+  .fa { margin-left:3px }
+}

@@ -5,6 +5,7 @@
   .row
     .col-lg-8= render partial: "modules/#{@module.handle}"
     .col-lg-4.resources{role:'complementary'}
+      = render partial: 'difficulty' if @module.difficulty
       .bs-component
         .panel.panel-basic
           = render partial: "modules/#{@module.handle}_resources"

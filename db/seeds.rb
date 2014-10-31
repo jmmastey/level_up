@@ -6,15 +6,14 @@ YAML.load(roles).each do |role|
 end
 
 CATEGORIES = [
-  ["Linux and Shell Utilities", "linux"],
-  ["Basic Ruby", "ruby"],
-  ["Basic Test Engineering", "test"],
-  ["Basic Ruby on Rails", "rails"],
-  ["Basic Interaction Design", "interaction"],
-  ["Basic Data Engineering", "data"],
-  ["Engineering Principles", "engineering"],
-  ["Learning the Business", "business"],
-  ["Professionalism in Engineering", "professionalism"],
+  ["Linux and Shell Utilities", "linux", 2],
+  ["Basic Ruby", "ruby", 4],
+  ["Basic Test Engineering", "test", 7],
+  ["Basic Ruby on Rails", "rails", 6],
+  ["Basic Interaction Design", "interaction", 3],
+  ["Basic Data Engineering", "data", 4],
+  ["Engineering Principles", "engineering", 2],
+  ["Professionalism in Engineering", "professionalism", 3],
   ["Intermediate Ruby", "ruby_2"],
   ["Intermediate Test Engineering", "test_2"],
   ["Intermediate Rails", "rails_2"],
@@ -22,6 +21,7 @@ CATEGORIES = [
   ["Intermediate Data Engineering", "data_2"],
   ["Engineering Principles II", "engineering_2"],
   ["Professionalism II", "professionalism_2"],
+  ["Learning the Business", "business"],
   ["Cnuapp", "cnuapp"],
   ["8 Boxes", "8boxes"],
   ["Performance and Scaling", "scaling"]
@@ -29,7 +29,7 @@ CATEGORIES = [
 
 i = 0
 CATEGORIES.each do |cat|
-  Category.create! name: cat[0], handle: cat[1], sort_order: i
+  Category.create! name: cat[0], handle: cat[1], difficulty: cat[2], sort_order: i
   i += 1
 end
 
