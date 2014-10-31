@@ -37,7 +37,7 @@ end
 Then /^I see their skills$/ do
   skills = @user.reload.skills
   skills.each do |skill|
-    expect(page).to have_css(".skill.completed.#{skill.handle}")
+    expect(page).to have_css(".skill.completed.skill-#{skill.handle}")
   end
 end
 

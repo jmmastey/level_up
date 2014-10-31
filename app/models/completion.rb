@@ -11,7 +11,7 @@ class Completion < ActiveRecord::Base
   def self.decorate_feed_item(item)
     {
       label: "Completed '#{item.skill.name}'",
-      tags: [:skill, :completed, item.skill.handle],
+      tags: [:skill, :completed, "skill-#{item.skill.handle}"],
       item: item,
     }
   end

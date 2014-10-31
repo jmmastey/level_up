@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
   validates_uniqueness_of :handle
 
   scope :published, -> { where(status: :published) }
+  scope :by_date, -> { order("created_at desc") }
 
   state_machine :status, initial: :created do
     event(:approve)  { transition created: :approved }
