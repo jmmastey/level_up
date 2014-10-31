@@ -3,10 +3,10 @@ rvm:
   - rbx-2.2.10
   - rbx-2.2.7
   - 2.1.0
-bundler_args: --without production
+bundler_args: --without production --without development --jobs=4
 cache: bundler
 before_script:
     - psql -c 'create user levelup with superuser;' -U postgres
-    - rake db:{create,migrate}
+    - bundle exec rake db:{create,migrate}
 env:
   - SECRET_KEY=f2fbcc06ac38f6f3a6383045f25856d
