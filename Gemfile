@@ -25,9 +25,9 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'newrelic_rpm'
 gem 'rack-mini-profiler'
+gem 'dotenv'
 
 group :development do
-  gem 'dotenv'
   gem 'foreman'
   gem 'quiet_assets'
   gem 'rubocop'
