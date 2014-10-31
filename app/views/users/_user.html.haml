@@ -12,7 +12,7 @@
           .col-lg-8
             %h4
               %a{href: user_path(user)}= user.name
-            - user.courses.take(2).each do |course|
+            - user.courses.by_date.take(2).each do |course|
               %h5= course.name
               .progress
-                .progress-bar{style: "width:#{completion_percent_for(course)}%"}
+                .progress-bar{style: "width:#{completion_percent_for(course, user)}%"}

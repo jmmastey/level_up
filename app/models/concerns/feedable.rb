@@ -3,7 +3,7 @@ module Feedable
 
   included do
     scope :for_user, ->(user) { where(user_id: user.id) }
-    scope :recent, -> { where("created_at > :at", at: 5.days.ago) }
+    scope :recent, -> { where("created_at > :at", at: 2.weeks.ago) }
     scope :by_creation_date, -> { order("created_at desc") }
   end
 

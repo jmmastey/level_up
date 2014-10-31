@@ -13,7 +13,7 @@ describe Completion do
     it "decorates completions as requested" do
       decorated_item = Completion.decorated_feed_for(user).first
       expect(decorated_item[:item]).to eql(completion)
-      expect(decorated_item[:tags]).to include(completion.skill.handle)
+      expect(decorated_item[:tags]).to include("skill-#{completion.skill.handle}")
       expect(decorated_item[:label]).to match(/#{completion.skill.name}/)
     end
 

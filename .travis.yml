@@ -1,6 +1,8 @@
 language: ruby
 rvm:
   - rbx-2.2.10
+  - rbx-2.2.7
+  - 2.1.0
 bundler_args: --without production
 cache: bundler
 before_script:
