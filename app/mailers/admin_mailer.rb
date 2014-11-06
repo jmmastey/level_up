@@ -10,6 +10,6 @@ class AdminMailer < ActionMailer::Base
 
   def send_feedback(user, name, page, message)
     @user, @name, @page, @message = user, name, page, message
-    mail(from: user.email, subject: "Feedback from #{@name}")
+    mail(from: user.email, reply_to: user.email, subject: "Feedback from #{@name}")
   end
 end
