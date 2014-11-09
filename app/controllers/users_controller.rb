@@ -21,8 +21,6 @@ class UsersController < ApplicationController
   def find_user
     @user ||= User.find params[:id]
   end
-  alias_method :user, :find_user
-  helper_method :user
 
   def user_params
     params.permit(:user)

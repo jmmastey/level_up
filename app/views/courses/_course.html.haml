@@ -4,8 +4,7 @@
     %p.description= course.description
     %hr
 
-    - summary = course_summary_for(course)
-    %p.completion= "#{summary[:completed]} of #{summary[:total]} skills completed"
+    %p.completion= completion_summary_for(course)
     .progress
       .progress-bar.progress-bar-success{style: "width: #{completion_percent_for(course)}%" }
 

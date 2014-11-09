@@ -6,8 +6,4 @@ module UsersHelper
     objects = FEEDABLE_OBJECTS.map { |klass| klass.decorated_feed_for(user) }
     objects.flatten.take(FEED_LENGTH)
   end
-
-  def category_progress_for(user)
-    Summaries.for_user(user).values
-  end
 end

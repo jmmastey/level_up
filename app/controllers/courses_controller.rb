@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   respond_to :html, :json
+
   before_filter :authenticate_user!, only: :enroll
   before_filter :set_course, only: [:enroll, :show]
 

@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     includes(:completions).where.not(completions: { id: nil })
   }
 
+  def summary
+    @summary ||= UserSummary.new(self)
+  end
+
   def admin?
     has_role? :admin
   end
