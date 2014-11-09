@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   scope :by_activity_date, -> { order("users.updated_at desc") }
-  scope :by_auth, ->(auth) { where(provider: auth.provider, uid: auth.uid) }
   scope :with_completions, lambda {
     includes(:completions).where.not(completions: { id: nil })
   }
