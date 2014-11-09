@@ -1,13 +1,11 @@
 class ExerciseBlock
-
   attr_accessor :category, :skill, :questions
 
   def initialize(category, skill)
-    @category = Category.find_by(handle: category)
-    @skill = @category.skills.find_by(handle: skill)
+    @category = category
+    @skill = category.skills.find { |s| s.handle == skill }
     @questions = []
   end
-
 
   def question(text)
     @questions << text
@@ -17,7 +15,6 @@ class ExerciseBlock
   def to_partial_path
     "exercise/block"
   end
-
 
   def questions
     QuestionBlock.new(@questions)
@@ -29,7 +26,6 @@ class QuestionBlock
     @questions = questions
     @questions = @questions.first unless @questions.many?
   end
-
 
   def to_partial_path
     if @questions.respond_to? :each

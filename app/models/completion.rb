@@ -13,7 +13,11 @@ class Completion < ActiveRecord::Base
   end
 
   def self.for!(user, skill)
-    self.for(user, skill) or raise RecordNotFoundError
+    self.for(user, skill) || fail(RecordNotFoundError)
+  end
+
+  def self.user_skills(user)
+    where(user: user).pluck(:skill_id)
   end
 
   def self.decorate_feed_item(item)

@@ -1,6 +1,6 @@
 module ModulesHelper
-  def exercise_block_for(category, handle)
-    block  = ExerciseBlock.new(category, handle)
+  def exercise_block_for(_category, handle)
+    block  = ExerciseBlock.new(@module, handle)
 
     yield block
 
@@ -20,16 +20,16 @@ module ModulesHelper
     "http://github.com/jmmastey/level_up_exercises/tree/master/#{exercise}"
   end
 
-  def completion_classes(ex_block)
-    if Completion.for(current_user, ex_block.skill)
+  def completion_classes(skill)
+    if @skills.include? skill.id
       "btn btn-default completed"
     else
       "btn btn-default"
     end
   end
 
-  def completion_classes_small(user, skill)
-    if Completion.for(user, skill)
+  def completion_classes_small(skill)
+    if @skills.include? skill.id
       "fa-check-circle-o"
     else
       "fa-circle-o"

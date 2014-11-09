@@ -6,7 +6,7 @@ class CompleteSkill
     context.fail!(message: "provide a valid user") unless context.user
     context.fail!(message: "provide a valid skill") unless context.skill
 
-    raise if Completion.for(context.user, context.skill)
+    fail if Completion.for(context.user, context.skill)
   rescue
     context.fail!(message: "cannot re-complete a skill")
   end

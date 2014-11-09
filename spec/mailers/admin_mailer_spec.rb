@@ -29,7 +29,7 @@ describe AdminMailer do
     let(:page) { "/feedback.html" }
     let(:name) { user.name }
     let(:message) { "This is my feedback message." }
-    let(:mail) { AdminMailer.send_feedback(user, name, page, message) }
+    let(:mail) { AdminMailer.send_feedback(user, page, message) }
 
     context "from real user" do
       it "sends feedback email" do

@@ -2,6 +2,6 @@
   %h3 Exercises From This Lesson
 .panel-body
   - current_skills.each do |skill|
-    - klass = completion_classes_small(current_user, skill)
+    - klass = completion_classes_small(skill)
     %p{class: "fa #{klass} dot-#{skill.handle}"}
       %a{href: "##{skill.handle}"}= skill.name
