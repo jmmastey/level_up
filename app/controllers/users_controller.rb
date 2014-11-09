@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_user, only: [:show, :update]
-
-  def index
-    @users = User.with_recent_activity.page(params[:page])
-  end
+  before_filter :find_active_users, only: [:index]
 
   def update
     authorize! :update, user, message: 'Not authorized as an administrator.'
@@ -16,6 +13,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def find_active_users
+    @users = User.with_recent_activity.page(params[:page])
+  end
 
   def find_user
     @user ||= User.find params[:id]

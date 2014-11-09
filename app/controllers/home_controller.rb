@@ -11,8 +11,7 @@ class HomeController < ApplicationController
     interactor = SendFeedback.call(feedback_params)
 
     if interactor.failure?
-      render json: { success: false, error: interactor.message },
-             status: :unprocessable_entity
+      render_bad_response(interactor.message)
     else
       render json: { success: true, complete: false }
     end

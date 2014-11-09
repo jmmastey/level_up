@@ -22,4 +22,9 @@ class ApplicationController < ActionController::Base
     return unless request.host =~ /herokuapp./
     redirect_to request.url.gsub(/herokuapp./, '')
   end
+
+  def render_bad_response(message)
+    render json: { success: false, error: message },
+           status: :unprocessable_entity
+  end
 end

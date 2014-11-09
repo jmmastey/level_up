@@ -25,11 +25,6 @@ class SkillsController < ApplicationController
 
   private
 
-  def render_bad_response(message)
-    render json: { success: false, error: message },
-           status: :unprocessable_entity
-  end
-
   def skill
     @skill ||= Skill.find_by_id(params[:skill_id])
   end
