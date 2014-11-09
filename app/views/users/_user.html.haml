@@ -13,6 +13,7 @@
             %h4
               %a{href: user_path(user)}= user.name
             - user.courses.by_date.take(2).each do |course|
+              - summary = user.summary.for_course(course)
               %h5= course.name
               .progress
-                .progress-bar{style: "width:#{completion_percent_for(course, user)}%"}
+                .progress-bar{style: "width:#{completion_percent_for(summary)}%"}
