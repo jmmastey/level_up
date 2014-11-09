@@ -25,6 +25,6 @@ class HomeController < ApplicationController
   end
 
   def find_module
-    @module = Category.find_by!(handle: params[:module])
+    @module = Category.by_handle(params[:module])
   end
 end

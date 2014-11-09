@@ -23,14 +23,6 @@ class Guest
     false
   end
 
-  def roles
-    Role.none
-  end
-
-  def has_role?(_role)
-    false
-  end
-
   def has_completed?(_skill)
     false
   end

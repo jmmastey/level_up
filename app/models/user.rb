@@ -24,11 +24,15 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    has_role?(:admin)
+    has_role? :admin
   end
 
   def signed_in?
     true
+  end
+
+  def self.with_recent_activity
+    with_completions.by_activity_date
   end
 
   def self.from_omniauth(auth)
