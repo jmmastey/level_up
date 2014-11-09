@@ -5,6 +5,8 @@ class ExerciseBlock
     @category = category
     @skill = category.skills.find { |s| s.handle == skill }
     @questions = []
+
+    yield self if block_given?
   end
 
   def question(text)

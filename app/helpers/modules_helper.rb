@@ -1,8 +1,6 @@
 module ModulesHelper
-  def exercise_block_for(handle)
-    block  = ExerciseBlock.new(@module, handle)
-
-    yield block
+  def exercise_block_for(handle, &block)
+    block = ExerciseBlock.new(@module, handle, &block)
 
     current_skills << block.skill
     render block
