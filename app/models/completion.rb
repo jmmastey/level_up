@@ -9,7 +9,11 @@ class Completion < ActiveRecord::Base
                           message: "cannot complete the same skill twice"
 
   def self.user_completion(user, skill)
-    find_by!(user: user, skill: skill)
+    find_by(user: user, skill: skill)
+  end
+
+  def self.user_completion!(user, skill)
+    user_completion(user, skill) or raise RecordNotFoundError
   end
 
   def self.decorate_feed_item(item)

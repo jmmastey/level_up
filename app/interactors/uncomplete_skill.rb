@@ -6,7 +6,8 @@ class UncompleteSkill
     context.fail!(message: "provide a valid user") unless context.user
     context.fail!(message: "provide a valid skill") unless context.skill
 
-    return if context.user && context.user.has_completed?(context.skill)
+    Completion.user_completion!(context.user, context.skill)
+  rescue
     context.fail!(message: "can only uncomplete a previously completed skill")
   end
 
