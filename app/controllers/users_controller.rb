@@ -23,6 +23,6 @@ class UsersController < ApplicationController
   end
 
   def summarize_user
-    @progress = Summaries.for_user(@user).values
+    @progress = UserSummary.new(@user).for_user.values
   end
 end
