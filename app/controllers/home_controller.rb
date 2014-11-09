@@ -4,7 +4,6 @@ class HomeController < ApplicationController
 
   def index
     @courses = current_user.courses
-    @progress = UserSummary.new(current_user).for_user
   end
 
   # POST /send_feedback

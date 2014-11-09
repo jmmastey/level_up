@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     includes(:completions).where.not(completions: { id: nil })
   }
 
+  def summary
+    @summary ||= UserSummary.new(self)
+  end
+
   def has_completed?(skill)
     skills.pluck(:id).include? skill.id
   end

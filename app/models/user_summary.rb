@@ -5,8 +5,6 @@ class UserSummary
   end
 
   def for_user
-    return unless @user.signed_in?
-
     summary_data.each_with_object({}) do |category, hash|
       hash[category['handle']] = typecast_results_for(category)
     end

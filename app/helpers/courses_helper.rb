@@ -1,6 +1,6 @@
 module CoursesHelper
   def course_summary_for(course, user = current_user)
-    UserSummary.new(user).for_course(course)
+    user.summary.for_course(course)
   end
 
   def completion_percent_for(course, user = current_user)

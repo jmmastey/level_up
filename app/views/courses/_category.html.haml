@@ -1,4 +1,4 @@
-- completion = @progress[category.handle]
+- completion = current_user.summary.for_user[category.handle]
 %li.list-group-item
   = link_to category.name, module_path(category.handle)
   - if completion[:total_completed] == completion[:total_skills]
