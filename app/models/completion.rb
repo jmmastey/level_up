@@ -8,12 +8,12 @@ class Completion < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :skill_id,
                           message: "cannot complete the same skill twice"
 
-  def self.user_completion(user, skill)
+  def self.for(user, skill)
     find_by(user: user, skill: skill)
   end
 
-  def self.user_completion!(user, skill)
-    user_completion(user, skill) or raise RecordNotFoundError
+  def self.for!(user, skill)
+    self.for(user, skill) or raise RecordNotFoundError
   end
 
   def self.decorate_feed_item(item)

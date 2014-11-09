@@ -44,7 +44,7 @@ module ModulesHelper
   end
 
   def completion_classes(ex_block)
-    if Completion.user_completion(current_user, ex_block.skill)
+    if Completion.for(current_user, ex_block.skill)
       "btn btn-default completed"
     else
       "btn btn-default"
@@ -52,7 +52,7 @@ module ModulesHelper
   end
 
   def completion_classes_small(user, skill)
-    if Completion.user_completion(user, skill)
+    if Completion.for(user, skill)
       "fa-check-circle-o"
     else
       "fa-circle-o"
