@@ -8,6 +8,10 @@ class Completion < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :skill_id,
                           message: "cannot complete the same skill twice"
 
+  def self.user_completion(user, skill)
+    find_by!(user: user, skill: skill)
+  end
+
   def self.decorate_feed_item(item)
     {
       label: "Completed '#{item.skill.name}'",

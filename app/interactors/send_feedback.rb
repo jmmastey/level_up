@@ -9,13 +9,11 @@ class SendFeedback
   end
 
   def call
-    c = context
-    message = AdminMailer.send_feedback(c.user, c.name, c.page, c.message)
-    unless message.deliver
-      context.fail!(message: "unable to send email: #{context.inspect}")
-    end
+    message = AdminMailer.send_feedback(context.user, context.name,
+                                        context.page, context.message)
+    message.deliver!
   rescue => e
-    context.fail!(message: e.message)
+    context.fail!(message: "unable to send email: #{e.message}")
   end
 
   private
