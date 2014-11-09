@@ -44,10 +44,18 @@ module ModulesHelper
   end
 
   def completion_classes(ex_block)
-    if current_user.has_completed?(ex_block.skill)
+    if Completion.user_completion(current_user, ex_block.skill)
       "btn btn-default completed"
     else
       "btn btn-default"
+    end
+  end
+
+  def completion_classes_small(user, skill)
+    if Completion.user_completion(user, skill)
+      "fa-check-circle-o"
+    else
+      "fa-circle-o"
     end
   end
 

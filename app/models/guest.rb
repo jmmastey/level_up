@@ -22,8 +22,4 @@ class Guest
   def admin?
     false
   end
-
-  def has_completed?(_skill)
-    false
-  end
 end

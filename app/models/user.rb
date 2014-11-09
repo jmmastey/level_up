@@ -20,10 +20,6 @@ class User < ActiveRecord::Base
     includes(:completions).where.not(completions: { id: nil })
   }
 
-  def has_completed?(skill)
-    skills.pluck(:id).include? skill.id
-  end
-
   def admin?
     has_role? :admin
   end
