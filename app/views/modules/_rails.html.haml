@@ -5,18 +5,18 @@
   %p The key to rails' productivity is the concept of "Convention Over Configuration". While there are a thousand tiny decisions to make for any application you build, the rails philosophy is that most of those decisions have "correct" (or nearly always correct) answers. That being the case, we just assume those answers and focus on more important things.
   %p <a href='https://www.youtube.com/watch?v=9naDS3r4MbY'>This talk</a> by Yehuda Katz does a great job of explaining how important this philosophy really is.
 
-  = exercise_block_for "rails", "convention" do |e|
+  = exercise_block_for "convention" do |e|
     = e.question "Explain how \"convention over configuration\" allows us to be more productive as a group."
 
   %p Here's where the rubber meets the road. We're going to build a fully functional rails app. It would be a good idea to look at the resources on the right, but I'm not going to add a lot of context here. Spend some time, make a thing.
 
-  = exercise_block_for "rails", "basic_types" do |e|
+  = exercise_block_for "basic_types" do |e|
     = e.question "Go complete the #{exercise_link 'cyoa'} exercise. It's a big one, but it should give you good practice and a base for the other exercises here."
 
   %p Of interesting note, one of the many bits of functionality provided by rails is a set of helpers to base ruby. Though you now know ruby, you may not be familiar with these extensions, and they're pretty helpful.
   %p The <a href='http://edgeguides.rubyonrails.org/active_support_core_extensions.html'>Rails Guide</a> has a long list, but check out in particular the date and string extensions, as well as the extensions to All Objects.
 
-  = exercise_block_for "rails", "active_support" do |e|
+  = exercise_block_for "active_support" do |e|
     = e.question "Do the #{exercise_link 'supportive'} exercise."
     = e.question "Refactor your rails app to make use of ActiveSupport extensions wherever it makes sense."
 
@@ -29,7 +29,7 @@
     %li <a href='http://railscasts.com/episodes/40-blocks-in-view'>Blocks in Views</a>
     %li <a href='http://railscasts.com/episodes/101-refactoring-out-helper-object'>Refactoring Out Helper Objects</a>
 
-  = exercise_block_for "rails", "helpers" do |e|
+  = exercise_block_for "helpers" do |e|
     = e.question "Explain how helpers improve the readability and organization of your rails app."
     = e.question "Refactor your rails app to move any complicated logic from views into helpers."
 
@@ -37,14 +37,14 @@
 
   %p Go ahead and watch <a href='http://railscasts.com/episodes/66-custom-rake-tasks'>this RailsCast</a>, and <a href='http://jasonseifer.com/2010/04/06/rake-tutorial'>this tutorial</a> is pretty sweet too.
 
-  = exercise_block_for "rails", "rake" do |e|
+  = exercise_block_for "rake" do |e|
     = e.question "Demonstrate the command to list all the rake tasks, and the one to match a particular set of tasks."
     = e.question "Explain what sorts of tasks (including examples) belong in a rake task."
     = e.question "If you haven't already, add a few rake tasks to your rails app. Jobs that are run on a schedule are a good place to start."
 
   %p Finally, this should be an easy one.
 
-  = exercise_block_for "rails", "test_conventions" do |e|
+  = exercise_block_for "test_conventions" do |e|
     = e.question "Presumably you already wrote your app using TDD / BDD, so this should be an easy one. Just make sure you've followed the conventions for Rspec and Cucumber tests in your codebase."
     = e.question "Make sure that you aren't stubbing functionality in your integration tests."
     = e.question "Explain the usage of integration versus unit tests in your Rails app."
@@ -55,7 +55,7 @@
   %p It's a common scene: the code doesn't work. Not only does it not work, but it makes no sense whatsoever that it doesn't work. You've checked the code several times over and it's just not possible that it's broken. But it is.
   %p We use a library called <a href='http://pryrepl.org/'>pry</a>, which is basically a replacement for irb. You'll want to be familiar with it; it's one of the most important debugging tools we use. One of our favorite friends Josh Cheek did a <a href='http://vimeo.com/26391171'>wonderful screencast</a> on the topic.
 
-  = exercise_block_for "rails", "pry" do |e|
+  = exercise_block_for "pry" do |e|
     = e.question "If you've got any nagging issues inside your code, now is a great time to debug it using binding.pry."
     = e.question "If not, try using pry to step through a request cycle from the app. Get familiar with breakpoints and stepping through code."
     = e.question "Consider switching your default console command to pry in your project. Change the console default to pry."

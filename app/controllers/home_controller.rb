@@ -30,6 +30,10 @@ class HomeController < ApplicationController
   end
 
   def find_completed_skills
-    @skills = Completion.user_skills(current_user)
+    if current_user.signed_in?
+      @skills = Completion.user_skills(current_user)
+    else
+      @skills = []
+    end
   end
 end

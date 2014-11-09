@@ -4,9 +4,9 @@
   %h3 None of this even matters.
   %p But I feel like it should be here anyway.
 
-  = exercise_block_for @module.handle, @module.skills.first.handle do |e|
+  = exercise_block_for @module.skills.first.handle do |e|
     = e.question "I am a fake question block, bro. Great work!"
 
-  = exercise_block_for @module.handle, @module.skills.last.handle do |e|
+  = exercise_block_for @module.skills.last.handle do |e|
     = e.question "I am a fake question block, bro. Great work!"
     = e.question "And I test multiple question rendering, too!"

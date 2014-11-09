@@ -2,16 +2,16 @@
   %h3 What It's All About
   %p When talking about data, it's tempting to believe that really we're only talking about the database layer. After all, database developers spend their entire day steeped in data. On the contrary, data engineering is something that has to exist at every layer of our application.
   %p Furthermore, the structure of that data -- and how we let people access it -- is just as important at the higher levels as it is at the lower levels. We have to provide people with sensible and intuitive ways to get at our data if we ever want them to use it.
-  = exercise_block_for "data", "apis" do |e|
+  = exercise_block_for "apis" do |e|
     = e.question "Explain what it means that 'everything has an API'."
     = e.question "Do the #{exercise_link('traffic_control')} exercise."
   %p The "make everything easy" nature of Rails development can often lead to a blindness to the structure of data. It takes so little effort to create new models and relate them to each other, that we often don't spend enough time understanding what the data <em>should</em> look like.
   %p The consequence of this is that we often don't store the right data, or enough data, or even sometimes that we store far too much data and make it impossible to retrieve. In a private project, that can be just fine, but as a business this costs us real money and can even expose us to lawsuits.
-  = exercise_block_for "data", "quality" do |e|
+  = exercise_block_for "quality" do |e|
     = e.question "Define data quality. How do we know that we are capturing and delivering the right data?"
     = e.question "Name some situations where data quality has bitten us, and the consequences of those situations."
   %p Another side effect of the Rails philosophy is that we often don't consider exactly how the code we write actually interacts with the data in our database.  Honestly, for many cases it doesn't actually matter as Rails is smart enough to be performant enough. On the other hand, a single poorly written access pattern can bring our application to its knees, and you had better understand how to fix it.
-  = exercise_block_for "data", "calculate" do |e|
+  = exercise_block_for "calculate" do |e|
     = e.question "Explain why we prefer to calculate everything in the database."
     = e.question "Give an example of a common operation in Rails that might be nonperformant if calculated at the app level, and then show how to calculate it properly using the database."
     
@@ -19,15 +19,15 @@
   %h3 Database Things After All
   %p While you're off in the clouds (snerk) thinking about data, your humble database will still be patiently waiting for you, its passion for serving you data kindling like the kind of low burning flame the could keep a man warm on a cold...
   %p Sorry, got a little carried away. Let's do some SQL.
-  = exercise_block_for "data", "sql" do |e|
+  = exercise_block_for "sql" do |e|
     = e.question "Do Part 1 of the #{exercise_link('yadda')} exercise."
   %p When you're not sure what's going on at the database level, Rails encourages you to drop into the SQL prompt to root around. We'll also be using that prompt to discover new things about the performance of our application. It's like the fuel to the proverbial fire of... nevermind.
-  = exercise_block_for "data", "psql" do |e|
+  = exercise_block_for "psql" do |e|
     = e.question "Demonstrate the Rails command to enter the psql shell."
     = e.question "Demonstrate the command to get help on other psql commands."
     = e.question "Use that command to find out how to list all views, and then to view the query that generated a view."
   %p Purely mechanical one here -- let's write a Rails migration. We abstract over the database implementation for a number of reasons, but personally I'm just happy that it's a little easier to read and write than vanilla SQL. Let's take a look at a few features.
-  = exercise_block_for "data", "migrations" do |e|
+  = exercise_block_for "migrations" do |e|
     = e.question "Go back the rails project and write a migration, or paste a link to a migration you wrote."
     = e.question "Demonstrate how to add a unique index on two columns within a migration."
     = e.question "Explain the cases where you can or cannot modify an existing migration."
@@ -37,16 +37,16 @@
   %p Think you're an expert with SQL now, just because you can create a table and do a basic select? Hah! Keep at it, you'll get there, kid.
   %p First, let's talk about your performance. You won't get far writing applications before you find yourself in a bit of a query performance pickle. Sure, you can put it off for a while with your caches and whathaveyou, but you'll get there, and once you do, you need to know about explain. Explain is going to guide you through the mess and you'll come out smelling like a rose, and who doesn't want that?
   %p Take a look at <a href='http://robots.thoughtbot.com/why-postgres-wont-always-use-an-index'>this article</a> on how to use explain and how to interpret the results.
-  = exercise_block_for "data", "explain" do |e|
+  = exercise_block_for "explain" do |e|
     = e.question "Do Parts 2 and 3 of the #{exercise_link('yadda')} exercise."
     = e.question "Explain what the cost numbers mean for a given query plan."
   %p Next, let's talk a little bit about size. First: get your mind out of the gutter. Column size, kid. Column size. If you don't size your columns correctly, you're going to be in for a world of hurt later on.
-  = exercise_block_for "data", "column_size" do |e|
+  = exercise_block_for "column_size" do |e|
     = e.question "Explain the problem with default column sizes and why we try to size columns properly."
     = e.question "Contrariwise, explain the dangers of sizing columns inappropriately."
     = e.question "Make sure your yadda schema is well normalized and sized."
   %p Finally, indices. Can't turn that one into some kind of filthy dreck, can you? Eh? Anyway, indices are one of the most common performance optimizations we make in database land. They allow for near-instantaneous executions of queries when used correctly. Or when used incorrectly, they screw your performance entirely. Maybe let's do that correclty?
-  = exercise_block_for "data", "indices" do |e|
+  = exercise_block_for "indices" do |e|
     = e.question "Explain the tradeoff that indices allow us to make."
     = e.question "Show how indices are stored on the filesystem, and explain how that affects the database's ability to use multi-column indices for a given query."
     = e.question "Do Part 4 of the #{exercise_link('yadda')} exercise."

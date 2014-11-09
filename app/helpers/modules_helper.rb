@@ -1,5 +1,5 @@
 module ModulesHelper
-  def exercise_block_for(_category, handle)
+  def exercise_block_for(handle)
     block  = ExerciseBlock.new(@module, handle)
 
     yield block
