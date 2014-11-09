@@ -1,5 +1,5 @@
 module Summaries
-  class CourseSummary < Summaries::Base
+  class CourseSummary
     def self.summarize(course, user)
       data = summary_data(course, user)
       data.each_with_object({}) do |(key, value), hash|
