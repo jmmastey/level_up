@@ -7,74 +7,74 @@
 
   %p While the skills necessary for writing and testing rails code are the same, there is an important distinction between the roles of Test Engineer and Software Engineer: testing requires a very different mindset. No matter your title, you need to know that when you test, your attitude towards the software needs to be fundamentally different from when you write that software.
   %p Read <a href='http://blog.utest.com/2012/02/06/the-software-testing-mindset/'>this blog post</a> on the tester's mindset for some insight into the differences in thinking between the roles.
-  = exercise_block_for "test", "trustno1" do |e|
-    = e.question "Developers are a tricksey bunch. Name some reasons why you shouldn't just trust the person who wrote the code."
-    = e.question "Name some mental pitfalls that you should watch out for when testing code."
-    = e.question "So then, why shouldn't we be satisfied with testing our own code?"
+  = exercise_block_for "trustno1" do |e|
+    - e.question "Developers are a tricksey bunch. Name some reasons why you shouldn't just trust the person who wrote the code."
+    - e.question "Name some mental pitfalls that you should watch out for when testing code."
+    - e.question "So then, why shouldn't we be satisfied with testing our own code?"
 
   %p When we develop new code, TDD is the process we use to build it. You may have encountered TDD before (<a href='http://blog.8thlight.com/uncle-bob/2013/09/23/Test-first.html'>read a little refresher here</a>), and odds are that if you tried it you felt like it was really awkward and then went back to your previous ways feeling like a bit of a heathen. That's okay.
   %p TDD is hard as a practice. There are times when it isn't even applicable. Still, writing the tests before you write the code tends to produce better code over time, and there are some specific skills that can help you get closer to "pure" in your development.
   %p <a href='http://www.bignerdranch.com/blog/red-green-refactor-the-tools-for-success/'>This article</a> (and really all the ones linked from it) are great resources on the philosophy and skills behind TDD.
-  = exercise_block_for "test", "redgreen" do |e|
-    = e.question "Explain how the red / green / refactor cycle works, and how it creates better code over time."
+  = exercise_block_for "redgreen" do |e|
+    - e.question "Explain how the red / green / refactor cycle works, and how it creates better code over time."
 
   %p Once you've got a little TDD under your belt, you will inevitably come to the question of "what should I write tests for first". This is a significant question for the layout of your application, but TDD has no opinions on the matter. That's where Behavior Driven Development comes in. We use BDD to define where to start and which things are worth testing in the precious limited time we have.
   %p Check the resources in the sidebar for some good BDD examples.
-  = exercise_block_for "test", "tdd_bdd" do |e|
-    = e.question "Here are the big ones. To demonstrate TDD, do the #{exercise_link 'data_science'} exercise. Make sure to write tests first."
-    = e.question "Once you've done that, to contrast BDD, do the #{exercise_link 'overlord'} exercise. Focus on the behavioral tests for this exercise."
+  = exercise_block_for "tdd_bdd" do |e|
+    - e.question "Here are the big ones. To demonstrate TDD, do the #{exercise_link 'data_science'} exercise. Make sure to write tests first."
+    - e.question "Once you've done that, to contrast BDD, do the #{exercise_link 'overlord'} exercise. Focus on the behavioral tests for this exercise."
 
 .page-header
   %h3 Your Toolbelt
 
   %p To think clearly about what types of testing we should be doing, let's first define some different types of testing. Read this <a href='http://guides.rubyonrails.org/testing.html'>Rails Guide</a> on testing to get an overview of what types of testing we'll be doing. We use some different technologies than those mentioned, but the ideas are fundamentally the same.
-  = exercise_block_for "test", "test_types" do |e|
-    = e.question "You've now written two types of tests. Name them, and explain the differences."
-    = e.question "Name the other type of test that you haven't written yet, and write an example of one."
+  = exercise_block_for "test_types" do |e|
+    - e.question "You've now written two types of tests. Name them, and explain the differences."
+    - e.question "Name the other type of test that you haven't written yet, and write an example of one."
 
   %p Okay, good job. Now, let's talk about some specific tooling. For functional and integration tests on the Prime Stack, we'll be using Capybara. Go <a href='https://github.com/jnicklas/capybara'>read the docs</a>, especially the part about <a href='https://github.com/jnicklas/capybara#drivers'>drivers</a>.
-  = exercise_block_for "test", "capybara" do |e|
-    = e.question "What type of tests do we use Capybara for? What are its strengths and limitations?"
-    = e.question "Explain what a capybara driver is, and what some benefits are of the default driver."
-    = e.question "Name a case where a driver other than the default would be necessary, then go implement it with your overlord code."
+  = exercise_block_for "capybara" do |e|
+    - e.question "What type of tests do we use Capybara for? What are its strengths and limitations?"
+    - e.question "Explain what a capybara driver is, and what some benefits are of the default driver."
+    - e.question "Name a case where a driver other than the default would be necessary, then go implement it with your overlord code."
 
   %p So you've written your integration tests and gone merrily on your way. Kudos! Still, over time you find yourself getting intermittent failures in the test suite, even without changing code. Turns out that one of the most insidious problems in testing is the inconsistent (or flapping) test. 
   %p Watch <a href='http://www.confreaks.com/videos/3371-railsconf-eliminating-inconsistent-test-failures'>this excellent talk</a> on eliminating flapping tests for some inspiration. <a href='http://xunitpatterns.com/Fragile%20Test.html'>XUnit Patterns</a> also has a great discussion on some common causes and resolutions for fragile tests.
   %p Remember that it's critical to resolve flapping tests before they become endemic to your codebase, or they'll undermine the entire test suite and make your life sad.
-  = exercise_block_for "test", "flapping" do |e|
-    = e.question "First, tell me what a flapping test is. Then, explain some ways that flapping tests are more destructive than even failing or non-existent tests."
-    = e.question "Name some gotchas when writing tests that can cause them to become fragile, and how to fix those problems."
+  = exercise_block_for "flapping" do |e|
+    - e.question "First, tell me what a flapping test is. Then, explain some ways that flapping tests are more destructive than even failing or non-existent tests."
+    - e.question "Name some gotchas when writing tests that can cause them to become fragile, and how to fix those problems."
 
 .page-header
   %h3 It's Not All Automatic
 
   %p Up until this point, we've focused on automated testing, and that's a good thing. The vast majority of the testing you do should be automated, and manual testing doesn't scale well. That said, there are times that manual testing of code is the best (or only) strategy, and we should shamelessly steal whatever value we can from the manual testing tradition.
-  = exercise_block_for "test", "manual" do |e|
-    = e.question "Name some cases where manual testing is preferable or necessary to verify code."
-    = e.question "Name some strategies for manually testing code that constrain the time cost of testing."
+  = exercise_block_for "manual" do |e|
+    - e.question "Name some cases where manual testing is preferable or necessary to verify code."
+    - e.question "Name some strategies for manually testing code that constrain the time cost of testing."
 
   %p When you're thinking about your test plan, try thinking of the tests grouped by their outcomes. Take a look at <a href='http://www.nishantverma.com/2010/03/test-case-paths-happy-sad-bad.html'>this article</a> and think about the different "paths" of tests. Planning your test cases according to different paths is a great way to make sure that you cover all the necessary cases.
-  = exercise_block_for "test", "paths" do |e|
-    = e.question "Go back to all the tests you've written for this course. Organize them according to what type of test they are."
-    = e.question "Think about what sort of tests you may have missed for the various paths, and add them to the code."
+  = exercise_block_for "paths" do |e|
+    - e.question "Go back to all the tests you've written for this course. Organize them according to what type of test they are."
+    - e.question "Think about what sort of tests you may have missed for the various paths, and add them to the code."
 
   %p One of the tools that might make you wrinkle your nose is a test plan. Planning your test process -- for your code or others' -- is a huge step toward doing good test work. Read <a href='http://googletesting.blogspot.com/2011/09/10-minute-test-plan.html'>this article</a> and spend some time thinking about how you're going to test your next software project.
-  = exercise_block_for "test", "test_plans" do |e|
-    = e.question "Do the #{exercise_link 'shopping_cart'} exercise."
+  = exercise_block_for "test_plans" do |e|
+    - e.question "Do the #{exercise_link 'shopping_cart'} exercise."
 
 .page-header
   %h3 Strategies for Better Testing
 
   %p I hope you'll forgive me when I say that it's entirely possible to write crap code even with TDD and full test coverage. The act of testing is necessary, but not sufficient, to produce the software we're looking for.
   %p Probably the hardest part of starting with TDD and other Test First methodologies is that you already know how you want to implement the code before you even fire up your editor. That's pretty neat (you're a smartie), but it tends to create awkward designs as you consider your functionality "from the inside out". Read this article on <a href='http://blog.carbonfive.com/2012/02/14/beginning-outside-in-rails-development-with-cucumber-and-rspec/'>driving your code from your tests</a> as a way to design better code.
-  = exercise_block_for "test", "wanttosee" do |e|
-    = e.question "Explain the theory around 'writing the code you want to see'."
-    = e.question "Create a short gist illustrating a place where violating this rule would cause you to write worse code."
+  = exercise_block_for "wanttosee" do |e|
+    - e.question "Explain the theory around 'writing the code you want to see'."
+    - e.question "Create a short gist illustrating a place where violating this rule would cause you to write worse code."
 
   %p One common source of test crappiness is that the tests themselves are not exercising the System Under Test. Roll your eyes at the hyperbolic title and watch the Ruby Tapas on <a href='http://www.rubytapas.com/episodes/52-The-End-of-Mocking'>The End of Mocking</a> for more information.
-  = exercise_block_for "test", "meaningful" do |e|
-    = e.question "Write an example of a tautological test. Show the correct implementation of that test."
+  = exercise_block_for "meaningful" do |e|
+    - e.question "Write an example of a tautological test. Show the correct implementation of that test."
 
   %p Though I'm sure you would never do such a thing, another problem you're sure to see in other people's code is that they wrote the tests after writing the code, but never verified that the tests could ever fail. If a test has never been red, it is probably of low value.
-  = exercise_block_for "test", "failtests" do |e|
-    = e.question "Go check the tests you've written during this course. Try to change the system under test to make the tests fail. If they don't, refactor them until they do."
+  = exercise_block_for "failtests" do |e|
+    - e.question "Go check the tests you've written during this course. Try to change the system under test to make the tests fail. If they don't, refactor them until they do."

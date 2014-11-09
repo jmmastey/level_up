@@ -1,14 +1,11 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_user, only: [:show, :update]
-
-  def index
-    @users = User.with_completions.by_activity_date.page(params[:page])
-  end
+  before_filter :find_active_users, only: [:index]
 
   def update
     authorize! :update, user, message: 'Not authorized as an administrator.'
-    if user.update_attributes(params[:user], as: :admin)
+    if user.update_attributes(user_params)
       redirect_to users_path, notice: "User updated."
     else
       redirect_to users_path, alert: "Unable to update user."
@@ -17,9 +14,17 @@ class UsersController < ApplicationController
 
   private
 
+  def find_active_users
+    @users = User.with_recent_activity.page(params[:page])
+  end
+
   def find_user
     @user ||= User.find params[:id]
   end
   alias_method :user, :find_user
   helper_method :user
+
+  def user_params
+    params.permit(:user)
+  end
 end

@@ -1,16 +1,9 @@
 module ModulesHelper
-  def exercise_block_for(category, handle)
-    skill     = skill_object_from(handle)
-    ex_block  = ExerciseBlock.new(category, skill, [])
+  def exercise_block_for(handle, &block)
+    block = ExerciseBlock.new(@module, handle, &block)
 
-    yield ex_block
-    register_exercise_for(skill)
-
-    render_block(ex_block)
-  end
-
-  def skill_object_from(handle)
-    @module.skills.find { |s| s.handle == handle }
+    current_skills << block.skill
+    render block
   end
 
   def exercise_link(exercise_name)
@@ -18,43 +11,26 @@ module ModulesHelper
   end
 
   def current_skills
-    @skills ||= []
+    @current_skills ||= []
   end
-
-  private
 
   def exercise_url(exercise)
     "http://github.com/jmmastey/level_up_exercises/tree/master/#{exercise}"
   end
 
-  def register_exercise_for(skill)
-    current_skills << skill
-  end
-
-  def render_block(ex_block)
-    render partial: 'exercise/block', object: ex_block
-  end
-
-  def render_questions(questions)
-    if questions.many?
-      render partial: "exercise/questions", object: questions
-    else
-      render partial: "exercise/question", object: questions.first
-    end
-  end
-
-  def completion_classes(ex_block)
-    if current_user.has_completed?(ex_block.skill)
+  def completion_classes(skill)
+    if @skills.include? skill.id
       "btn btn-default completed"
     else
       "btn btn-default"
     end
   end
 
-  ExerciseBlock = Struct.new(:category, :skill, :questions) do
-    def question(text)
-      questions << text
-      nil
+  def completion_classes_small(skill)
+    if @skills.include? skill.id
+      "fa-check-circle-o"
+    else
+      "fa-circle-o"
     end
   end
 end

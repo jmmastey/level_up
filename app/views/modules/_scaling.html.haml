@@ -21,170 +21,170 @@
   %h3 Detection and Your Environment
   %p There is really one main reason why our Rails apps don't get optimized properly: we aren't really the users. While we run our applications locally to develop and test them, we usually aren't the primary users of the app. Even when we do use them, we tend not to be "extreme" users of the app. Let's take a look at some ways that we can start to understand the pain that we're inflicting on our users and get a grip on what needs to be optimized.
   %p So, the first thing we're going to do is to move into a production-like environment so that we can observe performance characteristics when not running on a production system.
-  = exercise_block_for "scaling", "remote" do |e|
-    = e.question "If you didn't read above, we're working with the #{exercise_link('art')} codebase. Clone it, seed it, run it."
-    = e.question "Get off localhost. Deploy the application to some other environment. Heroku, a virtual machine, doesn't matter."
-    = e.question "Seed the \"production\" and development databases and compare performance between the two. How different are they? What contributes to that difference?"
+  = exercise_block_for "remote" do |e|
+    - e.question "If you didn't read above, we're working with the #{exercise_link('art')} codebase. Clone it, seed it, run it."
+    - e.question "Get off localhost. Deploy the application to some other environment. Heroku, a virtual machine, doesn't matter."
+    - e.question "Seed the \"production\" and development databases and compare performance between the two. How different are they? What contributes to that difference?"
   %p Now that we can start to feel some of the pain, let's focus on how to diagnose performance problems. While you should start to see some of these issues on your own, as a developer you are still not well equipped as an "average" user. To get an idea of what problems your customers are facing, you should be using regular monitoring tools as part of your workflow
   %p There are several such tools, but we'll focus on just one for now. <a href='http://newrelic.com'>New Relic</a> is a popular monitoring tool that can keep track of your application performance for you. With their paid plans, you can also do extensive tracing of transactions and pages from your application.
-  = exercise_block_for "scaling", "diagnose" do |e|
-    = e.question "Sign up for a free NewRelic account. No need to provide payment credentials or anything here."
-    = e.question "Install the NewRelic client in the app. Deploy with the client enabled, or at least run it in development mode."
-    = e.question "If you're not a junior engineer, make sure your license key isn't checked into source control. C'mon, what are you thinking?"
+  = exercise_block_for "diagnose" do |e|
+    - e.question "Sign up for a free NewRelic account. No need to provide payment credentials or anything here."
+    - e.question "Install the NewRelic client in the app. Deploy with the client enabled, or at least run it in development mode."
+    - e.question "If you're not a junior engineer, make sure your license key isn't checked into source control. C'mon, what are you thinking?"
   %p To choose an appropriate problem to tackle, we will often use tools like NewRelic to see where customers are spending their time. Monitoring tools like these can be configured to warn us when performance crosses a preset boundary.
   %p The common alternative to this approach is honestly just to guess. When developing a feature, we may use it over and over and notice that the performance under a development load is insufficient, and then spend time optimizing it. There are a few problems to this approach. Firstly, our development load is typically not realistic, nor is our usaage of the application. We risk optimizing parts of our application that will never be strained under realistic situations.
   %p A second problem we face is that our testing does not tend to take into account the frequency with which a real user interacts with certain parts of our app. We may prefer to optimize a view that takes 200ms to render over one that takes 30ms to render, but if the latter is called hundreds of times more often, this optimization will fall far short. This is doubly problematic as our changes might interact with both views to make them consistently 50ms.
-  = exercise_block_for "scaling", "premature" do |e|
-    = e.question "Without consulting new relic, take another walk around the codebase. Can you identify any problematic areas that might need optimization?"
-    = e.question "Now walk around the app in the browser. Retrieve some pages in HTML, and then in JSON. Imagine yourself as a real user, or as an API client."
-    = e.question "Take a look back at NewRelic, especially under Transactions. Were your suspicions correct? Identify problem areas based on quantitative output."
+  = exercise_block_for "premature" do |e|
+    - e.question "Without consulting new relic, take another walk around the codebase. Can you identify any problematic areas that might need optimization?"
+    - e.question "Now walk around the app in the browser. Retrieve some pages in HTML, and then in JSON. Imagine yourself as a real user, or as an API client."
+    - e.question "Take a look back at NewRelic, especially under Transactions. Were your suspicions correct? Identify problem areas based on quantitative output."
   %p Once we've identified potential problems in our application, either by monitoring or by user feedback, we need to decide how to fix the problem. Despite being a test-focused (to the point of being test-obsessed) culture, the Rails prime stack has surprisingly lacking tooling around performance testing. There used to be a <a href='https://github.com/rails/rails-perftest'>type of Test::Unit test for performance</a>, but it was still relatively hard to work with, and provided no assertions around performance. We don't want to pull in all of Test::Unit for a small gain, so we're out of luck.
   %p So instead, we'll use three tools to measure performance improvements: the <a href='http://www.ruby-doc.org/stdlib-1.9.3/libdoc/benchmark/rdoc/Benchmark.html'>Benchmark library</a>, <a href='https://github.com/MiniProfiler/rack-mini-profiler'>MiniProfiler</a>, and NewRelic running in developer mode.
-  = exercise_block_for "scaling", "profile" do |e|
-    = e.question "Install the rack-mini-profiler gem in your development and \"production\" environment."
-    = e.question "Pick a problem controller action from the NewRelic interface to focus on."
-    = e.question "View the problem from both the development and production environments. Is the performance trace similar? Can you identify areas that would benefit from optimization?"
-    = e.question "Identify a model or SQL query related performance problem from the application."
-    = e.question "Use Benchmark.measure to run the problematic model code several thousand times. We need to do this to get consistent timing performance."
-    = e.question "Take a look at the benchmark output and identify the relevant metrics to pay attention to." 
+  = exercise_block_for "profile" do |e|
+    - e.question "Install the rack-mini-profiler gem in your development and \"production\" environment."
+    - e.question "Pick a problem controller action from the NewRelic interface to focus on."
+    - e.question "View the problem from both the development and production environments. Is the performance trace similar? Can you identify areas that would benefit from optimization?"
+    - e.question "Identify a model or SQL query related performance problem from the application."
+    - e.question "Use Benchmark.measure to run the problematic model code several thousand times. We need to do this to get consistent timing performance."
+    - e.question "Take a look at the benchmark output and identify the relevant metrics to pay attention to." 
 
 .page-header
   %h3 Basic Refactoring
   %p Most fixes for performance will either focus on using features in Rails or adding to the platform. That said, there are some basic refactoring techniques that we can use to fix issues. Most of these fixes aren't even specific to Rails or Ruby. Remember to test performance before and after these optimizations.
   %p First let's take a look at a common pattern for database interaction. In the common case of needing to summarize data from the database, the naive approach is to collect all the objects and perform the summary in Ruby code. While this is conceptually simple, it leads to poor performance as needless data and objects are manipulated. Read <a href='http://www.devarticles.com/c/a/Ruby-on-Rails/Calculating-Statistics-with-Active-Record/'>this article</a> on calculating stats and let's fix the issue.
-  = exercise_block_for "scaling", "wrong_work" do |e|
-    = e.question "Take a look at the method Performance#average_rating. Run it in a console. How many queries are executed? How much time do they take?"
-    = e.question "Generate a quick benchmark for the method and take note of average time. Remember to run hundreds of times, at least, to average out variations."
-    = e.question "Fix the method so that it does aggregation in the database and compare with the previous timing results." 
-    = e.question "Do the same for Performer#average_rating. Notice how many queries are run from that method when executing in a console. Why is this different?"
+  = exercise_block_for "wrong_work" do |e|
+    - e.question "Take a look at the method Performance#average_rating. Run it in a console. How many queries are executed? How much time do they take?"
+    - e.question "Generate a quick benchmark for the method and take note of average time. Remember to run hundreds of times, at least, to average out variations."
+    - e.question "Fix the method so that it does aggregation in the database and compare with the previous timing results." 
+    - e.question "Do the same for Performer#average_rating. Notice how many queries are run from that method when executing in a console. Why is this different?"
   %p Even when you do need to load objects from the database, you may not need to load all fields from those objects. By default, when you ask for a record or collection of records from ActiveRecord, it will include all fields for that record. We can use the ActiveRecord <a href='http://guides.rubyonrails.org/active_record_querying.html#pluck'>pluck method</a> to return a much smaller set of data instead.
-  = exercise_block_for "scaling", "pluck" do |e|
-    = e.question "Take a look at the shows#index of the application. Only one query is executed, but it is an expensive one. What problem does this cause?"
-    = e.question "Refactor the controller method to use the pluck method instead. You will have to modify the view to accommodate an array rather than an object."
-    = e.question "How does this impact performance of the page? What are some downsides of this approach?"
-    = e.question "Try using the .select method instead. How does this compare to the pluck approach?"
-    = e.question "On the ActiveRecord Querying resource listed above, take a look at other querying methods available. Where could you use them to increase performance?"
+  = exercise_block_for "pluck" do |e|
+    - e.question "Take a look at the shows#index of the application. Only one query is executed, but it is an expensive one. What problem does this cause?"
+    - e.question "Refactor the controller method to use the pluck method instead. You will have to modify the view to accommodate an array rather than an object."
+    - e.question "How does this impact performance of the page? What are some downsides of this approach?"
+    - e.question "Try using the .select method instead. How does this compare to the pluck approach?"
+    - e.question "On the ActiveRecord Querying resource listed above, take a look at other querying methods available. Where could you use them to increase performance?"
   %p When testing, we may run into a related performance issue. We tend to create many objects because it's so easy to do with FactoryGirl. Each of those objects has to run through a complete object save, access the database, and then later be loaded back into the application during the test.
   %p Instead, we should create only the minimum number of objects necessary to complete a test. When applicable, it is sometimes even possible to build an object without saving it. Let's see if we can reduce the object creation count in our tests.
-  = exercise_block_for "scaling", "slow_tests" do |e|
-    = e.question "Thankfully, tests come with built in timing. Time the performance_spec.rb test as it is currently written."
-    = e.question "Refactor the test to create WAY fewer objects. Are there any risks to this approach?"
-    = e.question "Do the same for the performer_spec.rb test."
-    = e.question "Are there any other tests that can be eliminated entirely to reduce the footprint of the test?"
-    = e.question "Is it really a big deal to remove such a relatively small number of objects from one test?"
+  = exercise_block_for "slow_tests" do |e|
+    - e.question "Thankfully, tests come with built in timing. Time the performance_spec.rb test as it is currently written."
+    - e.question "Refactor the test to create WAY fewer objects. Are there any risks to this approach?"
+    - e.question "Do the same for the performer_spec.rb test."
+    - e.question "Are there any other tests that can be eliminated entirely to reduce the footprint of the test?"
+    - e.question "Is it really a big deal to remove such a relatively small number of objects from one test?"
   %p Rails scoping is a fantastic feature to improve encapsulation and code readability. One of the features we get as part of scoping is the "default scope". This scope applies to all queries, and can be useful for cases where only a subset of a table will ever be retrieved.
   %p That said, a common error that developers make is to perform sorting or other expensive computations within the default scope. These computations are propagated through the rest of the app, even when they aren't necessary. See <a href='http://rails-bestpractices.com/posts/806-default_scope-is-evil'>This article</a> for more details. Let's fix this issue.
-  = exercise_block_for "scaling", "scope" do |e|
-    = e.question "Take a look at the Show model, which has a sorted default scope. Create a benchmark that shows the time difference between executing Show.all with and without this scope."
-    = e.question "We added that scope for the shows#all action, but it is unnecessary for other parts of the application. Name some places where this scope might be accidentally included and affect the application."
-    = e.question "Move the default_scope into another named scope and update the shows#all action accordingly."
-    = e.question "What else might alleviate the concern with having a sorting scope?"
+  = exercise_block_for "scope" do |e|
+    - e.question "Take a look at the Show model, which has a sorted default scope. Create a benchmark that shows the time difference between executing Show.all with and without this scope."
+    - e.question "We added that scope for the shows#all action, but it is unnecessary for other parts of the application. Name some places where this scope might be accidentally included and affect the application."
+    - e.question "Move the default_scope into another named scope and update the shows#all action accordingly."
+    - e.question "What else might alleviate the concern with having a sorting scope?"
   %p The default Rails generators (and perhaps you) are somewhat lazy about what data they choose to render. Their default behavior is to render all records and associations for a given object. This might be fine -- and probably has no problems when you test it locally with a few records -- but will cause problems for outlier users who can have hundreds or thousands or records associated with their account.
   %p This refactor will not be transparent to the application. We're going to make a business decision on how much data we should display to the user. Still, judicious inclusion of data on a page is not only performant, it's also more usable.
-  = exercise_block_for "scaling", "all" do |e|
-    = e.question "Generate a user with several hundred reviews. View the user's \"show\" page. Profile the performance of the page. How many partials does it render?"
-    = e.question "Create a new scope on Review that displays only reviews in the last few days. Reference that scope instead in the user view. Change the title to \"Most Recent Reviews\" How does performance compare?"
-    = e.question "We've now added a potentially expensive sort operation to the mix. Is there anything we can to do mitigate the cost of sorting the data when the database may be extremely large?"
-    = e.question "Are there other places where we can apply this technique? Model.all is usually a red flag here."
+  = exercise_block_for "all" do |e|
+    - e.question "Generate a user with several hundred reviews. View the user's \"show\" page. Profile the performance of the page. How many partials does it render?"
+    - e.question "Create a new scope on Review that displays only reviews in the last few days. Reference that scope instead in the user view. Change the title to \"Most Recent Reviews\" How does performance compare?"
+    - e.question "We've now added a potentially expensive sort operation to the mix. Is there anything we can to do mitigate the cost of sorting the data when the database may be extremely large?"
+    - e.question "Are there other places where we can apply this technique? Model.all is usually a red flag here."
   %p This is a pretty common refactor, but we still fall for it pretty often. If you went to college for CS, you'll remember that loops are the enemy of performance. We're not going to try loop unrolling, or anything so arcane, but we do need to minimize the amount of work we do within our loops. By moving "invariants" (values that don't change within our loop) outside of the loop, we can avoid recomputing values over and over again.
-  = exercise_block_for "scaling", "loop_invariant" do |e|
-    = e.question "Look at the ShowRecommender class, specifically at the loop within the #recommendations method. Benchmarking this class with a realistic load will probably be a bit of a pain. sorry, do it anyway."
-    = e.question "The call to retrieve the current user's favorite shows is repeated within the loop, even though the result will never change. Move it outside the loop and observe the performance difference."
-    = e.question "As a similar type of optimization, look at the line that ensures novelty and uniqueness of the suggestions provided. Notice that we do not need to execute this check on every iteration through the loop. Move the line to the end of the method and again observe the performance difference."
+  = exercise_block_for "loop_invariant" do |e|
+    - e.question "Look at the ShowRecommender class, specifically at the loop within the #recommendations method. Benchmarking this class with a realistic load will probably be a bit of a pain. sorry, do it anyway."
+    - e.question "The call to retrieve the current user's favorite shows is repeated within the loop, even though the result will never change. Move it outside the loop and observe the performance difference."
+    - e.question "As a similar type of optimization, look at the line that ensures novelty and uniqueness of the suggestions provided. Notice that we do not need to execute this check on every iteration through the loop. Move the line to the end of the method and again observe the performance difference."
   %p Similarly to the above, we may compute values elsewhere and then use their value several times. While this can be obvious within a single loop, it can be much harder when the calls are to a different method. This is one of the big benefits of a tool like NewRelic: we can see how long we spend within a single method.
   %p When we identify a method that is expensive and gets called frequently, the easiest way for us to correct the problem is to "<a href='http://www.justinweiss.com/blog/2014/07/28/4-simple-memoization-patterns-in-ruby-and-one-gem/'>memoize</a>" or remember the result. We'll only have to perform the calculation once, and every other time we'll just get the result. Let's look at this in action.
-  = exercise_block_for "scaling", "memoization" do |e|
-    = e.question "Using any of your benchmarking and profiling tools, take a look at the reviews#index.json action. Notice that the application shows us a sentiment for each review. This is done using the average rating for a show."
-    = e.question "Create a benchmark for retrieving all review sentiments for a performance with many reviews. Observe that we retrieve the average rating from the database every single time."
-    = e.question "Memoize the result of Review.recent_ratings, making sure to scope the memoized result to the proper performance ID. How does this affect our performance?"
+  = exercise_block_for "memoization" do |e|
+    - e.question "Using any of your benchmarking and profiling tools, take a look at the reviews#index.json action. Notice that the application shows us a sentiment for each review. This is done using the average rating for a show."
+    - e.question "Create a benchmark for retrieving all review sentiments for a performance with many reviews. Observe that we retrieve the average rating from the database every single time."
+    - e.question "Memoize the result of Review.recent_ratings, making sure to scope the memoized result to the proper performance ID. How does this affect our performance?"
   %p We should always start by writing our models in a well-normalized way, and Rails makes this pretty simple. Writing normalized models will help us create a well-designed data model that reflects the domain of our application accurately. In some cases, though, sticking entirely to that model is insufficient for performance reasons. Later we'll look at caching strategies that can help us with this performance, but there is another simpler option that can sometimes be simpler and easier to implement. By <a href='http://highscalability.com/scaling-secret-2-denormalizing-your-way-speed-and-profit'>denormalizing</a> our data, we can get pretty fantastic speeds without dealing with cache complications.
-  = exercise_block_for "scaling", "denormalize" do |e|
-    = e.question "Run the shows#view.json action. Notice how we get a count of the show's reviews? This probably has acceptable performance. Look at shows#index.json instead. Now that we're running the method over and over performance isn't so good anymore."
-    = e.question "Create a benchmark that shows the performance of loading several shows. Observe the number of extra queries we have to perform in this situation."
-    = e.question "Create a new num_review attribute on the Show model to keep track of the number of reviews. Update that attribute whenever a new review is created or destroyed. How does our benchmark fare?"
-    = e.question "Note that we haven't actually reduced total work, we've increased it. Where did the work go?"
-    = e.question "Are there other complications we've created in our data model? Are they worth it? Can we mitigate them?"
+  = exercise_block_for "denormalize" do |e|
+    - e.question "Run the shows#view.json action. Notice how we get a count of the show's reviews? This probably has acceptable performance. Look at shows#index.json instead. Now that we're running the method over and over performance isn't so good anymore."
+    - e.question "Create a benchmark that shows the performance of loading several shows. Observe the number of extra queries we have to perform in this situation."
+    - e.question "Create a new num_review attribute on the Show model to keep track of the number of reviews. Update that attribute whenever a new review is created or destroyed. How does our benchmark fare?"
+    - e.question "Note that we haven't actually reduced total work, we've increased it. Where did the work go?"
+    - e.question "Are there other complications we've created in our data model? Are they worth it? Can we mitigate them?"
   %p As a final refactor, let's take a critical eye to some of Ruby's dynamism. The ability to define new methods is a huge strength that we leverage often in Ruby. Unfortunately, this strength comes ith some caveats. Looking up methods is an expensive operation, so Ruby caches the result of those lookups at the language level. When we define a new method, it expires that entire cache, slowing down all our performance.
   %p No problem, don't define any new methods, right? Well, as it turns out, the libraries you use (core and otherwise) may do it for you, in which case you're pretty much hosed. As an example, the <a href='http://www.ruby-doc.org/stdlib-2.1.3/libdoc/ostruct/rdoc/OpenStruct.html'>OpenStruct core library</a> defines new methods as its primary method of operation. Take a look at <a href="https://github.com/charliesome/charlie.bz/blob/master/posts/things-that-clear-rubys-method-cache.md">this article</a> for more examples that clear the cache. Let's fix this.
-  = exercise_block_for "scaling", "method_cache" do |e|
-    = e.question "Our app can export an ical formatted list of upcoming performances (look at performance#calendar). It does so by creating OpenStruct instances for each performance, which is needlessly costly. Benchmark the calendar rendering. It need not be via the controller action."
-    = e.question "Switch the page to use a hash. Or even make a change so that all the OpenStructs are created at once. How does this affect our benchmark?"
-    = e.question "See if you can find any other places where you can remove method cache clearing."
+  = exercise_block_for "method_cache" do |e|
+    - e.question "Our app can export an ical formatted list of upcoming performances (look at performance#calendar). It does so by creating OpenStruct instances for each performance, which is needlessly costly. Benchmark the calendar rendering. It need not be via the controller action."
+    - e.question "Switch the page to use a hash. Or even make a change so that all the OpenStructs are created at once. How does this affect our benchmark?"
+    - e.question "See if you can find any other places where you can remove method cache clearing."
 
 .page-header
   %h3 Rails Features
   %p Now that we've plucked some of the low hanging fruit, let's talk about Rails features that we can use to help us optimize our code. Rails has had a reputation for being slow for years now, and while you may need to consider alternatives if you reach Twitter-scale, almost any site can get reasonable performance out of Rails with a little forethought. Let's take a look at the toolbox you get for using Rails.
   %p We'll start with the biggun. If you research performance optimization in Rails (I did), there is one problem that gets covered over and over again online. This is because it causes significant slowdowns of your code, and also because it's really easy to fix in the space of a blog post. It's called the N+1 Problem, and you can read more about it <a href='https://www.codemy.net/posts/optimizing-your-rails-app-part-1-n-1-queries'>here</a>. Take a gander and get ready for some easy wins.
-  = exercise_block_for "scaling", "n_plus_one" do |e|
-    = e.question "Load the reviews#index.json action and check out either the profiler or even just the rails server log. It should be immediately obvious how bad this action is."
-    = e.question "Use the technique you learned from the article to fix this situation. Compare performance."
-    = e.question "This is a change you could make at several different levels: the controller, the model relationship, a new scope. Which one should you choose? Why?"
+  = exercise_block_for "n_plus_one" do |e|
+    - e.question "Load the reviews#index.json action and check out either the profiler or even just the rails server log. It should be immediately obvious how bad this action is."
+    - e.question "Use the technique you learned from the article to fix this situation. Compare performance."
+    - e.question "This is a change you could make at several different levels: the controller, the model relationship, a new scope. Which one should you choose? Why?"
   %p When we first started working with this codebase, I asked you to seed the database so that we could start working with a larger dataset. Really, this was a silly lie on my part. The dataset we're generating is almost embarassingly small. Let's fix that. Read <a href='https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance'>this article</a> for some ways to fix the performance of our imports.
-  = exercise_block_for "scaling", "import" do |e|
-    = e.question "Time the seed script, either with a benchmark or the unix time command."
-    = e.question "Fix the seeds script to use the techniques from the article. You may have to get creative about your data generation."
-    = e.question "See if you can push up the number of records by an order of magnitude or two while maintaining performance."
+  = exercise_block_for "import" do |e|
+    - e.question "Time the seed script, either with a benchmark or the unix time command."
+    - e.question "Fix the seeds script to use the techniques from the article. You may have to get creative about your data generation."
+    - e.question "See if you can push up the number of records by an order of magnitude or two while maintaining performance."
   %p Here's another big one; you're about to get a bunch of credit all at once. Did you know that Rails already has <a href='http://guides.rubyonrails.org/caching_with_rails.html'>a well implemented caching system</a> built into its rendering system? Oh, you did? Fine, follow along anyway. We're going to do a few exercises in a row that should make even expensive page loads faster.
   %p First, we'll make our models suitable for caching. It's been said that one of the two hardest problems in computer science is cache invalidation (along with naming and off-by-one errors). Since we're using ActiveRecord, we actually have <a href='https://signalvnoise.com/posts/3113-how-key-based-cache-expiration-works'>a fairly robust way to handle this problem</a>, but it'll require some foresight on our part.
-  = exercise_block_for "scaling", "cache_expiry" do |e|
-    = e.question "Take a look at the homepage of the site (home#trending). This page meets our business needs, but it takes a ton of resources to do so. We'll need to optimize it heavily to get any performance at all."
-    = e.question "Update the relevant models using the \"touch\" directive so that new reviews cause the relevant show to get a new updated_at date."
-    = e.question "What are the implications of making this change on a site that potentially generates many reviews?"
-    = e.question "While you're at it, use this change to simplify the Show#trending method. It should no longer require a manual SQL query."
+  = exercise_block_for "cache_expiry" do |e|
+    - e.question "Take a look at the homepage of the site (home#trending). This page meets our business needs, but it takes a ton of resources to do so. We'll need to optimize it heavily to get any performance at all."
+    - e.question "Update the relevant models using the \"touch\" directive so that new reviews cause the relevant show to get a new updated_at date."
+    - e.question "What are the implications of making this change on a site that potentially generates many reviews?"
+    - e.question "While you're at it, use this change to simplify the Show#trending method. It should no longer require a manual SQL query."
   %p You've now created the conditions necessary to start caching. We'll start by caching specific fragments of a page.
-  = exercise_block_for "scaling", "chunk_caching" do |e|
-    = e.question "Make sure your fragment cache is configured to use memcache, as deployment platforms like Heroku don't allow you to use the filesystem."
-    = e.question "Profile the homepage and notice the number of queries and execution time for the page."
-    = e.question "Update the homepage so that trending shows are successfully cached. Make sure that new reviews or changes to the show cause the cache to be invalidated."
-    = e.question "Is the page more performant yet? What happens when the view partial changes?"
+  = exercise_block_for "chunk_caching" do |e|
+    - e.question "Make sure your fragment cache is configured to use memcache, as deployment platforms like Heroku don't allow you to use the filesystem."
+    - e.question "Profile the homepage and notice the number of queries and execution time for the page."
+    - e.question "Update the homepage so that trending shows are successfully cached. Make sure that new reviews or changes to the show cause the cache to be invalidated."
+    - e.question "Is the page more performant yet? What happens when the view partial changes?"
   %p We're now caching individual show renders, but we can do even better. For a highly trafficked site, we should consider caching content for a set period of time. If we can cache a page without running any queries -- even for a few minutes -- we should see significant returns on our response time. This is another change that affects the behavior of the site in a way that isn't transparent, but is necessary for higher-traffic situations.
   %p By the way, this type of caching is known as "Russian Doll Caching", meaning that we cache at several different layers. This means that even when we have a cache miss at a higher layer, we may be able to hit other caches at lower levels, providing at least partial cache coverage. It is the preferred method in Rails caching.
-  = exercise_block_for "scaling", "russian_doll" do |e|
-    = e.question "We're going to use the same caching mechanism in a different way to provide another layer of caching. Profile the homepage again."
-    = e.question "Add another cache directive around the entire trending shows view. Rather than using AR models for the cache key, make the cache expire every five minutes."
-    = e.question "Check performance again. Make sure that the trending shows are only loaded one time when the cache misses."
+  = exercise_block_for "russian_doll" do |e|
+    - e.question "We're going to use the same caching mechanism in a different way to provide another layer of caching. Profile the homepage again."
+    - e.question "Add another cache directive around the entire trending shows view. Rather than using AR models for the cache key, make the cache expire every five minutes."
+    - e.question "Check performance again. Make sure that the trending shows are only loaded one time when the cache misses."
   %p We talked previously about displaying only recent reviews as a way to load less data. We'd like to do something like this for our "list" actions, but users want access to all records, not just the first few. We can still limit the number of records we return by paginating results. There is an easy-to-add <a href='https://github.com/mislav/will_paginate'>pagination gem</a> available to do this for us, making this one of the largest trivial optimizations we can perform.
-  = exercise_block_for "scaling", "pagination" do |e|
-    = e.question "Visit the users#index page and profile the page. How many queries are executed?"
-    = e.question "Add the will_paginate gem to your project. Configure the users#index page to return a limited set of results. How does this affect the profile?"
-    = e.question "If you're feeling courageous, find a way to add that pagination to the users#index json renderer."
+  = exercise_block_for "pagination" do |e|
+    - e.question "Visit the users#index page and profile the page. How many queries are executed?"
+    - e.question "Add the will_paginate gem to your project. Configure the users#index page to return a limited set of results. How does this affect the profile?"
+    - e.question "If you're feeling courageous, find a way to add that pagination to the users#index json renderer."
 
 .page-header
   %h3 Platform
   %p Now that we've wrested performance out of the application through refactors, let's add some power to the application platform. This is our final set of refactors, and should lower our resource consumption significantly. By doing so, we'll be able to reduce the number of servers necessary to serve requests.
   %p Let's start with something simple. The default Rails webserver -- Webrick -- is pathetically slow and single threaded. It's trivial to upgrade so let's do that now.
-  = exercise_block_for "scaling", "mongrel" do |e|
-    = e.question "Add the mongrel gem to your gemfile. Restart the server with mongrel."
-    = e.question "It will be hard to test the performance difference when clicking around the app. See if you can generate enough load on your \"production\" server to see the difference in NewRelic."
+  = exercise_block_for "mongrel" do |e|
+    - e.question "Add the mongrel gem to your gemfile. Restart the server with mongrel."
+    - e.question "It will be hard to test the performance difference when clicking around the app. See if you can generate enough load on your \"production\" server to see the difference in NewRelic."
   %p Assets don't change, so they don't need to be served by Rails at all. Rather than dealing with the entire Rails stack for every asset request, let's configure another proxy to serve those assets instead. When running our own server, we typically use nginx to serve static assets. As of writing, Heroku has a <a href='https://addons.heroku.com/cloudinary'>free CDN option</a> that we can use to test.
-  = exercise_block_for "scaling", "cdn" do |e|
-    = e.question "Monitor the Rails logs for your production site and observe that static assets take up resources."
-    = e.question "Set up the Cloudinary CDN to serve assets instead. You'll probably need to generate assets after every release. Observe that you are no longer using Rails threads to serve assets."
-    = e.question "Set up nginx on your local machine to serve static assets and observe the same."
+  = exercise_block_for "cdn" do |e|
+    - e.question "Monitor the Rails logs for your production site and observe that static assets take up resources."
+    - e.question "Set up the Cloudinary CDN to serve assets instead. You'll probably need to generate assets after every release. Observe that you are no longer using Rails threads to serve assets."
+    - e.question "Set up nginx on your local machine to serve static assets and observe the same."
   %p We learned about memoization as a technique for optimization above. This is a powerful pattern, but in Rails there are some practical considerations to be taken into account. Every value we store has to go somewhere. In the Rails case, this means the memory space of the process. This means that we may have quickly growing processes if we're not careful. Also, different web processes do not share this space, so any space losses are multiplied over our entire web stack.
   %p To solve this, we can offload our memory to a single place that it can be retrieved efficiently. There are a number of products that will do this for us, but we'll focus today on one. <a href='http://redis.io'>Redis</a> was built as a high-throughput key-value store, which means that it stores simple values for us and retrieves them extremely quickly.
-  = exercise_block_for "scaling", "redis" do |e|
-    = e.question "Add redis to your project. You'll be running a complete separate worker for the redis process, so modify your Procfile to start that worker."
-    = e.question "Look back at the Review.recent_ratings method. Move the memoization we performed into redis. Look back at your benchmark. Is there a performance difference?"
-    = e.question "While we're at it, make the memoization key expire automatically every few minutes. We don't want the value to get too stale."
-    = e.question "In this case we're only memoizing single integers, so we wouldn't have to worry about individual web processes running out of memory. What are some cases where we might want to memoize larger values? Can we handle this with redis? Is there a limit to what we can handle?"
+  = exercise_block_for "redis" do |e|
+    - e.question "Add redis to your project. You'll be running a complete separate worker for the redis process, so modify your Procfile to start that worker."
+    - e.question "Look back at the Review.recent_ratings method. Move the memoization we performed into redis. Look back at your benchmark. Is there a performance difference?"
+    - e.question "While we're at it, make the memoization key expire automatically every few minutes. We don't want the value to get too stale."
+    - e.question "In this case we're only memoizing single integers, so we wouldn't have to worry about individual web processes running out of memory. What are some cases where we might want to memoize larger values? Can we handle this with redis? Is there a limit to what we can handle?"
   %p In some cases, it may be difficult or impossible for us to make our work efficient. When dealing with external APIs, for instance, we may not be able to guarantee latency in a reasonable amount of time. In those cases, our best strategy may be to offload the work to happen asynchronously without blocking the user to wait for us. Since we have redis installed already, it should be a snap to get async processing in our app.
   %p We're going to use <a href='http://sidekiq.org/'>Sidekiq</a>, which is itself a solution patterned after the popular Resque library. It will give us a simple way to offload work.
-  = exercise_block_for "scaling", "sidekiq" do |e|
-    = e.question "Add resque to your project. As with redis, we'll need a separate process for our workers. Add another line to your Procfile. Procfiles are great."
-    = e.question "In the denormalization activity above, you added a trigger to update num_reviews on our Show whenever a new review is added. This created additional work whenever a new review gets saved. Benchmark the creation of new reviews. Is that performance affected by subsequent review additions?"
-    = e.question "Reduce that overhead by deferring the calculation of the num_reviews attribute to happen asynchronously."
-    = e.question "This will mean that our attribute is not immediately \"in sync\" with the normalized data. Is that okay in this instance? Are there other instances where it would not be acceptable?"
-    = e.question "If you're up for it, do the same for the recommendations provided by the UserRecommender."
+  = exercise_block_for "sidekiq" do |e|
+    - e.question "Add resque to your project. As with redis, we'll need a separate process for our workers. Add another line to your Procfile. Procfiles are great."
+    - e.question "In the denormalization activity above, you added a trigger to update num_reviews on our Show whenever a new review is added. This created additional work whenever a new review gets saved. Benchmark the creation of new reviews. Is that performance affected by subsequent review additions?"
+    - e.question "Reduce that overhead by deferring the calculation of the num_reviews attribute to happen asynchronously."
+    - e.question "This will mean that our attribute is not immediately \"in sync\" with the normalized data. Is that okay in this instance? Are there other instances where it would not be acceptable?"
+    - e.question "If you're up for it, do the same for the recommendations provided by the UserRecommender."
   %p We've performed only optimizations on the server side so far. This is partly because modern Rails already does a solid job of caching for the user. The default Rails installation will outut Etags and cache headers that will be respected by all modern browsers (and even <a href='https://github.com/plataformatec/faraday-http-cache'>some client library software</a>). Let's see if we can leverage this for some extra performance.
   %p We're going to throw an extra cache layer in front of our Rails app. We'll be using <a href='http://www.slatestudio.com/blog/p/caching-in-rails-4-applications#2-http-caching-with-varnish'>Varnish</a>, a popular HTTP cache, and asking it to perform additional caching for us. By doing this, our cache will work across customers and save additional headache. First, we need to modify our code a bit for Rails' <a href='http://guides.rubyonrails.org/caching_with_rails.html#conditional-get-support'>conditional get support</a>.
-  = exercise_block_for "scaling", "http_cache" do |e|
-    = e.question "Take a look at the performers#index page, both as HTML and JSON. Using your browser, verify that Rails is sending Etags based on the rendered page. If you request the page a second time, your browser should receive a 304 Not Modified response. This does require the entire page to be rendered both times, unfortunately."
-    = e.question "Use the fresh_when call to conditionally return a Not Modified code to the browser. You may need the group_cache_key gem to make this work. Verify in the logs that you are not rendering the view on a cache hit."
-    = e.question "Add Varnish to your now-impressive Procfile, and configure it as a proxy for your application. Use your test and the Rails logs to verify that Varnish now serves repeat requests."
-    = e.question "As the article above mentions, Varnish will by default only work with requests that do not forward session cookies. What can we do with to make sure that we still get good performance out of our cache? You may want to try Rack Cache as an alternative that respects user sessions better."
-  = exercise_block_for "scaling", "thread" do |e|
-    = e.question "Work in progress. Sit tight. You can skip this one for now."
+  = exercise_block_for "http_cache" do |e|
+    - e.question "Take a look at the performers#index page, both as HTML and JSON. Using your browser, verify that Rails is sending Etags based on the rendered page. If you request the page a second time, your browser should receive a 304 Not Modified response. This does require the entire page to be rendered both times, unfortunately."
+    - e.question "Use the fresh_when call to conditionally return a Not Modified code to the browser. You may need the group_cache_key gem to make this work. Verify in the logs that you are not rendering the view on a cache hit."
+    - e.question "Add Varnish to your now-impressive Procfile, and configure it as a proxy for your application. Use your test and the Rails logs to verify that Varnish now serves repeat requests."
+    - e.question "As the article above mentions, Varnish will by default only work with requests that do not forward session cookies. What can we do with to make sure that we still get good performance out of our cache? You may want to try Rack Cache as an alternative that respects user sessions better."
+  = exercise_block_for "thread" do |e|
+    - e.question "Work in progress. Sit tight. You can skip this one for now."
 
 .page-header
   %h3 Conclusion - Some Other Things to Think About

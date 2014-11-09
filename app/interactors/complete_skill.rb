@@ -6,16 +6,21 @@ class CompleteSkill
     context.fail!(message: "provide a valid user") unless context.user
     context.fail!(message: "provide a valid skill") unless context.skill
 
-    return unless context.user && context.user.has_completed?(context.skill)
+    fail if Completion.for(context.user, context.skill)
+  rescue
     context.fail!(message: "cannot re-complete a skill")
   end
 
   def call
-    completion = Completion.new(user: context.user, skill: context.skill)
-    if completion.save
-      context.completion = completion
-    else
-      context.fail! message: "unable to complete skill: #{completion.errors}"
-    end
+    context.completion = new_completion(context.user, context.skill)
+    context.completion.save!
+  rescue
+    context.fail! message: "unable to complete skill"
+  end
+
+  private
+
+  def new_completion(user, skill)
+    Completion.new(user: user, skill: skill)
   end
 end

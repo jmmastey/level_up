@@ -12,4 +12,8 @@ class Category < ActiveRecord::Base
   scope :hidden, -> { where(hidden: true) }
   scope :sorted, -> { order(:sort_order) }
   scope :by_courses, ->(c) { includes(:courses).where("courses.id" => c).uniq }
+
+  def self.by_handle(handle)
+    find_by!(handle: handle)
+  end
 end

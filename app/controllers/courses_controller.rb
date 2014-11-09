@@ -23,6 +23,6 @@ class CoursesController < ApplicationController
   private
 
   def set_course # yarr
-    @course = Course.published.find(params[:id])
+    @course = Course.published_course(params[:id])
   end
 end

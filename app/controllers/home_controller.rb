@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   helper :courses
   before_action :find_module, only: :show
+  before_action :find_completed_skills, only: :show
 
   def index
     @courses = current_user.courses
@@ -11,8 +12,7 @@ class HomeController < ApplicationController
     interactor = SendFeedback.call(feedback_params)
 
     if interactor.failure?
-      render json: { success: false, error: interactor.message },
-             status: :unprocessable_entity
+      render_bad_response(interactor.message)
     else
       render json: { success: true, complete: false }
     end
@@ -21,10 +21,19 @@ class HomeController < ApplicationController
   private
 
   def feedback_params
-    params.permit(:name, :page, :message).to_h.merge(user: current_user)
+    current_user.name = params.permit(:name)
+    params.permit(:page, :message).to_h.merge(user: current_user)
   end
 
   def find_module
-    @module = Category.find_by!(handle: params[:module])
+    @module = Category.by_handle(params[:module])
+  end
+
+  def find_completed_skills
+    if current_user.signed_in?
+      @skills = Completion.user_skills(current_user)
+    else
+      @skills = []
+    end
   end
 end

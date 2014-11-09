@@ -5,12 +5,12 @@
   %p Take some time to practice with ruby core. There are a million tutorials around to teach you the basics, but once you've experienced the really simple stuff (arrays and hashes and variables and iteration), you'll find that the most important thing to do is to write a lot of ruby, and to get someone more experienced to review that code.
   %p Also, after several years of writing ruby programs, I still find myself opening the official ruby docs for core classes to find the right method to turn my code into something simple and capable.
 
-  = exercise_block_for "ruby", "docs" do |e|
-    = e.question "Ruby core has so many more methods than you'll ever keep in your head. That's totally fine, but you need to know how to look up and use those functions. Use the ruby docs to find the docs for the String class. There's a method that lets you substitute a bunch of characters for a corresponding set of characters (it's not gsub). Find that method and use it in a code sample"
+  = exercise_block_for "docs" do |e|
+    - e.question "Ruby core has so many more methods than you'll ever keep in your head. That's totally fine, but you need to know how to look up and use those functions. Use the ruby docs to find the docs for the String class. There's a method that lets you substitute a bunch of characters for a corresponding set of characters (it's not gsub). Find that method and use it in a code sample"
 
-  = exercise_block_for "ruby", "ruby_core" do |e|
-    = e.question "Let's write a ruby program so that we can play with the code. Do the #{exercise_link 'dino_catalog'} exercise."
-    = e.question "For practice, try the first few ruby Exercism problems, and make sure to nitpick other people's code."
+  = exercise_block_for "ruby_core" do |e|
+    - e.question "Let's write a ruby program so that we can play with the code. Do the #{exercise_link 'dino_catalog'} exercise."
+    - e.question "For practice, try the first few ruby Exercism problems, and make sure to nitpick other people's code."
 
 .page-header
   %h3 Stylish (and Sane) Ruby
@@ -18,38 +18,38 @@
 
   %p The first, most obvious thing is to standardize on a single way of writing ruby. Because the syntax is so flexible, there are typically many ways to write a given program. Instead, we should usually follow the conventions of the popular Ruby Style Guide. That said, remember that clarity is always key, so if a particular piece of code is more comprehensible, it can make sense to break the rules.
 
-  = exercise_block_for "ruby", "style_guide" do |e|
-    = e.question "Fix the code example in the #{exercise_link 'triangle_facts'} exercise so that it conforms to the Ruby style guide."
-    = e.question "Go back and make sure that your dino_catalog code conforms to the style guide. Bonus points if it did already."
+  = exercise_block_for "style_guide" do |e|
+    - e.question "Fix the code example in the #{exercise_link 'triangle_facts'} exercise so that it conforms to the Ruby style guide."
+    - e.question "Go back and make sure that your dino_catalog code conforms to the style guide. Bonus points if it did already."
 
   %p Another common pattern that is both common and totally unnecessary is called Arrowhead Programming. this is pretty simple to diagnose. If a method indents more than maybe two levels, it probably needs to be refactored. Method calls are cheap relative to other resources, so reorganizing and refactoring your code to avoid this particular problem is well worth it.
 
   %p Try this talk by <a href='https://www.youtube.com/watch?v=npOGOmkxuio'>Sandi Metz</a> for some discussion of this and the next few ideas.
 
-  = exercise_block_for "ruby", "arrowhead" do |e|
-    = e.question "Look at the code in the #{exercise_link 'arrowhead'} exercise. It currently fails to put error conditions near their conditions. Refactor it so that it isn't terrible anymore."
-    = e.question "Go fix your dino_catalog code so that it conforms to this rule."
+  = exercise_block_for "arrowhead" do |e|
+    - e.question "Look at the code in the #{exercise_link 'arrowhead'} exercise. It currently fails to put error conditions near their conditions. Refactor it so that it isn't terrible anymore."
+    - e.question "Go fix your dino_catalog code so that it conforms to this rule."
 
   %p The next rule turns out to be related to the previous one: you should write short methods, and short lines of code. Games like code golf are lots of fun, but if you check abstruse one-liners into the production codebase you're mostly just a jerk. A decent rule of thumb is to have no more than five lines of code in a method, and to keep your lines of code under eighty characters. That said, it's still possible to write a lot of terrible code in eighty characters, so consider rewriting any line whose meaning is not entirely apparent.
 
   %p Also by Sandy Metz (sense a theme?), the book Practical Object Oriented Design in Ruby. There are copies in the library, take one and read at least the first several chapters to get an idea here. Then, snag a copy of Confident Ruby for some more ideas.
 
-  = exercise_block_for "ruby", "short_methods" do |e|
-    = e.question "We're going to continue rocking these exercises. The #{exercise_link 'robot_name'} exercise seems apropos here."
-    = e.question "Your dino_catalog code is probably still offensive. Fix that."
+  = exercise_block_for "short_methods" do |e|
+    - e.question "We're going to continue rocking these exercises. The #{exercise_link 'robot_name'} exercise seems apropos here."
+    - e.question "Your dino_catalog code is probably still offensive. Fix that."
 
   %p Even with short lines of code, it's not always possible to understand all code at a glance, so we put a lot of focus on using meaningful variable and method names. Ideally, someone reading your code should not even need to look at the body of a method to know what it does; the name should stand alone sufficiently to describe it. Similarly, variable names serve either to enlighten or confuse others as they read your code.
 
   %p Naming is always going to be hard (it's actually stated as one of the hard problems of computer science), but this <a href='http://www.rubytapas.com/episodes/87-Naming-Head-Count'>Tapas</a> does a good job of walking you through some ideas around naming.
 
-  = exercise_block_for "ruby", "meaningful_names" do |e|
-    = e.question "You're never going to guess how this goes. Refactor your dino_catalog code!"
+  = exercise_block_for "meaningful_names" do |e|
+    - e.question "You're never going to guess how this goes. Refactor your dino_catalog code!"
 
   %p Finally, once you've written your masterpiece code, it's important to remember that conciseness in the code has to be less important than others' ability to understand it. You should already be doing code review with your peers (and hopefully with people with much more experience than yourself). If they don't understand the code quickly, it means that you won't either a month from now, and that's a problem.
 
-  = exercise_block_for "ruby", "fivesecond" do |e|
-    = e.question "Explain how the Five Second Rule for code review works."
-    = e.question "Look back through your code and find any places where your code is unnecessarily clever. Refactor."
+  = exercise_block_for "fivesecond" do |e|
+    - e.question "Explain how the Five Second Rule for code review works."
+    - e.question "Look back through your code and find any places where your code is unnecessarily clever. Refactor."
 
 .page-header
   %h3 Comments (and Why We Tend to Avoid Them)
@@ -66,10 +66,10 @@
 
   %p Read the Wikipedia Page on <a href='https://en.wikipedia.org/wiki/Self-documenting'>self documenting code</a> to start, but this episode of <a href='http://rubyrogues.com/079-rr-documenting-code/'>Ruby Rogues</a> may explain the topic a bit better.
 
-  = exercise_block_for "ruby", "comments" do |e|
-    = e.question "Take a break from the exercises for a bit. Explain why we say that 'comments lie'."
-    = e.question "If we don't trust comments, how do we explain our code adequately to others?"
-    = e.question "Explain what 'self documenting code' means in your own words"
+  = exercise_block_for "comments" do |e|
+    - e.question "Take a break from the exercises for a bit. Explain why we say that 'comments lie'."
+    - e.question "If we don't trust comments, how do we explain our code adequately to others?"
+    - e.question "Explain what 'self documenting code' means in your own words"
 
-  = exercise_block_for "ruby", "comments2" do |e|
-    = e.question "So, I lied above obviously. Sometimes comments are actually necessary. Name (and defend) some cases where you should add comments to your code."
+  = exercise_block_for "comments2" do |e|
+    - e.question "So, I lied above obviously. Sometimes comments are actually necessary. Name (and defend) some cases where you should add comments to your code."

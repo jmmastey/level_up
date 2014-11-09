@@ -21,4 +21,8 @@ class Course < ActiveRecord::Base
     admin_courses = student.admin? ? all : none
     (published | student.courses | admin_courses).sort_by(&:id)
   end
+
+  def self.published_course(id)
+    published.find(id)
+  end
 end
