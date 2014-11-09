@@ -1,5 +1,4 @@
 class Completion < ActiveRecord::Base
-  include ArelHelpers::ArelTable
   include Feedable
 
   belongs_to :user, touch: true

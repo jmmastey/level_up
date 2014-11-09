@@ -17,7 +17,6 @@ gem 'rolify'
 gem 'interactor-rails'
 gem 'state_machine'
 gem 'gravatar_image_tag'
-gem 'arel-helpers'
 gem 'puma', ">= 2.0"
 gem 'omniauth-github'
 gem 'activerecord-session_store'

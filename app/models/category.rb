@@ -1,6 +1,4 @@
 class Category < ActiveRecord::Base
-  include ArelHelpers::ArelTable
-
   has_many :skills
   has_many :courses, -> { uniq }, through: :skills
 

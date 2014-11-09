@@ -19,10 +19,10 @@ module Summaries
   private
 
   def self.summary_data(user)
-    ActiveRecord::Base.connection.execute(query(user.id))
+    connection.execute(summary_query(user.id))
   end
 
-  def self.query(id)
+  def self.summary_query(user_id)
     "select e.course_id, c.id, c.name, c.handle, count(*) total_skills,
       count(cp.created_at) total_completed,
       count(cp.verified_on) total_verified
@@ -30,8 +30,9 @@ module Summaries
         join courses_skills cs on cs.course_id = e.course_id
         join skills s on s.id = cs.skill_id
         join categories c on c.id = s.category_id
-        left join completions cp on cp.skill_id = s.id and cp.user_id = #{id}
-      where e.user_id = #{id}
+        left join completions cp on cp.skill_id = s.id and
+          cp.user_id = #{user_id}
+      where e.user_id = #{user_id}
       group by e.course_id, c.id, c.handle, sort_order
       order by sort_order"
   end
@@ -45,5 +46,9 @@ module Summaries
       total_completed:  category['total_completed'].to_i,
       total_verified:   category['total_verified'].to_i,
     }
+  end
+
+  def self.connection
+    ActiveRecord::Base.connection
   end
 end
