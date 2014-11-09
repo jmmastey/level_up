@@ -5,14 +5,15 @@ class UserSummary
   end
 
   def for_user
-    summary_data.each_with_object({}) do |category, hash|
-      hash[category['handle']] = typecast_results_for(category)
-    end
+    @for_user ||= summary_data.map { |category| typecast_results_for(category) }
+  end
+
+  def for_category(category)
+    for_user.find { |data| category.handle == data[:handle] }
   end
 
   def for_course(course)
-    data = for_user.values
-    data.each_with_object(completed: 0, total: 0, verified: 0) do |cat, hash|
+    for_user.each_with_object(completed: 0, total: 0, verified: 0) do |cat, hash|
       next unless course.id == cat[:course_id]
 
       hash[:completed]  += cat[:total_completed]

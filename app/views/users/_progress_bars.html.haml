@@ -2,7 +2,7 @@
   %tr
     %th Category
     %th{colspan: 2} Completion
-  - @user.summary.for_user.values.each do |category|
+  - @user.summary.for_user.each do |category|
     %tr{class: category[:handle]}
       %td= category[:name]
       %td.completion-stat

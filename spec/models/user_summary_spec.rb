@@ -16,7 +16,7 @@ describe UserSummary do
     end
 
     it "counts skills, completions and verifications" do
-      summary = UserSummary.new(user).for_user[category.handle]
+      summary = UserSummary.new(user).for_category(category)
       expect(summary[:total_skills]).to eq(category.skills.length)
       expect(summary[:total_completed]).to eq(1)
       expect(summary[:total_verified]).to eq(1)
@@ -25,7 +25,7 @@ describe UserSummary do
     it "only tracks your completion stats" do
       create(:completion, skill: category.skills.first)
 
-      summary = UserSummary.new(user).for_user[category.handle]
+      summary = UserSummary.new(user).for_category(category)
       expect(summary[:total_skills]).to eq(category.skills.length)
       expect(summary[:total_completed]).to eq(1)
     end
