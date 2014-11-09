@@ -5,9 +5,7 @@
         .fa.fa-question-circle
         = "Exercise: #{block.skill.name} "
     .panel-body
-
-      = render_questions(block.questions)
-
+      = render block.questions
       .completion
         - if current_user.signed_in?
           .fa.fa-spinner.fa-spin.spinner
