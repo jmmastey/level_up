@@ -4,10 +4,9 @@
     %p.description= course.description
     %hr
 
-    - summary = current_user.summary.for_course(course)
-    %p.completion= "#{summary[:completed]} of #{summary[:total]} skills completed"
+    %p.completion= completion_summary_for(course)
     .progress
-      .progress-bar.progress-bar-success{style: "width: #{completion_percent_for(summary)}%" }
+      .progress-bar.progress-bar-success{style: "width: #{completion_percent_for(course)}%" }
 
   .col-lg-6
     %ul.categories.list-group
