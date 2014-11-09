@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_user, only: [:show, :update]
+  before_filter :summarize_user, only: [:show]
 
   def index
     @users = User.with_completions.by_activity_date.page(params[:page])
@@ -20,6 +21,8 @@ class UsersController < ApplicationController
   def find_user
     @user ||= User.find params[:id]
   end
-  alias_method :user, :find_user
-  helper_method :user
+
+  def summarize_user
+    @progress = Summaries.for_user(@user).values
+  end
 end

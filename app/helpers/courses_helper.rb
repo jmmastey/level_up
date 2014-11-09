@@ -1,16 +1,4 @@
 module CoursesHelper
-  def user_summary
-    @user_summary ||= Summaries.for_user(current_user)
-  end
-
-  def category_completion(category)
-    if current_user.courses.empty?
-      return { total_completed: 0, total_skills: 0 }
-    end
-
-    user_summary[category.handle]
-  end
-
   def course_summary_for(course, user = current_user)
     Summaries.for_course(course, user)
   end

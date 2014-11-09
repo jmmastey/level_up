@@ -1,5 +1,7 @@
 module Summaries
   def self.for_user(user)
+    return unless user.signed_in?
+
     summary_data(user).each_with_object({}) do |category, hash|
       hash[category['handle']] = typecast_results_for(category)
     end

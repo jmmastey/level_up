@@ -1,7 +1,9 @@
 class CoursesController < ApplicationController
   respond_to :html, :json
+
   before_filter :authenticate_user!, only: :enroll
   before_filter :set_course, only: [:enroll, :show]
+  before_filter :summarize_user, only: [:show]
 
   # GET /
   def index
@@ -24,5 +26,9 @@ class CoursesController < ApplicationController
 
   def set_course # yarr
     @course = Course.published.find(params[:id])
+  end
+
+  def summarize_user
+    @progress = Summaries.for_user(current_user)
   end
 end
