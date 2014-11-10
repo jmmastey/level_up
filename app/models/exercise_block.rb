@@ -40,4 +40,8 @@ class QuestionBlock
   def each(&block)
     @questions.each(&block)
   end
+
+  def to_s
+    @questions
+  end
 end
