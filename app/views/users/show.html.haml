@@ -2,7 +2,7 @@
   = link_to "← Back to Users List", :back
 
 .col-lg-2
-  = gravatar_image_tag(@user.email, alt: @user.name, class: "gravatar", gravatar: { size: 160 })
+  = gravatar_for(@user, 160)
 
 .col-lg-5
   %h3= "#{@user.name}'s Profile"

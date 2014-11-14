@@ -4,7 +4,7 @@
       .panel-body
         .row
           .col-lg-4
-            = gravatar_image_tag(user.email, alt: user.name, class: "gravatar", gravatar: { size: 100 })
+            = gravatar_for(user, 100)
             .activity-feed
               - feed_items_for(user).each do |item|
                 .item{class: item[:tags].join(" "), title: item[:label], data: {toggle: "tooltip", placement: "top"}} &nbsp;
