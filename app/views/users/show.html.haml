@@ -1,12 +1,13 @@
 .col-lg-12.linkback
-  = link_to "← Back to Users List", :back
+  = link_to "← Back to Users List", users_path
 
 .col-lg-2
   = gravatar_for(@user, 160)
 
 .col-lg-5
   %h3= "#{@user.name}'s Profile"
-  %span= link_to "Edit Profile", edit_user_registration_path, id: 'edit-profile'
+  - if @user == current_user
+    %span= link_to "Edit Profile", edit_user_registration_path, id: 'edit-profile'
 
   = render partial: 'enrolled_courses', locals: { user: @user }
   = render partial: 'recent_activity', locals: { user: @user }
