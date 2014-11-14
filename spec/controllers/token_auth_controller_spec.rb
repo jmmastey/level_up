@@ -4,7 +4,7 @@ describe HomeController, type: :controller do
   let(:email) { "bill@microsoft.com" }
   let(:token) { "hunter2" }
 
-  let(:auth_hash) {{ auth_email: email, auth_token: token }}
+  let(:auth_hash) { { auth_email: email, auth_token: token } }
 
   it "authenticates the user via token as requested" do
     expect(User).to receive(:from_token_auth).with(auth_hash)

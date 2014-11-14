@@ -1,5 +1,4 @@
 class UserSummary
-
   def initialize(user)
     @user = user
   end
@@ -13,7 +12,8 @@ class UserSummary
   end
 
   def for_course(course)
-    for_user.each_with_object(completed: 0, total: 0, verified: 0) do |cat, hash|
+    totals = for_user
+    totals.each_with_object(completed: 0, total: 0, verified: 0) do |cat, hash|
       next unless course.id == cat[:course_id]
 
       hash[:completed]  += cat[:total_completed]
@@ -50,8 +50,7 @@ class UserSummary
       course_id:        category['course_id'].to_i,
       total_skills:     category['total_skills'].to_i,
       total_completed:  category['total_completed'].to_i,
-      total_verified:   category['total_verified'].to_i,
-    }
+      total_verified:   category['total_verified'].to_i }
   end
 
   def connection

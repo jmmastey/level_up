@@ -15,7 +15,7 @@ module TokenAuthable
     def from_token_auth(args)
       return unless args[:auth_email].presence && args[:auth_token].presence
 
-      self.find_by(email: args[:auth_email]).try(:tap) do |record|
+      find_by(email: args[:auth_email]).try(:tap) do |record|
         (record.authentication_token == args[:auth_token]) && record
       end
     end

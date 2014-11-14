@@ -16,8 +16,8 @@ describe HomeController, type: :controller do
     it "shows the #{category} page properly" do
       get :show, module: category
 
-      expect(@response.code).to eq("200")
-      expect(@response.body).to include(category)
+      expect(response.code).to eq("200")
+      expect(response.body).to include(category)
     end
   end
 end
