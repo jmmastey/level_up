@@ -12,13 +12,12 @@ class UserSummary
   end
 
   def for_course(course)
-    totals = for_user
-    totals.each_with_object(completed: 0, total: 0, verified: 0) do |cat, hash|
-      next unless course.id == cat[:course_id]
+    for_user.each_with_object(completed: 0, total: 0, verified: 0) do |c, hash|
+      next unless course.id == c[:course_id]
 
-      hash[:completed]  += cat[:total_completed]
-      hash[:total]      += cat[:total_skills]
-      hash[:verified]   += cat[:total_verified]
+      hash[:completed]  += c[:total_completed]
+      hash[:total]      += c[:total_skills]
+      hash[:verified]   += c[:total_verified]
     end
   end
 
@@ -38,7 +37,7 @@ class UserSummary
         join categories c on c.id = s.category_id
         left join completions cp on cp.skill_id = s.id and
           cp.user_id = #{@user.id}
-      where e.user_id = #{@user.id}
+      where e.user_id = #{@user.id} and c.hidden = 'f'
       group by e.course_id, c.id, c.handle, sort_order
       order by sort_order"
   end
