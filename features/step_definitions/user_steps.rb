@@ -59,6 +59,11 @@ Given /^I am logged in$/ do
   sign_in
 end
 
+Given /^I am logged in and wait$/ do
+  create_user
+  sign_in
+end
+
 Given /^I exist as a user$/ do
   create_user
 end

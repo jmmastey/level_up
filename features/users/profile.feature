@@ -4,7 +4,7 @@ Feature: User profile
   So that I can see how my training is going
 
   Background:
-    Given I am logged in
+    Given I am logged in and wait
 
   Scenario: View profile link
     When I return to the site

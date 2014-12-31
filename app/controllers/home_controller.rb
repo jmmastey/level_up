@@ -21,7 +21,7 @@ class HomeController < ApplicationController
   private
 
   def feedback_params
-    current_user.name = params.permit(:name)
+    current_user.name = params["name"]
     params.permit(:page, :message).to_h.merge(user: current_user)
   end
 
