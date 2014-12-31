@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - rbx-2.2.10
+  - rbx-2.4.1
   - 2.1.2
 bundler_args: --without production --without development --jobs=4
 cache: bundler
