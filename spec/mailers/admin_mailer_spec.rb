@@ -35,6 +35,7 @@ describe AdminMailer do
       it "sends feedback email" do
         expect(mail.to).to include(admin_email)
         expect(mail.from).to include(user.email)
+        expect(mail.subject).to eq("Feedback from #{name}")
         expect(mail.body).to include(page)
         expect(mail.body).to include(message)
       end
@@ -46,9 +47,12 @@ describe AdminMailer do
 
     context "from guest" do
       let(:user) { Guest.new }
+      let(:name) { "Hamid Karzai" }
 
       it "sends from a default address" do
+        user.name = name
         expect(mail.from).to include(user.email)
+        expect(mail.subject).to eq("Feedback from #{name}")
       end
     end
   end

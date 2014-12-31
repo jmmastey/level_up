@@ -1,4 +1,6 @@
 class Guest
+  attr_writer :name
+
   def courses
     Course.none
   end
@@ -8,7 +10,7 @@ class Guest
   end
 
   def name
-    "Guest"
+    @name || "Guest"
   end
 
   def email
