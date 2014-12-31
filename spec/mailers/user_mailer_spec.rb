@@ -11,7 +11,7 @@ describe UserMailer do
   end
 
   it "actually sends the email" do
-    expect { mail.deliver! }.to change { deliveries }.by(1)
+    expect { mail.deliver_now! }.to change { deliveries }.by(1)
   end
 
   def deliveries

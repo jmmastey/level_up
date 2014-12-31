@@ -9,7 +9,7 @@ class SendFeedback
   end
 
   def call
-    feedback_message.deliver!
+    feedback_message.deliver_now!
   rescue => e
     context.fail!(message: "unable to send email: #{e.message}")
   end

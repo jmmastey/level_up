@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 # ruby '2.1.0', engine: 'rbx', engine_version: '2.2.10'
 
-gem 'rails', '4.1.5'
+gem 'rails', '4.2.0'
 gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -26,6 +26,8 @@ gem 'will_paginate-bootstrap'
 gem 'newrelic_rpm'
 gem 'rack-mini-profiler'
 gem 'dotenv'
+
+gem 'mail', '~> 2.5.4' # workaround for http://stackoverflow.com/questions/25984067/argumenterror-method-sort-given-0-expected-1-when-sending-a-confirmation
 
 group :development do
   gem 'foreman'

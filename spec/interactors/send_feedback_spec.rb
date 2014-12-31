@@ -8,7 +8,7 @@ describe SendFeedback do
   let(:interactor) { SendFeedback.call(params) }
 
   context "when the interactor is a success" do
-    let(:mail) { double("AdminMailer", deliver!: true) }
+    let(:mail) { double("AdminMailer", deliver_now!: true) }
 
     it "sends feedback emails" do
       expect(AdminMailer).to receive(:send_feedback).once
@@ -22,7 +22,7 @@ describe SendFeedback do
     let(:mail) { double("AdminMailer") }
 
     it "fails when emails cannot be sent properly" do
-      expect(mail).to receive(:deliver!).once.and_raise
+      expect(mail).to receive(:deliver_now!).once.and_raise
 
       expect(AdminMailer).to receive(:send_feedback).once
         .with(user, page, message).and_return(mail)

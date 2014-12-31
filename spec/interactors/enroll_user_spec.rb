@@ -5,7 +5,7 @@ describe EnrollUser do
   let(:user) { create(:user) }
   let(:interactor) { EnrollUser.call(course: course, user: user) }
 
-  let(:mail) { double("AdminMailer", deliver: deliver) }
+  let(:mail) { double("AdminMailer", deliver_now: deliver) }
 
   context "when the interactor is a success" do
     let(:deliver) { true }
