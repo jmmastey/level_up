@@ -9,6 +9,7 @@ module UsersHelper
 
   def gravatar_for(user, size)
     gravatar_image_tag(user.email, alt: user.name, class: 'gravatar',
-                       gravatar: { size: size, secure: request.ssl?, default: :identicon })
+                       gravatar: { size: size, secure: request.ssl?,
+                                   default: :identicon })
   end
 end
