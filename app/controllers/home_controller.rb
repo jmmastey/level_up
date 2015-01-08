@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   helper :courses
   before_action :find_module, only: :show
   before_action :find_completed_skills, only: :show
+  before_action :find_enrollment, only: :show
 
   def index
     @courses = current_user.courses

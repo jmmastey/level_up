@@ -21,3 +21,13 @@ Feature: Complete and uncomplete skills
     When I click on a completion checkbox
     And I wait for Ajax to finish
     Then I should not have completed that skill
+
+  Scenario: I get stuck in my progress and need help
+    Given I completed a skill a long time ago
+    When I visit a course page
+    Then I should see a friendly help message
+
+  Scenario: I'm no longer stuck so I don't need help
+    Given I completed a skill recently
+    When I visit a course page
+    Then I shouldn't see any help message because I'm not stuck

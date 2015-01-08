@@ -33,4 +33,8 @@ module ModulesHelper
       "fa-circle-o"
     end
   end
+
+  def user_is_stuck?
+    false
+  end
 end
