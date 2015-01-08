@@ -7,6 +7,14 @@ class Completion < ActiveRecord::Base
   validates_uniqueness_of :user_id, scope: :skill_id,
                           message: "cannot complete the same skill twice"
 
+  scope :by_id, -> { order("id desc") }
+
+  def self.from_enrollment(enrollment)
+    Completion.where(user: enrollment.user).where("skill_id in " \
+      "(select skill_id from courses_skills where course_id = ?)",
+      enrollment.course)
+  end
+
   def self.for(user, skill)
     find_by(user: user, skill: skill)
   end
