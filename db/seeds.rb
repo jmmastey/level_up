@@ -306,12 +306,11 @@ COURSE_CATS = {
   scaling: ['scaling'],
 }
 COURSE_CATS.each do |course, categories|
-  categories = categories.map { |cat| Category.find_by_handle(cat).id }
-  skills = Skill.where(category_id: categories)
   course = Course.find_by_handle(course)
-
-  course.skills = skills
-  course.save
+  categories.each do |handle|
+    category = Category.find_by_handle(handle)
+    category.update_attributes!(course: course)
+  end
 end
 
 if ENV['ADMIN_NAME']

@@ -9,7 +9,7 @@ end
 
 def create_course(status, name)
   category = create_category(name)
-  FactoryGirl.create(:course, skills: category.skills, status: status,
+  FactoryGirl.create(:course, categories: [category], status: status,
                      name: name, handle: name.gsub(' ', '_').underscore)
 end
 
