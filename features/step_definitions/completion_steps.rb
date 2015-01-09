@@ -11,7 +11,8 @@ Given(/^I completed a skill( recently)?$/) do |_|
 end
 
 Given(/^I completed a skill a long time ago$/) do
-  FactoryGirl.create(:completion, user: current_user, skill: skill, created_at: 2.weeks.ago)
+  FactoryGirl.create(:completion, user: current_user, skill: skill,
+                                  created_at: 2.weeks.ago)
 end
 
 Given(/^I visit a course page$/) do

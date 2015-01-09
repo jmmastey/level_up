@@ -10,7 +10,7 @@ FactoryGirl.define do
     trait(:created)   { status :created }
 
     trait(:with_related_category) do
-      categories { [ create(:category, :skilled, name: name, handle: handle) ] }
+      categories { [create(:category, :skilled, name: name, handle: handle)] }
     end
 
     trait(:with_skills) do
