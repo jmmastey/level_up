@@ -4,6 +4,7 @@ describe CourseActivity do
   let(:course) { create(:course, :with_skills) }
   let(:enrollment) { create(:enrollment, course: course) }
   let(:user) { enrollment.user }
+  let(:date) { Date.today }
 
   let(:skill1) { course.skills.first }
   let(:skill2) { course.skills.last }
@@ -26,14 +27,14 @@ describe CourseActivity do
 
   describe ".last_activity_date" do
     it "returns the last completion date when one is present" do
-      completion = create(:completion, user: user, skill: skill2)
-      expect(course_activity.last_activity_date).to eq(completion.created_at)
+      create(:completion, user: user, skill: skill2, created_at: date)
+      expect(course_activity.last_activity_date).to eq(date)
     end
 
     it "returns the enrollment date when there aren't completions" do
-      enrollment = create(:enrollment)
+      enrollment = create(:enrollment, created_at: date)
       course_activity = CourseActivity.new(enrollment)
-      expect(course_activity.last_activity_date).to eq(enrollment.created_at)
+      expect(course_activity.last_activity_date).to eq(date)
     end
   end
 end
