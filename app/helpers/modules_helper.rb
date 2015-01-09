@@ -33,4 +33,9 @@ module ModulesHelper
       "fa-circle-o"
     end
   end
+
+  def high_five
+    ["Sweet!", "Awesome!", "Go you!", "Right on!", "Righteous!", "やった！", "You're a champ!",
+     "Rockin' it. I knew you would.", "Get down with your bad self.", "Boom shakalaka!"].sample
+  end
 end

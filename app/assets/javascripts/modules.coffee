@@ -14,11 +14,16 @@ init_modules = ->
       success:  (response) ->
         handle = ".dot-" + self.parents(".panel").eq(0).attr('id')
         if response.complete
-        	self.addClass('completed')
-        	$(handle).removeClass(uncompletedClass).addClass(completedClass)
+          self.addClass('completed')
+          self.parents('.completion').addClass('just_completed')
+          $(handle).removeClass(uncompletedClass).addClass(completedClass)
         else
-        	self.removeClass('completed')
-        	$(handle).removeClass(completedClass).addClass(uncompletedClass)
+          self.removeClass('completed')
+          $(handle).removeClass(completedClass).addClass(uncompletedClass)
+
+  $(".completion .feedback a").click ->
+    exercise = $(this).parents(".exercise").find("h3").text().trim()
+    $("#feedback_form #page").val(exercise)
 
 $(document).ready(init_modules)
 $(document).on('page:load', init_modules)
