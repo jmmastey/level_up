@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
   has_many :skills
-  has_many :courses, -> { uniq }, through: :skills
+  belongs_to :course
 
   validates :name, presence: true
   validates :handle, presence: true, uniqueness: true
@@ -9,7 +9,6 @@ class Category < ActiveRecord::Base
   default_scope -> { where(hidden: false) }
   scope :hidden, -> { where(hidden: true) }
   scope :sorted, -> { order(:sort_order) }
-  scope :by_courses, ->(c) { includes(:courses).where("courses.id" => c).uniq }
 
   def self.by_handle(handle)
     find_by!(handle: handle)

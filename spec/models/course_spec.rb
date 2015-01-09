@@ -27,11 +27,6 @@ describe Course do
     it "doesn't belong to any categories by default" do
       expect(course.categories).to be_empty
     end
-
-    it "belongs to the categories of its skills" do
-      create(:skill, category: category, courses: [course])
-      expect(course.categories).to eq([category])
-    end
   end
 
   describe "course visibility" do
