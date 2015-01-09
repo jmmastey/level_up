@@ -35,16 +35,12 @@ module ModulesHelper
   end
 
   def high_five
-    ["Sweet!", "Awesome!", "Go you!", "Right on!", "Righteous!", "やった！", "You're a champ!",
-     "Rockin' it. I knew you would.", "Get down with your bad self.", "Boom shakalaka!"].sample
+    ["Sweet!", "Awesome!", "Go you!", "Right on!", "Righteous!", "やった！",
+     "You're a champ!", "Rockin' it. I knew you would.", "Bravo!", "Kudos!",
+     "Get down with your bad self.", "Boom shakalaka!", "Yeah, buddy!"].sample
   end
 
-  def user_is_stuck?(user, course)
-    enrollment = user.enrollments.find_by!(course: course)
-
-    activity   = CourseActivity.new(enrollment)
-    activity.last_activity_date < 7.days.ago
-  rescue ActiveRecord::RecordNotFound
-    false
+  def user_is_stuck?(user, category)
+    CourseActivity.new(user, category).user_is_stuck?
   end
 end
