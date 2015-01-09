@@ -1,8 +1,35 @@
 class CourseActivity
-  attr_reader :enrollment
+  attr_reader :user, :category
 
-  def initialize(enrollment)
-    @enrollment = enrollment
+  def initialize(user, category)
+    @category = category
+    @user = user
+  end
+
+  def user_is_stuck?
+    !(user_is_finished? || user_is_moving?)
+  end
+
+  def user_is_finished?
+    total = category.skills.count
+    complete = Completion.where(user: user)
+      .where("skill_id in (select skill_id from skills where category_id = ?)",
+             category.id)
+      .count
+
+    complete >= total
+  end
+
+  def user_is_moving?
+    last_activity_date >= 7.days.ago
+  rescue ActiveRecord::RecordNotFound
+    true
+  end
+
+  private
+
+  def enrollment
+    user.enrollments.find_by!(course: category.course)
   end
 
   def completions

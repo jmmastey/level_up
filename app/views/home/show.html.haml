@@ -1,5 +1,5 @@
 .content.module
-  = render partial: 'stuck_message' if user_is_stuck?(current_user, @module.course)
+  = render partial: 'stuck_message' if user_is_stuck?(current_user, @module)
   .page-header
     %h1= @module.name
 
