@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20150108223205) do
     t.integer  "course_id"
   end
 
+  add_index "categories", ["handle"], name: "index_categories_on_handle", using: :btree
+
   create_table "completions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
@@ -48,6 +50,8 @@ ActiveRecord::Schema.define(version: 20150108223205) do
     t.text     "description"
   end
 
+  add_index "courses", ["handle"], name: "index_courses_on_handle", using: :btree
+
   create_table "enrollments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "course_id"
@@ -56,9 +60,9 @@ ActiveRecord::Schema.define(version: 20150108223205) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",          limit: 255
+    t.string   "name"
     t.integer  "resource_id"
-    t.string   "resource_type", limit: 255
+    t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150108223205) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "sessions", force: :cascade do |t|
-    t.string   "session_id", limit: 255, null: false
+    t.string   "session_id", null: false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -85,23 +89,25 @@ ActiveRecord::Schema.define(version: 20150108223205) do
     t.integer  "category_id"
   end
 
+  add_index "skills", ["handle"], name: "index_skills_on_handle", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name",                   limit: 100,              null: false
-    t.string   "provider",               limit: 255
-    t.string   "uid",                    limit: 255
-    t.string   "authentication_token",   limit: 255
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

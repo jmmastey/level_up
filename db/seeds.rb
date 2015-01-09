@@ -308,8 +308,7 @@ COURSE_CATS = {
 COURSE_CATS.each do |course, categories|
   course = Course.find_by_handle(course)
   categories.each do |handle|
-    category = Category.find_by_handle(handle)
-    category.update_attributes!(course: course)
+    Category.find_by_handle(handle).update_attributes!(course: course)
   end
 end
 
