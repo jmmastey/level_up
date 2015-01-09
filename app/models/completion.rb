@@ -4,6 +4,7 @@ class Completion < ActiveRecord::Base
   belongs_to :user, touch: true
   belongs_to :skill
 
+  validates_presence_of :skill_id
   validates_uniqueness_of :user_id, scope: :skill_id,
                           message: "cannot complete the same skill twice"
 

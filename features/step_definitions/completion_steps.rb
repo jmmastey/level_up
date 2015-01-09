@@ -1,9 +1,9 @@
 def category
-  @category ||= Category.find_by!(handle: "faux")
+  current_user.courses.last.categories.last
 end
 
 def skill
-  @skill ||= category.skills.last
+  category.skills.last
 end
 
 Given(/^I completed a skill( recently)?$/) do |_|
@@ -11,7 +11,7 @@ Given(/^I completed a skill( recently)?$/) do |_|
 end
 
 Given(/^I completed a skill a long time ago$/) do
-  FactoryGirl.create(:completion, user: current_user, created_at: 1.week.ago)
+  FactoryGirl.create(:completion, user: current_user, skill: skill, created_at: 2.weeks.ago)
 end
 
 Given(/^I visit a course page$/) do

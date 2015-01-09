@@ -9,6 +9,10 @@ FactoryGirl.define do
     trait(:published) { status :published }
     trait(:created)   { status :created }
 
+    trait(:with_related_category) do
+      categories { [ create(:category, :skilled, name: name, handle: handle) ] }
+    end
+
     trait(:with_skills) do
       categories { create_list(:category, 2, :skilled) }
     end
