@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Enrollment do
-
   describe "feed_for" do
     let(:user) { build(:user) }
     let!(:enrollment) { create(:enrollment, user: user) }
@@ -17,7 +16,5 @@ describe Enrollment do
       expect(decorated_item[:tags]).to include(enrollment.course.handle)
       expect(decorated_item[:label]).to match(/#{enrollment.course.name}/)
     end
-
   end
-
 end

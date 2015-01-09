@@ -36,5 +36,4 @@ describe CourseActivity do
       expect(course_activity.last_activity_date).to eq(enrollment.created_at)
     end
   end
-
 end

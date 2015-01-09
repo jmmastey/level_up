@@ -9,10 +9,11 @@ class Completion < ActiveRecord::Base
 
   scope :by_id, -> { order("id desc") }
 
-  def self.from_enrollment(enrollment)
-    Completion.where(user: enrollment.user).where("skill_id in " \
-      "(select skill_id from courses_skills where course_id = ?)",
-      enrollment.course)
+  def self.for_course(user, course)
+    Completion.where("user_id = ? and skill_id in
+      (select s.id from skills s, categories c
+      where s.category_id = c.id and c.course_id = ?)",
+      user.id, course.id)
   end
 
   def self.for(user, skill)

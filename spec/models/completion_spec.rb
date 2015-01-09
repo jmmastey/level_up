@@ -40,12 +40,12 @@ describe Completion do
     end
   end
 
-  describe ".from_enrollment" do
-    let(:course) { create(:course, skills: [skill]) }
-    let(:enrollment) { create(:enrollment, course: course, user: user) }
+  describe ".for_course" do
+    let(:category) { create(:category, skills: [skill]) }
+    let(:course) { create(:course, categories: [category]) }
 
     it "returns relevant completions" do
-      expect(Completion.from_enrollment(enrollment).last).to eq(completion)
+      expect(Completion.for_course(user, course).last).to eq(completion)
     end
   end
 end
