@@ -32,9 +32,8 @@ class UserSummary
       count(cp.created_at) total_completed,
       count(cp.verified_on) total_verified
       from enrollments e
-        join courses_skills cs on cs.course_id = e.course_id
-        join skills s on s.id = cs.skill_id
-        join categories c on c.id = s.category_id
+        join categories c on c.course_id = e.course_id
+        join skills s on s.category_id = c.id
         left join completions cp on cp.skill_id = s.id and
           cp.user_id = #{@user.id}
       where e.user_id = #{@user.id} and c.hidden = 'f'
