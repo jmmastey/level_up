@@ -10,7 +10,6 @@ describe HomeController, type: :controller do
     expect(User).to receive(:from_token_auth).with(auth_hash)
 
     get :index, auth_hash
-
   end
 
   it "only authenticates if params are provided" do

@@ -12,7 +12,7 @@ describe CourseActivity do
 
   describe ".last_completion_for" do
     it "grabs the most recent completion" do
-      old_completion = create(:completion, user: user, skill: skill1)
+      create(:completion, user: user, skill: skill1)
       completion = create(:completion, user: user, skill: skill2)
 
       expect(course_activity.last_completion).to eq(completion)
