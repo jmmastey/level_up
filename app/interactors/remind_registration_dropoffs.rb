@@ -2,7 +2,7 @@ class RemindRegistrationDropoffs
   include Interactor
 
   def call
-    lazy_users.each do |user|
+    context.users = lazy_users.each do |user|
       user.update_attributes!(enrollment_reminder_sent: true)
       remind(user)
     end
