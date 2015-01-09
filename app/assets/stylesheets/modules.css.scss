@@ -36,6 +36,7 @@
 
   .completion {
     float:right;
+    text-align:right;
 
     .spinner { display:none; margin-right:4px; }
     &.active .spinner { display:inline; }
@@ -48,6 +49,15 @@
 
       &.completed .fa-square-o { display:none; }
       &.completed .fa-check-square-o { display:inline; }
+    }
+
+    .feedback {
+      margin-top:5px;
+      display:none;
+    }
+
+    &.just_completed .feedback {
+      display:block;
     }
   }
 }
