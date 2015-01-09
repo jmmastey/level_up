@@ -2,14 +2,8 @@ def current_user
   User.find_by_email(@visitor[:email])
 end
 
-def create_category(name)
-  FactoryGirl.create(:category, :skilled, name: name,
-                     handle: name.gsub(' ', '_').underscore)
-end
-
 def create_course(status, name)
-  category = create_category(name)
-  FactoryGirl.create(:course, categories: [category], status: status,
+  FactoryGirl.create(:course, :with_related_category, status: status,
                      name: name, handle: name.gsub(' ', '_').underscore)
 end
 

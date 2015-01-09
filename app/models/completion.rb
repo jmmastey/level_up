@@ -4,8 +4,18 @@ class Completion < ActiveRecord::Base
   belongs_to :user, touch: true
   belongs_to :skill
 
+  validates :skill_id, presence: true
   validates_uniqueness_of :user_id, scope: :skill_id,
                           message: "cannot complete the same skill twice"
+
+  scope :by_id, -> { order("id desc") }
+
+  def self.for_course(user, course)
+    Completion.where("user_id = ? and skill_id in
+      (select s.id from skills s, categories c
+      where s.category_id = c.id and c.course_id = ?)",
+      user.id, course.id)
+  end
 
   def self.for(user, skill)
     find_by(user: user, skill: skill)

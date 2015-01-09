@@ -29,16 +29,12 @@ class UserSummary
 
   def summary_query
     "select e.course_id, c.id, c.name, c.handle, count(*) total_skills,
-      count(cp.created_at) total_completed,
-      count(cp.verified_on) total_verified
-      from enrollments e
-        join categories c on c.course_id = e.course_id
-        join skills s on s.category_id = c.id
-        left join completions cp on cp.skill_id = s.id and
-          cp.user_id = #{@user.id}
-      where e.user_id = #{@user.id} and c.hidden = 'f'
-      group by e.course_id, c.id, c.handle, sort_order
-      order by sort_order"
+      count(p.created_at) total_completed, count(p.verified_on) total_verified
+    from enrollments e join categories c on c.course_id = e.course_id
+      join skills s on s.category_id = c.id
+      left join completions p on p.skill_id = s.id and p.user_id = #{@user.id}
+    where e.user_id = #{@user.id} and c.hidden = 'f'
+    group by e.course_id, c.id, c.handle, sort_order order by sort_order"
   end
 
   def typecast_results_for(category)

@@ -39,5 +39,4 @@ describe UserSummary do
       expect(summary[:verified]).to eq(1)
     end
   end
-
 end

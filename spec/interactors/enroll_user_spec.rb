@@ -34,5 +34,4 @@ describe EnrollUser do
       expect(interactor).not_to be_success
     end
   end
-
 end

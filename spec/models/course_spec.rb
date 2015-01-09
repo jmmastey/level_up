@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Course do
-
   describe "publishing" do
     it "is not published by default" do
       course = create(:course)
@@ -47,6 +46,5 @@ describe Course do
       expect(Course.available_to(user)).to include(published)
       expect(Course.available_to(admin)).to include(published, hidden)
     end
-
   end
 end

@@ -19,6 +19,6 @@ class EnrollUser
 
   def send_welcome_email
     AdminMailer.confirm_enrollment(context.user, context.course).deliver_now &&
-    UserMailer.confirm_enrollment(context.user, context.course).deliver_now
+      UserMailer.confirm_enrollment(context.user, context.course).deliver_now
   end
 end

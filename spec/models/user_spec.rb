@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe User do
-
   let(:attr) do
     {
       name: "Example User",
@@ -50,7 +49,6 @@ describe User do
   end
 
   describe "passwords" do
-
     let(:user) { User.new(attr) }
 
     it "has a password attribute" do
@@ -63,7 +61,6 @@ describe User do
   end
 
   describe "password validations" do
-
     it "requires a password" do
       user = User.new(attr.merge(password: "", password_confirmation: ""))
       expect(user).not_to be_valid
@@ -79,7 +76,6 @@ describe User do
       hash = attr.merge(password: short, password_confirmation: short)
       expect(User.new(hash)).not_to be_valid
     end
-
   end
 
   describe "password encryption" do
@@ -92,7 +88,6 @@ describe User do
     it "sets the encrypted password attribute" do
       expect(user.encrypted_password).not_to be_blank
     end
-
   end
 
   describe "skills" do

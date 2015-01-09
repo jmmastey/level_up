@@ -4,6 +4,8 @@ class Enrollment < ActiveRecord::Base
   belongs_to :user, touch: true
   belongs_to :course
 
+  validates :user_id, presence: true
+  validates :course_id, presence: true
   validates_uniqueness_of :user_id, scope: :course_id,
                           message: "cannot register for the same course twice"
 

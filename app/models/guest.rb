@@ -9,6 +9,10 @@ class Guest
     Skill.none
   end
 
+  def enrollments
+    Enrollment.none
+  end
+
   def name
     @name || "Guest"
   end

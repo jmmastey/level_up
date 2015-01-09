@@ -5,6 +5,7 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
   validates :handle, presence: true, uniqueness: true
   validates :difficulty, allow_nil: true, inclusion: { in: 1..10 }
+  validates :course_id, presence: true
 
   default_scope -> { where(hidden: false) }
   scope :hidden, -> { where(hidden: true) }

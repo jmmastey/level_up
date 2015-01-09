@@ -18,5 +18,4 @@ describe UncompleteSkill do
     interactor = UncompleteSkill.call(skill: skill, user: user)
     expect(interactor).not_to be_success
   end
-
 end

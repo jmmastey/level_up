@@ -5,34 +5,6 @@ YAML.load(roles).each do |role|
   Role.find_or_create_by(name: role)
 end
 
-CATEGORIES = [
-  ["Linux and Shell Utilities", "linux", 2],
-  ["Basic Ruby", "ruby", 4],
-  ["Basic Test Engineering", "test", 7],
-  ["Basic Ruby on Rails", "rails", 6],
-  ["Basic Interaction Design", "interaction", 3],
-  ["Basic Data Engineering", "data", 4],
-  ["Engineering Principles", "engineering", 2],
-  ["Professionalism in Engineering", "professionalism", 3],
-  ["Intermediate Ruby", "ruby_2"],
-  ["Intermediate Test Engineering", "test_2"],
-  ["Intermediate Rails", "rails_2"],
-  ["Intermediate Interaction Design", "interaction_2"],
-  ["Intermediate Data Engineering", "data_2"],
-  ["Engineering Principles II", "engineering_2"],
-  ["Professionalism II", "professionalism_2"],
-  ["Learning the Business", "business"],
-  ["Cnuapp", "cnuapp"],
-  ["8 Boxes", "8boxes"],
-  ["Performance and Scaling", "scaling"]
-]
-
-i = 0
-CATEGORIES.each do |cat|
-  Category.create! name: cat[0], handle: cat[1], difficulty: cat[2], sort_order: i
-  i += 1
-end
-
 COURSES = [
   ["Engineering Baseline I", "baseline_1", "Learn to build and test a complete Ruby on Rails application. This isn't a basic intro: you will finish with some serious ruby chops."],
   ["Engineering Baseline II", "baseline_2", "Description"],
@@ -41,6 +13,36 @@ COURSES = [
 ]
 COURSES.each do |course|
   Course.create! name: course[0], handle: course[1], description: course[2], status: :published
+end
+
+CATEGORIES = [
+  ["baseline_1", "Linux and Shell Utilities", "linux", 2],
+  ["baseline_1", "Basic Ruby", "ruby", 4],
+  ["baseline_1", "Basic Test Engineering", "test", 7],
+  ["baseline_1", "Basic Ruby on Rails", "rails", 6],
+  ["baseline_1", "Basic Interaction Design", "interaction", 3],
+  ["baseline_1", "Basic Data Engineering", "data", 4],
+  ["baseline_1", "Engineering Principles", "engineering", 2],
+  ["baseline_1", "Professionalism in Engineering", "professionalism", 3],
+  ["baseline_2", "Intermediate Ruby", "ruby_2"],
+  ["baseline_2", "Intermediate Test Engineering", "test_2"],
+  ["baseline_2", "Intermediate Rails", "rails_2"],
+  ["baseline_2", "Intermediate Interaction Design", "interaction_2"],
+  ["baseline_2", "Intermediate Data Engineering", "data_2"],
+  ["baseline_2", "Engineering Principles II", "engineering_2"],
+  ["baseline_2", "Professionalism II", "professionalism_2"],
+  ["enova", "Learning the Business", "business"],
+  ["enova", "Cnuapp", "cnuapp"],
+  ["enova", "8 Boxes", "8boxes"],
+  ["scaling", "Performance and Scaling", "scaling"]
+]
+
+i = 0
+CATEGORIES.each do |cat|
+  course = Course.find_by(handle: cat[0])
+  Category.create!(course: course, name: cat[1], handle: cat[2],
+                   difficulty: cat[3], sort_order: i)
+  i += 1
 end
 
 SKILLS = [
@@ -289,26 +291,12 @@ SKILLS = [
   ["scaling", "cdn", "Configures and deploy to a CDN"],
   ["scaling", "http_cache", "Uses common HTTP caching functionality"],
 ]
-
 SKILLS.each do |skill|
   begin
     cat = Category.find_by_handle! skill[0]
     Skill.create! category: cat, handle: skill[1], name: skill[2]
   rescue
     puts "failed to create skill: #{skill[2]}"
-  end
-end
-
-COURSE_CATS = {
-  baseline_1: ['linux', 'ruby', 'rails', 'test', 'data', 'interaction', 'engineering'],
-  baseline_2: ['ruby_2', 'rails_2', 'test_2', 'data_2', 'interaction_2', 'engineering_2'],
-  enova: ['business', 'cnuapp', '8boxes', 'professionalism', 'professionalism_2'],
-  scaling: ['scaling'],
-}
-COURSE_CATS.each do |course, categories|
-  course = Course.find_by_handle(course)
-  categories.each do |handle|
-    Category.find_by_handle(handle).update_attributes!(course: course)
   end
 end
 

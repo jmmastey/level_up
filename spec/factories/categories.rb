@@ -9,6 +9,7 @@ FactoryGirl.define do
 
     sequence(:sort_order)
     hidden(false)
+    association :course
 
     trait(:skilled) do
       after(:create) do |category|
