@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :email
 
-  scope :older, -> { where("users.created_at < ?", 2.weeks.ago) }
+  scope :older, -> { where("users.created_at < ?", 5.days.ago) }
   scope :by_activity_date, -> { order("users.updated_at desc") }
   scope :without_enroll_email, -> { where(enrollment_reminder_sent: false) }
   scope :with_completions, lambda {
