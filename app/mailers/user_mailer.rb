@@ -7,4 +7,9 @@ class UserMailer < ActionMailer::Base
     @course = course
     mail(to: user.email, subject: "You've been enrolled!")
   end
+
+  def reg_reminder(user)
+    @user = user
+    mail(to: user.email, subject: "We miss you. Come on back.")
+  end
 end
