@@ -35,11 +35,9 @@ module ModulesHelper
   end
 
   def user_is_stuck?(user, course)
-    enrollment = user.enrollments.where(course_id: course.id)
-    return false unless enrollment.present?
+    enrollment = user.enrollments.find_by!(course: course)
 
-    activity   = CourseActivity.new(enrollment.first)
-    binding.pry
+    activity   = CourseActivity.new(enrollment)
     activity.last_activity_date < 7.days.ago
   rescue ActiveRecord::RecordNotFound
     false

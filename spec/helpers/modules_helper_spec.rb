@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ModulesHelper, type: :helper do
-  let(:course) { create(:course) }
+  let(:course) { create(:course, :with_skills) }
   let(:skill) { course.skills.last }
   let(:user) { create(:user) }
   let(:guest) { Guest.new }

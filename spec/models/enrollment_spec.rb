@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Enrollment do
   describe "feed_for" do
-    let(:user) { build(:user) }
+    let(:user) { create(:user) }
     let!(:enrollment) { create(:enrollment, user: user) }
 
     it "returns the recently completed enrollment" do
