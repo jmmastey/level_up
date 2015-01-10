@@ -20,6 +20,8 @@ Contributing
 
 Contributions are very welcome. Fork, fix, submit pulls.
 
+Contribution is expected to conform to the [Contributor Covenant](https://github.com/jmmastey/level_up/blob/master/CODE_OF_CONDUCT.md).
+
 Credits
 -------
 
@@ -28,4 +30,4 @@ See [the humans file](public/humans.txt)
 License
 -------
 
-levelup is released under the [MIT License](https://github.com/jmmastey/level_up/blob/master/MIT-LICENSE).
+This software is released under the [MIT License](https://github.com/jmmastey/level_up/blob/master/MIT-LICENSE).
