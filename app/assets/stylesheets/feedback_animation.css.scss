@@ -1,0 +1,14 @@
+@-webkit-keyframes wobblewobble {
+  0%    { -webkit-transform: translate(0, 0px); }
+  50%   { -webkit-transform: translate(0, 6px); }
+  100%  { -webkit-transform: translate(0, 0px); }
+}
+
+.feedback-link.wobble {
+  display:inline-block;
+
+  -webkit-animation-name: wobblewobble;
+  -webkit-animation-duration: 1.2s;
+  -webkit-animation-iteration-count: 3;
+  -webkit-animation-timing-function: linear;
+}
