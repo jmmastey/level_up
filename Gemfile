@@ -24,7 +24,7 @@ gem 'activerecord-session_store'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'newrelic_rpm'
-gem 'rack-mini-profiler'
+#gem 'rack-mini-profiler'
 gem 'dotenv'
 
 gem 'mail', '~> 2.5.4' # workaround for http://stackoverflow.com/questions/25984067/argumenterror-method-sort-given-0-expected-1-when-sending-a-confirmation
