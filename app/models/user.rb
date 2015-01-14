@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
 
   def admin?
     has_role? :admin
+  rescue
+    false
   end
 
   def signed_in?
