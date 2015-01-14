@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def miniprofiler
-    Rack::MiniProfiler.authorize_request if current_user.admin?
+    #Rack::MiniProfiler.authorize_request if current_user.admin?
   end
 
   def redirect_to_real_domain
