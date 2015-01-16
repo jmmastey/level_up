@@ -5,12 +5,12 @@ class AdminMailer < ActionMailer::Base
   def confirm_enrollment(user, course)
     @user = user
     @course = course
-    mail(subject: "User enrollment for #{course.handle}")
+    mail(subject: "LevelUp: User enrollment for #{course.handle}")
   end
 
   def send_feedback(user, page, message)
     @user, @name, @page, @message = user, user.name, page, message
     mail(from: user.email, reply_to: user.email,
-         subject: "Feedback from #{@name}")
+         subject: "LevelUp: Feedback from #{@name}")
   end
 end
