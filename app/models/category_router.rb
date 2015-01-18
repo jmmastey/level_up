@@ -1,8 +1,15 @@
 class CategoryRouter
-  def self.find(handle, organization)
+  def self.find(user, handle, organization)
+    authorize_user!(user, organization)
     Category.find_by!(handle: handle, organization: organization)
   rescue ActiveRecord::RecordNotFound
-    raise ActionController::RoutingError
+    raise AbstractController::ActionNotFound
+  end
+
+  def self.authorize_user!(user, organization)
+    if organization.present? && organization != user.organization
+      raise AbstractController::ActionNotFound
+    end
   end
 
   def self.path_to(category)
