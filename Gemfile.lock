@@ -1,3 +1,10 @@
+PATH
+  remote: /export/enova_engineering
+  specs:
+    enova_engineering (0.0.1)
+      haml
+      rails (~> 4.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -318,6 +325,7 @@ DEPENDENCIES
   devise
   dotenv
   email_spec
+  enova_engineering!
   factory_girl_rails
   foreman
   gravatar_image_tag

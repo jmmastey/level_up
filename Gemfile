@@ -55,3 +55,7 @@ end
 group :production do
   gem 'rails_12factor'
 end
+
+group :content_engines do
+  gem 'enova_engineering', path: '/export/enova_engineering'
+end
