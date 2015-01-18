@@ -8,6 +8,9 @@
     Ashton Thomas
     John McConnell
     Ryan Cowan
+    Paul Haddad
+    Zamir Syed
+    Dan Kotowski
 
 /* THANKS */
   Chuck Lauer Vose (@vosechu) for the Inspiration
