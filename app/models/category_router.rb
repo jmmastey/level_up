@@ -6,8 +6,8 @@ module CategoryRouter
     model.find_by!(params)
   end
 
-  def self.path_for(category, urls = Rails.application.routes.url_helpers)
-    params = { handle: category.handle, organization: category.organization }
+  def self.path_for(cat, urls = Rails.application.routes.url_helpers)
+    params = { category: cat.handle, organization: cat.organization }
     urls.category_path(params)
   end
 

@@ -40,7 +40,7 @@ describe CategoryRouter do
     it "uses helpers" do
       helpers = double("UrlHelpers", category_path: nil)
       cat     = double("Category", organization: "org", handle: "handle")
-      expected_vals = hash_including(handle: "handle", organization: "org")
+      expected_vals = hash_including(category: "handle", organization: "org")
 
       expect(helpers).to receive(:category_path).with(expected_vals)
       subject.path_for(cat, helpers)
