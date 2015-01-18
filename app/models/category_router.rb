@@ -14,6 +14,7 @@ module CategoryRouter
   private
 
   def authorize_user!(user, organization)
+    return if user && user.admin?
     fail if organization && organization != user.organization
   end
 end
