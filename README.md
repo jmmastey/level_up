@@ -15,6 +15,11 @@ for competitive purposes.
     bundle exec rake db:{setup,seed}
     foreman start
 
+Proprietary Content Support
+---------------------------
+
+LevelUp now supports proprietary courses for users from organizations. While the intention is to share as much as possible, it's useful to have one platform that also covers internal projects. the production site uses private gems with Rails Engines to mount the additional content. Users, courses, and categories can all have organization flags on them, which render them invisible to anyone outside those orgs.
+
 Contributing
 ------------
 
