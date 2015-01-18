@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   before_action :find_category, only: :show
   before_action :find_completed_skills, only: :show
 
+  include CategoryRouter
+
   def index
     @courses = current_user.courses
   end
@@ -26,7 +28,9 @@ class HomeController < ApplicationController
   end
 
   def find_category
-    @category = CategoryRouter.find(current_user, params[:category], params[:organization])
+    @category = find_category!(params, current_user)
+  rescue
+    raise AbstractController::ActionNotFound
   end
 
   def find_completed_skills

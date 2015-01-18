@@ -1,23 +1,19 @@
-class CategoryRouter
-  def self.find(user, handle, organization)
-    authorize_user!(user, organization)
-    Category.find_by!(handle: handle, organization: organization)
-  rescue ActiveRecord::RecordNotFound
-    raise AbstractController::ActionNotFound
+module CategoryRouter
+  def find_category!(params, user, model = Category)
+    authorize_user!(user, params[:organization])
+
+    params = { handle: params[:category], organization: params[:organization] }
+    model.find_by!(params)
   end
 
-  def self.authorize_user!(user, organization)
-    if organization.present? && organization != user.organization
-      raise AbstractController::ActionNotFound
-    end
+  def self.path_for(category, urls = Rails.application.routes.url_helpers)
+    params = { handle: category.handle, organization: category.organization }
+    urls.category_path(params)
   end
 
-  def self.path_to(category)
-    url_helpers.category_path(category: category.handle,
-                              organization: category.organization)
-  end
+  private
 
-  def self.url_helpers
-    Rails.application.routes.url_helpers
+  def authorize_user!(user, organization)
+    fail if organization && organization != user.organization
   end
 end
