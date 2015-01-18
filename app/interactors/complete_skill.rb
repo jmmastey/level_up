@@ -6,6 +6,7 @@ class CompleteSkill
     check_user
     check_skill
     check_recompletion
+    check_organization
   end
 
   def call
@@ -32,5 +33,12 @@ class CompleteSkill
   def check_recompletion
     comp = Completion.for(context.user, context.skill)
     context.fail!(message: "cannot re-complete a skill") if comp
+  end
+
+  def check_organization
+    org = context.skill.category.course.organization
+    return if !org || org == context.user.organization
+
+    context.fail!(message: "provide a valid skill")
   end
 end

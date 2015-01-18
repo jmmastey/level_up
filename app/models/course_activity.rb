@@ -11,11 +11,9 @@ class CourseActivity
   end
 
   def user_is_finished?
-    total = category.skills.count
-    complete = Completion.where(user: user)
-      .where("skill_id in (select skill_id from skills where category_id = ?)",
-             category.id)
-      .count
+    total    = category.skills.count
+    cat_in   = "skill_id in (select skill_id from skills where category_id = ?)"
+    complete = Completion.where(user: user).where(cat_in, category.id).count
 
     complete >= total
   end

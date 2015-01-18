@@ -28,7 +28,6 @@ describe CategoryRouter do
       user    = double("User", admin?: true, organization: "jets")
       klass   = double("Category", organization: "sharks", find_by!: "fie!")
 
-
       expect { subject.find_category!(params, user, klass) }.not_to raise_error
     end
 
