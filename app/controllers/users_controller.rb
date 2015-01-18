@@ -4,8 +4,7 @@ class UsersController < ApplicationController
   before_filter :find_active_users, only: [:index]
 
   def update
-    authorize! :update, user, message: 'Not authorized as an administrator.'
-    if user.update_attributes(user_params)
+    if current_user.update_attributes(user_params)
       redirect_to users_path, notice: "User updated."
     else
       redirect_to users_path, alert: "Unable to update user."

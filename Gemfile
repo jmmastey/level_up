@@ -10,7 +10,6 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder'
 gem 'bootstrap-sass'
-gem 'cancan'
 gem 'devise'
 gem 'haml-rails'
 gem 'pg'
@@ -23,7 +22,6 @@ gem 'omniauth-github'
 gem 'activerecord-session_store'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-gem 'newrelic_rpm'
 # gem 'rack-mini-profiler'
 gem 'dotenv'
 
@@ -46,7 +44,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'pry-rails'
+  gem 'pry-rails', require: false
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
   gem 'poltergeist'
@@ -54,5 +52,5 @@ end
 
 group :production do
   gem 'rails_12factor'
-  # gem 'enova_engineering', path: '/export/enova_engineering'
+  gem 'newrelic_rpm'
 end
