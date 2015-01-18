@@ -1,12 +1,12 @@
 .content.module
-  = render partial: 'stuck_message' if user_is_stuck?(current_user, @module)
+  = render partial: 'stuck_message' if user_is_stuck?(current_user, @category)
   .page-header
-    %h1= @module.name
+    %h1= @category.name
 
   .row
-    .col-lg-8= render partial: "modules/#{@module.handle}"
+    .col-lg-8= render partial: "modules/#{@category.handle}"
     .col-lg-4.resources{role:'complementary'}
-      = render partial: 'difficulty' if @module.difficulty
+      = render partial: 'difficulty' if @category.difficulty
       .bs-component
         .panel.panel-basic
-          = render partial: "modules/#{@module.handle}_resources"
+          = render partial: "modules/#{@category.handle}_resources"

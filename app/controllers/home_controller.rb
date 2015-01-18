@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   helper :courses
-  before_action :find_module, only: :show
+  before_action :find_category, only: :show
   before_action :find_completed_skills, only: :show
+
+  include CategoryRouter
 
   def index
     @courses = current_user.courses
@@ -25,8 +27,10 @@ class HomeController < ApplicationController
     params.permit(:page, :message).to_h.merge(user: current_user)
   end
 
-  def find_module
-    @module = Category.by_handle(params[:module])
+  def find_category
+    @category = find_category!(params, current_user)
+  rescue
+    raise AbstractController::ActionNotFound
   end
 
   def find_completed_skills

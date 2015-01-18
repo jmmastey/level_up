@@ -1,6 +1,6 @@
 module ModulesHelper
   def exercise_block_for(handle, &block)
-    block = ExerciseBlock.new(@module, handle, &block)
+    block = ExerciseBlock.new(@category, handle, &block)
 
     current_skills << block.skill
     render block

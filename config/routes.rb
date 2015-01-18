@@ -1,7 +1,7 @@
 Levelup::Application.routes.draw do
   root to: "home#index"
   get "/thedeal.html", to: "home#thedeal"
-  get "/:module.html", to: "home#show", as: :module
+  get "(/:organization)/:category.html", to: "home#show", as: :category
 
   devise_for :users, controllers: { registrations: "registrations",
                                     omniauth_callbacks: "omniauth_callbacks" }
