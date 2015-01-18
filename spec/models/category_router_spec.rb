@@ -10,22 +10,31 @@ describe CategoryRouter do
   describe ".find_category!" do
     it "raises if user isn't in the right org" do
       params  = { category: "america", organization: "sharks" }
-      user    = double("User", organization: "jets")
+      user    = double("User", admin?: false, organization: "jets")
 
       expect { subject.find_category!(params, user) }.to raise_error
     end
 
     it "doesn't care if the category doesn't belong to an organization" do
       params  = { category: "america" }
-      user    = double("User")
+      user    = double("User", admin?: false)
       klass   = double("Category", organization: nil, find_by!: "fie!")
+
+      expect { subject.find_category!(params, user, klass) }.not_to raise_error
+    end
+
+    it "allows admins through regardless" do
+      params  = { category: "america", organization: "sharks" }
+      user    = double("User", admin?: true, organization: "jets")
+      klass   = double("Category", organization: "sharks", find_by!: "fie!")
+
 
       expect { subject.find_category!(params, user, klass) }.not_to raise_error
     end
 
     it "looks for the category when bidden" do
       params  = { category: "america", organization: "sharks" }
-      user    = double("User", organization: "sharks")
+      user    = double("User", admin?: false, organization: "sharks")
       klass   = double("Category", organization: nil, find_by!: nil)
       expected_vals = hash_including(handle: "america", organization: "sharks")
 
