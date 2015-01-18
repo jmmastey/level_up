@@ -1,6 +1,6 @@
 - completion = current_user.summary.for_category(category)
 %li.list-group-item
-  = link_to category.name, module_path(category.handle)
+  = link_to category.name, category_path(category.handle)
   - if completion[:total_completed] == completion[:total_skills]
     %span.badge.success DONE!
   - else

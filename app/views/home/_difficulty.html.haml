@@ -1,9 +1,9 @@
 - tooltip = "Heuristically, how hard is this module? Your mileage will vary massively by experience."
 .difficulty
   .rating Difficulty:
-  - @module.difficulty.times do
+  - @category.difficulty.times do
     .hard.dot &nbsp;
-  - (10 - @module.difficulty).times do
+  - (10 - @category.difficulty).times do
     .easy.dot &nbsp;
   %i.fa.fa-question-circle{data: { toggle: "tooltip", placement: "top"}, title: tooltip} &nbsp;
   .exercise-count Exercises: #{current_skills.length}

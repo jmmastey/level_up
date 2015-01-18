@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   helper :courses
-  before_action :find_module, only: :show
+  before_action :find_category, only: :show
   before_action :find_completed_skills, only: :show
 
   def index
@@ -25,8 +25,8 @@ class HomeController < ApplicationController
     params.permit(:page, :message).to_h.merge(user: current_user)
   end
 
-  def find_module
-    @module = Category.by_handle(params[:module])
+  def find_category
+    @category = Category.by_handle(params[:category])
   end
 
   def find_completed_skills
