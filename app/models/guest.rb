@@ -28,4 +28,8 @@ class Guest
   def admin?
     false
   end
+
+  def organization
+    nil
+  end
 end
