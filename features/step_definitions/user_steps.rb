@@ -42,10 +42,10 @@ def fill_sign_up_form
   click_button "Sign up"
 end
 
-def sign_in
+def sign_in(user = @visitor)
   visit '/users/sign_in'
-  fill_in "Email", with: @visitor[:email]
-  fill_in "Password", with: @visitor[:password]
+  fill_in "Email", with: user[:email]
+  fill_in "Password", with: user[:password]
   click_button "Sign in"
 end
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Course do
-  describe "publishing" do
+  describe "#published" do
     it "is not published by default" do
       course = create(:course)
       published_course = create(:course, :published)
@@ -19,7 +19,7 @@ describe Course do
     end
   end
 
-  describe "categories" do
+  describe "#categories" do
     let(:course) { create(:course) }
     let(:category) { create(:category) }
 
@@ -28,9 +28,11 @@ describe Course do
     end
   end
 
-  describe "course visibility" do
+  describe "#available_to" do
     let(:user) { create(:user) }
     let(:admin) { create(:user, :admin) }
+    let(:employee) { create(:user, organization: "toool") }
+    let!(:proprietary) { create(:course, :published, organization: "toool") }
     let!(:published) { create(:course, :published) }
     let!(:hidden) { create(:course, :created) }
 
@@ -45,6 +47,12 @@ describe Course do
     it "shows all courses to admins, but not to other users" do
       expect(Course.available_to(user)).to include(published)
       expect(Course.available_to(admin)).to include(published, hidden)
+    end
+
+    it "only shows org courses to admins and org users" do
+      expect(Course.available_to(user)).not_to include(proprietary)
+      expect(Course.available_to(admin)).to include(proprietary)
+      expect(Course.available_to(employee)).to include(proprietary)
     end
   end
 end

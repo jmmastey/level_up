@@ -18,8 +18,11 @@ class Course < ActiveRecord::Base
   end
 
   def self.available_to(student)
-    admin_courses = student.admin? ? all : none
-    (published | student.courses | admin_courses).sort_by(&:id)
+    return all.sort_by(&:id) if student.admin?
+
+    (published | student.courses).reject do |course|
+      course.organization && student.organization != course.organization
+    end.sort_by(&:id)
   end
 
   def self.published_course(id)

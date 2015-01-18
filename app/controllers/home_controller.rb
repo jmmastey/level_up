@@ -29,7 +29,8 @@ class HomeController < ApplicationController
 
   def find_category
     @category = find_category!(params, current_user)
-  rescue
+  rescue => e
+    logger.error e.message
     raise AbstractController::ActionNotFound
   end
 
