@@ -54,5 +54,5 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'enova_engineering', path: '/export/enova_engineering'
+  #gem 'enova_engineering', path: '/export/enova_engineering'
 end

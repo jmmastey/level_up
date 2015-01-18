@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   end
 
   def find_category
-    @category = Category.by_handle(params[:category])
+    @category = CategoryRouter.find(params[:category], params[:organization])
   end
 
   def find_completed_skills
