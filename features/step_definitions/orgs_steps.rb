@@ -13,7 +13,8 @@ Given(/^there are users from many orgs$/) do
 end
 
 def create_org_course(name, handle, org = nil)
-  FactoryGirl.create(:course, :published, name: name, handle: handle, organization: org)
+  FactoryGirl.create(:course, :published, name: name,
+                     handle: handle, organization: org)
 end
 
 Given(/^there are courses from many orgs$/) do

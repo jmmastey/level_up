@@ -16,8 +16,8 @@ class UsersController < ApplicationController
 
   def find_active_users
     @users = User.with_recent_activity
-                  .by_org(current_user.organization)
-                  .page(params[:page])
+             .by_org(current_user.organization)
+             .page(params[:page])
   end
 
   def find_user

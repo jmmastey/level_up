@@ -36,8 +36,8 @@ describe CompleteSkill do
     end
 
     it "won't let me complete sekkret skills from other orgs" do
-      their_sekkret = create(:course, :with_skills, organization: "them").skills.first
-      interactor    = CompleteSkill.call(skill: their_sekkret, user: me)
+      sekkret = create(:course, :with_skills, organization: "them").skills.first
+      interactor    = CompleteSkill.call(skill: sekkret, user: me)
       expect(interactor).not_to be_success
     end
 
