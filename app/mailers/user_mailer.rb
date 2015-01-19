@@ -16,7 +16,7 @@ class UserMailer < ActionMailer::Base
   def activity_reminder(enrollment)
     @user = enrollment.user
     @course = enrollment.course
-    title = "Stuck working on #{@course.name}? Here comes help!"
+    title = "LevelUp: Stuck working on #{@course.name}? Here comes help!"
     mail(to: @user.email, subject: title)
   end
 end
