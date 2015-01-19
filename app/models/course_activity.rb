@@ -1,41 +1,37 @@
 class CourseActivity
-  attr_reader :user, :category
+  attr_reader :user, :course
 
-  def initialize(user, category)
-    @category = category
+  def initialize(user, course)
+    @course = course
     @user = user
   end
 
   def user_is_stuck?
-    enrollment && !(user_is_moving? || user_is_finished?)
+    enroll_date && stopped_moving? && unfinished?
   end
 
   private
 
-  def user_is_moving?
-    last_activity_date >= 7.days.ago
+  def stopped_moving?
+    last_activity_date < 7.days.ago
   end
 
-  def user_is_finished?
-    total    = category.skills.count
-    cat_in   = "skill_id in (select skill_id from skills where category_id = ?)"
-    complete = Completion.where(user: user).where(cat_in, category.id).count
-    complete >= total
-  end
-
-  def enrollment
-    @enrollment ||= user.enrollments.find_by(course: category.course)
+  def unfinished?
+    course.skills.count > completions.count
   end
 
   def completions
-    Completion.for_course(enrollment.user, enrollment.course)
-  end
-
-  def last_completion
-    completions.by_id.first
+    @completions ||= Completion.joins(:skill)
+      .where(user: user)
+      .where(skills: { category_id: course.categories })
+      .by_id
   end
 
   def last_activity_date
-    last_completion.try(:created_at) || enrollment.created_at
+    completions.first.try(:created_at) || enroll_date
+  end
+
+  def enroll_date
+    @enroll_date ||= user.enrollments.where(course: course).pluck(:created_at).first
   end
 end

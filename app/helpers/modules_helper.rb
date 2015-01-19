@@ -41,6 +41,6 @@ module ModulesHelper
   end
 
   def user_is_stuck?(user, category)
-    CourseActivity.new(user, category).user_is_stuck?
+    CourseActivity.new(user, category.course).user_is_stuck?
   end
 end
