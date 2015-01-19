@@ -8,6 +8,6 @@ end
 desc "send reminder emails to enrolled users who have stopped progress"
 task progress_reminder: :environment do
   puts "Sending reminders to unenrolled users..."
-  int = RemindRegistrationDropoffs.call
-  puts "done. Sent #{int.users.length} emails."
+  int = RemindActivityDropoffs.call
+  puts "done. Sent #{int.enrollments.length} emails."
 end
