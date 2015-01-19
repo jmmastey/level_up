@@ -1,5 +1,5 @@
-class AddProgressReminderToUsers < ActiveRecord::Migration
+class AddProgressReminderToEnrollments < ActiveRecord::Migration
   def change
-    add_column :users, :progress_reminder_sent_at, :datetime
+    add_column :enrollments, :progress_reminder_sent_at, :datetime
   end
 end

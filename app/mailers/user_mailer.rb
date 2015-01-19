@@ -12,4 +12,10 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: user.email, subject: "We miss you. Come on back.")
   end
+
+  def activity_reminder(enrollment, user)
+    @user = user
+    @course = enrollment.course
+    mail(to: user.email, subject: "Stuck working on #{@course.name}? Here comes help!")
+  end
 end
