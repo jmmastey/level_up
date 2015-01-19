@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118183957) do
+ActiveRecord::Schema.define(version: 20150119203208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20150118183957) do
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "progress_reminder_sent_at"
   end
 
   create_table "roles", force: :cascade do |t|
