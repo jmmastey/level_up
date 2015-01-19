@@ -22,9 +22,9 @@ class CourseActivity
 
   def completions
     @completions ||= Completion.joins(:skill)
-      .where(user: user)
-      .where(skills: { category_id: course.categories })
-      .by_id
+                     .where(user: user)
+                     .where(skills: { category_id: course.categories })
+                     .by_id
   end
 
   def last_activity_date
@@ -32,6 +32,8 @@ class CourseActivity
   end
 
   def enroll_date
-    @enroll_date ||= user.enrollments.where(course: course).pluck(:created_at).first
+    @enroll_date ||= user.enrollments
+                     .where(course: course)
+                     .pluck(:created_at).first
   end
 end

@@ -52,7 +52,7 @@ describe CourseActivity, type: :model do
       expect(activity(user, course).user_is_stuck?).to be_truthy
     end
 
-    it "returns true when the registration is super old but there are no completions" do
+    it "returns true when the registration is old and w/ no completions" do
       enroll(2.weeks.ago)
       expect(activity(user, course).user_is_stuck?).to be_truthy
     end
