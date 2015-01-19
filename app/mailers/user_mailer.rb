@@ -17,6 +17,6 @@ class UserMailer < ActionMailer::Base
     @user = enrollment.user
     @course = enrollment.course
     title = "Stuck working on #{@course.name}? Here comes help!"
-    mail(to: user.email, subject: title)
+    mail(to: @user.email, subject: title)
   end
 end
