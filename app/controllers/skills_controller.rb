@@ -26,6 +26,6 @@ class SkillsController < ApplicationController
   private
 
   def skill
-    @skill ||= Skill.find_by_id(params[:skill_id])
+    @skill ||= Skill.find(params[:skill_id])
   end
 end
