@@ -237,7 +237,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   config.omniauth :github, (ENV['GITHUB_CLIENT_ID'] || "fixme_in_dotenv"),
     (ENV['GITHUB_CLIENT_SECRET'] || "fixme_in_dotenv"),
-    scope: 'user,public_repo,gist'
+    scope: 'user:email,public_repo,gist'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
