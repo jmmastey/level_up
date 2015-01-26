@@ -21,11 +21,16 @@ module Omniauthable
     def new_from_omniauth(auth)
       create(email: auth.info.email,
              password: Devise.friendly_token[0, 20],
-             name: auth.info.name,
+             name: name_from_auth(auth),
              provider: auth.provider,
              uid: auth.uid,
             )
     end
     private :new_from_omniauth
+
+    def name_from_auth(auth)
+      auth.info.name.presence || auth.info.email.split("@")[0]
+    end
+    private :name_from_auth
   end
 end

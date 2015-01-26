@@ -150,6 +150,20 @@ describe User do
         user = User.from_omniauth(auth)
         expect(user).to be_persisted
       end
+
+      context "when auth returns no name" do
+        let(:attrs) { { email: "tom@test.com", name: '' } }
+
+        it "saves the user params" do
+          user = User.from_omniauth(auth)
+          expect(user).to have_attributes(
+            email: attrs[:email],
+            name: attrs[:email].split("@")[0],
+            provider: "github",
+            uid: "1",
+          )
+        end
+      end
     end
 
     context "when the user registered before" do
