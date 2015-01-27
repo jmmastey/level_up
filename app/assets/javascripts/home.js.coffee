@@ -6,7 +6,9 @@ init_home = ->
     $.ajax form.attr("target"),
       method: 'POST'
       dataType: 'json',
-      complete: -> $("#feedback_form").modal("hide")
+      complete: ->
+        $("#feedback_form").modal("hide")
+        $("#message").val('')
       data: {
         name: $("#name", form).val(),
         page: $("#page", form).val(),
