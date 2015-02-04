@@ -45,7 +45,8 @@
     - e.question "Explain the problem with default column sizes and why we try to size columns properly."
     - e.question "Contrariwise, explain the dangers of sizing columns inappropriately."
     - e.question "Make sure your yadda schema is well normalized and sized."
-  %p Finally, indices. Can't turn that one into some kind of filthy dreck, can you? Eh? Anyway, indices are one of the most common performance optimizations we make in database land. They allow for near-instantaneous executions of queries when used correctly. Or when used incorrectly, they screw your performance entirely. Maybe let's do that correclty?
+  %p Finally, indices. Can't turn that one into some kind of filthy dreck, can you? Eh? Anyway, indices are one of the most common performance optimizations we make in database land. They allow for near-instantaneous executions of queries when used correctly. Or when used incorrectly, they screw your performance entirely. Maybe let's do that correctly?
+  %p Take a look at <a href='http://robots.thoughtbot.com/postgresql-performance-considerations'>this article</a> on understanding indices and other performance considerations.
   = exercise_block_for "indices" do |e|
     - e.question "Explain the tradeoff that indices allow us to make."
     - e.question "Show how indices are stored on the filesystem, and explain how that affects the database's ability to use multi-column indices for a given query."
