@@ -5,6 +5,7 @@ class HomeController < ApplicationController
 
   include CategoryRouter
 
+  # GET /
   def index
     @courses = current_user.courses
   end
