@@ -20,9 +20,9 @@ describe UserMailer do
   describe "#slack_reminder" do
     let(:mail) { UserMailer.slack_reminder(user) }
 
-    it "includes the slack link" do
+    it "includes the slack invite link" do
       expect(mail.to).to include(user.email)
-      expect(mail.body).to include("https://leveluprails.slack.com/")
+      expect(mail.body).to include("https://levelupslackinvites.herokuapp.com/")
     end
 
     it "actually sends the email" do
