@@ -4,12 +4,17 @@ class RemindActivityDropoffs
   def call
     context.enrollments = targets.each do |enrollment|
       next unless still_stuck?(enrollment)
+      next unless emailable?(enrollment.user)
       enrollment.update_attributes!(progress_reminder_sent_at: Time.now)
       remind(enrollment)
     end
   end
 
   private
+
+  def emailable?(user)
+    user.email_opt_out.nil?
+  end
 
   def still_stuck?(enrollment)
     CourseActivity.new(enrollment.user, enrollment.course).user_is_stuck?
