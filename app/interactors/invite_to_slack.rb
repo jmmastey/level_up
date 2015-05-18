@@ -8,7 +8,9 @@ class InviteToSlack
   private
 
   def invite_to_slack(user)
-    update(user) && remind(user)
+    User.transaction do
+      update(user) && remind(user)
+    end
   end
 
   def update(user)
