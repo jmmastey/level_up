@@ -19,4 +19,9 @@ class UserMailer < ActionMailer::Base
     title = "LevelUp: Stuck working on #{@course.name}? Here comes help!"
     mail(to: @user.email, subject: title)
   end
+
+  def slack_reminder(user)
+    @user = user
+    mail(to: user.email, subject: "Get LevelUp help (and give it) on Slack.")
+  end
 end
