@@ -13,7 +13,7 @@ class InviteToSlack
 
   def update(user)
     !user.slack_invite_sent_at &&
-    !user.email_opt_out &&
+      !user.email_opt_out &&
       user.update_attributes!(slack_invite_sent_at: Time.now)
   end
 

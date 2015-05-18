@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
     includes(:enrollments).where(enrollments: { id: nil })
   }
 
-
   def summary
     @summary ||= UserSummary.new(self)
   end
