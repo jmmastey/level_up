@@ -16,3 +16,8 @@ Feature: Unsubscribe from emails
     When I visit unsubscribe with a token
     Then I am unsubscribed
     And I see a message that I am unsubscribed
+
+  Scenario: Unsubscribe via profile
+    Given I am logged in
+    When I visit my profile
+    Then I see a link to unsubscribe from emails

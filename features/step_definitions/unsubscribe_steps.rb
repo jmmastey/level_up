@@ -27,3 +27,7 @@ end
 Then(/^I am unsubscribed$/) do
   expect(@user.reload.email_opt_out).to eq("unsubscribed")
 end
+
+Then(/^I see a link to unsubscribe from emails$/) do
+  expect(page).to have_css("#unsubscribe")
+end
