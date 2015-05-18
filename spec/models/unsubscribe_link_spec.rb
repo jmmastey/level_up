@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe UnsubscribeLink do
   context "#for_user" do
@@ -14,5 +13,4 @@ describe UnsubscribeLink do
       expect(UnsubscribeLink.for_user(user)).to be_an(UnsubscribeLink)
     end
   end
-
 end
