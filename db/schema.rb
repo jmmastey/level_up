@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518180143) do
+ActiveRecord::Schema.define(version: 20150518215010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(version: 20150518180143) do
   end
 
   add_index "skills", ["handle"], name: "index_skills_on_handle", using: :btree
+
+  create_table "unsubscribe_links", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "token",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                default: "",    null: false

@@ -16,4 +16,7 @@ Levelup::Application.routes.draw do
     post "completion", to: "skills#complete", as: :complete
     delete "completion", to: "skills#uncomplete", as: :uncomplete
   end
+
+  get "/unsubscribe", to: "unsubscribe#index", as: :unsubscribe
+  get "/unsubscribe/:token", to: "unsubscribe#confirm"
 end

@@ -22,6 +22,10 @@ When /^I visit a user's profile page$/ do
   visit user_path(@user)
 end
 
+When /^I visit my profile$/ do
+  visit user_path(@user)
+end
+
 When /^I click a user's profile link$/ do
   click_link @user.name
 end
