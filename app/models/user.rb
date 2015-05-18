@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   scope :older, -> { where("users.created_at < ?", 5.days.ago) }
   scope :by_activity_date, -> { order("users.updated_at desc") }
   scope :by_org, ->(org) { where(organization: org) }
+  scope :emailable, -> { where(email_opt_out: nil) }
   scope :with_completions, lambda {
     includes(:completions).where.not(completions: { id: nil })
   }
