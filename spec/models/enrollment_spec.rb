@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Enrollment do
   describe "feed_for" do
     let(:user) { create(:user) }
-    let!(:enrollment) { create(:enrollment, user: user) }
+    let!(:enrollment) { create(:enrollment, user: user, created_at: 1.day.ago) }
 
     it "returns the recently completed enrollment" do
       expect(Enrollment.feed_for(user)).to include(enrollment)
