@@ -7,6 +7,7 @@ end
 
 COURSES = [
   ["Welcome to LevelUpRails", "welcome", "Learning a new stack is hard. Take a look at how LevelUpRails can help."],
+  ["Engineering Baseline I", "baseline_1", "Learn to build and test a complete Ruby on Rails application. This isn't a basic intro: you will finish with some serious ruby chops."],
   ["Engineering Baseline II", "baseline_2", "Description"],
   ["Engineering at Enova", "enova", "Learn more about engineering as it happens at Enova."],
   ["Performance and Scaling", "scaling", "Take a realistic Rails app and learn to scale it in real world circumstances. You'll cover all the basic best practices in performance and scalability for the Rails world."],
