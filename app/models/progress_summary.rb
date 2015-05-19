@@ -29,11 +29,20 @@ class ProgressSummary
 
   def progress_burndown(enrollment)
     skills_left = enrollment.course.skills.count
+    completions = completions(enrollment)
+
     start_date.upto(end_date).each_with_object({}) do |date, hash|
+      skills_left -= completions[date].length if completions[date]
       hash[date] = skills_left
     end
   end
   private :progress_burndown
+
+  def completions(enrollment)
+    Completion.for_course(enrollment.user, enrollment.course)
+      .pluck(:created_at, :id)
+      .group_by { |c| as_date(c.first) }
+  end
 
   #
   # [

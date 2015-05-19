@@ -89,7 +89,7 @@ describe ProgressSummary do
       end
 
       it "reduces the remaining count when a skill is completed" do
-        completion = create(:completion, created_at: start_date + 1
+        completion = create(:completion, created_at: start_date + 1,
                             skill: course.skills.last, user: enrollment.user)
 
         expect(enrollment_data[:progress][start_date]).to eq(total_skills)
