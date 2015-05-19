@@ -12,4 +12,8 @@ module UsersHelper
                        gravatar: { size: size, secure: request.ssl?,
                                    default: :identicon })
   end
+
+  def progress_summary_for(user)
+    ProgressSummary.new(user.enrollments.limit(1)).to_a
+  end
 end

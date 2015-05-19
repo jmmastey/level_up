@@ -23,7 +23,7 @@ class ProgressSummary
     return val if val.kind_of? Date
     return val.to_date if val.respond_to? :to_date
     return Date.parse(val) if val.kind_of? String
-    raise InvalidArgumentError
+    raise ArgumentError
   end
   private :as_date
 
