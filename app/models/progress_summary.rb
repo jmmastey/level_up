@@ -1,11 +1,10 @@
 class ProgressSummary
-
   attr_reader :enrollments, :end_date, :start_date
 
   def initialize(enrollments, options = {})
     @enrollments  = enrollments
     @end_date     = as_date(options.fetch(:end_date, Date.today))
-    @start_date   = as_date(options.fetch(:start_date, enrollments.minimum(:created_at)))
+    @start_date   = as_date(options.fetch(:start_date, first_enrollment))
   end
 
   def to_a
@@ -14,16 +13,22 @@ class ProgressSummary
     end
   end
 
+  def first_enrollment
+    enrollments.minimum(:created_at)
+  end
+  private :first_enrollment
+
   def summarize_progress_for_enrollment(enrollment)
-    { course_name: enrollment.course.name, progress: progress_burndown(enrollment) }
+    { course_name: enrollment.course.name,
+      progress: progress_burndown(enrollment) }
   end
   private :summarize_progress_for_enrollment
 
   def as_date(val)
-    return val if val.kind_of? Date
+    return val if val.is_a? Date
     return val.to_date if val.respond_to? :to_date
-    return Date.parse(val) if val.kind_of? String
-    raise ArgumentError
+    return Date.parse(val) if val.is_a? String
+    fail ArgumentError
   end
   private :as_date
 
@@ -56,5 +61,4 @@ class ProgressSummary
   #   ...
   # ]
   #
-
 end

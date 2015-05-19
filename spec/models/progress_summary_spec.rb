@@ -2,10 +2,9 @@ require 'pry'
 require 'spec_helper'
 
 describe ProgressSummary do
-
   before do
     FactoryGirl.create(:enrollment, created_at: oldest_date)
-    FactoryGirl.create(:enrollment, created_at: oldest_date+1)
+    FactoryGirl.create(:enrollment, created_at: oldest_date + 1)
   end
 
   let(:enrollments)     { Enrollment.all }
@@ -64,11 +63,13 @@ describe ProgressSummary do
       end
 
       it "has progress keys for each day in the range" do
-        subject = subject_with(enrollments, start_date: Date.today, end_date: Date.today+3)
-        data    = subject.to_a.first
+        subject = subject_with(enrollments, start_date: Date.today,
+                               end_date: Date.today + 3)
+        data = subject.to_a.first
+        dates = [Date.today, Date.today + 1, Date.today + 2, Date.today + 3]
 
         expect(data[:progress]).to have(4).items
-        expect(data[:progress].keys).to eq([ Date.today, Date.today+1, Date.today+2, Date.today+3])
+        expect(data[:progress].keys).to eq(dates)
       end
     end
 
@@ -83,19 +84,20 @@ describe ProgressSummary do
       let(:course) { create(:course, :with_skills) }
       let(:total_skills) { course.skills.count }
 
-      it "returns the total number of skills when there have been no completions" do
+      it "returns the total number of skills when there are no completions" do
         expect(enrollment_data[:progress][start_date]).to eq(total_skills)
         expect(enrollment_data[:progress][Date.today]).to eq(total_skills)
       end
 
       it "reduces the remaining count when a skill is completed" do
-        completion = create(:completion, created_at: start_date + 1,
-                            skill: course.skills.last, user: enrollment.user)
+        create(:completion, created_at: start_date + 1,
+               skill: course.skills.last, user: enrollment.user)
 
-        expect(enrollment_data[:progress][start_date]).to eq(total_skills)
-        expect(enrollment_data[:progress][start_date + 1]).to eq(total_skills - 1)
+        progress = enrollment_data[:progress]
+
+        expect(progress[start_date]).to eq(total_skills)
+        expect(progress[start_date + 1]).to eq(total_skills - 1)
       end
     end
   end
-
 end
