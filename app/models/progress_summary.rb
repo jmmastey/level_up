@@ -2,9 +2,9 @@ class ProgressSummary
   attr_reader :enrollments, :end_date, :start_date
 
   def initialize(enrollments, options = {})
-    @enrollments  = enrollments
-    @end_date     = as_date(options.fetch(:end_date, Date.today))
-    @start_date   = as_date(options.fetch(:start_date, first_enrollment))
+    @enrollments = enrollments
+    @end_date = as_date(options.fetch(:end_date, Date.today))
+    @start_date = as_date(options.fetch(:start_date, first_enrollment))
   end
 
   def to_a
