@@ -10,6 +10,11 @@ describe RemindActivityDropoffs do
   end
 
   it "sends email to users who've become stuck" do
+    # TODO: the interface of Interactor is really getting in the way
+    # of decent form here. consider removing interactor altogether.
+    # In particular, this any-instance shit is a lot of indirection,
+    # and it's hard to dependency inject the mailers because of the
+    # silliness in context.
     expect_any_instance_of(subject).to receive(:targets)
       .and_return([enrollment])
     expect(UserMailer).to receive(:activity_reminder).and_return(mail)
