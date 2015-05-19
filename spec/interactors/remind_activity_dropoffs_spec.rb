@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RemindActivityDropoffs do
   subject(:interactor) { RemindActivityDropoffs }
-  let(:mail) { double("<UserMailer>", deliver_now: true) }
+  let(:mail) { double("UserMailer", deliver_now: true) }
   let(:user) { create(:user, name: "Old User", created_at: 2.weeks.ago) }
   let(:course) { create(:course, :with_skills) }
   let!(:enrollment) do

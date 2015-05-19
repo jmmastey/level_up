@@ -6,7 +6,7 @@ describe EnrollUser do
   let(:interactor) { EnrollUser.call(course: course, user: user) }
 
   context "when the interactor is a success" do
-    let(:mail) { double("<AdminMailer>", deliver_now: true) }
+    let(:mail) { double("AdminMailer", deliver_now: true) }
 
     it "allows a user to register for a course" do
       expect(interactor).to be_success
@@ -27,7 +27,7 @@ describe EnrollUser do
   end
 
   context "when emails cannot be sent" do
-    let(:mail) { double("<AdminMailer>", deliver_now: false) }
+    let(:mail) { double("AdminMailer", deliver_now: false) }
 
     it "fails when emails cannot be sent properly" do
       expect(AdminMailer).to receive(:confirm_enrollment)
