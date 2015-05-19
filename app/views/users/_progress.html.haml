@@ -4,3 +4,10 @@
       .panel-heading
         %h4 Skill Progress
       .panel-body= render partial: 'progress_bars'
+
+- if (@user == current_user || current_user.admin?) && @user.enrollments.any?
+  .progress_chart
+    .panel
+      .panel-heading
+        %h4 Burndown
+      .panel-body= render partial: 'progress_chart'

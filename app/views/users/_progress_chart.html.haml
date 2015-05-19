@@ -1,0 +1,27 @@
+- summary = progress_summary_for(@user).first
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+%script
+  = "chartData = function() { return ["
+  = "  ['Date', '#{summary[:course_name]}'],"
+  - summary[:progress].each do |date, remaining|
+    = "['#{date}', #{remaining}],"
+  = "] };"
+  = "console.log('loaded data')"
+
+
+:javascript
+  google.load('visualization', '1', { packages:['corechart'] });
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(chartData());
+
+    var options = {
+      hAxis: {title: 'Skills Remaining',  titleTextStyle: {color: '#333'}},
+      vAxis: {minValue: 0}
+    };
+
+    var chart = new google.visualization.AreaChart(document.getElementById('progress_burndown'));
+    chart.draw(data, options);
+  }
+
+<div id="progress_burndown" style="width: 100%; height: 300px;"></div>
