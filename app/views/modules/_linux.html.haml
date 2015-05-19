@@ -63,8 +63,8 @@
 
 .page-header
   %h3 Why You Shouldn't Use sudo
-  %p With great power comes great responsibility, right? Natch. Some commands you execute are going to need escalated privileges. For example, starting and stopping services, or installing new packages on a Linux system. If you're not familiar with the command, here's a <a href='https://www.linux.com/learn/tutorials/306766:linux-101-introduction-to-sudo'>Linux tutorial</a> on it.
-  %p Most users have unlimited sudo power on their systems. And sometimes, adding sudo to a command that's not working appears to "fix it". But down that way lies madness. By escalating yourself to root, erroneous commands have the ability to wreck your system. Resist the urge, and find a non-root way to execute the command.
+  %p With great power comes great responsibility, right? Natch. Some commands you execute are going to need escalated privileges. For example, starting and stopping services, or installing new packages on a Linux system. If you're not familiar with the command, here's a <a href='http://www.antson.org/tutorials/2014/06/12/a-short-introduction-to-sudo.html'>Linux tutorial</a> on it.
+  %p Most users have unlimited sudo power on their systems. And sometimes, adding sudo to a command that's not working appears to "fix it". But down that way lies madness. By escalating yourself to root, erroneous commands have the ability to wreck your system. Resist the urge, and find a non-root way to execute the command. To learn more read <a href='http://labs.securitycompass.com/network/bad-sudo'>this article about the dangerous sides of sudo</a>.
   = exercise_block_for "sudo" do |e|
     - e.question "Name an example of a command where sudo is necessary to run a command."
     - e.question "Name a few examples where use of sudo can get you into trouble."
