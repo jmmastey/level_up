@@ -12,7 +12,12 @@
 .page-header
   %h3 Everything is a File
   %p An important thing to understand when manipulating a Unix system is the principle that "Everything is a File". Ports and sockets, filesystems, directories and more are all treated as files for the purposes of manipulation. This is a benefit because it allows us a consistent way to manipulate I/O using common tools.
-  %p Read <a href='https://en.wikipedia.org/wiki/Everything_is_a_file'>the Wikipedia Article</a> for more details.
+
+  = resource_block do |e|
+    - e.text("Everything is a File", 'https://en.wikipedia.org/wiki/Everything_is_a_file', "As always, you can just read the wikipedia article. Contains links to further reading.")
+    - e.text("Introduction to Linux: About files and the file system", 'http://www.tldp.org/LDP/intro-linux/html/sect_03_01.html', "A comprehensive tutorial on working with the Linux filesystem. There's a ton of information in this guide to help with the rest of this section as well. Use the TOC at the top to find it.")
+    - e.video("The Linux File System Explained", 'https://www.youtube.com/watch?v=2qQTXp4rBEE', "A video about the entire Linux filesystem. A little campy, but the information is solid.")
+
   = exercise_block_for "everything_is_a_file" do |e|
     - e.question "Name some 'files' in a standard unix filesystem that aren't very file-like."
     - e.question "Identify some places where we use file descriptors for non-file content as part of the development process (hint: sockets are a good example here)."

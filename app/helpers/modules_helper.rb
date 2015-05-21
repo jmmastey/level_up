@@ -18,6 +18,20 @@ module ModulesHelper
     "http://github.com/jmmastey/level_up_exercises/tree/master/#{exercise}"
   end
 
+  def resource_block(&block)
+    block = ResourceBlock.new(&block)
+    render block
+  end
+
+  def resource_classes(type)
+    case type
+      when :text then 'fa-file-text'
+      when :video then 'fa-video-camera'
+      when :tutorial then 'fa-code'
+      else fail ArgumentError, "Unrecognized '#{type}'"
+    end + ' fa fa-fw'
+  end
+
   def completion_classes(skill)
     if @skills.include? skill.id
       "btn btn-default completed"
