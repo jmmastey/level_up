@@ -5,10 +5,8 @@
       .list-group-item{ class: ['course', course.handle] }
 
         %h3= course.name
+        .icon= image_tag "courses/#{course.handle}.png"
         %p.description= course.description
-        %p.topics
-          %strong Topics Covered:
-          = categories.join(", ")
 
         - if current_user.courses.include?(course)
           = link_to 'View course', course, class: 'btn btn-primary btn-lg register'
