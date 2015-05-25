@@ -1,0 +1,7 @@
+.list-group.resource-block
+  - block.resources.each do |type, title, link, text|
+    %a{href: link, class: "list-group-item #{type}"}
+      %h4.list-group-item-heading
+        %i{class: resource_classes(type)}
+        = title
+      %p.list-group-item-text= text
