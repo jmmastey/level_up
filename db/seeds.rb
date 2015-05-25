@@ -49,7 +49,8 @@ end
 
 SKILLS = [
   ["welcome", "group", "Understands good study habits and how to find a group."],
-  ["welcome", "interface", "Can use the interface to complete skills."],
+  ["welcome", "interface", "Can use the interface to signal completion of exercises."],
+
   ["linux", "navigation", "Understands absolute vs relative path and can navigate the filesystem"],
   ["linux", "everything_is_a_file", "Understands that everything is a file"],
   ["linux", "environment", "Understands path and environment variables"],
