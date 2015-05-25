@@ -3,7 +3,10 @@
 .page-header
   %h3 Getting Around the Filesystem: Absolute and Relative Paths
   %p There's not much to say for this one, navigating the filesystem is possibly the most basic thing you can do. If not a Mac / Linux user, you've probably still done this before. That said, take a moment to review some basics. A really common error for newer engineers is to accidentally conflate absolute and relative path when running commands.
-  %p If you could use a refresher, check out this <a href='http://linuxcommand.org/'>Linux Navigation Tutorial</a>
+
+  = resource_block do |e|
+    - e.text("Linux Navigation Tutorial", 'http://linuxcommand.org/', "Get a quick refresher on navigation via the command line.")
+
   = exercise_block_for "navigation" do |e|
     - e.question "Demonstrate a few commands showing the difference between navigating to an absolute path versus a relative path."
     - e.question "The tilde (~) character is neither an absolute nor a relative path, but it stands for your home directory (interestingly, it just reads the environment variable HOME). Navigate to home using the tilde and then list your working directory to verify the path you've arrived at."
@@ -27,8 +30,11 @@
   %h3 Path and the Environment
   %p We rely heavily on environment variables to influence the behavior of our applications. For instance, when starting a rails server, we often pass a variable that tells it whether to start in development, integration or production mode.
   %p Path is also key to keeping control of your environment. By manipulating the path, we change which version of ruby and other utilities we're running on the fly. Oftentimes, when a command doesn't work the way you expected it to (or not at all), the problem lies in your execution path.
-  %p Read more about <a href='http://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html'>environment variables</a> at the Bash Guide.
-  %p Read more about <a href='https://kb.iu.edu/data/acar.html'>retrieving and manipulating the path</a>.
+
+  = resource_block do |e|
+    - e.text("Bash Beginner's Guide", 'http://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html', "A somewhat long-winded explanation of environment variables. Once you learn it, you never have to read it again.")
+    - e.text("Retrieving an Manipulating the Path", 'https://kb.iu.edu/data/acar.html', "Read more about the path environment variable.")
+
   = exercise_block_for "environment" do |e|
     - e.question "Demonstrate the command to view all environment variables, and then use grep to find the one called EDITOR. If it's not set, modify your initialization scripts to set it to 'vim'."
     - e.question "Demonstrate a command that echoes the value of the PATH environment variable."
@@ -36,8 +42,12 @@
 
 .page-header
   %h3 Transferring Files Between Boxes
-  %p Since we work on remote VMs, and often across the network, transferring of files across machines is a common task. Take a look at this <a href='https://linuxacademy.com/blog/linux/ssh-and-scp-howto-tips-tricks/'>SCP tutorial</a> to find out how to transfer files. 
-  %p In this and future exercises, we'll assume that you have access to a Linux VM of some sort. If you need suggestions, we prefer <a href='https://www.virtualbox.org/'>Virtualbox</a> and <a href='https://www.vagrantup.com/'>Vagrant</a>.
+  %p Since we work on remote VMs, and often across the network, transferring of files across machines is a common task. In this and future exercises, we'll assume that you have access to a Linux VM of some sort. If you need suggestions, we prefer <a href='https://www.virtualbox.org/'>Virtualbox</a> and <a href='https://www.vagrantup.com/'>Vagrant</a>.
+
+  = resource_block do |e|
+    - e.text("SSH and SCP How-to", 'https://linuxacademy.com/blog/linux/ssh-and-scp-howto-tips-tricks/', "Learn how to use SCP to transfer files.")
+    - e.text("Retrieving an Manipulating the Path", 'https://kb.iu.edu/data/acar.html', "Read more about the path environment variable.")
+
   = exercise_block_for "scp" do |e|
     - e.question "Create a text file with your email username (e.g. jmastey.txt). Now SCP it to your VM and put it into the /tmp directory."
     - e.question "Delete your local copy, and then copy the file from the remote box back to your local machine."
@@ -45,8 +55,13 @@
 .page-header
   %h3 Git. Just Git.
   %p Source control is a big topic, but you don't need to know everything up front. We're going to focus on the few basic commands that should let you do most of your work day-to-day.
-  %p Different teams use different workflows, but most look something like <a href='http://nvie.com/posts/a-successful-git-branching-model/'>this article</a>. You should be using topic branches and a similar flow as you work.
-  %p We strongly encourage pairing throughout Level UP courses (and on real work as well).  When committing your code via your partner's account, be sure to indicate that you are the author of the changes.
+  %p We strongly encourage pairing throughout Level UP courses (and on real work as well).  When committing your code via your partner's account, be sure to indicate that you are the author of the changes. Also make sure that you're using branches properly as part of your workflow.
+
+  = resource_block do |e|
+    - e.text("A Successful Git Branching Model", 'http://nvie.com/posts/a-successful-git-branching-model/', "If there's one thing you're likely to have a problem with, it's the model for branching and merging in git. This is the model we (and many other orgs) use.")
+    - e.video("The Git Book", 'http://www.git-scm.com/book', "The canonical way to learn git. If you want a deep understanding of the software, this is how to do it.")
+    - e.video("Fugitive and Vim", 'https://www.codeschool.com/screencasts/vimcasts-fugitive-vim', "If you're already a big vim user, take a look at fugitive as a way to incorporate git into your vim workflow.")
+
   = exercise_block_for "git" do |e|
     - e.question "Go run through <a href='https://try.github.io/'>Try Git</a> to get up to speed."
     - e.question "Fork the exercises repo (see the sidebar) to get ready for the other modules."
@@ -58,7 +73,10 @@
   %h3 Managing File Permissions
   %p File permissions are the Unixy way of preventing total chaos and destruction on your system. So they're good. In source control, these permissions are tracked and held consistent across machines to make sure that only specified users can access resources.
   %p Beyond that, any time you download an executable, like a shell script, your OS will probably use permissions to stop you from executing that file. If you want to run that sweet sweet script, you're going to need to learn to change them.
-  %p For more information, read this lovely <a href='http://linuxfrombeginning.wordpress.com/2008/09/25/linux-command-9-chown-chgrp-chmod/'>chmod and chown tutorial</a>.
+  
+  = resource_block do |e|
+    - e.text("Linux Commands: chown, chgrp, chmod", 'http://linuxfrombeginning.wordpress.com/2008/09/25/linux-command-9-chown-chgrp-chmod/', "Everything you need to manipulate file permissions to your heart's content.")
+
   = exercise_block_for "file_permissions" do |e|
     - e.question "Use touch to create a new file in the /tmp directory. What permissions do user / group / and world have to that file by default?"
     - e.question "Use chown to change ownership of that file to the root user and root group."
@@ -68,8 +86,13 @@
 
 .page-header
   %h3 Why You Shouldn't Use sudo
-  %p With great power comes great responsibility, right? Natch. Some commands you execute are going to need escalated privileges. For example, starting and stopping services, or installing new packages on a Linux system. If you're not familiar with the command, here's a <a href='http://www.antson.org/tutorials/2014/06/12/a-short-introduction-to-sudo.html'>Linux tutorial</a> on it.
-  %p Most users have unlimited sudo power on their systems. And sometimes, adding sudo to a command that's not working appears to "fix it". But down that way lies madness. By escalating yourself to root, erroneous commands have the ability to wreck your system. Resist the urge, and find a non-root way to execute the command. To learn more read <a href='http://labs.securitycompass.com/network/bad-sudo'>this article about the dangerous sides of sudo</a>.
+  %p With great power comes great responsibility, right? Natch. Some commands you execute are going to need escalated privileges. For example, starting and stopping services, or installing new packages on a Linux system.
+  %p Most users have unlimited sudo power on their systems. And sometimes, adding sudo to a command that's not working appears to "fix it". But down that way lies madness. By escalating yourself to root, erroneous commands have the ability to wreck your system. Resist the urge, and find a non-root way to execute the command. 
+
+  = resource_block do |e|
+    - e.text("A Short Introduction to Sudo", 'http://www.antson.org/tutorials/2014/06/12/a-short-introduction-to-sudo.html', "An overview of usage of the sudo command. ")
+    - e.text("Bad Sudo", 'http://labs.securitycompass.com/network/bad-sudo', "Sudo is dangerous. Find out some of the bad things you can do with it in this article.")
+
   = exercise_block_for "sudo" do |e|
     - e.question "Name an example of a command where sudo is necessary to run a command."
     - e.question "Name a few examples where use of sudo can get you into trouble."
@@ -77,7 +100,13 @@
 .page-header
   %h3 Monitoring System Resources
   %p Virtual machines typically have very limited resources, because they have to take them from a host machine. So, you may often find yourself running out of disk space, processor or memory resources. While it's obvious enough when a machine is slow, it may not be obvious which resource is in contention. Luckily, there are a few commands that can help you track down resource issues to fix them.
-  %p Read some tutorials for <a href='http://www.linfo.org/du.html'>du</a>, <a href='http://www.linfo.org/df.html'>df</a> and <a href='http://www.thegeekstuff.com/2011/09/linux-htop-examples/'>htop</a>. It's also useful to be familiar with <a href='https://en.wikipedia.org/wiki/Load_(computing)'>reading load averages</a>.
+
+  = resource_block do |e|
+    - e.text("Linfo: du", 'http://www.linfo.org/du.html', "Just how much space DO you have left on your computer?")
+    - e.text("Linfo: df", 'http://www.linfo.org/df.html', "It's like du, but totally different.")
+    - e.text("Linux htop Examples", 'http://www.thegeekstuff.com/2011/09/linux-htop-examples/', "Find out what's been eating all your processing power.")
+    - e.text("Load (Computing)", 'https://en.wikipedia.org/wiki/Load_(computing)', "Load averages are richer than just CPU Load. Learn to read them.")
+
   = exercise_block_for "monitoring_resources" do |e|
     - e.question "Demonstrate the command to check what the remaining disk space is on your laptop. Make sure to use the flag to make the output more readable."
     - e.question "Navigate to the your home directory, and demonstrate the command to see how much space that directory and each subdirectory takes on disk."
@@ -87,7 +116,11 @@
 .page-header
   %h3 What's a Port and How to Find It
   %p Most pieces of software, like SSH or your web browser, use ports to communicate with other computers. While it might not explicitly call this fact out, your browser knows that the typical ports for HTTP/S are 80 and 443. As we develop, we use ports that are unique across the entire organization to identify internal services and offer them for consumption.
-  %p You'll need to understand how to manipulate ports and check whether they are listening for connections, but it's not that tough. Check out these resources on <a href='https://en.wikipedia.org/wiki/Port_(computer_networking)'>ports</a> and <a href='http://www.thegeekstuff.com/2010/03/netstat-command-examples/'>checking on them</a>. 
+
+  = resource_block do |e|
+    - e.text("Port (Computer Networking)", 'https://en.wikipedia.org/wiki/Port_(computer_networking)', "If you don't know about ports yet, Wikipedia to the rescue!")
+    - e.text("Netstat Command Examples", 'http://www.thegeekstuff.com/2010/03/netstat-command-examples/', "Netstat is the command we use to check ports. A lot.")
+
   = exercise_block_for "ports" do |e|
     - e.question "Demonstrate the command to show the list of currently listening ports on your laptop."
     - e.question "Do it again on a Linux VM, but make sure to include the flags to display the applications that are listening. Find the application port and pid that run sshd."
@@ -96,7 +129,11 @@
 .page-header
   %h3 Finding, pausing and killing processes
   %p Similarly to checking ports, sometimes you'll need to find and verify that processes are actually running on your system. When they get out of hand, you'll also need to be able to kill them (with prejudice).
-  %p Read these tutorials on <a href='http://www.thegeekstuff.com/2011/04/ps-command-examples/'>the ps command</a> and <a href='http://www.thegeekstuff.com/2010/05/unix-background-job/'>background jobs</a>.
+
+  = resource_block do |e|
+    - e.text("Ps Command Examples", 'http://www.thegeekstuff.com/2011/04/ps-command-examples/', "Computer Science is the only career where you get to reap your zombie children and not feel bad about it.")
+    - e.text("Background Jobs", 'http://www.thegeekstuff.com/2010/05/unix-background-job/', "Running jobs in the background, for your own good.")
+
   = exercise_block_for "processes" do |e|
     - e.question "If you run the command `ruby -e 'sleep 1 while true'`, you'll start a ruby process that never completes. Try it out and verify that the command never returns. Use the keyboard command to kill it."
     - e.question "Try it again, but append the character that causes the process to run in the background."
@@ -106,7 +143,11 @@
 
 .page-header
   %h3 Starting and Stopping Services
-  %p Aside from user-space programs you're accustomed to, Linux environments also run many services in the background. On Debian -- our preferred flavor of Linux -- the way to manage those services is through the init system. The commands to start and stop services are well <a href='http://oreilly.com/openbook/debian/book/ch07_03.html'>standardized and documented</a>, so you shouldn't need to learn any new commands for most services.
+  %p Aside from user-space programs you're accustomed to, Linux environments also run many services in the background. On Debian -- our preferred flavor of Linux -- the way to manage those services is through the init system. The commands to start and stop services are well standardized and documented, so you shouldn't need to learn any new commands for most services.
+
+  = resource_block do |e|
+    - e.text("Starting and Stopping the System and Services", 'http://oreilly.com/openbook/debian/book/ch07_03.html', "This system has been standard for quite a while. If you don't start and stop services gracefully, you're going to have big issues.")
+
   = exercise_block_for "init_scripts" do |e|
     - e.question "On a Linux development VM, use init scripts to restart sshd. Y'know, just in case."
     - e.question "Let's pretend you just changed your nginx config, and want to reload the changes without stopping the service altogether. Invoke the init script without any arguments to see valid choices. Now run the correct init command to parse and load the config without stopping the server."
@@ -114,14 +155,22 @@
 .page-header
   %h3 Monitoring Production Hardware
   %p We have hundreds of virtual servers running our production and internal systems. That makes monitoring those servers for health into a big job. It's important that you understand how that monitoring works, because you may be responsible for helping define or fix some of the checks that they employ. It's also just kinda cool.
-  %p Here's a handy <a href='https://www.youtube.com/watch?v=UjJKpDLYx18'>product demo</a> by Zenoss, the company we use to monitor our servers. We moved to that platform from Nagios, another popular platform for monitoring. Some of the reasons why <a href='http://www.techrepublic.com/blog/linux-and-open-source/system-monitoring-with-zenoss-takes-complexity-out-of-configuration/'>are here</a>.
+
+  = resource_block do |e|
+    - e.video("Network Monitoring", 'http://oreilly.com/openbook/debian/book/ch07_03.html', "A handy product demo by Zenoss, a company that does server monitoring.")
+    - e.text("System Monitoring with Zenoss", 'http://www.techrepublic.com/blog/linux-and-open-source/system-monitoring-with-zenoss-takes-complexity-out-of-configuration/', "We changed to Zenoss off of Nagios. Some of the reasons why are here.")
+
   = exercise_block_for "monitoring" do |e|
     - e.question "Name some resources that you might monitor for a production host."
     - e.question "There's a big problem with most monitoring: a momentary spike in resource usage isn't actually a problem. Some software, like the 'god' gem, tries to overcome this limitation. Can you think of some strategies to solve this problem?"
 
 .page-header
   %h3 Why We Use Web Proxies
-  %p In a complicated network environment, we use proxies all the time. Even within a single node, we usually have a proxy set up to listen for the machine and proxy requests back to the actual software. You need to know how they work, and where we use them, in order to understand how requests actually reach our systems. There are some critical caveats to use of these proxies that you may need to know about. Learn more about <a href='https://medium.com/@jmmastey/proxies-and-you-2846c5fc0c7b'>common types of proxies</a> we work with.
+  %p In a complicated network environment, we use proxies all the time. Even within a single node, we usually have a proxy set up to listen for the machine and proxy requests back to the actual software. You need to know how they work, and where we use them, in order to understand how requests actually reach our systems. There are some critical caveats to use of these proxies that you may need to know about.
+
+  = resource_block do |e|
+    - e.text("Proxies and You", 'https://medium.com/@jmmastey/proxies-and-you-2846c5fc0c7b', "Learn more about the many types of proxies we work with.")
+
   = exercise_block_for "proxies" do |e|
     - e.question "Draw a little diagram or ASCII art or whatever moves you, showing all the proxies between a production customer and the actual application webserver."
     - e.question "How can we use proxies to better service to our customers?"
@@ -129,15 +178,22 @@
 .page-header
   %h3 Managing Server Time (NTP)
   %p If you don't manage the time on your system properly, your commits will appear to be from the future, and everyone will make fun of you. However, our tests tend to change system time in order to accomplish common tasks, so you may end up with a system whose time is not set correctly.
-  %p Quick, read <a href='http://linux.die.net/man/8/ntpdate'>the man</a> to avoid total embarassment!
+
+  = resource_block do |e|
+    - e.text("Ntpdate Man Page", 'http://linux.die.net/man/8/ntpdate', "Quick, read the man pages to avoid total embarassment!")
+
   = exercise_block_for "ntp" do |e|
     - e.question "This one's easy. Demonstrate the command to reset your time using an external NTP server."
 
 .page-header
   %h3 Firewalls, iptables, and nmap
-  %p On most systems, and certainly on our production system, we limit traffic in and out of systems using a firewall. By allowing only whitelisted traffic to pass, we can eliminate large numbers of security vulnerabilities.
-  %p All modern Linux systems use iptables to manage traffic, which you can <a href='http://www.tecmint.com/basic-guide-on-iptables-linux-firewall-tips-commands/'>read about here</a>. We have wrappers to iptables on our systems, but you should be able to view the rules as the need arises.
-  %p Sometimes, it's not clear whether or not the firewall is blocking your traffic. From the host itself, the port may appear to be open, but requests are not being served properly. In this case, a good tool for "sniffing out" the misbehaving machine is nmap. You can use nmap to scan the machine and display a report of all ports that are open and listening. Find out more about nmap with this <a href='https://www.digitalocean.com/community/articles/how-to-use-nmap-to-scan-for-open-ports-on-your-vps'>fantastic tutorial</a>.
+  %p On most systems, and certainly on our production system, we limit traffic in and out of systems using a firewall. By allowing only whitelisted traffic to pass, we can eliminate large numbers of security vulnerabilities. All modern Linux systems use iptables to manage traffic. We have wrappers to iptables on our systems, but you should be able to view the rules as the need arises.
+  %p Sometimes, it's not clear whether or not the firewall is blocking your traffic. From the host itself, the port may appear to be open, but requests are not being served properly. In this case, a good tool for "sniffing out" the misbehaving machine is nmap. You can use nmap to scan the machine and display a report of all ports that are open and listening.
+
+  = resource_block do |e|
+    - e.text("Basic Guide to iptables", 'http://www.tecmint.com/basic-guide-on-iptables-linux-firewall-tips-commands/', "Learn how to manipulate iptables to manage traffic.")
+    - e.text("How to Use Nmap to Scan for Open Ports", 'https://www.digitalocean.com/community/articles/how-to-use-nmap-to-scan-for-open-ports-on-your-vps', "This tutorial is fantastic.")
+
   = exercise_block_for "firewall" do |e|
     - e.question "On your development machine, see what rules are currently loaded in the firewall. If it's not running, shame on you, start it first."
     - e.question "Explain why a whitelist approach is better than a blacklist approach for firewalls?"
