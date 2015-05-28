@@ -4,7 +4,7 @@ describe HomeController, type: :controller do
   render_views
 
   def self.extant_partials
-    Dir["#{Rails.root}/app/views/modules/_*.html.haml"].map do |category|
+    Dir["#{Rails.root}/app/views/categories/_*.html.haml"].map do |category|
       next if category =~ /resources|exercises/
       category.scan(/_([a-z_]*).html.haml/).first.first
     end.compact
