@@ -1,4 +1,4 @@
-init_modules = ->
+init_categories = ->
   $(".exercise button").click ->
     self = $(this)
     completedClass = 'fa-check-circle-o'
@@ -25,5 +25,5 @@ init_modules = ->
     exercise = $(this).parents(".exercise").find("h3").text().trim()
     $("#feedback_form #page").val(exercise)
 
-$(document).ready(init_modules)
-$(document).on('page:load', init_modules)
+$(document).ready(init_categories)
+$(document).on('page:load', init_categories)

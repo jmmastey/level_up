@@ -1,4 +1,4 @@
-module ModulesHelper
+module CategoriesHelper
   def exercise_block_for(handle, &block)
     block = ExerciseBlock.new(@category, handle, &block)
 
