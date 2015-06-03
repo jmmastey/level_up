@@ -18,6 +18,16 @@ class ResourceBlock
     @resources << [:tutorial, title, link, desc]
   end
 
+  def book(title, link, desc)
+    @resources << [:book, title, link, desc]
+  end
+
+  def audio(title, link, desc)
+    @resources << [:audio, title, link, desc]
+  end
+
+  # @TODO this is just silly...
+
   def to_partial_path
     "resource/block"
   end
