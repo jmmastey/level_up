@@ -28,6 +28,8 @@ module CategoriesHelper
       when :text then 'fa-file-text'
       when :video then 'fa-video-camera'
       when :tutorial then 'fa-code'
+      when :book then 'fa-book'
+      when :audio then 'fa-microphone'
       else fail ArgumentError, "Unrecognized '#{type}'"
     end + ' fa fa-fw'
   end

@@ -21,7 +21,8 @@
 
   %p Another common pattern that is both common and totally unnecessary is called Arrowhead Programming. this is pretty simple to diagnose. If a method indents more than maybe two levels, it probably needs to be refactored. Method calls are cheap relative to other resources, so reorganizing and refactoring your code to avoid this particular problem is well worth it.
 
-  %p Try this talk by <a href='https://www.youtube.com/watch?v=npOGOmkxuio'>Sandi Metz</a> for some discussion of this and the next few ideas.
+  = resource_block do |e|
+    - e.video("Sandi Metz - Rules", 'https://www.youtube.com/watch?v=npOGOmkxuio', "A discussion of this and the next few ideas.")
 
   = exercise_block_for "arrowhead" do |e|
     - e.question "Look at the code in the #{exercise_link 'arrowhead'} exercise. It currently fails to put error conditions near their conditions. Refactor it so that it isn't terrible anymore."
@@ -29,7 +30,9 @@
 
   %p The next rule turns out to be related to the previous one: you should write short methods, and short lines of code. Games like code golf are lots of fun, but if you check abstruse one-liners into the production codebase you're mostly just a jerk. A decent rule of thumb is to have no more than five lines of code in a method, and to keep your lines of code under eighty characters. That said, it's still possible to write a lot of terrible code in eighty characters, so consider rewriting any line whose meaning is not entirely apparent.
 
-  %p Also by Sandy Metz (sense a theme?), the book Practical Object Oriented Design in Ruby. There are copies in the library, take one and read at least the first several chapters to get an idea here. Then, snag a copy of Confident Ruby for some more ideas.
+  = resource_block do |e|
+    - e.book("Practical Object Oriented Design in Ruby (POODR)", 'http://smile.amazon.com/dp/0321721330', "Sandi Metz's (sense a theme?) book on designing good objects and messages.")
+    - e.book("Confident Ruby", 'https://www.confidentruby.com/', "How to structure just one method. Fantastic book.")
 
   = exercise_block_for "short_methods" do |e|
     - e.question "We're going to continue rocking these exercises. The #{exercise_link 'robot_name'} exercise seems apropos here."
@@ -37,7 +40,8 @@
 
   %p Even with short lines of code, it's not always possible to understand all code at a glance, so we put a lot of focus on using meaningful variable and method names. Ideally, someone reading your code should not even need to look at the body of a method to know what it does; the name should stand alone sufficiently to describe it. Similarly, variable names serve either to enlighten or confuse others as they read your code.
 
-  %p Naming is always going to be hard (it's actually stated as one of the hard problems of computer science), but this <a href='http://www.rubytapas.com/episodes/87-Naming-Head-Count'>Tapas</a> does a good job of walking you through some ideas around naming.
+  = resource_block do |e|
+    - e.video("Naming - Head Count", 'http://www.rubytapas.com/episodes/87-Naming-Head-Count', "Naming is always going to be hard (it's actually stated as one of the hard problems of computer science), but this Tapas does a good job walking you through some ideas on the topic.")
 
   = exercise_block_for "meaningful_names" do |e|
     - e.question "You're never going to guess how this goes. Refactor your ruby code!"
@@ -61,7 +65,9 @@
 
   %p Finally, we try to be as "Agile" as possible when we write applications, and while that doesn't mean that we skip comments entirely, it does mean that we hesitate to generate documentation when it's not totally necessary. Good code (and its tests) should stand as documentation of its own function.
 
-  %p Read the Wikipedia Page on <a href='https://en.wikipedia.org/wiki/Self-documenting'>self documenting code</a> to start, but this episode of <a href='http://rubyrogues.com/079-rr-documenting-code/'>Ruby Rogues</a> may explain the topic a bit better.
+  = resource_block do |e|
+    - e.text("Wikipedia - Self Documenting Code", 'https://en.wikipedia.org/wiki/Self-documenting', "As always, the wiki page.")
+    - e.audio("Ruby Rogues - Documenting Code", 'http://rubyrogues.com/079-rr-documenting-code/', "This podcast explains better and with more relevant examples than the wiki page.")
 
   = exercise_block_for "comments" do |e|
     - e.question "Take a break from the code for a minute. Explain why we say that 'comments lie'."
