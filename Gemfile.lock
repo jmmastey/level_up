@@ -123,10 +123,6 @@ GEM
       hpricot (~> 0.8.6)
       ruby_parser (~> 3.1.1)
     i18n (0.7.0)
-    interactor (3.1.0)
-    interactor-rails (2.0.1)
-      interactor (~> 3.0)
-      rails (>= 3, < 5)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -320,7 +316,6 @@ DEPENDENCIES
   foreman
   gravatar_image_tag
   haml-rails
-  interactor-rails
   jbuilder
   jquery-rails
   jquery-turbolinks

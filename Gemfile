@@ -14,7 +14,6 @@ gem 'devise'
 gem 'haml-rails'
 gem 'pg'
 gem 'rolify'
-gem 'interactor-rails'
 gem 'state_machine'
 gem 'gravatar_image_tag'
 gem 'puma', ">= 2.0"
