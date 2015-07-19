@@ -17,7 +17,7 @@ class ServiceObject
     errors.join("\n")
   end
 
-  def fail!(message: '')
+  def fail!(message = '')
     errors << message
   end
 

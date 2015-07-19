@@ -9,7 +9,7 @@ class UncompleteSkill < ServiceObject
     set_completion(context.user, context.skill)
     context.completion.destroy!
   rescue => error
-    fail! "unable to uncomplete skill: #{error.message}"
+    fail! message: "unable to uncomplete skill: #{error.message}"
   end
 
   private
@@ -19,16 +19,16 @@ class UncompleteSkill < ServiceObject
   end
 
   def check_user
-    fail!("provide a valid user") unless context.user
+    fail!(message: "provide a valid user") unless context.user
   end
 
   def check_skill
-    fail!("provide a valid skill") unless context.skill
+    fail!(message: "provide a valid skill") unless context.skill
   end
 
   def check_completion
     Completion.for!(context.user, context.skill)
   rescue
-    fail!("can only uncomplete a previously completed skill")
+    fail!(message: "can only uncomplete a previously completed skill")
   end
 end

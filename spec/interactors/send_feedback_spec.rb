@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe SendFeedback do
+  subject(:interactor) { described_class.new(params) }
   let(:user) { create(:user) }
   let(:page) { "page" }
   let(:message) { "message" }
   let(:params) { { user: user, page: page, message: message } }
-  let(:interactor) { SendFeedback.new(params).call }
 
   context "when the interactor is a success" do
     let(:mail) { double("AdminMailer", deliver_now!: true) }
@@ -14,7 +14,7 @@ describe SendFeedback do
       expect(AdminMailer).to receive(:send_feedback).once
         .with(user, page, message).and_return(mail)
 
-      expect(interactor).to be_success
+      expect(subject.call).to be_success
     end
   end
 
@@ -27,7 +27,7 @@ describe SendFeedback do
       expect(AdminMailer).to receive(:send_feedback).once
         .with(user, page, message).and_return(mail)
 
-      expect(interactor).not_to be_success
+      expect(subject.call).not_to be_success
     end
   end
 end
