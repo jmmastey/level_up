@@ -1,36 +1,38 @@
 require 'spec_helper'
+require 'pry'
 
 describe InviteToSlack do
-  subject(:interactor) { described_class }
-  let(:mail) { double("UserMailer", deliver_now: true) }
-  let!(:user) { double("User", slack_invite_sent_at: nil) }
+  subject(:interactor) { InviteToSlack.new(users: [user], user_mailer: umail) }
+  let(:umail) { spy("UserMailer", slack_reminder: spy) }
+  let!(:user) { User.new }
 
   it "sends email as requested" do
-    user = double("User", slack_invite_sent_at: nil, email_opt_out: nil)
-    expect(UserMailer).to receive(:slack_reminder).with(user).and_return(mail)
-    expect_any_instance_of(subject).to receive(:update).and_return(true)
+    allow(interactor).to receive(:update) { true }
 
-    subject.call(users: [user])
+    interactor.call
+
+    expect(umail).to have_received(:slack_reminder).with(user)
+    expect(interactor).to have_received(:update)
   end
 
   it "updates the user" do
-    user = double("User", slack_invite_sent_at: nil, email_opt_out: nil)
+    allow(user).to receive(:update_attributes!) { true }
 
-    expect(user).to receive(:update_attributes!)
-    subject.call(users: [user])
+    interactor.call
+    expect(user).to have_received(:update_attributes!)
   end
 
   it "bails if the email has been sent before" do
-    user = double("User", slack_invite_sent_at: Date.today, email_opt_out: nil)
+    user.slack_invite_sent_at = Date.today
 
-    expect(UserMailer).not_to receive(:slack_reminder)
-    subject.call(users: [user])
+    interactor.call
+    expect(umail).not_to have_received(:slack_reminder)
   end
 
   it "bails if the user doesn't want to receive emails" do
-    user = double("User", slack_invite_sent_at: nil, email_opt_out: :bad_email)
+    user.email_opt_out = :bad_email
 
-    expect(UserMailer).not_to receive(:slack_reminder)
-    subject.call(users: [user])
+    interactor.call
+    expect(umail).not_to have_received(:slack_reminder)
   end
 end

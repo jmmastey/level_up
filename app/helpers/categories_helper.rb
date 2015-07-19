@@ -1,4 +1,12 @@
 module CategoriesHelper
+  RESOURCE_CLASSES = {
+    text: 'fa-file-text',
+    video: 'fa-video-camera',
+    tutorial: 'fa-code',
+    book: 'fa-book',
+    audio: 'fa-microphone',
+  }
+
   def exercise_block_for(handle, &block)
     block = ExerciseBlock.new(@category, handle, &block)
 
@@ -24,14 +32,7 @@ module CategoriesHelper
   end
 
   def resource_classes(type)
-    case type
-      when :text then 'fa-file-text'
-      when :video then 'fa-video-camera'
-      when :tutorial then 'fa-code'
-      when :book then 'fa-book'
-      when :audio then 'fa-microphone'
-      else fail ArgumentError, "Unrecognized '#{type}'"
-    end + ' fa fa-fw'
+    RESOURCE_CLASSES.fetch(type) { fail ArgumentError } + ' fa fa-fw'
   end
 
   def completion_classes(skill)

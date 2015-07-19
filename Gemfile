@@ -14,7 +14,6 @@ gem 'devise'
 gem 'haml-rails'
 gem 'pg'
 gem 'rolify'
-gem 'interactor-rails'
 gem 'state_machine'
 gem 'gravatar_image_tag'
 gem 'puma', ">= 2.0"
@@ -46,7 +45,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails', require: false
   gem 'rspec-rails'
-  gem 'rspec-collection_matchers'
   gem 'poltergeist'
 end
 
