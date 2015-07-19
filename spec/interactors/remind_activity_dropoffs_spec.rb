@@ -18,7 +18,7 @@ describe RemindActivityDropoffs do
     expect_any_instance_of(subject).to receive(:targets)
       .and_return([enrollment])
     expect(UserMailer).to receive(:activity_reminder).and_return(mail)
-    subject.call
+    subject.new.call
   end
 
   it "finds only enrolled but stuck users" do
@@ -29,13 +29,13 @@ describe RemindActivityDropoffs do
     expect_any_instance_of(subject).not_to receive(:remind).with(young)
     expect_any_instance_of(subject).not_to receive(:remind).with(complete)
 
-    subject.call
+    subject.new.call
   end
 
   it "sends emails only once" do
     expect_any_instance_of(subject).to receive(:remind).with(enrollment).once
 
-    subject.call
-    subject.call
+    subject.new.call
+    subject.new.call
   end
 end
