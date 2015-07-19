@@ -1,5 +1,4 @@
 class InviteToSlack < ServiceObject
-
   def run
     context.users.each { |user| invite_to_slack(user) }
   end

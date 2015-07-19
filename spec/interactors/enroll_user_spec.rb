@@ -9,7 +9,7 @@ describe EnrollUser do
   let(:umailer) { spy("UserMailer", confirm_enrollment: mail) }
 
   def interactor(opts = {})
-    @interactor ||= subject.new({course: course, user: user}.merge(opts))
+    @interactor ||= subject.new({ course: course, user: user }.merge(opts))
   end
 
   context "when the interactor is a success" do

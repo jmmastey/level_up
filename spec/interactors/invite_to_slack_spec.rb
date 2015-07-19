@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'pry'
 
 describe InviteToSlack do
-  subject(:interactor) { described_class.new(users: [user], user_mailer: umail) }
+  subject(:interactor) { InviteToSlack.new(users: [user], user_mailer: umail) }
   let(:umail) { spy("UserMailer", slack_reminder: spy) }
   let!(:user) { User.new }
 

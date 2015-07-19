@@ -3,7 +3,7 @@ class ServiceObject
 
   def initialize(context = {})
     @context = OpenStruct.new
-    context.each do |k,v|
+    context.each do |k, v|
       @context.send("#{k}=", v)
     end
     setup if respond_to? :setup
@@ -30,7 +30,7 @@ class ServiceObject
   end
 
   def run
-    raise NotImplementedError, "Please implement 'run' to perform the work."
+    fail NotImplementedError, "Please implement 'run' to perform the work."
   end
 
   def call

@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe SendFeedback do
-  subject(:interactor) { described_class.new(user: user, page: "pg", message: "msg", admin_mailer: amailer) }
+  subject(:interactor) do
+    described_class.new(user: user, page: "pg",
+                        message: "msg", admin_mailer: amailer)
+  end
+
   let(:amailer) { double("AdminMailer", send_feedback: spy) }
   let(:user)    { create(:user) }
 

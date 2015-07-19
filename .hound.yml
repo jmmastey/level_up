@@ -56,7 +56,7 @@ Style/DotPosition:
   EnforcedStyle: leading
 
 # I like extra spacing.
-Style/ExtraSpacing
+Style/ExtraSpacing:
   Enabled: false
 
 # stop nesting so hard.
