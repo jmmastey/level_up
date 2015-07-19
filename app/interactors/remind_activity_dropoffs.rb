@@ -25,6 +25,10 @@ class RemindActivityDropoffs < ServiceObject
   end
 
   def remind(enrollment)
-    UserMailer.activity_reminder(enrollment).deliver_now
+    user_mailer.activity_reminder(enrollment).deliver_now
+  end
+
+  def user_mailer
+    context.user_mailer || UserMailer
   end
 end

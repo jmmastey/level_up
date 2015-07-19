@@ -1,39 +1,40 @@
 require 'spec_helper'
 
 describe EnrollUser do
-  let(:course) { create(:course) }
-  let(:user) { create(:user) }
-  let(:interactor) { EnrollUser.new(course: course, user: user).call }
+  subject { described_class }
+  let(:course)  { create(:course) }
+  let(:user)    { create(:user) }
+
+  let(:amailer) { spy("AdminMailer", confirm_enrollment: mail) }
+  let(:umailer) { spy("UserMailer", confirm_enrollment: mail) }
+
+  def interactor(opts = {})
+    @interactor ||= subject.new({course: course, user: user}.merge(opts))
+  end
 
   context "when the interactor is a success" do
-    let(:mail) { double("AdminMailer", deliver_now: true) }
+    let(:mail) { double("mail", deliver_now: true) }
 
     it "allows a user to register for a course" do
-      expect(interactor).to be_success
+      expect(interactor.call).to be_success
       expect(user.courses).to include(course)
     end
 
-    # TODO: this really should be dependency injected
-    # at which point the .and_return should move to
-    # a double(confirm_enrollment: mail)
     it "sends welcome and notification emails" do
-      expect(AdminMailer).to receive(:confirm_enrollment).once
-        .with(user, course).and_return(mail)
-      expect(UserMailer).to receive(:confirm_enrollment).once
-        .with(user, course).and_return(mail)
+      interactor = interactor(admin_mailer: amailer, user_mailer: umailer)
 
-      expect(interactor).to be_success
+      expect(interactor.call).to be_success
+      expect(amailer).to have_received(:confirm_enrollment).with(user, course)
+      expect(umailer).to have_received(:confirm_enrollment).with(user, course)
     end
   end
 
   context "when emails cannot be sent" do
-    let(:mail) { double("AdminMailer", deliver_now: false) }
+    let(:mail) { double("mail", deliver_now: false) }
 
     it "fails when emails cannot be sent properly" do
-      expect(AdminMailer).to receive(:confirm_enrollment)
-        .with(user, course).and_return(mail)
-
-      expect(interactor).not_to be_success
+      interactor = interactor(admin_mailer: amailer)
+      expect(interactor.call).not_to be_success
     end
   end
 end

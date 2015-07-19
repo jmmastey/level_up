@@ -19,6 +19,10 @@ class InviteToSlack < ServiceObject
   end
 
   def remind(user)
-    UserMailer.slack_reminder(user).deliver_now
+    user_mailer.slack_reminder(user).deliver_now
+  end
+
+  def user_mailer
+    context.user_mailer || UserMailer
   end
 end

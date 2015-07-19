@@ -14,7 +14,11 @@ class SendFeedback < ServiceObject
   private
 
   def feedback_message
-    AdminMailer.send_feedback(context.user, context.page, context.message)
+    admin_mailer.send_feedback(context.user, context.page, context.message)
+  end
+
+  def admin_mailer
+    context.admin_mailer || AdminMailer
   end
 
   def fail_unless_var_present(var)

@@ -15,7 +15,15 @@ class EnrollUser < ServiceObject
   end
 
   def send_welcome_email
-    AdminMailer.confirm_enrollment(context.user, context.course).deliver_now &&
-      UserMailer.confirm_enrollment(context.user, context.course).deliver_now
+    admin_mailer.confirm_enrollment(context.user, context.course).deliver_now &&
+      user_mailer.confirm_enrollment(context.user, context.course).deliver_now
+  end
+
+  def admin_mailer
+    context.admin_mailer || AdminMailer
+  end
+
+  def user_mailer
+    context.user_mailer || UserMailer
   end
 end

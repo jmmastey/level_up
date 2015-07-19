@@ -15,6 +15,10 @@ class RemindRegistrationDropoffs < ServiceObject
   end
 
   def remind(user)
-    UserMailer.reg_reminder(user).deliver_now
+    user_mailer.reg_reminder(user).deliver_now
+  end
+
+  def user_mailer
+    context.user_mailer || UserMailer
   end
 end
