@@ -1,7 +1,6 @@
-class InviteToSlack
-  include Interactor
+class InviteToSlack < ServiceObject
 
-  def call
+  def run
     context.users.each { |user| invite_to_slack(user) }
   end
 

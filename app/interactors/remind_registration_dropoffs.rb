@@ -1,7 +1,5 @@
-class RemindRegistrationDropoffs
-  include Interactor
-
-  def call
+class RemindRegistrationDropoffs < ServiceObject
+  def run
     context.users = lazy_users.each do |user|
       user.update_attributes!(enrollment_reminder_sent: true)
       remind(user)

@@ -1,14 +1,11 @@
-class EnrollUser
-  include Interactor
-  before :setup
-
+class EnrollUser < ServiceObject
   def setup
-    context.fail! unless context.user.present? && context.course.present?
+    fail! unless context.user.present? && context.course.present?
   end
 
-  def call
-    context.fail!(message: "Couldn't add enrollment") unless add_user_enrollment
-    context.fail!(message: "Couldn't send email") unless send_welcome_email
+  def run
+    fail!(message: "Couldn't add enrollment") unless add_user_enrollment
+    fail!(message: "Couldn't send email") unless send_welcome_email
   end
 
   private
