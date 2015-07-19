@@ -99,11 +99,11 @@ describe User do
       expect(user.skills).to be_empty
 
       create(:completion, user: user, skill: skill)
-      expect(user).to have(1).skills
+      expect(user.skills.count).to eq(1)
       expect(user.skills).to include(skill)
 
       completion = create(:completion, user: user)
-      expect(user.reload).to have(2).skills
+      expect(user.skills.count).to eq(2)
       expect(user.skills).to include(completion.skill)
     end
 
@@ -112,7 +112,7 @@ describe User do
       other = create(:completion, user: user)
 
       # scope down on category
-      expect(user.skills.for_category(category)).to have(1).item
+      expect(user.skills.for_category(category).length).to eq(1)
       expect(user.skills.for_category(category)).not_to include(other.skill)
     end
 

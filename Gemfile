@@ -45,7 +45,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails', require: false
   gem 'rspec-rails'
-  gem 'rspec-collection_matchers'
   gem 'poltergeist'
 end
 

@@ -12,7 +12,7 @@ describe UserSummary do
   describe "for_user" do
     it "lists all categories that exist" do
       summary = UserSummary.new(user).for_user
-      expect(summary).to have(course.categories.count).items
+      expect(summary.length).to eq(course.categories.count)
     end
 
     it "counts skills, completions and verifications" do
