@@ -37,4 +37,8 @@ class ServiceObject
     run unless failure?
     self
   end
+
+  def self.call(context = {})
+    new(context).call
+  end
 end

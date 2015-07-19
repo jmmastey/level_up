@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 
   # POST /send_feedback
   def send_feedback
-    interactor = SendFeedback.new(feedback_params).call
+    interactor = SendFeedback.call(feedback_params)
 
     if interactor.failure?
       render_bad_response(interactor.message)

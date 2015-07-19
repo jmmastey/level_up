@@ -3,7 +3,7 @@ class SkillsController < ApplicationController
 
   # POST skill/:skill_id/completion
   def complete
-    interactor = CompleteSkill.new(user: current_user, skill: skill).call
+    interactor = CompleteSkill.call(user: current_user, skill: skill)
 
     if interactor.failure?
       render_bad_response(interactor.message)
@@ -14,7 +14,7 @@ class SkillsController < ApplicationController
 
   # DELETE skill/:skill_id/completion
   def uncomplete
-    interactor = UncompleteSkill.new(user: current_user, skill: skill).call
+    interactor = UncompleteSkill.call(user: current_user, skill: skill)
 
     if interactor.failure?
       render_bad_response(interactor.message)
