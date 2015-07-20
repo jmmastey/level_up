@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe TokenAuthable do
   let(:auth_token) { "EXAMPLE_AUTH_TOKEN" }
-  let(:user) { FactoryGirl.create(:user, authentication_token: auth_token) }
+  let(:user) { create(:user, authentication_token: auth_token) }
 
   describe "#authentication_token=" do
     it "sets the token to a bcrypt password object" do
