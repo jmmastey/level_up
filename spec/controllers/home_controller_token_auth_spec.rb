@@ -7,13 +7,18 @@ describe HomeController, type: :controller do
   let(:auth_hash) { { auth_email: email, auth_token: token } }
 
   it "authenticates the user via token as requested" do
-    expect(User).to receive(:from_token_auth).with(auth_hash)
+    allow(User).to receive(:from_token_auth)
 
     get :index, auth_hash
+
+    expect(User).to have_received(:from_token_auth).with(auth_hash)
   end
 
   it "only authenticates if params are provided" do
-    expect(User).not_to receive(:from_token_auth)
+    allow(User).to receive(:from_token_auth)
+
     get :index, {}
+
+    expect(User).not_to have_received(:from_token_auth)
   end
 end

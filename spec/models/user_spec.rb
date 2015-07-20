@@ -130,10 +130,12 @@ describe User do
 
     context "with a new user" do
       it "creates the new user with the provided info" do
-        expect(User).to receive(:create)
-          .with(hash_including(email: attrs[:email], uid: "1"))
-          .and_call_original
+        allow(User).to receive(:create)
+
         User.from_omniauth(auth)
+
+        creation_params = hash_including(email: attrs[:email], uid: "1")
+        expect(User).to have_received(:create).with(creation_params)
       end
 
       it "saves the user params" do
@@ -175,8 +177,11 @@ describe User do
       end
 
       it "doesn't try to create a new user" do
-        expect(User).not_to receive(:create)
+        allow(User).to receive(:create)
+
         User.from_omniauth(auth)
+
+        expect(User).not_to have_received(:create)
       end
     end
 
@@ -189,8 +194,11 @@ describe User do
       end
 
       it "doesn't try to create a new user" do
-        expect(User).not_to receive(:create)
+        allow(User).to receive(:create)
+
         User.from_omniauth(auth)
+
+        expect(User).not_to have_received(:create)
       end
     end
   end

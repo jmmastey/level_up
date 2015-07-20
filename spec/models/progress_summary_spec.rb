@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe ProgressSummary do
   before do
-    FactoryGirl.create(:enrollment, created_at: oldest_date)
-    FactoryGirl.create(:enrollment, created_at: oldest_date + 1)
+    create(:enrollment, created_at: oldest_date)
+    create(:enrollment, created_at: oldest_date + 1)
   end
 
   let(:enrollments)     { Enrollment.all }
