@@ -22,7 +22,7 @@ class Completion < ActiveRecord::Base
   end
 
   def self.for!(user, skill)
-    self.for(user, skill) || fail(RecordNotFoundError)
+    self.for(user, skill) || fail(ActiveRecord::RecordNotFound)
   end
 
   def self.user_skills(user)

@@ -12,7 +12,7 @@ describe CategoryRouter do
       params  = { category: "america", organization: "sharks" }
       user    = instance_double("User", admin?: false, organization: "jets")
 
-      expect { subject.find_category!(params, user) }.to raise_error
+      expect { subject.find_category!(params, user) }.to raise_error(WrongOrganizationError)
     end
 
     it "doesn't care if the category doesn't belong to an organization" do
