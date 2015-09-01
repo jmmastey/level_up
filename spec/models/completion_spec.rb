@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Completion do
   let(:user) { create(:user) }
   let(:skill) { create(:skill) }
+  let(:incomplete_skill) { create(:skill) }
   let!(:completion) { create(:completion, skill: skill, user: user) }
 
   describe ".feed_for" do
@@ -19,8 +20,6 @@ describe Completion do
   end
 
   describe ".for" do
-    let(:incomplete_skill) { create(:skill) }
-
     it "returns the specified completion" do
       expect(Completion.for(user, skill)).to eq(completion)
     end
@@ -36,7 +35,7 @@ describe Completion do
     end
 
     it "raises when there is no completion" do
-      expect { Completion.for!(user, incomplete_skill) }.to raise_error
+      expect { Completion.for!(user, incomplete_skill) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
