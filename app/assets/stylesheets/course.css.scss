@@ -1,13 +1,15 @@
 .list-group-item.course {
-  min-height:300px;
+  min-height:425px;
 
-  h3 { margin-top:10px; }
+  h3 { margin-top:10px; text-align:center; }
+  .icon img { width:60%; margin:1.5em 20%; }
 
   .register {
     display:block;
     width:10em;
 
     position:absolute;
+    text-align:center;
     bottom:10px;
     left:50%;
     margin-left:-5em;
