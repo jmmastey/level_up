@@ -25,6 +25,11 @@
   = exercise_block_for "redgreen" do |e|
     - e.question "Explain how the red / green / refactor cycle works, and how it creates better code over time."
 
+  %p We're getting into religious territory now. One common theme in the Rails community is when - and with what granularity - to test. Nobody is going to force you to write Strict TDD, but if you don't at least write the tests that fail first, you'll end up wasting a lot of your own time.
+  %p Frequently, when we add tests after we write functionality, we end up with a test that doesn't actually turn red when the code breaks. If a test has never been red, it is probably of low value.
+  = exercise_block_for "failtests" do |e|
+    - e.question "We're going to write a bunch of tests in the next few exercises. As you do, practice writing the test first, so that it fails. If you've written some tests before this point, try changing the underlying system to make the test fail. If it doesn't refactor until it does."
+
   %p Once you've got a little TDD under your belt, you will inevitably come to the question of "what should I write tests for first". This is a significant question for the layout of your application, but TDD has no opinions on the matter. That's where Behavior Driven Development comes in. We use BDD to define where to start and which things are worth testing in the precious limited time we have.
   %p Check the resources in the sidebar for some good BDD examples.
   = exercise_block_for "tdd_bdd" do |e|
@@ -111,7 +116,3 @@
 
   = exercise_block_for "meaningful" do |e|
     - e.question "Write an example of a tautological test. Show the correct implementation of that test."
-
-  %p Though I'm sure you would never do such a thing, another problem you're sure to see in other people's code is that they wrote the tests after writing the code, but never verified that the tests could ever fail. If a test has never been red, it is probably of low value.
-  = exercise_block_for "failtests" do |e|
-    - e.question "Go check the tests you've written during this course. Try to change the system under test to make the tests fail. If they don't, refactor them until they do."
