@@ -1,4 +1,4 @@
-.module {
+.category {
   pre.prettyprint {
     padding:6px;
     border:1px solid #cccccc;
@@ -20,6 +20,22 @@
         border-bottom-width:0px;
       }
     }
+  }
+}
+
+.resource-block {
+  background:transparent image_url("noun_116372.png") 90% 50% no-repeat;
+  background-size: 100px;
+
+  a {
+    &.text { background-color:#F5F5EB; background-color:rgba(245, 245, 235, 0.95); }
+    &.video { background-color:#EBF5EB; background-color:rgba(235, 245, 235, 0.95); }
+    &.tutorial { background-color:#EBEBF5; background-color:rgba(235, 235, 245, 0.95); }
+    &.book { background-color:#EBF5F5; background-color:rgba(235, 245, 245, 0.95); }
+    &.audio { background-color:#E5DBE5; background-color:rgba(229, 219, 229, 0.95); }
+
+    .fa { opacity:0.3; }
+    h4 { font-size:16px; }
   }
 }
 

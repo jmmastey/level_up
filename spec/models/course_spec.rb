@@ -32,6 +32,7 @@ describe Course do
     let(:user) { create(:user) }
     let(:admin) { create(:user, :admin) }
     let(:employee) { create(:user, organization: "toool") }
+
     let!(:proprietary) { create(:course, :published, organization: "toool") }
     let!(:published) { create(:course, :published) }
     let!(:hidden) { create(:course, :created) }

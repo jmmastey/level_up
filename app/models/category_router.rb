@@ -1,3 +1,5 @@
+class WrongOrganizationError < RuntimeError; end
+
 module CategoryRouter
   def find_category!(params, user, model = Category)
     authorize_user!(user, params[:organization])
@@ -15,6 +17,8 @@ module CategoryRouter
 
   def authorize_user!(user, organization)
     return if user && user.admin?
-    fail if organization && organization != user.organization
+    return if !organization || organization == user.organization
+
+    fail WrongOrganizationError
   end
 end

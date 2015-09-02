@@ -1,12 +1,18 @@
-.content.module
+.content.category
   = render partial: 'stuck_message' if user_is_stuck?(current_user, @category)
   .page-header
     %h1= @category.name
 
   .row
-    .col-lg-8= render partial: "modules/#{@category.handle}"
+    .col-lg-8= render partial: "categories/#{@category.handle}"
     .col-lg-4.resources{role:'complementary'}
       = render partial: 'difficulty' if @category.difficulty
       .bs-component
         .panel.panel-basic
-          = render partial: "modules/#{@category.handle}_resources"
+          .panel-heading
+            %h3 More Resources
+          .panel-body= render partial: "categories/#{@category.handle}_resources"
+
+          .panel-heading
+            %h3 Exercises From This Lesson
+          .panel-body= render partial: "categories/exercises"

@@ -50,7 +50,7 @@ describe ProgressSummary do
     let(:enrollment) { Enrollment.first }
 
     it "returns an array of the correct length" do
-      expect(subject.to_a).to have(num_enrollments).items
+      expect(subject.to_a.length).to eq(num_enrollments)
     end
 
     describe "result hash" do
@@ -68,7 +68,7 @@ describe ProgressSummary do
         data = subject.to_a.first
         dates = [Date.today, Date.today + 1, Date.today + 2, Date.today + 3]
 
-        expect(data[:progress]).to have(4).items
+        expect(data[:progress].length).to eq(4)
         expect(data[:progress].keys).to eq(dates)
       end
     end

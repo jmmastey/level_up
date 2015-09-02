@@ -6,7 +6,7 @@ describe TokenAuthable do
 
   describe "#authentication_token=" do
     it "sets the token to a bcrypt password object" do
-      expect(user.authentication_token).to have(60).chars
+      expect(user.authentication_token.chars.length).to eq(60)
     end
   end
 

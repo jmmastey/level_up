@@ -1,4 +1,12 @@
-module ModulesHelper
+module CategoriesHelper
+  RESOURCE_CLASSES = {
+    text: 'fa-file-text',
+    video: 'fa-video-camera',
+    tutorial: 'fa-code',
+    book: 'fa-book',
+    audio: 'fa-microphone',
+  }
+
   def exercise_block_for(handle, &block)
     block = ExerciseBlock.new(@category, handle, &block)
 
@@ -16,6 +24,15 @@ module ModulesHelper
 
   def exercise_url(exercise)
     "http://github.com/jmmastey/level_up_exercises/tree/master/#{exercise}"
+  end
+
+  def resource_block(&block)
+    block = ResourceBlock.new(&block)
+    render block
+  end
+
+  def resource_classes(type)
+    RESOURCE_CLASSES.fetch(type) { fail ArgumentError } + ' fa fa-fw'
   end
 
   def completion_classes(skill)

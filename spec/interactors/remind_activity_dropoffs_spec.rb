@@ -1,41 +1,37 @@
 require 'spec_helper'
 
 describe RemindActivityDropoffs do
-  subject(:interactor) { RemindActivityDropoffs }
-  let(:mail) { double("UserMailer", deliver_now: true) }
-  let(:user) { create(:user, name: "Old User", created_at: 2.weeks.ago) }
-  let(:course) { create(:course, :with_skills) }
-  let!(:enrollment) do
-    create(:enrollment, user: user, course: course, created_at: 2.weeks.ago)
-  end
+  subject(:interactor) { described_class.new(user_mailer: umailer) }
+  let(:course)  { create(:course, :with_skills) }
+  let(:umailer) { spy("UserMailer", activity_reminder: spy) }
+  let!(:enroll) { create(:enrollment, course: course, created_at: 1.year.ago) }
 
   it "sends email to users who've become stuck" do
-    # TODO: the interface of Interactor is really getting in the way
-    # of decent form here. consider removing interactor altogether.
-    # In particular, this any-instance shit is a lot of indirection,
-    # and it's hard to dependency inject the mailers because of the
-    # silliness in context.
-    expect_any_instance_of(subject).to receive(:targets)
-      .and_return([enrollment])
-    expect(UserMailer).to receive(:activity_reminder).and_return(mail)
-    subject.call
+    allow(interactor).to receive(:targets) { [enroll] }
+
+    interactor.call
+
+    expect(umailer).to have_received(:activity_reminder).with(enroll)
   end
 
   it "finds only enrolled but stuck users" do
+    old      = create(:enrollment, course: course, created_at: 1.year.ago)
     young    = create(:enrollment, course: course, created_at: 1.day.ago)
     complete = create(:enrollment) # no skills, fucker
+    allow(interactor).to receive(:remind)
 
-    expect_any_instance_of(subject).to receive(:remind).with(enrollment)
-    expect_any_instance_of(subject).not_to receive(:remind).with(young)
-    expect_any_instance_of(subject).not_to receive(:remind).with(complete)
+    interactor.call
 
-    subject.call
+    expect(interactor).to have_received(:remind).with(old)
+    expect(interactor).not_to have_received(:remind).with(young)
+    expect(interactor).not_to have_received(:remind).with(complete)
   end
 
   it "sends emails only once" do
-    expect_any_instance_of(subject).to receive(:remind).with(enrollment).once
+    allow(interactor).to receive(:remind)
 
-    subject.call
-    subject.call
+    interactor.call.call
+
+    expect(interactor).to have_received(:remind).with(enroll)
   end
 end

@@ -52,6 +52,6 @@ end
 Then /^I see all the other users with completions$/ do
   @users.each do |user|
     expect(page).to have_css(".user-#{user.id}")
-    expect(all(".user-#{user.id}")).to have(1).item
+    expect(all(".user-#{user.id}").length).to eq(1)
   end
 end
