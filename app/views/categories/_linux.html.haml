@@ -191,7 +191,7 @@
   %p Sometimes, it's not clear whether or not the firewall is blocking your traffic. From the host itself, the port may appear to be open, but requests are not being served properly. In this case, a good tool for "sniffing out" the misbehaving machine is nmap. You can use nmap to scan the machine and display a report of all ports that are open and listening.
 
   = resource_block do |e|
-    - e.text("Basic Guide to iptables", 'http://www.tecmint.com/basic-guide-on-iptables-linux-firewall-tips-commands/', "Learn how to manipulate iptables to manage traffic.")
+    - e.text("Ubuntu iptables Tutorial", "https://help.ubuntu.com/community/IptablesHowTo", "Not really specific to Ubuntu. Learn how to use iptables to manipulate traffic to your machine."
     - e.text("How to Use Nmap to Scan for Open Ports", 'https://www.digitalocean.com/community/articles/how-to-use-nmap-to-scan-for-open-ports-on-your-vps', "This tutorial is fantastic.")
 
   = exercise_block_for "firewall" do |e|
