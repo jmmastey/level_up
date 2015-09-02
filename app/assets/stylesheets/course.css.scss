@@ -1,7 +1,5 @@
-.list-group-item.course {
-  min-height:425px;
-
-  h3 { margin-top:10px; text-align:center; }
+.course {
+  h1 { margin-top:10px; font-size:22px; }
   .icon img { width:60%; margin:1.5em 20%; }
 
   .register {
@@ -14,4 +12,23 @@
     left:50%;
     margin-left:-5em;
   }
+  
+  .categories {
+    margin-top:10px;
+
+    .list-group-item {
+      padding:2px 0px;
+    }
+
+    .badge {
+      min-width:55px;
+    }
+  }
+}
+
+.signup {
+  min-height:440px;
+
+  h3 { text-align: center; }
+  .description { font-size: 14px; }
 }

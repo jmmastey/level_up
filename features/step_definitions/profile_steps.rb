@@ -38,13 +38,6 @@ Then /^I see their pretty picture$/ do
   expect(page).to have_css("img.gravatar")
 end
 
-Then /^I see their skills$/ do
-  skills = @user.reload.skills
-  skills.each do |skill|
-    expect(page).to have_css(".skill.completed.skill-#{skill.handle}")
-  end
-end
-
 Then /^I see a profile link in the header$/ do
   expect(page).to have_css("header .profile")
 end

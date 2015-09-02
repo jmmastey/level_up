@@ -49,6 +49,11 @@ def sign_in(user = @visitor)
   click_button "Sign in"
 end
 
+def expect_flash_message(message)
+  msg_location = page.html =~ /site_alerts.push\("#{message}/
+  expect(msg_location).not_to be_nil, "Couldn't find message: #{message}"
+end
+
 ### GIVEN ###
 Given /^I am not logged in$/ do
   visit '/users/sign_out'
@@ -156,15 +161,15 @@ Then /^I am signed out$/ do
 end
 
 Then /^I see an unconfirmed account message$/ do
-  expect(page).to have_content "You have to confirm your account"
+  expect_flash_message "You have to confirm your account"
 end
 
 Then /^I see a successful sign in message$/ do
-  expect(page).to have_content "Signed in successfully."
+  expect_flash_message "Signed in successfully."
 end
 
 Then /^I see a successful sign up message$/ do
-  expect(page).to have_content "Welcome! You have signed up successfully."
+  expect_flash_message "Welcome! You have signed up successfully."
 end
 
 Then /^I see an invalid email message$/ do
@@ -184,15 +189,15 @@ Then /^I see a mismatched password message$/ do
 end
 
 Then /^I see a signed out message$/ do
-  expect(page).to have_content "Signed out successfully."
+  expect_flash_message "Signed out successfully."
 end
 
 Then /^I see an invalid login message$/ do
-  expect(page).to have_content "Invalid email or password."
+  expect_flash_message "Invalid email or password."
 end
 
 Then /^I see an account edited message$/ do
-  expect(page).to have_content "You updated your account successfully."
+  expect_flash_message "You updated your account successfully."
 end
 
 Then /^I see my name$/ do

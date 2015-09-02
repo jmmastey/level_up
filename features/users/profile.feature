@@ -14,5 +14,4 @@ Feature: User profile
     Given a user exists with some training progress
     When I visit a user's profile page
     Then I see that user's profile
-    And I see their skills
     And I see their pretty picture

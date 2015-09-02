@@ -1,6 +1,7 @@
-.list-group-item.row{ class: ['course', course.handle] }
-  .col-lg-6
-    %h3= course.name
+.list-group-item.row.shadow-z-1{ class: ['course', course.handle] }
+  .col-lg-5
+    .page-header
+      %h1= course.name
     %p.description= course.description
     %hr
 
@@ -8,6 +9,6 @@
     .progress
       .progress-bar.progress-bar-success{style: "width: #{completion_percent_for(course)}%" }
 
-  .col-lg-6
+  .col-lg-7
     %ul.categories.list-group
       = render collection: course.categories.sorted, partial: 'courses/category'

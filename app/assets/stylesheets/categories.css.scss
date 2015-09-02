@@ -3,39 +3,56 @@
     padding:6px;
     border:1px solid #cccccc;
   }
+}
 
-  .resources {
-    .panel-heading {
-      h1, h2, h3, h4, h5, h6 {
-        margin:0px;
-      }
-    }
+.resources {
+  position:absolute;
+  top: 4em;
+  right:0;
+  width:36%;
+  padding:3%;
+  font-size:14px;
+  
+  .sidebar-skill a {
+    padding-left:4px; 
+  }
 
-    .resource {
-      padding-bottom:10px;
-      margin-bottom:10px;
-      border-bottom:1px solid #e5e5e5;
+  .resource {
+    padding-bottom:10px;
+    margin-bottom:10px;
+    border-bottom:1px solid #e5e5e5;
 
-      &.last {
-        border-bottom-width:0px;
-      }
+    &.last {
+      border-bottom-width:0px;
     }
   }
 }
 
 .resource-block {
-  background:transparent image_url("noun_116372.png") 90% 50% no-repeat;
   background-size: 100px;
 
-  a {
-    &.text { background-color:#F5F5EB; background-color:rgba(245, 245, 235, 0.95); }
-    &.video { background-color:#EBF5EB; background-color:rgba(235, 245, 235, 0.95); }
-    &.tutorial { background-color:#EBEBF5; background-color:rgba(235, 235, 245, 0.95); }
-    &.book { background-color:#EBF5F5; background-color:rgba(235, 245, 245, 0.95); }
-    &.audio { background-color:#E5DBE5; background-color:rgba(229, 219, 229, 0.95); }
+  .panel-title .fa {
+    margin-right:4px;
+  }
 
-    .fa { opacity:0.3; }
-    h4 { font-size:16px; }
+  .panel-body { padding:0px; }
+  .list-group {
+    margin-bottom:0px;
+    padding-left:10px;
+
+    .list-group-item {
+      padding-top:8px;
+      padding-bottom:8px;
+    }
+
+    .list-group-item-text {
+      padding-left:25px;
+    }
+
+    a {
+      .fa { opacity:0.3; padding-right:3px;}
+      h4.list-group-item-heading { font-size:16px; margin-bottom:0px; }
+    }
   }
 }
 
