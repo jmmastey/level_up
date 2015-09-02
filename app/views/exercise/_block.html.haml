@@ -1,15 +1,15 @@
 = cache ['v1', current_user, block.skill] do
-  .panel.panel-default.exercise{ id: block.skill.handle }
+  .panel.panel-primary.exercise{ id: block.skill.handle }
     .panel-heading
       %h3.panel-title
-        .fa.fa-question-circle
+        .fa.fa-balance-scale
         = "Exercise: #{block.skill.name} "
     .panel-body
       = render block.questions
       .completion
         - if current_user.signed_in?
           .fa.fa-spinner.fa-spin.spinner
-          %button{ 'class' => completion_classes(block.skill), 'data-target' => skill_complete_path(block.skill) }
+          %button.btn-raised{ 'class' => completion_classes(block.skill), 'data-target' => skill_complete_path(block.skill) }
             %i.fa.fa-square-o
             %i.fa.fa-check-square-o
             Complete

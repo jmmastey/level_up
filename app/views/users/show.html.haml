@@ -1,18 +1,19 @@
-.col-lg-12.linkback
-  = link_to "← Back to Users List", users_path
+.content.shadow-z-2
+  %p= link_to "← Back to Users List", users_path
 
-.col-lg-2
-  = gravatar_for(@user, 160)
+  .page-header
+    %h3= "#{@user.name}'s Profile"
 
-.col-lg-5
-  %h3= "#{@user.name}'s Profile"
-  - if @user == current_user
-    %span= link_to "Edit Profile", edit_user_registration_path, id: 'edit-profile'
-    |
-    %span= link_to "Unsubscribe from Emails", unsubscribe_path, id: 'unsubscribe'
+  .row
+    .col-md-8
+      - if @user == current_user
+        %span= link_to "Edit Profile", edit_user_registration_path, id: 'edit-profile'
+        |
+        %span= link_to "Unsubscribe from Emails", unsubscribe_path, id: 'unsubscribe'
 
-  = render partial: 'enrolled_courses', locals: { user: @user }
-  = render partial: 'recent_activity', locals: { user: @user }
+      = render partial: 'enrolled_courses', locals: { user: @user }
 
-.col-lg-5.skills
+    .col-md-4
+      = gravatar_for(@user, 160)
+
   = render partial: 'progress'

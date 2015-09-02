@@ -1,3 +1,49 @@
+header {
+  height: 120px;
+
+  a, a:hover, a:active, a:visited { color: #fff; text-decoration: none; }
+  .home {
+    margin-left:6%;
+    font-size:20px;
+    position:relative;
+    top:40px;
+  }
+}
+
+.main.container {
+  position:absolute;
+  top:5em;
+  left:5%;
+  font-size:16px;
+}
+
+.content {
+  width:60%;
+  background-color:white;
+  padding:3%;
+}
+
+.wide-content {
+  width:96%;
+  background-color:white;
+  padding:3%;
+  margin-top:4em;
+}
+
+.panel-heading {
+  border-radius:0px;
+}
+
+.page-header {
+  margin-top:0px;
+
+  h1 {
+    font-size:32px;
+    margin-top:0px;
+    margin-bottom:5px;
+  }
+}
+
 .alert-notice {
   background-color: #28b62c;
   border-color: #24a528;
@@ -12,6 +58,14 @@
 
 .badge.success {
   background-color:#28b62c;
+}
+
+.nav {
+  position: absolute;
+  right: 0px;
+  top: 60px;
+  width: 450px;
+  z-index: 100;
 }
 
 .nav li.github-signin {
@@ -32,21 +86,15 @@
 .feedback-link {
   position:fixed;
   bottom:0px;
-  left:3em;
-  background-color:white;
-  border:1px solid #ccc;
-  border-width:1px 1px 0px;
-  border-radius:4px 4px 0px 0px;
+  right:3em;
+  margin-bottom:0px;
+}
 
-  &:hover {
-    border-bottom-width:0px;
-  }
+#feedback_form textarea {
+  min-height:70px;
 }
 
 footer {
-  /*background:#1a1a1a; figure out sticky footer first */
-  margin-top:60px;
+  margin-top:20px;
   padding:40px 0px 20px;
-  border-top:1px solid #e5e5e5;
-  /* color:#999;*/
 }

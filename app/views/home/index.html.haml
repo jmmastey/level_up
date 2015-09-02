@@ -1,6 +1,10 @@
-- cache current_user do
-  - unless @courses.empty?
-    %h2 Your Enrolled Courses
-    = render @courses
-  - else
-    %p You haven't enrolled in any courses. Go #{link_to "take a look", courses_path} at what's on offer.
+.content.shadow-z-2
+  - cache current_user do
+    - unless @courses.empty?
+      .page-header
+        %h1 Welcome Back. What's New?
+      = render @courses
+    - else
+      .page-header
+        %h1 Welcome to Level Up Rails
+      %p You haven't enrolled in any courses. Go #{link_to "take a look", courses_path} at what's on offer.

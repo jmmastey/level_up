@@ -1,5 +1,12 @@
-- if @courses.empty?
-  %p Sorry, there are no available courses for you to study. Please come back soon.
+.content.shadow-z-2
+  .page-header
+    %h1 Courses
 
-- else
-  = render collection: @courses, partial: 'signup', as: :course
+  - if @courses.empty?
+    %p Sorry, there are no available courses for you to study. Please come back soon.
+
+  - else
+    = render collection: @courses, partial: 'signup', as: :course
+
+
+  %p{style: 'clear:both'} So sign up already.

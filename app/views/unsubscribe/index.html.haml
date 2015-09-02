@@ -1,7 +1,9 @@
-%h2 Unsubscribe From Emails
+.content.shadow-z-2
+  .page-header
+    %h2 Unsubscribe From Emails
 
-.unsubscription_confirmation
-  %p We try to send very few emails, mostly because they're boring to write. Are you sure you want to unsubscribe anyway?
-  %p If you no longer wish to receive emails from us, click this link:
-  %p
-    %a#unsubscribe{href: "/unsubscribe/#{@link.token}"} Unsubscribe from emails
+  .unsubscription_confirmation
+    %p We try to send very few emails, mostly because they're boring to write. Are you sure you want to unsubscribe anyway?
+    %p If you no longer wish to receive emails from us, click this link:
+    %p
+      %a#unsubscribe{href: "/unsubscribe/#{@link.token}"} Unsubscribe from emails

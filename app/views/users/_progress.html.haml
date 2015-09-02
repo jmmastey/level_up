@@ -1,13 +1,11 @@
-- if @user.skills.any?
-  .bs-component.skill-table
-    .panel
-      .panel-heading
-        %h4 Skill Progress
-      .panel-body= render partial: 'progress_bars'
-
 - if (@user == current_user || current_user.admin?) && @user.enrollments.any?
-  .progress_chart
-    .panel
-      .panel-heading
-        %h4 Burndown
-      .panel-body= render partial: 'progress_chart'
+  .row
+    .col-md-12
+      %h4 Burndown
+      = render partial: 'progress_chart'
+
+- if @user.skills.any?
+  .row
+    .col-md-12
+      %h4 Skill Progress
+      = render partial: 'progress_bars'
