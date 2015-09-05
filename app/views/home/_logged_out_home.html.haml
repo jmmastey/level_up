@@ -1,0 +1,43 @@
+%p Welcome to LevelUpRails, a challenging course to teach people to develop with the Ruby on Rails Prime stack.
+%p LevelUpRails is <strong>more than a tutorial</strong>. While tutorials are great for teaching specific syntax, they fall short when it comes to teaching you all the tools you really need to develop. Instead, we want to provide you with everything you need to really be successful.
+
+
+%h3 Instead, you'll get...
+
+.home-section.section-context
+  = image_tag("roadmap.png", width:200, height:200)
+  %h4 Context
+  %p Get a complete picture of skills you need, but much more than that. It's not good enough to get a list of skills or keywords. If you're going to integrate your skills together, you need to understand how they're useful. We'll spell out the real ways we use each technology, and the parts you can safely skip for now.
+
+.home-section.section-resources
+  = image_tag("books.png", width:200, height:200)
+  %h4 Resources
+  %p We're not going to try to teach you everything by hand. Other folks all over the internet have done a fine job on that front. Instead, we'll point you toward the easiest, most efficient resources to learn a given skill. Use text, video, tutorials and more to become an expert.
+
+.home-section.section-verification
+  = image_tag("quiz.png", width:200, height:200)
+  %h4 Verification
+  %p Finally, once you think you know the material, get real honest verification of your skills. We provide <a href='http://github.com/jmmastey/level_up_exercises'>challenging assignments</a> that will stretch you to really apply what you've just learned.
+
+%h3.home-title And we'll help you!
+
+%p Learning a new stack is a big challenge, so we want to support you every step of the way. Ask questions and provide feedback in the app. Join the <a href='https://levelupslackinvites.herokuapp.com'>Slack channel</a>. Get <a href='https://github.com/jmmastey/level_up_exercises/pulls'>feedback on your code</a>.
+
+%p We want to give you every chance to succeed.
+
+%h3 Pick a course and sign up...
+
+.home-section.baseline_1
+  = image_tag("courses/baseline_1.png", width:200, height:200)
+  %h4 Engineering Baseline I
+  %p This is the best course for learning how to do modern software development on the Rails Prime stack. Don't worry if you don't know what that means yet, we'll teach you.
+  = form_tag enroll_path(2), method: :post, class: 'register' do
+    %button.btn.btn-primary.btn-lg Enroll
+
+.home-section.scaling
+  = image_tag("courses/scaling.png", width:200, height:200)
+  %h4 Performance and Scaling
+  %p Take your skills to the next level and learn to deal with applications that have to operate under huge load. You'll learn all the idiomatic tricks that Rails provides you to handle capacity and keep things running smoothly.
+  = form_tag enroll_path(5), method: :post, class: 'register' do
+    %button.btn.btn-primary.btn-lg Enroll
+
