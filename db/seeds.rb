@@ -6,6 +6,7 @@ YAML.load(roles).each do |role|
 end
 
 COURSES = [
+  ["Welcome to LevelUpRails", "welcome", "Learning a new stack is hard. Take a look at how LevelUpRails can help."],
   ["Engineering Baseline I", "baseline_1", "Learn to build and test a complete Ruby on Rails application. This isn't a basic intro: you will finish with some serious ruby chops."],
   ["Engineering Baseline II", "baseline_2", "Description"],
   ["Engineering at Enova", "enova", "Learn more about engineering as it happens at Enova."],
@@ -16,6 +17,7 @@ COURSES.each do |course|
 end
 
 CATEGORIES = [
+  ["welcome", "Welcome to LevelUpRails", "welcome", 1],
   ["baseline_1", "Linux and Shell Utilities", "linux", 2],
   ["baseline_1", "Basic Ruby", "ruby", 4],
   ["baseline_1", "Basic Test Engineering", "test", 7],
@@ -46,6 +48,9 @@ CATEGORIES.each do |cat|
 end
 
 SKILLS = [
+  ["welcome", "group", "Understands good study habits and how to find a group."],
+  ["welcome", "interface", "Can use the interface to signal completion of exercises."],
+
   ["linux", "navigation", "Understands absolute vs relative path and can navigate the filesystem"],
   ["linux", "everything_is_a_file", "Understands that everything is a file"],
   ["linux", "environment", "Understands path and environment variables"],
