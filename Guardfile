@@ -1,13 +1,8 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
 guard :bundler do
   watch('Gemfile')
-  # Uncomment next line if your Gemfile contains the `gemspec' command.
-  # watch(/^.+\.gemspec/)
 end
 
-guard 'cucumber' do
+guard 'cucumber', cmd: 'spring rake cucumber' do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$})          { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
@@ -20,7 +15,7 @@ guard 'rails' do
   watch(%r{^(config|lib)/.*})
 end
 
-guard :rspec do
+guard :rspec, cmd: 'spring rspec' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -38,15 +33,4 @@ guard :rspec do
   watch(%r{^spec/support/(.+)\.rb$}) { "spec" }
   watch('config/routes.rb') { "spec/routing" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
-
-  # Capybara features specs
-  watch(%r{^app/views/(.+)/.*\.(erb|haml|slim)$}) do |m|
-    "spec/features/#{m[1]}_spec.rb"
-  end
-
-  # Turnip features and steps
-  watch(%r{^spec/acceptance/(.+)\.feature$})
-  watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'
-  end
 end

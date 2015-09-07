@@ -102,13 +102,40 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.10)
     foreman (0.78.0)
       thor (~> 0.19.1)
+    formatador (0.2.5)
     gherkin (2.12.2)
       multi_json (~> 1.3)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     gravatar_image_tag (1.2.0)
+    guard (2.13.0)
+      formatador (>= 0.2.4)
+      listen (>= 2.7, <= 4.0)
+      lumberjack (~> 1.0)
+      nenv (~> 0.1)
+      notiffany (~> 0.0)
+      pry (>= 0.9.12)
+      shellany (~> 0.0)
+      thor (>= 0.18.1)
+    guard-bundler (2.1.0)
+      bundler (~> 1.0)
+      guard (~> 2.2)
+      guard-compat (~> 1.1)
+    guard-compat (1.2.1)
+    guard-cucumber (1.5.4)
+      cucumber (>= 1.3.0)
+      guard-compat (~> 1.0)
+      nenv (~> 0.1)
+    guard-rails (0.7.1)
+      guard (~> 2.11)
+      guard-compat (~> 1.0)
+    guard-rspec (4.6.4)
+      guard (~> 2.1)
+      guard-compat (~> 1.1)
+      rspec (>= 2.99.0, < 4.0)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -139,8 +166,12 @@ GEM
     jwt (1.5.1)
     launchy (2.4.3)
       addressable (~> 2.3)
+    listen (3.0.3)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
+    lumberjack (1.0.9)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -152,9 +183,13 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    nenv (0.2.0)
     newrelic_rpm (3.13.0.299)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    notiffany (0.0.7)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -224,9 +259,18 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
+    rb-fchange (0.0.6)
+      ffi
+    rb-fsevent (0.9.5)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rolify (4.1.1)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -261,7 +305,11 @@ GEM
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
     sexp_processor (4.6.0)
+    shellany (0.0.1)
     slop (3.6.0)
+    spring (1.3.6)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (2.12.4)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -312,6 +360,10 @@ DEPENDENCIES
   factory_girl_rails
   foreman
   gravatar_image_tag
+  guard-bundler
+  guard-cucumber
+  guard-rails
+  guard-rspec
   haml-rails
   jbuilder
   jquery-rails
@@ -327,11 +379,16 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails_12factor
   rake
+  rb-fchange
+  rb-fsevent
+  rb-inotify
   rolify
   rspec-rails
   rubocop
   rubocop-rspec
   sass-rails (~> 4.0.2)
+  spring
+  spring-commands-rspec
   state_machine
   turbolinks
   uglifier (>= 1.3.0)
