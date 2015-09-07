@@ -12,8 +12,10 @@ COURSES = [
   ["Engineering at Enova", "enova", "Learn more about engineering as it happens at Enova."],
   ["Performance and Scaling", "scaling", "Take a realistic Rails app and learn to scale it in real world circumstances. You'll cover all the basic best practices in performance and scalability for the Rails world."],
 ]
+i = 0
 COURSES.each do |course|
-  Course.create! name: course[0], handle: course[1], description: course[2], status: :published
+  Course.create! name: course[0], handle: course[1], description: course[2], status: :published, sort_order: i
+  i += 1
 end
 
 CATEGORIES = [
