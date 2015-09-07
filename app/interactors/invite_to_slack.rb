@@ -1,7 +1,5 @@
-class InviteToSlack
-  include Interactor
-
-  def call
+class InviteToSlack < ServiceObject
+  def run
     context.users.each { |user| invite_to_slack(user) }
   end
 
@@ -20,6 +18,10 @@ class InviteToSlack
   end
 
   def remind(user)
-    UserMailer.slack_reminder(user).deliver_now
+    user_mailer.slack_reminder(user).deliver_now
+  end
+
+  def user_mailer
+    context.user_mailer || UserMailer
   end
 end

@@ -1,35 +1,33 @@
-<div class='col-lg-6 col-lg-offset-3'>
-  <div class='panel panel-default'>
-    <div class='panel-body'>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal'}) do |f| %>
-        <fieldset>
-          <legend>Sign In</legend>
+<div class='panel panel-default content'>
+  <div class='panel-body'>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal'}) do |f| %>
+      <fieldset>
+        <legend>Sign In</legend>
 
+        <div class='form-group'>
+          <%= f.label :email, class: 'col-lg-2 control-label' %>
+          <div class='col-lg-10'><%= f.email_field :email, autofocus: true, class: 'form-control' %></div>
+        </div>
+
+        <div class='form-group'>
+          <%= f.label :password, class: 'col-lg-2 control-label' %>
+          <div class='col-lg-10'><%= f.password_field :password, autocomplete: "off", class: 'form-control' %></div>
+        </div>
+
+        <% if devise_mapping.rememberable? -%>
           <div class='form-group'>
-            <%= f.label :email, class: 'col-lg-2 control-label' %>
-            <div class='col-lg-10'><%= f.email_field :email, autofocus: true, class: 'form-control' %></div>
+            <div class='col-lg-10 col-lg-offset-2'><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
           </div>
+        <% end -%>
 
-          <div class='form-group'>
-            <%= f.label :password, class: 'col-lg-2 control-label' %>
-            <div class='col-lg-10'><%= f.password_field :password, autocomplete: "off", class: 'form-control' %></div>
-          </div>
+        <div class='form-group'>
+          <div class='col-lg-10 col-lg-offset-2'><%= f.button "Sign in", type: "submit", class: 'btn btn-lg btn-primary' %></div>
+        </div>
 
-          <% if devise_mapping.rememberable? -%>
-            <div class='form-group'>
-              <div class='col-lg-10 col-lg-offset-2'><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-            </div>
-          <% end -%>
+      </fieldset>
+    <% end %>
+    <hr />
 
-          <div class='form-group'>
-            <div class='col-lg-10 col-lg-offset-2'><%= f.button "Sign in", type: "submit", class: 'btn btn-lg btn-primary' %></div>
-          </div>
-
-        </fieldset>
-      <% end %>
-      <hr />
-
-      <%= render "devise/shared/links" %>
-    </div>
+    <%= render "devise/shared/links" %>
   </div>
 </div>

@@ -1,27 +1,24 @@
 - user_role = current_user.admin? ? "(admin)" : ""
-%header.navbar.navbar-default{ role: "navigation" }
-  .container
-    .navbar-brand
-      %a{ href: root_path }
-        %i.fa.fa-arrow-up
-        Level UP
+%header.navbar.shadow-z-1{ role: "navigation" }
+  %a.home{ href: root_path }
+    %i.fa.fa-arrow-up
+    Level UP Rails
 
-    %button.navbar-toggle{ data: { toggle: 'collapse', target: '.navbar-collapse' } }
-      %span.sr-only Toggle navigation
-      %i.fa.fa-cog
+  %button.navbar-toggle{ data: { toggle: 'collapse', target: '.navbar-collapse' } }
+    %span.sr-only Toggle navigation
+    %i.fa.fa-cog
 
-    .collapse.navbar-collapse
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to "Courses", courses_path
-        - if current_user.signed_in?
-          %li.profile= link_to "#{current_user.name} #{user_role}", user_path(current_user)
-          %li= link_to 'Logout', destroy_user_session_path, method: :delete
+  %ul.nav.navbar-nav.navbar-right
+    %li= link_to "Courses", courses_path
+    - if current_user.signed_in?
+      %li.profile= link_to "#{current_user.name} #{user_role}", user_path(current_user)
+      %li= link_to 'Logout', destroy_user_session_path, method: :delete
 
-        - else
-          %li= link_to 'Sign In', new_user_session_path
-          %li.github-signin
-            = link_to user_omniauth_authorize_path(:github) do
-              %i.fa.fa-github-square
-              %span.support Log in with Github
-          %li= link_to 'Sign Up', new_user_registration_path 
-          %li= link_to 'What\'s The Deal', '/thedeal.html'
+    - else
+      %li= link_to 'Sign In', new_user_session_path
+      %li.github-signin
+        = link_to user_omniauth_authorize_path(:github) do
+          %i.fa.fa-github-square
+          %span.support Log in with Github
+      %li= link_to 'Sign Up', new_user_registration_path 
+      %li= link_to 'What\'s The Deal', '/thedeal.html'

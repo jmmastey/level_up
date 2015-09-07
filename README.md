@@ -30,7 +30,13 @@ Contribution is expected to conform to the [Contributor Covenant](https://github
 Credits
 -------
 
-See [the humans file](public/humans.txt)
+See [the humans file](public/humans.txt) for information on helpful humans.
+
+Some icons are used via the Noun Project. We bought a license but here's attribution anyway, because we like them:
+- [Map](https://thenounproject.com/term/map/96666/), by Lloyd Humphreys, DK
+- [Quiz](https://thenounproject.com/term/quiz/117740/), by carlos sarmento
+- [Books](https://thenounproject.com/term/books/137857/), by Jakub Čaja
+- [Signpost](https://thenounproject.com/term/signpost/116372/), by Creative Stall
 
 License
 -------

@@ -1,9 +1,9 @@
-%a{href: "#feedback_form", role: "button", class: feedback_link_classes, data: {toggle: "modal"}} Give Feedback
+%a.btn-primary.shadow-z-4{href: "#feedback_form", role: "button", class: feedback_link_classes, data: {toggle: "modal"}} Give Feedback
 
 #feedback_form.modal
   .modal-dialog
     .modal-content
-      .modal-header
+      .modal-header.page-header
         %button.close{"data-dismiss" => "modal"} ×
         %h4.modal-title Send Feedback
       .modal-body= render partial: "layouts/feedback_form"

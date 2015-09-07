@@ -1,7 +1,5 @@
-class RemindActivityDropoffs
-  include Interactor
-
-  def call
+class RemindActivityDropoffs < ServiceObject
+  def run
     context.enrollments = targets.each do |enrollment|
       next unless still_stuck?(enrollment)
       next unless emailable?(enrollment.user)
@@ -27,6 +25,10 @@ class RemindActivityDropoffs
   end
 
   def remind(enrollment)
-    UserMailer.activity_reminder(enrollment).deliver_now
+    user_mailer.activity_reminder(enrollment).deliver_now
+  end
+
+  def user_mailer
+    context.user_mailer || UserMailer
   end
 end

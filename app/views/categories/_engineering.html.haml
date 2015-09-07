@@ -4,18 +4,33 @@
   %h3 Sanity-Inducing Principles
   %p You now have at your disposal a series of powerful tools for writing software. More specifically, you have a loaded gun, and it's pointed at your foot already. If you don't use those tools safely, you now have the ability to write some of the most difficult-to-understand spaghetti in the programming world. Congratulations? Let's take a look at some principles you can use to avoid that situation.
   %p You may have realized this back when we were talking about humane APIs that predictability is a virtue. It reduces the cognitive load of trying to understand your software significantly and means that your code is less likely to be lying to me.
-  %p <a href='http://programmers.stackexchange.com/a/187462'>Here's</a> a decent StackOverflow explanation of the POLS, or take a look at the admittedly slightly academic <a href='https://en.wikipedia.org/wiki/Principle_of_least_astonishment'>wiki page</a>.
+
+  = resource_block do |e|
+    - e.text("StackOverflow - Principle of Least Astonishment", 'http://programmers.stackexchange.com/a/187462', "A decent StackOverflow explanation of the POLS.")
+    - e.text("Wikipedia - Principle of Least Astonishment", 'https://en.wikipedia.org/wiki/Principle_of_least_astonishment', "Or alternatively, the admittedly slightly academic wiki page.")
+
   = exercise_block_for "least_surprise" do |e|
     - e.question "Explain several conventions in ruby we use to conform to the Principle of Least Surprise."
     - e.question "Take a look at your previous code, see where you've violated the principle, and fix it."
+
   %p Another source of insanity is the over-engineering of code. When asked to implement a simple service to save user data, you end up with a system that can do everything short of opening a pet shop. While extensibility and abstraction are powerful and useful concepts for our software, they are not the only concern.
-  %p This <a href='http://c2.com/cgi/wiki?YouArentGonnaNeedIt'>fantastic article</a> has a good explanation. The <a href="https://en.wikipedia.org/wiki/You_aren't_gonna_need_it#Rationale">wiki article</a> provides some solid rationale too. A slight counter-argument to the overuse of YAGNI is in <a href='http://www.skorks.com/2009/08/does-yagni-mean-you-ignore-the-obvious/'>this blog-post</a>.
+
+  = resource_block do |e|
+    - e.text("C2 Wiki - YAGNI", 'http://c2.com/cgi/wiki?YouArentGonnaNeedIt', "This fantastic article has a good explanation of the principle.")
+    - e.text("Martin Fowler - YAGNI", "http://martinfowler.com/bliki/Yagni.html", "Martin Fowler talks about the costs of violating YAGNI.")
+    - e.text("Does YAGNI Mean You Ignore the Obvious?", 'http://www.skorks.com/2009/08/does-yagni-mean-you-ignore-the-obvious/', "A slight counter-argument to the overuse of YAGNI.")
+
   = exercise_block_for "yagni" do |e|
     - e.question "Explain how YAGNI improves the quality of our code."
     - e.question "If we follow YAGNI, explain how we can still make intelligent decisions about features we may need."
     - e.question "Explain the role of proper encapsulation and loose coupling in following the convention."
+
   %p Perhaps related to YAGNI, but as more of a code-organization principle, we have DRY. You've probably heard of this one before: we don't want duplication representations of knowledge in the system. 
-  %p Remember that DRY is about knowledge in your system, not just code duplication. This <a href='http://www.rubytapas.com/episodes/89-Coincidental-Duplication'>Ruby Tapas</a> has a great example of the overuse of this principle.
+  %p Remember that DRY is about knowledge in your system, not just code duplication.
+
+  = resource_block do |e|
+    - e.video("RubyTapas - Coincidental Duplication", 'http://www.rubytapas.com/episodes/89-Coincidental-Duplication', "This Ruby Tapas has a great example of the overuse of this principle.")
+
   = exercise_block_for "dry" do |e|
     - e.question "Name some techniques we can use to de-duplicate code."
     - e.question "Look back at the code you've written and see if you can dry up any of it."
@@ -25,29 +40,49 @@
   %h3 Bad Magic and Perpetual Confusion
   %p The magic we use in ruby can be very deceptive. Everything looks so simple and intuitive that you're deceived into thinking that there isn't more happening under the hood. In this way, most rails codebases are quite deceptive. When you begin to look at your data from another perspective (trying to do business analysis with it, for instance), it becomes apparent just how baseless that feeling of elegance is.
   %p We want to build our software better than that, so let's talk about some common bad magic, and how to relieve the curse.
-  %p First, let's talk about magical numbers and values. <a href='http://mikeymurph.me/magical-values/'>This article</a> has a great overview on what they are and why they're harmful.
+  %p First, let's talk about magical numbers and values.
+
+  = resource_block do |e|
+    - e.text("Magical Values", 'http://mikeymurph.me/magical-values/', "A great overview on what they are and why they're harmful.")
+
   = exercise_block_for "magic" do |e|
     - e.question "Explain the problem with the use of magic numbers and constants."
     - e.question "Give an example of the use of 'magic numbers', and suggest a possible refactor."
     - e.question "Personally, I see people get too focused on this one sometimes. Can you name an example where moving away from 'magic' values isn't actually helpful?"
-  %p Next, we shift our gaze to the environment, rather than the code. You may not have launched much code to production yet, but when you do, you'll start to deal with differing environments. When you do, you'll need to know why (and how) to keep them in sync or you'll be in trouble before long. Read <a href='http://bens.me.uk/2009/development-and-production'>this article</a>. Do it. I dare you.
+
+  %p Next, we shift our gaze to the environment, rather than the code. You may not have launched much code to production yet, but when you do, you'll start to deal with differing environments. When you do, you'll need to know why (and how) to keep them in sync or you'll be in trouble before long.
+
+  = resource_block do |e|
+    - e.text("Development and Production", 'http://bens.me.uk/2009/development-and-production', "Read this article. Do it. I dare you.")
+
   = exercise_block_for "environments" do |e|
     - e.question "Give some examples of problems you've seen (or we see) when dev and prod differ."
     - e.question "Explain why dev will never be just like prod, and how we can mitigate some of the differences."
+
   %p As your code operates in the wild, you'll need to keep it secure and well behaved in the face of bad input and malicious users. You'll need to either coax that data into a usable format or escape before it can do any damage.
-  %p The best resource for this is Avdi Grimm's <a href='http://www.confidentruby.com/'>Confident Ruby</a>. Find a copy in the library and review some of the patterns in it for better code. You can also read <a href='https://practicingruby.com/articles/confident-ruby'>this article</a>, which provides a summary of the book's practices.
+
+  = resource_block do |e|
+    - e.book("Confident Ruby", 'http://www.confidentruby.com/', "One of the best books on improving your ruby code, focuses almost solely on improving single methods.")
+    - e.text("Confident Ruby", 'https://practicingruby.com/articles/confident-ruby', "You can also read this article, which provides a summary of the book's practices. Not quite a replacement, but cheaper.")
+
   = exercise_block_for "guards" do |e|
     - e.question "Show some ways that you can make your code more accepting and robust while guarding against errors."
     - e.question "For which code is it more important to guard against errors? For which code is it less important?"
     - e.question "For the above, why does it matter?"
+
   %p One more here. While we're going to continue to use a lot of dynamic code in ruby and rails, we need to be careful not to make the code so dynamic that it is impossible to work with. Dynamic code tends to have low findability and can very easily violate the Principle of Least Surprise. Using tricks like modifying core ruby classes (like String, etc) is even worse, as it often creates incompatibilities with the "unpatched" versions of those classes. These kinds of modifications are a definite code smell.
+
   = exercise_block_for "dynamic" do |e|
     - e.question "In ruby and rails, we depend heavily on 'magic' behavior. How can we be consistent in our usage of the Principle of Least Surprise and still use this behavior?"
     - e.question "Show an example of dangerously dynamic code, and one of code that is dynamic but consistent with the other principles you've learned."
 
 .page-header
   %h3 Good Magic
-  %p Don't let the stuff above scare you off dynamic code entirely, though. As <a href='http://www.infoq.com/news/2007/06/dsl-or-not'>this article</a> argues, ruby is actually a great language for creating custom domain specific languages, and you've been using them for quite some time. Take a look at contemplate how hard some of the magic we take for granted would be in another language.
+  %p Don't let the stuff above scare you off dynamic code entirely. In reality ruby is a great language for creating custom domain specific languages, and you've been using them for quite some time.
+
+  = resource_block do |e|
+    - e.text("DSL or Not", 'http://www.infoq.com/news/2007/06/dsl-or-not', "An argument for using DSLs in ruby. Take a look at contemplate how hard some of the magic we take for granted would be in another language.")
+
   = exercise_block_for "dsls" do |e|
     - e.question "Explain why DSLs are an advantage to a language like ruby."
     - e.question "Give two examples of DSLs that we use on an everyday basis in rails development"
@@ -56,20 +91,33 @@
   %h3 A Little Kindness for Others
   %p Let's talk about some human-factors kind of stuff. Since you'll be engineering in a team and maybe even writing software that other people use, it makes sense to cover some bases on how to work with other people when building that software.
   %p First, a purely project planning topic: estimation. You (will) do this all the time, and you'll probably communicate those estimates to another person on the team, maybe a product manager. And while you think you're just giving them a rough guess of when something is done, and they think a different thing entirely.
-  %p <a href='http://blog.8thlight.com/paul-pagel/FromEstimateToCommitment.pdf'>This paper</a> by Paul Pagel has some solid principles of estimation, and this <a href='http://www.mountaingoatsoftware.com/blog/separate-estimating-from-committing'>blog post</a> will help you understand the difference between estimates and commitments.
+
+  = resource_block do |e|
+    - e.text("From Estimate to Commitment", 'http://blog.8thlight.com/paul-pagel/FromEstimateToCommitment.pdf', "This paper by Paul Pagel has some solid principles of estimation.")
+    - e.text("Separate Estimating from Committing", 'http://www.mountaingoatsoftware.com/blog/separate-estimating-from-committing', "This post will help you understand the difference between estimates and commitments.")
+
   = exercise_block_for "commitments" do |e|
     - e.question "What's the difference between a commitment and an estimate?"
     - e.question "How do you communicate the difference in conversation?"
     - e.question "Why do business users need a commitment? How do you best fulfill their needs as a customer."
-  %p Since much of your work will probably be API-related these days, let's inject a bit of sanity into your API design. Read <a href='http://semver.org/'>this site</a> and become enlightened.
+
+  %p Since much of your work will probably be API-related these days, let's inject a bit of sanity into your API design.
+
+  = resource_block do |e|
+    - e.text("Semver", 'http://semver.org/', "Versioning that won't make people want to hunt you down.")
+
   = exercise_block_for "versioning" do |e|
     - e.question "Explain the situations under which you bump the patch / minor / major version number on your software."
     - e.question "How does that versioning relate to the consumers of your code?"
+
   %p Not much to say on this one, we're members of a wide and vibrant community that gives us fantastic tools to make our jobs easier. You should know how we fit within that community.
+
   = exercise_block_for "open_source" do |e|
     - e.question "Why do we contribute back to Open Source?"
     - e.question "What is our policy on Open Source contributions?"
+
   %p You may have thought that since we write "self-documenting" code that you were off the hook for writing any kind of documentation. Nope! Your codebase should have a useful README that explains how to set up and run the software, some example usage, and any gotchas people should know about. This kind of documentation is necessary for others to use your project, even if it's been well structured.
+
   = exercise_block_for "documentation" do |e|
     - e.question "What is a useful level of documentation?"
     - e.question "How much documentation is enough? How much is too much? How can we balance those needs?"

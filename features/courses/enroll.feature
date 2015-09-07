@@ -5,11 +5,11 @@ Feature: Enroll in a course
 
   Background:
     Given I am logged in
-    And there is a published course called "Test 1"
+    And there is a published course called "Welcome"
 
   @javascript
   Scenario: Enroll in a course
     Given I visit the courses page
-    When I click on the "test_1" enroll button
-    Then I see the "test_1" course page
-    And I have been enrolled in "test_1"
+    When I click on the "welcome" enroll button
+    Then I see the "welcome" course page
+    And I have been enrolled in "welcome"

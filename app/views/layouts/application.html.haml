@@ -2,8 +2,9 @@
 %html
   %head
     %title Level UP
-    = stylesheet_link_tag    "//netdna.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css"
-    = stylesheet_link_tag    "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+    = stylesheet_link_tag    "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css"
+    = stylesheet_link_tag    "//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css"
+    = stylesheet_link_tag    "//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
     = stylesheet_link_tag    "//fonts.googleapis.com/css?family=Patrick+Hand+SC"
 
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
@@ -13,20 +14,18 @@
   %body
     = render partial: 'layouts/navigation'
 
-    .container 
-      - flash.each do |name, msg|
-        %div{class: "alert alert-#{name}"}= msg
-
+    .container.main
       = yield
 
-    %footer
-      .container
-        .col-lg-10.col-lg-offset-1
-          This is a project to give a common baseline to engineers on the <a href='http://words.steveklabnik.com/rails-has-two-default-stacks'>Rails Prime</a> stack.
-          That said, all facts, opinions and rants on this site are surely incorrect and not endorsed by anyone.
-          Send blame, hatemail and unending admiration and so forth to Joe Mastey (<a href='mailto:jmmastey@gmail.com'>jmmastey@gmail.com</a>).
-          Pull requests emphatically welcome <a href='https://github.com/jmmastey/level_up'>on Github</a>.
+      %footer
+        .container
+          .col-lg-10
+            This is a project to give a common baseline to engineers on the <a href='http://words.steveklabnik.com/rails-has-two-default-stacks'>Rails Prime</a> stack.
+            That said, all facts, opinions and rants on this site are surely incorrect and not endorsed by anyone.
+            Send blame, hatemail and unending admiration and so forth to Joe Mastey (<a href='mailto:jmmastey@gmail.com'>jmmastey@gmail.com</a>).
+            Pull requests emphatically welcome <a href='https://github.com/jmmastey/level_up'>on Github</a>.
 
     = render partial: "layouts/feedback_modal"
     = javascript_include_tag "//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=default&lang=bash"
     = javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
+    = render partial: "layouts/flash"
