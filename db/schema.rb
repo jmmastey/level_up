@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518215010) do
+ActiveRecord::Schema.define(version: 20150907184326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150518215010) do
     t.string   "status",       limit: 20,  default: "created", null: false
     t.text     "description"
     t.string   "organization", limit: 50
+    t.integer  "sort_order",               default: 99
   end
 
   add_index "courses", ["handle"], name: "index_courses_on_handle", using: :btree
