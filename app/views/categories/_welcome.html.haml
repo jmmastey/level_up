@@ -1,19 +1,43 @@
-%p The Rails Prime stack runs on a Unix stack, which is to say that all production hardware (and most people's personal workstations) are some variant of that system. As such, you'll need to understand some basic Unix utilities to control your development environment. Thankfully, you don't need to be a sysadmin to navigate the waters of application development on Unix, so this will be a simple course.
+%p It's time to get started learning a new stack, hell yeah! Learning a ton of new skills is intimidating, and there's no shortcut to make things easy.
+%p But <strong>there are ways to make it more effective</strong>.
+%p Hundreds of people have used this curriculum to learn the Rails stack. Some were grizzled industry veterans, others were completely new to the profession. This is what we've learned so far:
+
+.page-header
+  %h3 Learning Soft Skills
+  %p In The Little Book of Talent, Steve Coyle argues that there are different ways to learn "hard" and "soft" skills. Hard skills, like swinging a golf club, involve repeatable precision, and the best way to learn them is to repeat them without variation for a long time. <em>Programming is not one of those skills.</em>
+  %p Soft skills, by comparison, involve creative decision-making in unpredictable circumstances. They are best trained by putting yourself into realistic practice scenarios where you can develop and refine your intuition for decision-making skills. The exercises on this site are designed to build that exact intuition. If you find yourself trying to practice by rote, take a step back and reconsider.
+
+  %h3 Getting the Most Out of Your Time
+  %blockquote
+    %p "Practice with your fingers and you need all day. Practice with your mind and you will do as much in 1 1/2 hours."
+    %small Leopold Auer, on <a href='http://www.bulletproofmusician.com/how-many-hours-a-day-should-you-practice/'>mastering the violin</a>
+  %p It's a good thing that quantity of practice isn't the important part, because we're all too busy to dedicate all of our time to it anyway. Here are some things you can do instead.
+  %ol
+    %li Start your session with <strong>small victories</strong>. Priming yourself for success is shown to prime you for success. Smaller exercises like <a href='http://exorcism.io'>exorcism.io</a> are a great way to do this.
+    %li <strong>Fast, high quality feedback</strong> is more important than just about everything else. Do not try to learn programming in isolation; you'll waste a lot of time and reinforce the wrong lessons. If you don't have a professional mentor or friends who can give you honest feedback, join our <a href='https://levelupslackinvites.herokuapp.com'>Slack community</a> and ask for help. We're here for you.
+    %li The most frustrating activities are usually the most valuable ones. Learners who come with some background in development tend to take shortcuts on activities that are hard and focus on ones that emphasize their current strengths. You will not learn like that. <strong>When an activity is tough, it means you're doing the most learning.</strong>
+    %li Reflect on your previous performance. When you finish an exercise and get feedback, <strong>take a few moments to reflect</strong> on what led you to a particular decision or implementation.
+
+  %h3 When You Get Stuck
+  %p You're going to get stuck. And frustrated. <strong>Don't give up, you have the ability to get past being stuck.</strong>
+  %p It's okay. That's part of the process. First, take a walk or grab a coffee; do anything other than spinning your wheels on your code. If you're spending more than a few hours not making progress, stop it. 
+  %p After you've had a few minutes to clear your head, start thinking about other ways to approach the problem. Perhaps the most foundational skill in programming is Problem Decomposition. See if you can tackle just a small part of the problem first. Expand your solution from there.
+  %p Still stuck? Ask for help! There's a feedback button at the bottom of the page. Ask on <a href='https://levelupslackinvites.herokuapp.com'>Slack</a>, ask on <a href='http://twitter.com/jmmastey'>Twitter</a>, or on <a href='http://stackoverflow.com'>StackOverflow</a>.
+  = exercise_block_for "group" do |e|
+    - e.question "Usually the answers won't be so obvious, but this lesson's a gimme."
+    - e.question "What are the best ways to keep making progress on your learning?"
+    - e.question "Where are the easiest places to find help when you get stuck?"
 
 .page-header
   %h3 How to Use This Website
-  %p There's not much to say for this one, navigating the filesystem is possibly the most basic thing you can do. If not a Mac / Linux user, you've probably still done this before. That said, take a moment to review some basics. A really common error for newer engineers is to accidentally conflate absolute and relative path when running commands.
-  %p If you could use a refresher, check out this <a href='http://linuxcommand.org/'>Linux Navigation Tutorial</a>
+  %p The technical stuff. Each lesson in a course builds upon previous ones, so try to work approximately in order. Sometimes you'll get bored with one topic and want to skip ahead. It's better to do that than to quit because of frustration, so go for it. Just make sure to go back to the previous lesson and not skip it entirely.
+  %p Each lesson is intended to provide <strong>context, resources, and verification.</strong>
+  %p First, read the context on the lesson page to understand the reason for learning each skill. If the skill seems pointless after reading this, send me some feedback. Spending time on useless things is a waste, and we'll hammer out how to fix it or drop the section entirely.
+  %p Next, use the resources to learn more about the skill. The neat thing about the web is that there are twenty places to learn everything. I've tried to provide the best places for each skill, but don't get too hung up. There are resources both inline on the page and on the right-hand sidebar. If you already know the given skill, skip this part. Don't waste time on things you already know.
+  %p The next part depends on the individual activity, but is the most important part of the process.
+  %p For non-code exercises, answer the questions provided. Write down the answers, and get someone more experienced than yourself to verify those answers. This isn't a self-study guide.
+  %p For code exercises, go do some code. Unlike other web tutoruial, the exercises are large enough to both verify the skill and give you enough rope to hang yourself. This is how real programming tasks work too. Once you've finished, or if you find yourself at an impasse, <strong>have someone else review your code</strong>. By definition you can't review your own code meaningfully. Most commonly learners submit pull requests of their activities against the <a href='http://github.com/jmmastey/level_up_exercises/pulls'>LevelUpRails exercise repo</a>. Otherwise, use any of the means of contact listed above to find someone to review your code.
+  %p Finally, check off the activity (see below). Well done!
   = exercise_block_for "interface" do |e|
     - e.question "Every section comes with an activity to verify that you understand and can use the knowledge you've gained."
-    - e.question "Some of the activities are simply questions, some include coding exercises. Get someone experienced to review your answers and code before you check off the exercise."
     - e.question "Click on the checkmark to the right to signal that you've completed the activity."
-
-.page-header
-  %h3 Getting the most out of LevelUpRails
-  %p An important thing to understand when manipulating a Unix system is the principle that "Everything is a File". Ports and sockets, filesystems, directories and more are all treated as files for the purposes of manipulation. This is a benefit because it allows us a consistent way to manipulate I/O using common tools.
-  %p Read <a href='https://en.wikipedia.org/wiki/Everything_is_a_file'>the Wikipedia Article</a> for more details.
-  = exercise_block_for "group" do |e|
-    - e.question "Name some 'files' in a standard unix filesystem that aren't very file-like."
-    - e.question "Identify some places where we use file descriptors for non-file content as part of the development process (hint: sockets are a good example here)."
-    - e.question "Postgres writes a file when it starts up to record some information about itself, called a 'pid file'. Find this file and display its contents. This will be really hard (impossible, really) unless you install Postgres."

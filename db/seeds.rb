@@ -17,7 +17,7 @@ COURSES.each do |course|
 end
 
 CATEGORIES = [
-  ["welcome", "Welcome Tutorial", "welcome", 1],
+  ["welcome", "Welcome to LevelUpRails", "welcome", 1],
   ["baseline_1", "Linux and Shell Utilities", "linux", 2],
   ["baseline_1", "Basic Ruby", "ruby", 4],
   ["baseline_1", "Basic Test Engineering", "test", 7],
