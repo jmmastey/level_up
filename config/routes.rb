@@ -8,6 +8,11 @@ Levelup::Application.routes.draw do
 
   resources :users, only: [:index, :update, :show]
   resources :courses, only: [:index, :show]
+  resources :deadlines, only: [:create, :destroy] do
+    collection do
+      post "toggle"
+    end
+  end
 
   post "courses/:id/enroll", to: "courses#enroll", as: "enroll"
   post "send_feedback", to: "home#send_feedback", as: "feedback"

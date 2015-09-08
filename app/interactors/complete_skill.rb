@@ -9,6 +9,7 @@ class CompleteSkill < ServiceObject
   def run
     context.completion = new_completion(context.user, context.skill)
     context.completion.save!
+    CompleteDeadline.call(user: context.user, category: context.skill.category)
   rescue
     fail! "unable to complete skill"
   end

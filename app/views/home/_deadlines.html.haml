@@ -1,0 +1,20 @@
+- if @deadline.completed_on.present?
+  .panel.panel-primary.deadline-complete
+    .panel-body
+      You met your deadline!
+- elsif @deadline.persisted?
+  .panel.panel-primary.show-deadline
+    .panel-body
+      %em
+        You've committed to completing this section by
+        %strong= @deadline.target_completed_on
+      = link_to "remove", @deadline, method: "delete", confirm: "Are you sure?"
+- else
+  .panel.panel-primary.set-deadline
+    .panel-body
+      %h4 Set a Deadline?
+      = form_for @deadline, method: :post do |f|
+        = f.hidden_field :category_id, value: @deadline.category.id
+        I will complete this section by:
+        = f.text_field :target_completed_on, value: Deadline.estimate(category)
+        = f.submit 'Set Deadline', class: 'btn btn-primary'

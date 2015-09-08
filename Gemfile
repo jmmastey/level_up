@@ -33,19 +33,29 @@ group :development do
   gem 'rubocop-rspec'
 end
 
-group :test do
-  gem 'rake'
-  gem 'capybara'
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner', '1.0.1'
-  gem 'email_spec'
-end
-
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails', require: false
   gem 'rspec-rails'
   gem 'poltergeist'
+
+  # other test deps
+  gem 'rake'
+  gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner', '1.0.1'
+  gem 'email_spec'
+  gem 'spring'
+  gem 'spring-commands-rspec' # since we're using rspec
+
+  # guard stuff
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'rb-fchange', :require=>false
+  gem 'rb-fsevent', :require=>false
+  gem 'rb-inotify', :require=>false
 end
 
 group :production do

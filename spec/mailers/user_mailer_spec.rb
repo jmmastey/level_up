@@ -60,6 +60,23 @@ describe UserMailer do
     end
   end
 
+  describe "#deadline_reminder" do
+    let(:category) { FactoryGirl.build(:category) }
+    let(:deadline) { Deadline.new(category: category, user: user, target_completed_on: "2099-01-01") }
+    let(:mail) { UserMailer.deadline_reminder(deadline) }
+
+    it "tells you about your deadline" do
+      expect(mail.body).to include(category.name)
+      expect(mail.body).to include("2099-01-01")
+      expect(mail.body).to include("/#{category.handle}.html")
+    end
+
+    it "actually sends the email" do
+      expect { mail.deliver_now! }.to change { deliveries }.by(1)
+    end
+  end
+
+
   def deliveries
     ActionMailer::Base.deliveries.size
   end

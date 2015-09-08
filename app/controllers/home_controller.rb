@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   helper :courses
   before_action :find_category, only: :show
   before_action :find_completed_skills, only: :show
+  before_action :find_deadline, only: :show
 
   include CategoryRouter
 
@@ -33,6 +34,11 @@ class HomeController < ApplicationController
   rescue => e
     logger.error e.message
     raise AbstractController::ActionNotFound
+  end
+
+  def find_deadline
+    @deadline = Deadline.where(category: @category, user: current_user).first ||
+                Deadline.new(category: @category)
   end
 
   def find_completed_skills
