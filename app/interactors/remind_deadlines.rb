@@ -12,7 +12,7 @@ class RemindDeadlines < ServiceObject
   def remind(deadline)
     return unless deadline.user.email_opt_out.nil?
 
-    user_mailer.deadline_reminder(deadline)
+    user_mailer.deadline_reminder(deadline).deliver_now
     deadline.update_attributes!(reminder_sent_at: now)
   end
 
