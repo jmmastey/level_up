@@ -16,4 +16,5 @@
     .col-md-4
       = gravatar_for(@user, 160)
 
+  = render partial: 'deadlines' if @user == current_user
   = render partial: 'progress'

@@ -20,6 +20,14 @@ describe CompleteSkill do
     expect(interactor).not_to be_success
   end
 
+  it "tries to complete deadlines too" do
+    allow(CompleteDeadline).to receive(:call)
+
+    interactor
+
+    expect(CompleteDeadline).to have_received(:call).with(user: user, category: skill.category)
+  end
+
   context "with organizations" do
     let(:me) { create(:user, organization: "good guys") }
     let(:us) { create(:course, :with_skills, organization: "good guys") }

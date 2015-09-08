@@ -16,12 +16,19 @@ class UserMailer < ActionMailer::Base
   def activity_reminder(enrollment)
     @user = enrollment.user
     @course = enrollment.course
-    title = "LevelUp: Stuck working on #{@course.name}? Here comes help!"
+    title = "LevelUpRails: Stuck working on #{@course.name}? Here comes help!"
     mail(to: @user.email, subject: title)
   end
 
   def slack_reminder(user)
     @user = user
-    mail(to: user.email, subject: "Get LevelUp help (and give it) on Slack.")
+    mail(to: user.email, subject: "Get LevelUpRails help (and give it) on Slack.")
+  end
+
+  def deadline_reminder(deadline)
+    @user = deadline.user
+    @category = deadline.category
+    @deadline = deadline
+    mail(to: @user.email, subject: "LevelUpRails: Your deadline for #{@category.name} is coming up.")
   end
 end

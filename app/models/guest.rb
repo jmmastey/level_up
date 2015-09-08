@@ -32,4 +32,8 @@ class Guest
   def organization
     nil
   end
+
+  def deadline_mode
+    nil
+  end
 end

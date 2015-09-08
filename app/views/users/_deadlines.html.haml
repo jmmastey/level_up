@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    %h4 Deadline Mode
+    %p Use deadlines to help set goals for your progress.
+    = form_for(@user, url: toggle_deadlines_path, html: { class: 'form-horizontal', method: :post }) do |f|
+      = select_tag :deadline_mode, options_for_select([['Deadline Mode Disabled', ''], ['Deadline Mode Enabled', 'on']], @user.deadline_mode), class: 'form-control'
+      = submit_tag 'Update', class: 'btn btn-primary'

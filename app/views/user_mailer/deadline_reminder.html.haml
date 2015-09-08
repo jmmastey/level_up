@@ -1,0 +1,9 @@
+%p= "Hey #{@user.name},"
+%p You set a deadline for #{@category.name} of #{@deadline.target_completed_on}, and it's coming up.
+%p
+  Are you almost done? Are you stuck? If you need help, feel free to come talk on the 
+  %a{href: 'https://levelupslackinvites.herokuapp.com/'} slack channel
+  and get some help.
+%p If not, make sure to <a href='https://leveluprails.com/#{@category.handle}.html'>complete all the exercises</a> on the site. You've only got a few days left!
+%br
+%p= "Go conquer. - Joe (jmmastey@gmail.com)"

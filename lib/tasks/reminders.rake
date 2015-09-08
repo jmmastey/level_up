@@ -11,3 +11,10 @@ task progress_reminder: :environment do
   int = RemindActivityDropoffs.call
   puts "done. Sent #{int.enrollments.length} emails."
 end
+
+desc "send reminder emails for users nearing their deadline"
+task deadline_reminder: :environment do
+  puts "Sending reminders to deadline users..."
+  int = RemindDeadlines.call
+  puts "done. Sent #{int.deadlines.length} emails."
+end

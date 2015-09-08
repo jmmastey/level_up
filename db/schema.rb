@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907184326) do
+ActiveRecord::Schema.define(version: 20150907233537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 20150907184326) do
   end
 
   add_index "courses", ["handle"], name: "index_courses_on_handle", using: :btree
+
+  create_table "deadlines", force: :cascade do |t|
+    t.integer  "user_id",             null: false
+    t.integer  "category_id",         null: false
+    t.date     "target_completed_on"
+    t.date     "completed_on"
+    t.datetime "reminder_sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "enrollments", force: :cascade do |t|
     t.integer  "user_id"
@@ -123,6 +133,7 @@ ActiveRecord::Schema.define(version: 20150907184326) do
     t.string   "organization",             limit: 50
     t.datetime "slack_invite_sent_at"
     t.string   "email_opt_out"
+    t.string   "deadline_mode"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
