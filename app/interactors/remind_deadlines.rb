@@ -6,7 +6,7 @@ class RemindDeadlines < ServiceObject
   private
 
   def targets
-    Deadline.active.nearly_expired
+    context.deadlines ||= Deadline.active.nearly_expired
   end
 
   def remind(deadline)

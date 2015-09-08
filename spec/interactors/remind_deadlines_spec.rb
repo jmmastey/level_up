@@ -40,4 +40,13 @@ describe RemindDeadlines do
 
     expect(umailer).not_to have_received(:deadline_reminder)
   end
+
+  it "exposes the target deadlines" do
+    allow(Deadline).to receive(:nearly_expired) { [deadline] }
+    allow(interactor).to receive(:remind)
+
+    interactor.call
+
+    expect(interactor.context.deadlines).to eq([deadline])
+  end
 end
