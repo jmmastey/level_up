@@ -38,8 +38,17 @@ describe EnrollUser do
     end
   end
 
-  it "doesn't allow the user to register if they are of the wrong org" do
-    course.update_attributes!(organization: "S.H.I.E.L.D")
-    expect(interactor.call).not_to be_success
+  context "for organizational courses" do
+    it "doesn't allow the user to register if they are of the wrong org" do
+      course.update_attributes!(organization: "S.H.I.E.L.D")
+      expect(interactor.call).not_to be_success
+    end
+
+    it "does allow the user to register if they are of the right org" do
+      course.update_attributes!(organization: "S.H.I.E.L.D")
+      user.update_attributes!(organization: "S.H.I.E.L.D")
+
+      expect(interactor.call).to be_success
+    end
   end
 end
