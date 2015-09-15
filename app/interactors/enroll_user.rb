@@ -1,6 +1,7 @@
 class EnrollUser < ServiceObject
   def setup
     fail! unless context.user.present? && context.course.present?
+    fail! unless user_has_correct_org
   end
 
   def run
@@ -9,6 +10,12 @@ class EnrollUser < ServiceObject
   end
 
   private
+
+  def user_has_correct_org
+    return true if !context.course.organization.present?
+
+    context.course.organization == context.user.organization
+  end
 
   def add_user_enrollment
     Enrollment.create(course: context.course, user: context.user)
