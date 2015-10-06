@@ -8,7 +8,8 @@ class UserSummary
   end
 
   def for_category(category)
-    for_user.find { |data| category.handle == data[:handle] }
+    summary = for_user.find { |data| category.handle == data[:handle] }
+    summary.presence || { total_skills: category.skills.count, total_completed: 0, total_verified: 0 }
   end
 
   def for_course(course)
