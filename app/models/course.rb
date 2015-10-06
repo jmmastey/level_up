@@ -26,6 +26,6 @@ class Course < ActiveRecord::Base
   end
 
   def self.published_course(id)
-    published.find(id)
+    all.published.find(id)
   end
 end
