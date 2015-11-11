@@ -17,7 +17,6 @@
 
   = exercise_block_for "style_guide" do |e|
     - e.question "Fix the code example in the #{exercise_link 'triangle_facts'} exercise so that it conforms to the Ruby style guide."
-    - e.question "Go back and make sure that your other ruby code conforms to the style guide. Bonus points if it did already."
 
   %p Another common pattern that is both common and totally unnecessary is called Arrowhead Programming. this is pretty simple to diagnose. If a method indents more than maybe two levels, it probably needs to be refactored. Method calls are cheap relative to other resources, so reorganizing and refactoring your code to avoid this particular problem is well worth it.
 
@@ -26,7 +25,6 @@
 
   = exercise_block_for "arrowhead" do |e|
     - e.question "Look at the code in the #{exercise_link 'arrowhead'} exercise. It currently fails to put error conditions near their conditions. Refactor it so that it isn't terrible anymore."
-    - e.question "Go fix your ruby code so that it conforms to this rule."
 
   %p The next rule turns out to be related to the previous one: you should write short methods, and short lines of code. Games like code golf are lots of fun, but if you check abstruse one-liners into the production codebase you're mostly just a jerk. A decent rule of thumb is to have no more than five lines of code in a method, and to keep your lines of code under eighty characters. That said, it's still possible to write a lot of terrible code in eighty characters, so consider rewriting any line whose meaning is not entirely apparent.
 
@@ -36,7 +34,6 @@
 
   = exercise_block_for "short_methods" do |e|
     - e.question "We're going to continue rocking these exercises. The #{exercise_link 'robot_name'} exercise seems apropos here."
-    - e.question "Your ruby code is probably still offensive. Fix that."
 
   %p Even with short lines of code, it's not always possible to understand all code at a glance, so we put a lot of focus on using meaningful variable and method names. Ideally, someone reading your code should not even need to look at the body of a method to know what it does; the name should stand alone sufficiently to describe it. Similarly, variable names serve either to enlighten or confuse others as they read your code.
 
@@ -50,7 +47,6 @@
 
   = exercise_block_for "fivesecond" do |e|
     - e.question "Explain how the Five Second Rule for code review works."
-    - e.question "Look back through your code and find any places where your code is unnecessarily clever. Refactor."
 
 .page-header
   %h3 Comments (and Why We Tend to Avoid Them)
