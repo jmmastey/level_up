@@ -11,6 +11,7 @@
     Paul Haddad
     Zamir Syed
     Dan Kotowski
+    Blake Thomas
 
 /* THANKS */
   Chuck Lauer Vose (@vosechu) for the Inspiration
