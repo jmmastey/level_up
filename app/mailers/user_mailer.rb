@@ -20,11 +20,6 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: title)
   end
 
-  def slack_reminder(user)
-    @user = user
-    mail(to: user.email, subject: "Get LevelUpRails help (and give it) on Slack.")
-  end
-
   def deadline_reminder(deadline)
     @user = deadline.user
     @category = deadline.category
