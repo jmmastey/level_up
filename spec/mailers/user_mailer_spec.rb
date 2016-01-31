@@ -17,18 +17,10 @@ describe UserMailer do
     it "actually sends the email" do
       expect { mail.deliver_now! }.to change { deliveries }.by(1)
     end
-
-    it "includes some helpful links" do
-      expect(mail.body).to include(helpful_url)
-    end
   end
 
   describe "#activity_reminder" do
     let(:mail) { UserMailer.activity_reminder(enrollment) }
-
-    it "includes some helpful links" do
-      expect(mail.body).to include(helpful_url)
-    end
 
     it "actually sends the email" do
       expect { mail.deliver_now! }.to change { deliveries }.by(1)
@@ -37,10 +29,6 @@ describe UserMailer do
 
   describe "#reg_reminder" do
     let(:mail) { UserMailer.reg_reminder(user) }
-
-    it "includes some helpful links" do
-      expect(mail.body).to include(helpful_url)
-    end
 
     it "actually sends the email" do
       expect { mail.deliver_now! }.to change { deliveries }.by(1)
