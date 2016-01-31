@@ -13,7 +13,7 @@ describe CourseActivity, type: :model do
       create(:completion, created_at: date, user: user, skill: skill)
     end
 
-    def enroll(date, course = course)
+    def enroll(date)
       create(:enrollment, user: user, course: course, created_at: date)
     end
 

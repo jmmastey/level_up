@@ -1,9 +1,9 @@
 class ServiceObject
   attr_reader :context
 
-  def initialize(context = {})
+  def initialize(params = {})
     @context = OpenStruct.new
-    context.each do |k, v|
+    params.each do |k, v|
       @context.send("#{k}=", v)
     end
     setup if respond_to? :setup

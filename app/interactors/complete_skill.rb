@@ -34,6 +34,7 @@ class CompleteSkill < ServiceObject
   end
 
   def check_organization
+    raise context.inspect unless context.skill.present?
     org = context.skill.category.course.organization
     return if !org || org == context.user.organization
 

@@ -6,8 +6,8 @@ describe CompleteSkill do
   let(:skill)     { create(:skill, category: category) }
   let(:user)      { create(:user) }
 
-  def interactor(skill = skill, user = user)
-    @interactor ||= subject.new(skill: skill, user: user).call
+  def interactor(the_skill: skill, the_user: user)
+    subject.new(skill: the_skill, user: the_user).call
   end
 
   it "allows the user to complete a skill" do
@@ -40,19 +40,19 @@ describe CompleteSkill do
     let(:not_sekkret) { create(:skill) }
 
     it "will let me complete proprietary skills" do
-      expect(interactor(our_sekkret, me)).to be_success
+      expect(interactor(the_skill: our_sekkret, the_user: me)).to be_success
     end
 
     it "will let me complete non-secret skills" do
-      expect(interactor(not_sekkret, me)).to be_success
+      expect(interactor(the_skill: not_sekkret, the_user: me)).to be_success
     end
 
     it "won't let me complete sekkret skills from other orgs" do
-      expect(interactor(their_sekkret, me)).not_to be_success
+      expect(interactor(the_skill: their_sekkret, the_user: me)).not_to be_success
     end
 
     it "won't let me complete sekkret skills without an org" do
-      expect(interactor(our_sekkret, rando)).not_to be_success
+      expect(interactor(the_skill: our_sekkret, the_user: rando)).not_to be_success
     end
   end
 end
