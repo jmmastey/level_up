@@ -1,8 +1,7 @@
 language: ruby
-rvm:
-  - 2.2.2
 matrix:
   include:
+  - rvm: 2.2.2
   - rvm: rbx-2.6
     env: RBX_RUBY_COMPAT=2.1.0 RBX_VERSION=2.6
 bundler_args: --without production --without development --jobs=4
