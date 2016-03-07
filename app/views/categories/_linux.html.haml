@@ -180,7 +180,7 @@
   %p If you don't manage the time on your system properly, your commits will appear to be from the future, and everyone will make fun of you. However, our tests tend to change system time in order to accomplish common tasks, so you may end up with a system whose time is not set correctly.
 
   = resource_block do |e|
-    - e.text("Ntpdate Man Page", 'http://linux.die.net/man/8/ntpdate', "Quick, read the man pages to avoid total embarassment!")
+    - e.text("Ntpd Man Page", 'http://linux.die.net/man/8/ntpd', "Quick, read the man pages to avoid total embarrassment!")
 
   = exercise_block_for "ntp" do |e|
     - e.question "This one's easy. Demonstrate the command to reset your time using an external NTP server."
