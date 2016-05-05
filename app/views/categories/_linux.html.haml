@@ -89,8 +89,8 @@
   %p Most users have unlimited sudo power on their systems. And sometimes, adding sudo to a command that's not working appears to "fix it". But down that way lies madness. By escalating yourself to root, erroneous commands have the ability to wreck your system. Resist the urge, and find a non-root way to execute the command. 
 
   = resource_block do |e|
-    - e.text("How to Use Sudo and Su", 'https://www.linux.com/blog/how-use-sudo-and-su-commands-linux-introduction', "An overview of usage of the sudo command. ")
-    - e.text("A Short Introduction to Sudo", 'http://www.antson.org/tutorials/2014/06/12/a-short-introduction-to-sudo.html', "An overview of usage of the sudo command. ")
+    - e.text("An Introduction to Sudo", 'http://www.simplehelp.net/2008/12/29/using-sudo-in-linux/', "An overview of usage of the sudo command.")
+    - e.text("How to Use Sudo and Su", 'https://www.linux.com/blog/how-use-sudo-and-su-commands-linux-introduction', "Another overview!")
     - e.text("Bad Sudo", 'http://labs.securitycompass.com/network/bad-sudo', "Sudo is dangerous. Find out some of the bad things you can do with it in this article.")
 
   = exercise_block_for "sudo" do |e|
@@ -181,7 +181,7 @@
   %p If you don't manage the time on your system properly, your commits will appear to be from the future, and everyone will make fun of you. However, our tests tend to change system time in order to accomplish common tasks, so you may end up with a system whose time is not set correctly.
 
   = resource_block do |e|
-    - e.text("Ntpdate Man Page", 'http://linux.die.net/man/8/ntpdate', "Quick, read the man pages to avoid total embarassment!")
+    - e.text("Ntpd Man Page", 'http://linux.die.net/man/8/ntpd', "Quick, read the man pages to avoid total embarrassment!")
 
   = exercise_block_for "ntp" do |e|
     - e.question "This one's easy. Demonstrate the command to reset your time using an external NTP server."
