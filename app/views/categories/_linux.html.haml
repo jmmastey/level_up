@@ -89,6 +89,7 @@
   %p Most users have unlimited sudo power on their systems. And sometimes, adding sudo to a command that's not working appears to "fix it". But down that way lies madness. By escalating yourself to root, erroneous commands have the ability to wreck your system. Resist the urge, and find a non-root way to execute the command. 
 
   = resource_block do |e|
+    - e.text("How to Use Sudo and Su", 'https://www.linux.com/blog/how-use-sudo-and-su-commands-linux-introduction', "An overview of usage of the sudo command. ")
     - e.text("A Short Introduction to Sudo", 'http://www.antson.org/tutorials/2014/06/12/a-short-introduction-to-sudo.html', "An overview of usage of the sudo command. ")
     - e.text("Bad Sudo", 'http://labs.securitycompass.com/network/bad-sudo', "Sudo is dangerous. Find out some of the bad things you can do with it in this article.")
 
