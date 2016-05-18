@@ -37,6 +37,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails', require: false
   gem 'rspec-rails'
+  gem 'rspec-pride', '3.1.1'
   gem 'poltergeist'
 
   # other test deps
