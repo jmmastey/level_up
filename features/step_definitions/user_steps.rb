@@ -12,7 +12,7 @@ end
 def create_unconfirmed_user
   create_visitor
   delete_user
-  sign_up
+  do_user_sign_up
   visit '/users/sign_out'
 end
 
@@ -27,7 +27,7 @@ def delete_user
   @user.destroy unless @user.nil?
 end
 
-def sign_up
+def do_user_sign_up
   delete_user
   fill_sign_up_form
   find_user
@@ -42,7 +42,7 @@ def fill_sign_up_form
   click_button "Sign up"
 end
 
-def sign_in(user = @visitor)
+def do_user_sign_in(user = @visitor)
   visit '/users/sign_in'
   fill_in "Email", with: user[:email]
   fill_in "Password", with: user[:password]
@@ -61,12 +61,12 @@ end
 
 Given /^I am logged in$/ do
   create_user
-  sign_in
+  do_user_sign_in
 end
 
 Given /^I am logged in and wait$/ do
   create_user
-  sign_in
+  do_user_sign_in
 end
 
 Given /^I exist as a user$/ do
@@ -85,7 +85,7 @@ end
 ### WHEN ###
 When /^I sign in with valid credentials$/ do
   create_visitor
-  sign_in
+  do_user_sign_in
 end
 
 When /^I sign out$/ do
@@ -94,31 +94,31 @@ end
 
 When /^I sign up with valid user data$/ do
   create_visitor
-  sign_up
+  do_user_sign_up
 end
 
 When /^I sign up with an invalid email$/ do
   create_visitor
   @visitor = @visitor.merge(email: "notanemail")
-  sign_up
+  do_user_sign_up
 end
 
 When /^I sign up without a password confirmation$/ do
   create_visitor
   @visitor = @visitor.merge(password_confirmation: "")
-  sign_up
+  do_user_sign_up
 end
 
 When /^I sign up without a password$/ do
   create_visitor
   @visitor = @visitor.merge(password: "")
-  sign_up
+  do_user_sign_up
 end
 
 When /^I sign up with a mismatched password confirmation$/ do
   create_visitor
   @visitor = @visitor.merge(password_confirmation: "changeme123")
-  sign_up
+  do_user_sign_up
 end
 
 When /^I return to the site$/ do
@@ -127,12 +127,12 @@ end
 
 When /^I sign in with a wrong email$/ do
   @visitor = @visitor.merge(email: "wrong@example.com")
-  sign_in
+  do_user_sign_in
 end
 
 When /^I sign in with a wrong password$/ do
   @visitor = @visitor.merge(password: "wrongpass")
-  sign_in
+  do_user_sign_in
 end
 
 When /^I edit my account details$/ do

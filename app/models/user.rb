@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   has_many :skills, through: :completions
   has_many :courses, through: :enrollments
 
-  validates_presence_of :name
-  validates_uniqueness_of :email
+  validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  validates :name, presence: true
 
   scope :older, -> { where("users.created_at < ?", 5.days.ago) }
   scope :by_activity_date, -> { order("users.updated_at desc") }

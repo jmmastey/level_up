@@ -24,11 +24,11 @@ Given(/^there are courses from many orgs$/) do
 end
 
 Given(/^I am some rando from the internet$/) do
-  sign_in(email: @no_org_user.email, password: @no_org_user.password)
+  do_user_sign_in(email: @no_org_user.email, password: @no_org_user.password)
 end
 
 Given(/^I am a user from an organization$/) do
-  sign_in(email: @my_org_user.email, password: @my_org_user.password)
+  do_user_sign_in(email: @my_org_user.email, password: @my_org_user.password)
 end
 
 # Then
