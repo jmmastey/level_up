@@ -3,6 +3,10 @@ LevelUpRails
 
 An app to store and verify training material for engineers on the [Rails Prime Stack](http://words.steveklabnik.com/rails-has-two-default-stacks). Currently hosted at http://leveluprails.com.
 
+Your Help Wanted
+---------------
+Hey there. If you're reading this, I'd welcome and appreciate your contributions on the project. Even if you feel like you're not ready to contribute to an open source repo. If that's the case for you, open up a new issue and we'll find something that works for your skill level. You're not an impostor, and we're here to help.
+
 Getting Started
 ---------------
 
