@@ -1,20 +1,27 @@
 class EnrollUser < ServiceObject
   def setup
-    fail! unless context.user.present? && context.course.present?
-    fail! unless user_has_correct_org
+    fail! unless user_present?
+    fail! unless course_present?
+    fail! unless user_has_correct_org?(context.course, context.user)
   end
 
   def run
-    fail!("Couldn't add enrollment") unless add_user_enrollment
-    fail!("Couldn't send email") unless send_welcome_email
+    add_user_enrollment || fail!("Couldn't add enrollment")
+    send_welcome_email || fail!("Couldn't send email")
   end
 
   private
 
-  def user_has_correct_org
-    return true if !context.course.organization.present?
+  def user_present?
+    context.user.present?
+  end
 
-    context.course.organization == context.user.organization
+  def course_present?
+    context.course.present?
+  end
+
+  def user_has_correct_org?(course, user)
+    course.organization.blank? || course.organization == user.organization
   end
 
   def add_user_enrollment
@@ -22,15 +29,16 @@ class EnrollUser < ServiceObject
   end
 
   def send_welcome_email
-    admin_mailer.confirm_enrollment(context.user, context.course).deliver_now &&
-      user_mailer.confirm_enrollment(context.user, context.course).deliver_now
+    mail_user && mail_admin
   end
 
-  def admin_mailer
-    context.admin_mailer || AdminMailer
+  def mail_admin
+    mailer = context.admin_mailer || AdminMailer
+    mailer.confirm_enrollment(context.user, context.course).deliver_now
   end
 
-  def user_mailer
-    context.user_mailer || UserMailer
+  def mail_user
+    mailer = context.user_mailer || UserMailer
+    mailer.confirm_enrollment(context.user, context.course).deliver_now
   end
 end

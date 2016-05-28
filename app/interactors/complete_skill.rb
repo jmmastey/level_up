@@ -7,17 +7,21 @@ class CompleteSkill < ServiceObject
   end
 
   def run
-    context.completion = new_completion(context.user, context.skill)
-    context.completion.save!
-    CompleteDeadline.call(user: context.user, category: context.skill.category)
+    create_completion(context.user, context.skill)
+    complete_deadline
   rescue
     fail! "unable to complete skill"
   end
 
   private
 
-  def new_completion(user, skill)
-    Completion.new(user: user, skill: skill)
+  def complete_deadline
+    CompleteDeadline.call(user: context.user, category: context.skill.category)
+  end
+
+  def create_completion(user, skill)
+    completion = Completion.new(user: user, skill: skill).tap(&:save!)
+    context.completion = completion
   end
 
   def check_user
@@ -34,10 +38,12 @@ class CompleteSkill < ServiceObject
   end
 
   def check_organization
-    raise context.inspect unless context.skill.present?
-    org = context.skill.category.course.organization
-    return if !org || org == context.user.organization
+    return if failure?
 
-    fail!("provide a valid skill")
+    fail!("provide a valid skill") unless skill_org.in? [nil, context.user.organization]
+  end
+
+  def skill_org
+    context.skill.category.course.organization
   end
 end

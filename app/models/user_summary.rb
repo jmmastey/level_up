@@ -1,28 +1,45 @@
 class UserSummary
+  BASE_SUMMARY = { completed: 0, total: 0, verified: 0 }
+
   def initialize(user)
     @user = user
   end
 
   def for_user
-    @for_user ||= summary_data.map { |category| typecast_results_for(category) }
+    @for_user ||= summary_data.map do |category|
+      typecast_results_for(category)
+    end
   end
 
   def for_category(category)
-    summary = for_user.find { |data| category.handle == data[:handle] }
-    summary.presence || { total_skills: category.skills.count, total_completed: 0, total_verified: 0 }
+    summary = for_user.find do |data|
+      category.handle == data[:handle]
+    end
+
+    summary.presence || initialized_summary(category)
   end
 
   def for_course(course)
-    for_user.each_with_object(completed: 0, total: 0, verified: 0) do |c, hash|
+    for_user.each_with_object(BASE_SUMMARY) do |c, hash|
       next unless course.id == c[:course_id]
 
       hash[:completed]  += c[:total_completed]
       hash[:total]      += c[:total_skills]
       hash[:verified]   += c[:total_verified]
+
+      hash[:completed_percent] = completed_percent(hash[:completed], hash[:total])
     end
   end
 
   private
+
+  def completed_percent(completed, total)
+    ((completed / total) * 100).ceil
+  end
+
+  def initialized_summary(category)
+    { total_skills: category.skills.count, total_completed: 0, total_verified: 0 }
+  end
 
   def summary_data
     connection.execute(summary_query)

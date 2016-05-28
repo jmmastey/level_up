@@ -9,14 +9,18 @@ class CompleteDeadline < ServiceObject
   private
 
   def all_skills_completed?
-    all       = context.category.skills.pluck(:id)
-    complete  = Completion.where(user: context.user, skill: all).count
+    skills    = context.category.skills
+    skill_ids = skills.pluck(:id)
+    completions  = Completion.where(user: context.user, skill: skill_ids)
 
-    all.length == complete
+    skill_ids.length == completions.count
   end
 
   def deadline
-    context.deadline ||
-      Deadline.where(user: context.user, category: context.category).first
+    context.deadline || user_deadline
+  end
+
+  def user_deadline
+    Deadline.find_by(user: context.user, category: context.category)
   end
 end
