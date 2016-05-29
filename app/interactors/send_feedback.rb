@@ -1,8 +1,7 @@
 class SendFeedback < ServiceObject
   def setup
-    [:user, :page, :message].each do |var|
-      fail_unless_var_present(var)
-    end
+    validate_key :user, :page, :message
+    default :admin_mailer, AdminMailer
   end
 
   def run
@@ -14,14 +13,7 @@ class SendFeedback < ServiceObject
   private
 
   def feedback_message
-    admin_mailer.send_feedback(context.user, context.page, context.message)
-  end
-
-  def admin_mailer
-    context.admin_mailer || AdminMailer
-  end
-
-  def fail_unless_var_present(var)
-    fail!("provide a valid #{var}") unless context.send(var)
+    mailer = context.admin_mailer
+    mailer.send_feedback(context.user, context.page, context.message)
   end
 end

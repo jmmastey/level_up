@@ -5,8 +5,8 @@ describe EnrollUser do
   let(:course)  { create(:course) }
   let(:user)    { create(:user) }
 
-  let(:amailer) { spy("AdminMailer", confirm_enrollment: mail) }
-  let(:umailer) { spy("UserMailer", confirm_enrollment: mail) }
+  let(:amailer) { spy("AdminMailer", present?: true, confirm_enrollment: mail) }
+  let(:umailer) { spy("UserMailer", present?: true, confirm_enrollment: mail) }
 
   def interactor(opts = {})
     @interactor ||= subject.new({ course: course, user: user }.merge(opts))

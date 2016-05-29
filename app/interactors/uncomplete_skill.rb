@@ -1,34 +1,28 @@
 class UncompleteSkill < ServiceObject
   def setup
-    check_user
-    check_skill
-    check_completion
+    validate_key :user, :skill
+    validate("can only uncomplete a previously completed skill") { |c| user_completed?(c.user, c.skill) }
   end
 
   def run
-    set_completion(context.user, context.skill)
-    context.completion.destroy!
+    set_completion
+    destroy_completion!
   rescue => error
     fail! "unable to uncomplete skill: #{error.message}"
   end
 
   private
 
-  def set_completion(user, skill)
-    context.completion = Completion.find_by!(user: user, skill: skill)
+  def set_completion
+    completion = Completion.find_by!(user: context.user, skill: context.skill)
+    context.completion = completion
   end
 
-  def check_user
-    fail!("provide a valid user") unless context.user
+  def destroy_completion!
+    context.completion.destroy!
   end
 
-  def check_skill
-    fail!("provide a valid skill") unless context.skill
-  end
-
-  def check_completion
-    Completion.for!(context.user, context.skill)
-  rescue
-    fail!("can only uncomplete a previously completed skill")
+  def user_completed?(user, skill)
+    Completion.for!(user, skill) rescue false
   end
 end

@@ -1,26 +1,24 @@
 class RemindDeadlines < ServiceObject
+  def setup
+    default :now, Time.now
+    default :user_mailer, UserMailer
+    default :deadlines, Deadline.active.nearly_expired
+  end
+
   def run
-    targets.each { |deadline| remind(deadline) }
+    context.deadlines.each do |deadline|
+      remind(deadline)
+    end
   end
 
   private
 
-  def targets
-    context.deadlines ||= Deadline.active.nearly_expired
-  end
-
   def remind(deadline)
-    return unless deadline.user.email_opt_out.nil?
+    return if deadline.user.email_opt_out?
 
-    user_mailer.deadline_reminder(deadline).deliver_now
-    deadline.update_attributes!(reminder_sent_at: now)
-  end
+    mailer = context.user_mailer
+    mailer.deadline_reminder(deadline).deliver_now
 
-  def now
-    @now ||= (context.now || Time.now)
-  end
-
-  def user_mailer
-    context.user_mailer || UserMailer
+    deadline.update_attributes!(reminder_sent_at: context.now)
   end
 end

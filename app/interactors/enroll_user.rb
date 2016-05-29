@@ -1,36 +1,40 @@
 class EnrollUser < ServiceObject
   def setup
-    fail! unless context.user.present? && context.course.present?
-    fail! unless user_has_correct_org
+    validate_key :user, :course
+    validate("provide a valid course") { |c| user_has_correct_org?(c.course, c.user) }
+
+    default :user_mailer, UserMailer
+    default :admin_mailer, AdminMailer
   end
 
   def run
-    fail!("Couldn't add enrollment") unless add_user_enrollment
-    fail!("Couldn't send email") unless send_welcome_email
+    add_user_enrollment || fail!("Couldn't add enrollment")
+    send_welcome_emails || fail!("Couldn't send email")
   end
 
   private
 
-  def user_has_correct_org
-    return true if !context.course.organization.present?
-
-    context.course.organization == context.user.organization
+  def user_has_correct_org?(course, user)
+    course.organization.in? [nil, user.organization]
   end
 
   def add_user_enrollment
     Enrollment.create(course: context.course, user: context.user)
   end
 
-  def send_welcome_email
-    admin_mailer.confirm_enrollment(context.user, context.course).deliver_now &&
-      user_mailer.confirm_enrollment(context.user, context.course).deliver_now
+  def send_welcome_emails
+    mail_user && mail_admin
   end
 
-  def admin_mailer
-    context.admin_mailer || AdminMailer
+  def mail_admin
+    mailer = context.admin_mailer
+    mail = mailer.confirm_enrollment(context.user, context.course)
+    mail.deliver_now
   end
 
-  def user_mailer
-    context.user_mailer || UserMailer
+  def mail_user
+    mailer = context.user_mailer
+    mail = mailer.confirm_enrollment(context.user, context.course)
+    mail.deliver_now
   end
 end

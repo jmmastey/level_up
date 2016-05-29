@@ -6,8 +6,6 @@ module CoursesHelper
 
   def completion_percent_for(course, user = current_user)
     summary = user.summary.for_course(course)
-
-    return 0 unless summary[:total] > 0
-    ((summary[:completed] / summary[:total].to_f) * 100).ceil
+    summary.fetch(:completed_percent, 0).ceil
   end
 end

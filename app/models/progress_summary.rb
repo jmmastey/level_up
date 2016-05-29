@@ -20,7 +20,8 @@ class ProgressSummary
 
   def summarize_progress_for_enrollment(enrollment)
     { course_name: enrollment.course.name,
-      progress: progress_burndown(enrollment) }
+      progress: progress_burndown(enrollment)
+    }
   end
   private :summarize_progress_for_enrollment
 
@@ -36,12 +37,17 @@ class ProgressSummary
     skills_left = enrollment.course.skills.count
     completions = completions(enrollment)
 
-    start_date.upto(end_date).each_with_object({}) do |date, hash|
-      skills_left -= completions[date].length if completions[date]
-      hash[date] = skills_left
-    end
+    burn_downward(start_date.upto(end_date), skills_left, completions)
   end
   private :progress_burndown
+
+  def burn_downward(dates, remaining, completions)
+    dates.each_with_object({}) do |date, hash|
+      remaining -= completions.fetch(date, []).length
+      hash[date] = remaining
+    end
+  end
+  private :burn_downward
 
   def completions(enrollment)
     Completion.for_course(enrollment.user, enrollment.course)

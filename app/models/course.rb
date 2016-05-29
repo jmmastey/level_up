@@ -9,6 +9,7 @@ class Course < ActiveRecord::Base
 
   scope :published, -> { where(status: :published) }
   scope :by_date, -> { order("created_at desc") }
+  scope :in_org, ->(org) { where(organization: [nil, org]) }
 
   state_machine :status, initial: :created do
     event(:approve)  { transition created: :approved }
@@ -18,14 +19,20 @@ class Course < ActiveRecord::Base
   end
 
   def self.available_to(student)
-    return all.sort_by(&:sort_order) if student.admin?
+    courses = if student.admin?
+      all
+    else
+      published.in_org(student.organization) | student.courses
+    end
 
-    (published | student.courses).reject do |course|
-      course.organization && student.organization != course.organization
-    end.sort_by(&:sort_order)
+    courses.sort_by(&:sort_order)
   end
 
   def self.published_course(id)
     all.published.find(id)
+  end
+
+  def for_org?(org)
+    !organization || organization == org
   end
 end
