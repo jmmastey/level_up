@@ -1,4 +1,8 @@
 class RemindActivityDropoffs < ServiceObject
+  def setup
+    default :user_mailer, UserMailer
+  end
+
   def run
     context.enrollments = targets.each do |enrollment|
       next unless still_stuck?(enrollment)
@@ -11,11 +15,12 @@ class RemindActivityDropoffs < ServiceObject
   private
 
   def emailable?(user)
-    user.email_opt_out.nil?
+    !user.email_opt_out?
   end
 
   def still_stuck?(enrollment)
-    CourseActivity.new(enrollment.user, enrollment.course).user_is_stuck?
+    activity = CourseActivity.new(enrollment.user, enrollment.course)
+    activity.user_is_stuck?
   end
 
   def targets
@@ -25,10 +30,7 @@ class RemindActivityDropoffs < ServiceObject
   end
 
   def remind(enrollment)
-    user_mailer.activity_reminder(enrollment).deliver_now
-  end
-
-  def user_mailer
-    context.user_mailer || UserMailer
+    mail = context.user_mailer.activity_reminder(enrollment)
+    mail.deliver_now
   end
 end

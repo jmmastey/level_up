@@ -1,4 +1,8 @@
 class RemindRegistrationDropoffs < ServiceObject
+  def setup
+    default :user_mailer, UserMailer
+  end
+
   def run
     context.users = lazy_users.each do |user|
       user.update_attributes!(enrollment_reminder_sent: true)
@@ -15,10 +19,7 @@ class RemindRegistrationDropoffs < ServiceObject
   end
 
   def remind(user)
-    user_mailer.reg_reminder(user).deliver_now
-  end
-
-  def user_mailer
-    context.user_mailer || UserMailer
+    mailer = context.user_mailer
+    mailer.reg_reminder(user).deliver_now
   end
 end

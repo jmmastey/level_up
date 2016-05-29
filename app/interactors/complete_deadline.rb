@@ -1,9 +1,15 @@
 class CompleteDeadline < ServiceObject
+  def setup
+    validate_key :category, :user
+    default :deadline, user_deadline
+  end
+
+  # return but don't fail if there's no deadline
   def run
-    return unless deadline.present?
+    return unless context.deadline
     return unless all_skills_completed?
 
-    deadline.update_attributes!(completed_on: Date.today)
+    context.deadline.update_attributes!(completed_on: Date.today)
   end
 
   private
@@ -14,10 +20,6 @@ class CompleteDeadline < ServiceObject
     completions  = Completion.where(user: context.user, skill: skill_ids)
 
     skill_ids.length == completions.count
-  end
-
-  def deadline
-    context.deadline || user_deadline
   end
 
   def user_deadline

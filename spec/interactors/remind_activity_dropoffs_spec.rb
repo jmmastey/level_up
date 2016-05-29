@@ -3,7 +3,7 @@ require 'spec_helper'
 describe RemindActivityDropoffs do
   subject(:interactor) { described_class.new(user_mailer: umailer) }
   let(:course)  { create(:course, :with_skills) }
-  let(:umailer) { spy("UserMailer", activity_reminder: spy) }
+  let(:umailer) { spy("UserMailer", present?: true, activity_reminder: spy) }
   let!(:enroll) { create(:enrollment, course: course, created_at: 1.year.ago) }
 
   it "sends email to users who've become stuck" do

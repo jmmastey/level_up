@@ -10,6 +10,11 @@ describe CompleteSkill do
     subject.new(skill: the_skill, user: the_user).call
   end
 
+  it "requires a valid skill" do
+    response = interactor(the_skill: nil)
+    expect(response.errors).to include("provide a valid skill")
+  end
+
   it "allows the user to complete a skill" do
     expect(interactor).to be_success
     expect(user.skills(skill.category)).to include(skill)

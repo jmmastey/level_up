@@ -27,14 +27,14 @@ class UserSummary
       hash[:total]      += c[:total_skills]
       hash[:verified]   += c[:total_verified]
 
-      hash[:completed_percent] = completed_percent(hash[:completed], hash[:total])
+      hash[:completed_percent] = completed_percent(hash)
     end
   end
 
   private
 
-  def completed_percent(completed, total)
-    ((completed / total) * 100).ceil
+  def completed_percent(hash)
+    ((hash[:completed] / hash[:total]) * 100).ceil
   end
 
   def initialized_summary(category)
@@ -55,14 +55,12 @@ class UserSummary
     group by e.course_id, c.id, c.handle, sort_order order by sort_order"
   end
 
+  INTEGER_FIELDS = [:id, :course_id, :total_skills, :total_completed, :total_verified]
+
   def typecast_results_for(category)
-    { id:               category['id'].to_i,
-      name:             category['name'],
-      handle:           category['handle'],
-      course_id:        category['course_id'].to_i,
-      total_skills:     category['total_skills'].to_i,
-      total_completed:  category['total_completed'].to_i,
-      total_verified:   category['total_verified'].to_i }
+    category.symbolize_keys!.tap do |hash|
+      INTEGER_FIELDS.each { |field| hash[field] = hash[field].to_i }
+    end
   end
 
   def connection
