@@ -17,7 +17,6 @@ gem 'state_machine'
 gem 'gravatar_image_tag'
 gem 'puma', ">= 2.0"
 gem 'omniauth-github'
-gem 'activerecord-session_store'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 # gem 'rack-mini-profiler'
