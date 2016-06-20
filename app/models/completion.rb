@@ -10,6 +10,13 @@ class Completion < ActiveRecord::Base
 
   scope :by_id, -> { order("id desc") }
 
+  def self.for_category(user, category)
+    Completion.joins(:skill)
+      .where(user: user)
+      .where(skills: { category_id: category })
+      .by_id
+  end
+
   def self.for_course(user, course)
     Completion.where("user_id = ? and skill_id in
       (select s.id from skills s, categories c

@@ -16,4 +16,9 @@ class Enrollment < ActiveRecord::Base
       item: item,
     }
   end
+
+  def self.enrollment_date(user, course)
+    where(course: course, user: user)
+      .pluck(:created_at).first
+  end
 end

@@ -1,9 +1,10 @@
 class CourseActivity
-  attr_reader :user, :course
+  attr_reader :user, :course, :skills
 
-  def initialize(user, course)
+  def initialize(user, course, skills: course.skills)
     @course = course
     @user = user
+    @skills = skills
   end
 
   def user_is_stuck?
@@ -17,14 +18,11 @@ class CourseActivity
   end
 
   def unfinished?
-    course.skills.count > completions.count
+    skills.count > completions.count
   end
 
   def completions
-    @completions ||= Completion.joins(:skill)
-                     .where(user: user)
-                     .where(skills: { category_id: course.categories })
-                     .by_id
+    @completions ||= Completion.for_category(user, course.categories)
   end
 
   def last_activity_date
@@ -32,8 +30,6 @@ class CourseActivity
   end
 
   def enroll_date
-    @enroll_date ||= user.enrollments
-                     .where(course: course)
-                     .pluck(:created_at).first
+    @enroll_date ||= Enrollment.enrollment_date(user, course)
   end
 end

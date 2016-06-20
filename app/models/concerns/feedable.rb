@@ -9,7 +9,9 @@ module Feedable
 
   module ClassMethods
     def feed_for(user)
-      recent.for_user(user).by_creation_date
+      recent
+        .for_user(user)
+        .by_creation_date
     end
 
     def decorated_feed_for(user)

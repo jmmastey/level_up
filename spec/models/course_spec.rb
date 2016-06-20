@@ -19,15 +19,6 @@ describe Course do
     end
   end
 
-  describe "#categories" do
-    let(:course) { create(:course) }
-    let(:category) { create(:category) }
-
-    it "doesn't belong to any categories by default" do
-      expect(course.categories).to be_empty
-    end
-  end
-
   describe "#available_to" do
     let(:user) { create(:user) }
     let(:admin) { create(:user, :admin) }

@@ -77,3 +77,6 @@ pickle-email-*.html
 # Environment files that may contain sensitive data
 .env
 .powenv
+
+# don't check in generated documentation
+/doc

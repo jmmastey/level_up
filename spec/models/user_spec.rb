@@ -90,39 +90,6 @@ describe User do
     end
   end
 
-  describe "skills" do
-    let(:user)      { create(:user) }
-    let(:skill)     { create(:skill, category: category) }
-    let(:category)  { create(:category) }
-
-    it "finds skills that have been completed" do
-      expect(user.skills).to be_empty
-
-      create(:completion, user: user, skill: skill)
-      expect(user.skills.count).to eq(1)
-      expect(user.skills).to include(skill)
-
-      completion = create(:completion, user: user)
-      expect(user.skills.count).to eq(2)
-      expect(user.skills).to include(completion.skill)
-    end
-
-    it "finds skills by category" do
-      create(:completion, user: user, skill: skill)
-      other = create(:completion, user: user)
-
-      # scope down on category
-      expect(user.skills.for_category(category).length).to eq(1)
-      expect(user.skills.for_category(category)).not_to include(other.skill)
-    end
-
-    it "checks completion of a skill" do
-      expect(user.skills).not_to include(skill)
-      create(:completion, user: user, skill: skill)
-      expect(user.reload.skills).to include(skill)
-    end
-  end
-
   describe "#from_omniauth" do
     let(:attrs) { { email: "tom@test.com", name: "Tom PW" } }
     let(:info) { double("info", email: attrs[:email], name: attrs[:name]) }
