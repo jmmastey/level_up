@@ -12,9 +12,9 @@ class Completion < ActiveRecord::Base
 
   def self.for_category(user, category)
     Completion.joins(:skill)
-      .where(user: user)
-      .where(skills: { category_id: category })
-      .by_id
+              .where(user: user)
+              .where(skills: { category_id: category })
+              .by_id
   end
 
   def self.for_course(user, course)
@@ -29,7 +29,7 @@ class Completion < ActiveRecord::Base
   end
 
   def self.for!(user, skill)
-    self.for(user, skill) || fail(ActiveRecord::RecordNotFound)
+    self.for(user, skill) || raise(ActiveRecord::RecordNotFound)
   end
 
   def self.user_skills(user)

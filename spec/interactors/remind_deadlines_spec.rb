@@ -3,12 +3,14 @@ require 'spec_helper'
 describe RemindDeadlines do
   subject(:interactor) { described_class.new(user_mailer: umailer, now: now) }
   let(:now) { Time.now }
-  let(:umailer) { spy("UserMailer", present?: true) }
+  let(:umailer) { class_spy(UserMailer, present?: true, deadline_reminder: spy) }
   let(:deadline) { Deadline.new(user: User.new) }
 
   it "sends email to users who've become stuck" do
     allow(deadline).to receive(:update_attributes!) { true }
-    interactor = described_class.new(deadlines: [deadline], user_mailer: umailer, now: now)
+    interactor = described_class.new(deadlines: [deadline],
+                                     user_mailer: umailer,
+                                     now: now)
 
     interactor.call
 
@@ -25,7 +27,9 @@ describe RemindDeadlines do
 
   it "updates the deadline params" do
     allow(deadline).to receive(:update_attributes!) { true }
-    interactor = described_class.new(deadlines: [deadline], user_mailer: umailer, now: now)
+    interactor = described_class.new(deadlines: [deadline],
+                                     user_mailer: umailer,
+                                     now: now)
 
     interactor.call
 

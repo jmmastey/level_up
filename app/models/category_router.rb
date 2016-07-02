@@ -19,6 +19,6 @@ module CategoryRouter
     return if user && user.admin?
     return if !organization || organization == user.organization
 
-    fail WrongOrganizationError
+    raise WrongOrganizationError
   end
 end

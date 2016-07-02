@@ -1,4 +1,4 @@
-task :stats => "custom_stats:stats"
+task stats: "custom_stats:stats"
 
 namespace :custom_stats do
   task :stats do
@@ -7,4 +7,3 @@ namespace :custom_stats do
     ::STATS_DIRECTORIES << ["Migrations", "db/migrate"]
   end
 end
-

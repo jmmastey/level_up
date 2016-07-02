@@ -35,7 +35,8 @@ describe CourseActivity, type: :model do
     end
 
     it "returns false when the user has recent completions" do
-      allow(Completion).to receive(:for_category) { [build(:completion, created_at: 1.day.ago)] }
+      completion = build(:completion, created_at: 1.day.ago)
+      allow(Completion).to receive(:for_category) { [completion] }
       allow(Enrollment).to receive(:enrollment_date) { 2.weeks.ago }
 
       result = subject.user_is_stuck?
@@ -53,7 +54,8 @@ describe CourseActivity, type: :model do
 
     it "returns true when the last completion is super old" do
       allow(Enrollment).to receive(:enrollment_date) { 2.weeks.ago }
-      allow(Completion).to receive(:for_category) { [build(:completion, created_at: 2.weeks.ago)] }
+      completion = build(:completion, created_at: 2.weeks.ago)
+      allow(Completion).to receive(:for_category) { [completion] }
 
       result = subject.user_is_stuck?
 

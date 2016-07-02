@@ -92,8 +92,8 @@ describe User do
 
   describe "#from_omniauth" do
     let(:attrs) { { email: "tom@test.com", name: "Tom PW" } }
-    let(:info) { double("info", email: attrs[:email], name: attrs[:name]) }
-    let(:auth) { double("github", provider: "github", uid: "1", info: info) }
+    let(:info) { OpenStruct.new(email: attrs[:email], name: attrs[:name]) }
+    let(:auth) { OpenStruct.new(provider: "github", uid: "1", info: info) }
 
     context "with a new user" do
       it "creates the new user with the provided info" do

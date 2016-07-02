@@ -24,6 +24,8 @@ class UserMailer < ActionMailer::Base
     @user = deadline.user
     @category = deadline.category
     @deadline = deadline
-    mail(to: @user.email, subject: "LevelUpRails: Your deadline for #{@category.name} is coming up.")
+    subject = "LevelUpRails: Your deadline for #{@category.name} is coming up."
+
+    mail(to: @user.email, subject: subject)
   end
 end

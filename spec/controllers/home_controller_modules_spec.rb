@@ -14,7 +14,7 @@ describe HomeController, type: :controller do
     next if ["faux"].include? category
 
     it "shows the #{category} page properly" do
-      get :show, category: category
+      get :show, params: { category: category }
 
       expect(response.code).to eq("200")
       expect(response.body).to include(category)

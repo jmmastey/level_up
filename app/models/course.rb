@@ -20,10 +20,10 @@ class Course < ActiveRecord::Base
 
   def self.available_to(student)
     courses = if student.admin?
-      all
-    else
-      published.in_org(student.organization) | student.courses
-    end
+                all
+              else
+                published.in_org(student.organization) | student.courses
+              end
 
     courses.sort_by(&:sort_order)
   end

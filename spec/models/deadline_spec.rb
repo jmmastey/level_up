@@ -5,7 +5,7 @@ describe Deadline do
 
   describe '#estimate' do
     it "estimates a deadline date" do
-      cat = double(difficulty: 3)
+      cat = instance_double(Category, difficulty: 3)
 
       result = deadline.estimate(cat).to_date
 

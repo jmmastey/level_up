@@ -1,7 +1,7 @@
 class UnsubscribeController < ApplicationController
-  before_filter :authenticate_user!, only: [:index]
-  before_filter :find_unsubscribe_by_token
-  before_filter :find_unsubscribe_by_user
+  before_action :authenticate_user!, only: [:index]
+  before_action :find_unsubscribe_by_token
+  before_action :find_unsubscribe_by_user
 
   def confirm
     unless @link.present?

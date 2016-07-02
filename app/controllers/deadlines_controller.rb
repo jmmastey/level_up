@@ -4,15 +4,16 @@ class DeadlinesController < ApplicationController
   # POST deadlines/toggle
   def toggle
     current_user.update_attributes!(mode_params)
-    redirect_to :back, notice: "Account details updated successfully. We'll remember that."
+    notice = "Account details updated successfully. We'll remember that."
+    redirect_to :back, notice: notice
   end
 
   # POST deadlines
   def create
     Deadline.create!(deadline_params.merge(user: current_user))
-    notice = "Locked and loaded: this lesson is going down by " +
-      "#{deadline_params[:target_completed_on]}. You'll receive a reminder for " +
-      "this deadline as it comes closer."
+    notice = "Locked and loaded: this lesson is going down by " \
+             "#{deadline_params[:target_completed_on]}. You'll receive a reminder for " \
+             "this deadline as it comes closer."
 
     redirect_to :back, notice: notice
   end

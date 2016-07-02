@@ -8,7 +8,7 @@ class ServiceObject
     params.each do |k, v|
       @context.send("#{k}=", v)
     end
-    setup if self.respond_to?(:setup)
+    setup if respond_to?(:setup)
   end
 
   # error handling
@@ -36,7 +36,7 @@ class ServiceObject
   # execution
 
   def run
-    fail NotImplementedError, "Please implement 'run' to perform the work."
+    raise NotImplementedError, "Please implement 'run' to perform the work."
   end
 
   def call
@@ -50,13 +50,13 @@ class ServiceObject
 
   # validations
 
-  def validate(message, &block)
-    fail! message unless block.call(context)
+  def validate(message)
+    fail! message unless yield(context)
   end
 
   def validate_key(*keys)
     keys.each do |key|
-      self.validate("provide a valid #{key}") { |c| c.send(key).present? }
+      validate("provide a valid #{key}") { |c| c.send(key).present? }
     end
   end
 

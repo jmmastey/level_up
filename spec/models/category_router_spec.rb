@@ -10,31 +10,33 @@ describe CategoryRouter do
   describe ".find_category!" do
     it "raises if user isn't in the right org" do
       params  = { category: "america", organization: "sharks" }
-      user    = instance_double("User", admin?: false, organization: "jets")
+      user    = instance_double(User, admin?: false, organization: "jets")
 
-      expect { subject.find_category!(params, user) }.to raise_error(WrongOrganizationError)
+      expect do
+        subject.find_category!(params, user)
+      end.to raise_error(WrongOrganizationError)
     end
 
     it "doesn't care if the category doesn't belong to an organization" do
       params  = { category: "america" }
-      user    = instance_double("User", admin?: false)
-      klass   = spy("Category", find_by!: "fie!")
+      user    = instance_double(User, admin?: false)
+      klass   = class_spy(Category, find_by!: "fie!")
 
       expect { subject.find_category!(params, user, klass) }.not_to raise_error
     end
 
     it "allows admins through regardless" do
       params  = { category: "america", organization: "sharks" }
-      user    = double("User", admin?: true, organization: "jets")
-      klass   = double("Category", organization: "sharks", find_by!: "fie!")
+      user    = instance_double(User, admin?: true, organization: "jets")
+      klass   = class_double(Category, find_by!: "fie!")
 
       expect { subject.find_category!(params, user, klass) }.not_to raise_error
     end
 
     it "looks for the category when bidden" do
       params  = { category: "america", organization: "sharks" }
-      user    = instance_double("User", admin?: false, organization: "sharks")
-      klass   = spy("Category")
+      user    = instance_double(User, admin?: false, organization: "sharks")
+      klass   = class_spy(Category)
 
       subject.find_category!(params, user, klass)
 
@@ -47,8 +49,8 @@ describe CategoryRouter do
     subject(:router) { CategoryRouter }
 
     it "uses helpers" do
-      helpers = spy("UrlHelpers")
-      cat     = double("Category", organization: "org", handle: "handle")
+      helpers = spy
+      cat     = instance_double(Category, organization: "org", handle: "handle")
 
       subject.path_for(cat, helpers)
 

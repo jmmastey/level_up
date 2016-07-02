@@ -6,7 +6,7 @@ describe SendFeedback do
                         message: "msg", admin_mailer: amailer)
   end
 
-  let(:amailer) { double("AdminMailer", send_feedback: spy) }
+  let(:amailer) { class_double(AdminMailer, send_feedback: spy) }
   let(:user)    { create(:user) }
 
   context "when the interactor is a success" do

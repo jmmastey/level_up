@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.6'
+gem 'rails', '5.0.0'
+
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -26,7 +27,6 @@ gem 'mail', '~> 2.5.4' # workaround for http://stackoverflow.com/questions/25984
 
 group :development do
   gem 'foreman'
-  gem 'quiet_assets'
   gem 'rubocop'
   gem 'rubocop-rspec'
 end
@@ -34,7 +34,9 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails', require: false
-  gem 'rspec-rails'
+  gem 'rspec-rails', '3.5.0'
+  # remove when guard-rspec properly resolves to rspec 3.5.0
+  gem 'rspec', '3.5.0'
   gem 'rspec-pride', '3.1.1'
   gem 'poltergeist'
 
@@ -53,9 +55,9 @@ group :development, :test do
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'guard-cucumber'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  gem 'rb-fchange', require: false
+  gem 'rb-fsevent', require: false
+  gem 'rb-inotify', require: false
 end
 
 group :production do

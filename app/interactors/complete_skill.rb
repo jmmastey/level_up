@@ -1,5 +1,4 @@
 class CompleteSkill < ServiceObject
-
   def setup
     validate_key :skill, :user
     validate("cannot re-complete a skill") { |c| !Completion.for(c.user, c.skill) }

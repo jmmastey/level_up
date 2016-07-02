@@ -3,7 +3,7 @@ def current_user
 end
 
 def create_course(status, name)
-  handle = name.gsub(' ', '_').underscore
+  handle = name.tr(' ', '_').underscore
   return if Course.where(handle: handle).any?
 
   FactoryGirl.create(:course, :with_related_category, status: status,

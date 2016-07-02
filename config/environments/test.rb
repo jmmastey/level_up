@@ -13,8 +13,8 @@ Levelup::Application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_files = true
-  config.static_cache_control = "public, max-age=3600"
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -36,4 +36,6 @@ Levelup::Application.configure do
 
   # Go somewhere. Needs real config in prod.
   config.action_mailer.default_url_options = { host: 'localhost:5000' }
+
+  config.assets.quiet = true
 end

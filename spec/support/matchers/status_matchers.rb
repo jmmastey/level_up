@@ -45,7 +45,7 @@ module StatusMatchers
     redirection: 300..399,
     client_error: 400..499,
     server_error: 500..599,
-  }
+  }.freeze
 
   # The Rack::Utils::SYMBOL_TO_STATUS_CODE contains all the
   # Rack::Utils::HTTP_STATUS_CODES already changed to symbols,

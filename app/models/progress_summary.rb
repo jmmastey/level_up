@@ -20,8 +20,7 @@ class ProgressSummary
 
   def summarize_progress_for_enrollment(enrollment)
     { course_name: enrollment.course.name,
-      progress: progress_burndown(enrollment)
-    }
+      progress: progress_burndown(enrollment) }
   end
   private :summarize_progress_for_enrollment
 
@@ -29,7 +28,7 @@ class ProgressSummary
     return val if val.is_a? Date
     return val.to_date if val.respond_to? :to_date
     return Date.parse(val) if val.is_a? String
-    fail ArgumentError
+    raise ArgumentError
   end
   private :as_date
 
@@ -51,8 +50,8 @@ class ProgressSummary
 
   def completions(enrollment)
     Completion.for_course(enrollment.user, enrollment.course)
-      .pluck(:created_at, :id)
-      .group_by { |c| as_date(c.first) }
+              .pluck(:created_at, :id)
+              .group_by { |c| as_date(c.first) }
   end
 
   #

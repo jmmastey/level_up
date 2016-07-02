@@ -23,8 +23,7 @@ module Omniauthable
              password: Devise.friendly_token[0, 20],
              name: name_from_auth(auth),
              provider: auth.provider,
-             uid: auth.uid,
-            )
+             uid: auth.uid)
     end
     private :new_from_omniauth
 

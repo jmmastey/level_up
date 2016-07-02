@@ -22,7 +22,10 @@ Style/PerlBackrefs:
   Exclude:
     - features/support/paths.rb
 
-Style/TrailingComma:
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 
 # This never works for validations
@@ -67,6 +70,9 @@ Metrics/BlockNesting:
 Metrics/MethodLength:
   Max: 7
 
+Metrics/LineLength:
+  Max: 90
+
 # fewer parameters
 Metrics/ParameterLists:
   Max: 3
@@ -75,3 +81,6 @@ Style/PredicateName:
   Exclude:
     - app/models/user.rb
     - app/models/guest.rb
+
+RSpec/ExampleLength:
+  Max: 7

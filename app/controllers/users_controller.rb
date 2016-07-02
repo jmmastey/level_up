@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :find_user, only: [:show, :update]
-  before_filter :find_active_users, only: [:index]
+  before_action :authenticate_user!
+  before_action :find_user, only: [:show, :update]
+  before_action :find_active_users, only: [:index]
 
   def update
     if current_user.update_attributes(user_params)
@@ -15,8 +15,8 @@ class UsersController < ApplicationController
 
   def find_active_users
     @users = User.with_recent_activity
-             .by_org(current_user.organization)
-             .page(params[:page])
+                 .by_org(current_user.organization)
+                 .page(params[:page])
   end
 
   def find_user

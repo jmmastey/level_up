@@ -17,7 +17,7 @@ class CompleteDeadline < ServiceObject
   def all_skills_completed?
     skills    = context.category.skills
     skill_ids = skills.pluck(:id)
-    completions  = Completion.where(user: context.user, skill: skill_ids)
+    completions = Completion.where(user: context.user, skill: skill_ids)
 
     skill_ids.length == completions.count
   end

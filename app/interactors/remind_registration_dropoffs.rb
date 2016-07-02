@@ -14,8 +14,8 @@ class RemindRegistrationDropoffs < ServiceObject
 
   def lazy_users
     User.older.emailable
-      .without_enrollments
-      .where(enrollment_reminder_sent: false)
+        .without_enrollments
+        .where(enrollment_reminder_sent: false)
   end
 
   def remind(user)

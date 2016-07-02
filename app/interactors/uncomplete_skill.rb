@@ -1,7 +1,9 @@
 class UncompleteSkill < ServiceObject
   def setup
     validate_key :user, :skill
-    validate("can only uncomplete a previously completed skill") { |c| user_completed?(c.user, c.skill) }
+
+    uncomplete_message = "can only uncomplete a previously completed skill"
+    validate(uncomplete_message) { |c| user_completed?(c.user, c.skill) }
   end
 
   def run
@@ -23,6 +25,8 @@ class UncompleteSkill < ServiceObject
   end
 
   def user_completed?(user, skill)
-    Completion.for!(user, skill) rescue false
+    Completion.for!(user, skill)
+  rescue
+    false
   end
 end

@@ -5,15 +5,15 @@ describe EnrollUser do
   let(:course)  { create(:course) }
   let(:user)    { create(:user) }
 
-  let(:amailer) { spy("AdminMailer", present?: true, confirm_enrollment: mail) }
-  let(:umailer) { spy("UserMailer", present?: true, confirm_enrollment: mail) }
+  let(:amailer) { class_spy(AdminMailer, present?: true, confirm_enrollment: mail) }
+  let(:umailer) { class_spy(UserMailer, present?: true, confirm_enrollment: mail) }
 
   def interactor(opts = {})
     @interactor ||= subject.new({ course: course, user: user }.merge(opts))
   end
 
   context "when the interactor is a success" do
-    let(:mail) { double("mail", deliver_now: true) }
+    let(:mail) { instance_double(ActionMailer::MessageDelivery, deliver_now: true) }
 
     it "allows a user to register for a course" do
       expect(interactor.call).to be_success
@@ -30,7 +30,7 @@ describe EnrollUser do
   end
 
   context "when emails cannot be sent" do
-    let(:mail) { double("mail", deliver_now: false) }
+    let(:mail) { instance_double(ActionMailer::MessageDelivery, deliver_now: false) }
 
     it "fails when emails cannot be sent properly" do
       interactor = interactor(admin_mailer: amailer)

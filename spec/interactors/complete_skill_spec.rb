@@ -17,7 +17,7 @@ describe CompleteSkill do
 
   it "allows the user to complete a skill" do
     expect(interactor).to be_success
-    expect(user.skills(skill.category)).to include(skill)
+    expect(user.skills.reload).to include(skill)
   end
 
   it "doesn't allow completions to exist twice" do
@@ -30,7 +30,8 @@ describe CompleteSkill do
 
     interactor
 
-    expect(CompleteDeadline).to have_received(:call).with(user: user, category: skill.category)
+    expect(CompleteDeadline).to have_received(:call)
+      .with(user: user, category: skill.category)
   end
 
   context "with organizations" do

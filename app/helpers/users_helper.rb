@@ -1,6 +1,6 @@
 module UsersHelper
   FEED_LENGTH = 50
-  FEEDABLE_OBJECTS = [Completion, Enrollment]
+  FEEDABLE_OBJECTS = [Completion, Enrollment].freeze
 
   def feed_items_for(user)
     objects = FEEDABLE_OBJECTS.map { |klass| klass.decorated_feed_for(user) }

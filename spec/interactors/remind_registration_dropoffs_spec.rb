@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RemindRegistrationDropoffs do
   subject(:interactor) { described_class.new(user_mailer: umailer) }
-  let(:umailer) { double("UserMailer", reg_reminder: spy) }
+  let(:umailer) { class_double(UserMailer, reg_reminder: spy) }
 
   it "sends email to users who haven't registered" do
     allow(interactor).to receive(:lazy_users) { [create(:user)] }
@@ -13,16 +13,14 @@ describe RemindRegistrationDropoffs do
   end
 
   it "finds old users with no enrollments" do
-    enrolled_user = create(:enrollment).user
-    new_user      = create(:user, name: "New User")
-    old_user      = create(:user, name: "Old User", created_at: 3.weeks.ago)
+    create(:enrollment).user
+    create(:user, name: "New User")
+    old_user = create(:user, name: "Old User", created_at: 3.weeks.ago)
     allow(interactor).to receive(:remind)
 
     interactor.call
 
-    expect(interactor).to have_received(:remind).with(old_user)
-    expect(interactor).not_to have_received(:remind).with(new_user)
-    expect(interactor).not_to have_received(:remind).with(enrolled_user)
+    expect(interactor).to have_received(:remind).once.with(old_user)
   end
 
   it "sends emails only once" do

@@ -9,7 +9,10 @@ class AdminMailer < ActionMailer::Base
   end
 
   def send_feedback(user, page, message)
-    @user, @name, @page, @message = user, user.name, page, message
+    @user = user
+    @name = user.name
+    @page = page
+    @message = message
     mail(from: user.email, reply_to: user.email,
          subject: "LevelUp: Feedback from #{@name}")
   end

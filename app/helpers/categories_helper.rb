@@ -5,7 +5,7 @@ module CategoriesHelper
     tutorial: 'fa-code',
     book: 'fa-book',
     audio: 'fa-microphone',
-  }
+  }.freeze
 
   def exercise_block_for(handle, &block)
     block = ExerciseBlock.new(@category, handle, &block)
@@ -32,7 +32,7 @@ module CategoriesHelper
   end
 
   def resource_classes(type)
-    RESOURCE_CLASSES.fetch(type) { fail ArgumentError } + ' fa fa-fw'
+    RESOURCE_CLASSES.fetch(type) { raise ArgumentError } + ' fa fa-fw'
   end
 
   def completion_classes(skill)

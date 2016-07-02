@@ -42,7 +42,7 @@ describe UserSummary do
 
   describe "#for_category" do
     it "returns empty if you aren't enrolled" do
-      cat = double(skills: Skill.all, handle: "foo")
+      cat = instance_double(Category, skills: Skill.all, handle: "foo")
       summary = UserSummary.new(user).for_category(cat)
 
       expect(summary[:total_skills]).to eq(Skill.count)

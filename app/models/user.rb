@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   has_many :skills, through: :completions
   has_many :courses, through: :enrollments
 
-  validates :email, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+  EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :email, uniqueness: true, format: { with: EMAIL_REGEX }
   validates :name, presence: true
 
   scope :older, -> { where("users.created_at < ?", 5.days.ago) }

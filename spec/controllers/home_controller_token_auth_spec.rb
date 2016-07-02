@@ -9,7 +9,7 @@ describe HomeController, type: :controller do
   it "authenticates the user via token as requested" do
     allow(User).to receive(:from_token_auth)
 
-    get :index, auth_hash
+    get :index, params: auth_hash
 
     expect(User).to have_received(:from_token_auth).with(auth_hash)
   end
@@ -17,7 +17,7 @@ describe HomeController, type: :controller do
   it "only authenticates if params are provided" do
     allow(User).to receive(:from_token_auth)
 
-    get :index, {}
+    get :index, params: {}
 
     expect(User).not_to have_received(:from_token_auth)
   end

@@ -25,8 +25,8 @@ class RemindActivityDropoffs < ServiceObject
 
   def targets
     Enrollment.includes(:course).includes(:user)
-      .where(progress_reminder_sent_at: nil)
-      .where("created_at < ?", 1.week.ago)
+              .where(progress_reminder_sent_at: nil)
+              .where("created_at < ?", 1.week.ago)
   end
 
   def remind(enrollment)

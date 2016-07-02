@@ -1,5 +1,5 @@
 class UserSummary
-  BASE_SUMMARY = { completed: 0, total: 0, verified: 0 }
+  BASE_SUMMARY = { completed: 0, total: 0, verified: 0 }.freeze
 
   def initialize(user)
     @user = user
@@ -20,7 +20,7 @@ class UserSummary
   end
 
   def for_course(course)
-    for_user.each_with_object(BASE_SUMMARY) do |c, hash|
+    for_user.each_with_object(BASE_SUMMARY.merge({})) do |c, hash|
       next unless course.id == c[:course_id]
 
       hash[:completed]  += c[:total_completed]
@@ -55,7 +55,8 @@ class UserSummary
     group by e.course_id, c.id, c.handle, sort_order order by sort_order"
   end
 
-  INTEGER_FIELDS = [:id, :course_id, :total_skills, :total_completed, :total_verified]
+  INTEGER_FIELDS = [:id, :course_id, :total_skills,
+                    :total_completed, :total_verified].freeze
 
   def typecast_results_for(category)
     category.symbolize_keys!.tap do |hash|
