@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/rack/rack.git
+  revision: 25a549883b85fb33970b4a1530a365c0c9e51f95
+  specs:
+    rack (2.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -224,7 +230,6 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     puma (3.4.0)
-    rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0)
@@ -376,6 +381,7 @@ DEPENDENCIES
   poltergeist
   pry-rails
   puma (>= 2.0)
+  rack!
   rails (= 5.0.0)
   rails_12factor
   rake

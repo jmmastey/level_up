@@ -22,6 +22,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 # gem 'rack-mini-profiler'
 gem 'dotenv'
+gem 'rack', github: 'rack/rack'
 
 gem 'mail', '~> 2.5.4' # workaround for http://stackoverflow.com/questions/25984067/argumenterror-method-sort-given-0-expected-1-when-sending-a-confirmation
 
