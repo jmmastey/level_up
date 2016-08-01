@@ -21,10 +21,7 @@ gem 'puma', ">= 2.0"
 gem 'omniauth-github'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-# gem 'rack-mini-profiler'
 gem 'dotenv'
-
-gem 'mail', '~> 2.5.4' # workaround for http://stackoverflow.com/questions/25984067/argumenterror-method-sort-given-0-expected-1-when-sending-a-confirmation
 
 group :development do
   gem 'foreman'
@@ -35,9 +32,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails', require: false
-  gem 'rspec-rails', '3.5.0'
-  # remove when guard-rspec properly resolves to rspec 3.5.0
-  gem 'rspec', '3.5.0'
+  gem 'rspec-rails'
   gem 'rspec-pride', '3.1.1'
   gem 'poltergeist'
 
