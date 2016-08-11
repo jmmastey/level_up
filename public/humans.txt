@@ -16,10 +16,10 @@
 /* THANKS */
   Chuck Lauer Vose (@vosechu) for the Inspiration
   A mountain of internal testers:
-    Blake Thomas (bthomas@enova.com)
-    Isaac Bowen (ibowen@enova.com)
+    Blake Thomas (@dijjnn)
+    Isaac Bowen (hello@isaacbowen.com)
     Lisa Szkatulski (lisa.szkaulski@gmail.com)
-    Pete Brousalis (pbrousalis@enova.com)
+    Pete Brousalis (@brousalis)
     and others...
 
 /* SITE */
