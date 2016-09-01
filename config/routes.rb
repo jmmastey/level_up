@@ -24,4 +24,5 @@ Levelup::Application.routes.draw do
 
   get "/unsubscribe", to: "unsubscribe#index", as: :unsubscribe
   get "/unsubscribe/:token", to: "unsubscribe#confirm"
+  get '/.well-known/acme-challenge/:id' => 'pages#letsencrypt'
 end
