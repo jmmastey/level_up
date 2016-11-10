@@ -24,6 +24,14 @@ Proprietary Content Support
 
 LevelUp now supports proprietary courses for users from organizations. While the intention is to share as much as possible, it's useful to have one platform that also covers internal projects. the production site uses private gems with Rails Engines to mount the additional content. Users, courses, and categories can all have organization flags on them, which render them invisible to anyone outside those orgs.
 
+Update Certificate
+------------------
+Cert provided by LetsEncrypt. Update as follows:
+
+    sudo certbot certonly --manual
+    heroku config:set LETS_ENCRYPT_CODE=some_value
+    sudo heroku certs:update /etc/letsencrypt/live/leveluprails.com-0001/fullchain.pem /etc/letsencrypt/live/leveluprails.com-0001/privkey.pem
+
 Contributing
 ------------
 
