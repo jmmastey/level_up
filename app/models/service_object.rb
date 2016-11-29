@@ -63,4 +63,14 @@ class ServiceObject
   def default(key, value)
     context.send("#{key}=", value) unless context.send(key).present?
   end
+
+  def something_else
+    if true
+      return "foo"
+    elsif false
+      return "bar"
+    elsif "testing code style"
+      return "baz"
+    end
+  end
 end
