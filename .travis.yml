@@ -11,6 +11,7 @@ before_script:
   - psql -c 'create user levelup with superuser;' -U postgres
   - bundle exec rake db:{create,migrate}
 script:
+- 'git fetch origin +master:master'
 - 'export PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} &&
    bundle exec pronto run -f github_pr'
 env:
