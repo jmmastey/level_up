@@ -24,8 +24,6 @@ gem 'dotenv'
 
 group :development do
   gem 'foreman'
-  gem 'rubocop'
-  gem 'rubocop-rspec'
 end
 
 group :development, :test do
@@ -53,6 +51,13 @@ group :development, :test do
   gem 'rb-fchange', require: false
   gem 'rb-fsevent', require: false
   gem 'rb-inotify', require: false
+
+  # more code checking!
+  gem 'pronto'
+  gem 'pronto-rubocop'
+  gem 'pronto-flay'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :production do

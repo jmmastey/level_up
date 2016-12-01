@@ -3,6 +3,7 @@ AllCops:
     - lib/tasks/cucumber.rake
     - features/step_definitions/email_steps.rb
     - 'db/**/*'
+  DisplayCopNames: true
     
 # C: Missing top-level module documentation comment.
 Style/Documentation:
