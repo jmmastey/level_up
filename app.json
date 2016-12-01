@@ -1,0 +1,80 @@
+{
+  "name": "level_up",
+  "description": "LevelUpRails.com site",
+  "scripts": {
+  },
+  "env": {
+    "ADMIN_EMAIL": {
+      "required": true
+    },
+    "ADMIN_NAME": {
+      "required": true
+    },
+    "CDN_HOST": {
+      "required": true
+    },
+    "DATABASE_URL": {
+      "required": true
+    },
+    "DOMAIN_NAME": {
+      "required": true
+    },
+    "GITHUB_CLIENT_ID": {
+      "required": true
+    },
+    "GITHUB_CLIENT_SECRET": {
+      "required": true
+    },
+    "GMAIL_PASSWORD": {
+      "required": true
+    },
+    "GMAIL_USERNAME": {
+      "required": true
+    },
+    "LANG": {
+      "required": true
+    },
+    "LETS_ENCRYPT_CODE": {
+      "required": true
+    },
+    "NEW_RELIC_LICENSE_KEY": {
+      "required": true
+    },
+    "NONCE": {
+      "required": true
+    },
+    "RACK_ENV": {
+      "required": true
+    },
+    "RAILS_ENV": {
+      "required": true
+    },
+    "ROLES": {
+      "required": true
+    },
+    "SECRET_KEY": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    },
+    "worker": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "rollbar",
+    "scheduler",
+    "sendgrid",
+    "ssl",
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
