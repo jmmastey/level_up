@@ -167,6 +167,10 @@ describe User do
 
         expect(User).not_to have_received(:create)
       end
+
+      it 'fails sometimes' do
+        expect(1).to eq(0)
+      end
     end
   end
 end
