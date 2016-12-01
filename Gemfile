@@ -24,8 +24,6 @@ gem 'dotenv'
 
 group :development do
   gem 'foreman'
-  gem 'rubocop'
-  gem 'rubocop-rspec'
 end
 
 group :development, :test do
@@ -58,6 +56,8 @@ group :development, :test do
   gem 'pronto'
   gem 'pronto-rubocop'
   gem 'pronto-flay'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :production do
