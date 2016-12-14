@@ -5,7 +5,7 @@ class DeadlinesController < ApplicationController
   def toggle
     current_user.update_attributes!(mode_params)
     notice = "Account details updated successfully. We'll remember that."
-    redirect_to :back, notice: notice
+    redirect_back(fallback_location: edit_user_registration_path, notice: notice)
   end
 
   # POST deadlines
@@ -15,7 +15,7 @@ class DeadlinesController < ApplicationController
              "#{deadline_params[:target_completed_on]}. You'll receive a reminder for " \
              "this deadline as it comes closer."
 
-    redirect_to :back, notice: notice
+    redirect_back(fallback_location: edit_user_registration_path, notice: notice)
   end
 
   # DELETE destroy
@@ -23,7 +23,7 @@ class DeadlinesController < ApplicationController
     deadline = Deadline.find(params[:id])
     deadline.destroy
 
-    redirect_to :back, notice: "Deadline removed. :'("
+    redirect_back(fallback_location: edit_user_registration_path, notice: "Deadline removed. :'(")
   end
 
   private
