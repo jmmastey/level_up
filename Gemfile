@@ -58,6 +58,8 @@ group :development, :test do
   gem 'pronto-flay'
   gem 'rubocop'
   gem 'rubocop-rspec'
+
+  gem 'rspec-activerecord-formatter'
 end
 
 group :production do

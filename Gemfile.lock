@@ -298,6 +298,10 @@ GEM
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
       rspec-mocks (~> 3.5.0)
+    rspec-activerecord-formatter (0.1.0)
+      activesupport (>= 4.0)
+      bundler (~> 1.9)
+      rspec (~> 3.4)
     rspec-core (3.5.2)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -418,6 +422,7 @@ DEPENDENCIES
   rb-fsevent
   rb-inotify
   rolify
+  rspec-activerecord-formatter
   rspec-pride (= 3.1.1)
   rspec-rails
   rubocop
