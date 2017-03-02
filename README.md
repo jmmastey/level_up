@@ -1,4 +1,4 @@
-LevelUpRails
+LevelUpRails [![codebeat badge](https://codebeat.co/badges/db618adb-34dc-48d0-9536-5c18391e89ef)](https://codebeat.co/projects/github-com-jmmastey-level_up)
 =========
 
 An app to store and verify training material for engineers on the [Rails Prime Stack](http://words.steveklabnik.com/rails-has-two-default-stacks). Currently hosted at http://leveluprails.com.
