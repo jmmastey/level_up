@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user_from_token
   before_action :miniprofiler
   before_action :redirect_to_real_domain
+  after_action :set_csp
 
   def current_user
     super || Guest.new
@@ -10,6 +11,24 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   private
+
+  ASSET_SOURCES = [ 'localhost:5000', 'cdnjs.cloudflare.com', 'netdna.bootstrapcdn.com',
+                    'fonts.googleapis.com', 'fonts.gstatic.com', 'gravatar.com',
+                    '*.google.com', '*.googleapis.com' ]
+
+  def script_nonce
+    @nonces ||= []
+    SecureRandom.uuid.tap { |nonce| @nonces << nonce }
+  end
+  helper_method :script_nonce
+
+  def csp_sources
+    ["'self'"] + ASSET_SOURCES + (@nonces || []).map { |n| "'nonce-#{n}'" }
+  end
+
+  def set_csp
+    response.headers['Content-Security-Policy'] = "default-src #{csp_sources.join(' ')}"
+  end
 
   def authenticate_user_from_token
     return unless params[:auth_email].presence && params[:auth_token].presence

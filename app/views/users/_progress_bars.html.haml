@@ -11,6 +11,6 @@
         .progress
           - unless category[:total_completed] == category[:total_skills]
             - completion = (category[:total_completed].to_f/category[:total_skills])*100
-            .progress-bar{style: "width:#{completion}%"}
+            .progress-bar{"data-width" => completion}
           - else
-            .progress-bar.progress-bar-success{style: 'width:100%'}
+            .progress-bar.progress-bar-success

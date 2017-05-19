@@ -7,7 +7,7 @@
 
     %p.completion= completion_summary_for(course)
     .progress
-      .progress-bar.progress-bar-success{style: "width: #{completion_percent_for(course)}%" }
+      .progress-bar.progress-bar-success{"data-width" => completion_percent_for(course)}
 
   .col-lg-7
     %ul.categories.list-group

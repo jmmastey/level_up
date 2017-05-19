@@ -15,4 +15,4 @@
             - user.courses.by_date.take(2).each do |course|
               %h5= course.name
               .progress
-                .progress-bar{style: "width:#{completion_percent_for(course, user)}%"}
+                .progress-bar{"data-width" => completion_percent_for(course, user)}

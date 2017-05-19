@@ -15,5 +15,10 @@ init_home = ->
         message: $("#message", form).val(),
       }
 
+  $('[data-width]').each(->
+    width = $(this).data('width') + "%"
+    $(this).css('width', width)
+  )
+
 $(document).ready(init_home)
 $(document).on('page:load', init_home)

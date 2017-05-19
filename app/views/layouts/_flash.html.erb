@@ -1,0 +1,9 @@
+<script type='text/javascript' nonce='<%= script_nonce %>'>
+  $(function() { site_alerts.map(function(msg) { $.snackbar({content: msg}); }); });
+  site_alerts = []
+
+  <%- flash.each do |_, msg| %>
+    site_alerts.push("<%= msg %>")
+  <% end %>
+
+</script>
