@@ -27,6 +27,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails', require: false
+  gem 'rb-readline'
   gem 'rspec-rails'
   gem 'rspec-pride', '3.1.1'
   gem 'poltergeist'
