@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   ASSET_SOURCES = [ 'leveluprails.com', 'localhost:5000', 'cdnjs.cloudflare.com',
                     'netdna.bootstrapcdn.com', 'fonts.googleapis.com', 'fonts.gstatic.com',
-                    'gravatar.com', '*.google.com', '*.googleapis.com' ]
+                    'gravatar.com', '*.google.com', '*.googleapis.com', ENV['CDN_HOST'] ]
 
   def script_nonce
     @nonces ||= []
