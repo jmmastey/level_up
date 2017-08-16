@@ -1,6 +1,17 @@
 .course {
+  border: 0px;
+  margin: 5px 5px 25px; 
+
+  .course-photo {
+    margin: 0px -15px 0px;
+  }
+
   h1 { margin-top:10px; font-size:22px; }
   .icon img { width:60%; margin:1.5em 20%; }
+
+  .description {
+    text-align: center;
+  }
 
   .register {
     display:block;
@@ -18,6 +29,11 @@
 
     .list-group-item {
       padding:2px 0px;
+
+      a {
+        color: #333;
+        font-size: 110%;
+      }
     }
 
     .badge {
@@ -27,8 +43,18 @@
 }
 
 .signup {
-  min-height:440px;
+  padding: 0px;
 
-  h3 { text-align: center; }
-  .description { font-size: 14px; }
+  min-height:400px;
+
+  h3 {
+    text-align: left;
+    margin: 20px;
+    font-size: 22px;
+  }
+  .description { margin: 20px; }
+
+  .btn {
+    margin-bottom: 20px;
+  }
 }
