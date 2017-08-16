@@ -41,9 +41,7 @@
 }
 
 .home-card {
-  display:inline-block;
-  margin:20px 20px;
-  width:40%;
+  margin-bottom:20px; 
 
   p {
     min-height: 10em;
@@ -51,6 +49,10 @@
 
   button { 
     margin-left: 16px;
+  }
+
+  img {
+    margin-top:0px;
   }
 }
 

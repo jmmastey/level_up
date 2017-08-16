@@ -21,6 +21,22 @@ header {
   width:60%;
   background-color:white;
   padding:20px;
+
+}
+
+@media only screen and (max-width : 992px) {
+  .content {
+    width: 100%;
+  }
+
+  .nav.navbar-nav {
+    top: 0px;
+    right: 0px;
+
+    li {
+      float: left;
+    }
+  }
 }
 
 .wide-content {

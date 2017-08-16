@@ -4,10 +4,6 @@
     %i.fa.fa-arrow-up
     Level UP Rails
 
-  %button.navbar-toggle{ data: { toggle: 'collapse', target: '.navbar-collapse' } }
-    %span.sr-only Toggle navigation
-    %i.fa.fa-cog
-
   %ul.nav.navbar-nav.navbar-right
     %li= link_to "Courses", courses_path
     - if current_user.signed_in?

@@ -26,22 +26,24 @@
     %p Once you know the material, get real verification of your skills with <a href='http://github.com/jmmastey/level_up_exercises'>challenging assignments</a> that will stretch you.
 
 
-.signups
+.signups.row
   %h2 Pick a course and sign up...
 
-  .home-card.shadow-z-1.baseline_1
-    = image_tag("courses/photo_baseline_1.jpg", width: '100%')
-    %h3 Engineering Baseline I
-    %p This is the best course for learning how to do modern software development on the Rails Prime stack. Don't worry if you don't know what that means yet, we'll teach you.
-    = form_tag enroll_path(1), method: :post, class: 'register' do
-      %button.btn.btn-lowprofile Enroll
+  .col-lg-6.col-sm-12
+    .home-card.shadow-z-1.baseline_1
+      = image_tag("courses/photo_baseline_1.jpg", width: '100%')
+      %h3 Engineering Baseline I
+      %p This is the best course for learning how to do modern software development on the Rails Prime stack. Don't worry if you don't know what that means yet, we'll teach you.
+      = form_tag enroll_path(1), method: :post, class: 'register' do
+        %button.btn.btn-lowprofile Enroll
 
-  .home-card.shadow-z-1.scaling
-    = image_tag("courses/photo_scaling.jpg", width: '100%')
-    %h3 Performance and Scaling
-    %p Take your skills to the next level and learn to deal with applications that have to operate under huge load. You'll learn all the idiomatic tricks that Rails provides you to handle capacity and keep things running smoothly.
-    = form_tag enroll_path(6), method: :post, class: 'register' do
-      %button.btn.btn-lowprofile Enroll
+  .col-lg-6.col-sm-12
+    .home-card.shadow-z-1.scaling
+      = image_tag("courses/photo_scaling.jpg", width: '100%')
+      %h3 Performance and Scaling
+      %p Take your skills to the next level and learn to deal with applications that have to operate under huge load. You'll learn all the idiomatic tricks that Rails provides you to handle capacity and keep things running smoothly.
+      = form_tag enroll_path(6), method: :post, class: 'register' do
+        %button.btn.btn-lowprofile Enroll
 
 .support
   %h2 And we'll help you!
