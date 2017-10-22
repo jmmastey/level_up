@@ -24,10 +24,10 @@ class ApplicationController < ActionController::Base
 
   def csp_sources(force_security: false)
     (
-      [("upgrade-insecure-requests" if upgrade_insecure)] +
+      [("upgrade-insecure-requests" if force_security)] +
       ["default-src", "'self'"] +
       ASSET_SOURCES + (@nonces || []).map { |n| "'nonce-#{n}'" } +
-      ["; report-uri #{report_csp_error_url}" if force_security]
+      [("; report-uri #{report_csp_error_url}" if force_security)]
     ).compact.join(' ')
   end
 
