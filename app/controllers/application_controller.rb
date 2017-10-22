@@ -22,17 +22,17 @@ class ApplicationController < ActionController::Base
   end
   helper_method :script_nonce
 
-  def csp_sources(upgrade_insecure: false)
+  def csp_sources(force_security: false)
     (
       [("upgrade-insecure-requests" if upgrade_insecure)] +
       ["default-src", "'self'"] +
-      ASSET_SOURCES + (@nonces || []).map { |n| "'nonce-#{n}'" }
+      ASSET_SOURCES + (@nonces || []).map { |n| "'nonce-#{n}'" } +
+      ["; report-uri #{report_csp_error_url}" if force_security]
     ).compact.join(' ')
   end
 
   def set_csp
-    response.headers['Content-Security-Policy'] = csp_sources(upgrade_insecure: Rails.application.config.force_ssl)
-    response.headers['Content-Security-Policy-Report-Only'] = "default-src https:; report-uri #{report_csp_error_url}"
+    response.headers['Content-Security-Policy'] = csp_sources(force_security: Rails.application.config.force_ssl)
   end
 
   def authenticate_user_from_token
