@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
   # GET /report-csp-error
   def report_csp_error
-    if Rails.app.config.force_ssl
+    if Rails.application.config.force_ssl
       AdminMailer.csp_error(request.body.read).deliver_now!
     end
   end
