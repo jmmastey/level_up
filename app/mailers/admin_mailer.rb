@@ -16,4 +16,9 @@ class AdminMailer < ActionMailer::Base
     mail(from: user.email, reply_to: user.email,
          subject: "LevelUp: Feedback from #{@name}")
   end
+
+  def csp_error(message)
+    @message = message
+    mail(subject: "LevelUp: Bad CSP Report")
+  end
 end

@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
 
   def set_csp
     response.headers['Content-Security-Policy'] = csp_sources(upgrade_insecure: Rails.application.config.force_ssl)
+    response.headers['Content-Security-Policy-Report-Only'] = "default-src https:; report-uri #{report_csp_error_url}"
   end
 
   def authenticate_user_from_token

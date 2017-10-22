@@ -25,4 +25,5 @@ Levelup::Application.routes.draw do
   get "/unsubscribe", to: "unsubscribe#index", as: :unsubscribe
   get "/unsubscribe/:token", to: "unsubscribe#confirm"
   get '/.well-known/acme-challenge/:id' => 'pages#letsencrypt'
+  post '/report-csp-error' => 'pages#report_csp_error'
 end
