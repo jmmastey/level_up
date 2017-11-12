@@ -98,4 +98,7 @@ Levelup::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # deflate responses!
+  config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
 end
