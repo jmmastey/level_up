@@ -1,7 +1,7 @@
 # Given
 
 def create_org_user(name, organization = nil)
-  FactoryGirl.create(:user, :skilled, name: name, organization: organization)
+  FactoryBot.create(:user, :skilled, name: name, organization: organization)
 end
 
 Given(/^there are users from many orgs$/) do
@@ -13,7 +13,7 @@ Given(/^there are users from many orgs$/) do
 end
 
 def create_org_course(name, handle, org = nil)
-  FactoryGirl.create(:course, :published, name: name,
+  FactoryBot.create(:course, :published, name: name,
                      handle: handle, organization: org)
 end
 

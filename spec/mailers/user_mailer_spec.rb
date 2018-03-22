@@ -36,7 +36,7 @@ describe UserMailer do
   end
 
   describe "#deadline_reminder" do
-    let(:deadline) { FactoryGirl.create(:deadline) }
+    let(:deadline) { FactoryBot.create(:deadline) }
     let(:mail) { UserMailer.deadline_reminder(deadline) }
 
     it "tells you about your deadline" do

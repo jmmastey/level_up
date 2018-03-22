@@ -7,11 +7,11 @@ def skill
 end
 
 Given(/^I completed a skill( recently)?$/) do |_|
-  FactoryGirl.create(:completion, user: current_user, skill: skill)
+  FactoryBot.create(:completion, user: current_user, skill: skill)
 end
 
 Given(/^I completed a skill a long time ago$/) do
-  FactoryGirl.create(:completion, user: current_user, skill: skill,
+  FactoryBot.create(:completion, user: current_user, skill: skill,
                                   created_at: 2.weeks.ago)
 end
 

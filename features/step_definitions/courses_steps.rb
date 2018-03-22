@@ -6,7 +6,7 @@ def create_course(status, name)
   handle = name.tr(' ', '_').underscore
   return if Course.where(handle: handle).any?
 
-  FactoryGirl.create(:course, :with_related_category, status: status,
+  FactoryBot.create(:course, :with_related_category, status: status,
                      name: name, handle: handle)
 end
 

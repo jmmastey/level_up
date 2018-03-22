@@ -79,7 +79,7 @@
     - e.question "Try using the .select method instead. How does this compare to the pluck approach?"
     - e.question "On the ActiveRecord Querying resource listed above, take a look at other querying methods available. Where could you use them to increase performance?"
 
-  %p When testing, we may run into a related performance issue. We tend to create many objects because it's so easy to do with FactoryGirl. Each of those objects has to run through a complete object save, access the database, and then later be loaded back into the application during the test.
+  %p When testing, we may run into a related performance issue. We tend to create many objects because it's so easy to do with FactoryBot. Each of those objects has to run through a complete object save, access the database, and then later be loaded back into the application during the test.
   %p Instead, we should create only the minimum number of objects necessary to complete a test. When applicable, it is sometimes even possible to build an object without saving it. Let's see if we can reduce the object creation count in our tests.
 
   = exercise_block_for "slow_tests" do |e|

@@ -1,16 +1,16 @@
 Given /^a user exists with some training progress$/ do
-  @user = FactoryGirl.create(:user, :enrolled)
+  @user = FactoryBot.create(:user, :enrolled)
 
   # now finish a few skills
   Skill.all.take(4).map do |skill|
-    FactoryGirl.create(:completion, :verified, user: @user,
+    FactoryBot.create(:completion, :verified, user: @user,
                        skill: skill, created_at: Date.today)
   end
 end
 
 Given /^there are other users with completions$/ do
   @users = []
-  2.times { @users << FactoryGirl.create(:user, :skilled) }
+  2.times { @users << FactoryBot.create(:user, :skilled) }
   @user = @users.first
 end
 
