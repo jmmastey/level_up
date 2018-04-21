@@ -55,6 +55,16 @@
   }
 }
 
+.course.list-group-item .summary,
+.course.signup { border-top: 5px solid #ccc; }
+
+.course.welcome.list-group-item .summary,
+.course.signup.welcome    { border-top-color: #007; }
+.course.baseline_1.list-group-item .summary,
+.course.signup.baseline_1 { border-top-color: #070; }
+.course.scaling.list-group-item .summary,
+.course.signup.scaling    { border-top-color: #700; }
+
 @media (max-width: 1000px) {
   .signup { padding-bottom: 30px; }
   .register .btn { margin-bottom: 0px; }
