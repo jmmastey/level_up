@@ -12,6 +12,10 @@
   width:36%;
   padding:3%;
   font-size:14px;
+
+  .sidebar-skill {
+    display: block;
+  }
   
   .sidebar-skill a {
     padding-left:4px; 
@@ -111,4 +115,18 @@
   }
   .exercise-count { display:inline-block; margin-left:5px; }
   .fa { margin-left:3px }
+}
+
+@media (max-width: 1000px) {
+  .container.home.show {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .resources {
+    position: relative;
+    width: auto;
+    order: -1;
+    margin-bottom: 4em;
+  }
 }

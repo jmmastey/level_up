@@ -14,7 +14,7 @@
   %body
     = render partial: 'layouts/navigation'
 
-    .container.main
+    %div{class: ['container', 'main', controller_name, action_name]}
       = yield
 
       %footer

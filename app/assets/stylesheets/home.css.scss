@@ -1,5 +1,5 @@
 .home-title {
-  clear:both;
+  clear: both;
 }
 
 .hero, .roadmap, .support, .signups {
@@ -12,18 +12,16 @@
 
   h1, h2 {
     font-size: 150%;
-    text-align: center;
-    margin: 20px 0px;
+    margin: 20px;
   }
 
   h3 {
-    text-align: center;
     font-weight: bold;
-    font-size: 110%;
+    font-size: 100%;
+    margin: 20px;
   }
 
   p {
-    text-align: center;
     margin: 0px 20px;
   }
 
@@ -32,11 +30,15 @@
   }
 }
 
-.home-section {
-  text-align: center;
-
-  p {
-    padding: 0px 20px;
+.roadmap {
+  .home-section {
+    .fa {
+      background-color: #009688;
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 20px;
+      margin-right: 5px;
+    }
   }
 }
 

@@ -9,10 +9,6 @@
   h1 { margin-top:10px; font-size:22px; }
   .icon img { width:60%; margin:1.5em 20%; }
 
-  .description {
-    text-align: center;
-  }
-
   .register {
     display:block;
     width:10em;
@@ -52,9 +48,14 @@
     margin: 20px;
     font-size: 22px;
   }
-  .description { margin: 20px; }
+  .description { padding: 20px; }
 
   .btn {
     margin-bottom: 20px;
   }
+}
+
+@media (max-width: 1000px) {
+  .signup { padding-bottom: 30px; }
+  .register .btn { margin-bottom: 0px; }
 }
