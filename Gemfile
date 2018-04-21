@@ -52,9 +52,9 @@ group :development, :test do
   gem 'rb-inotify', require: false
 
   # more code checking!
-  gem 'pronto'
-  gem 'pronto-rubocop'
-  gem 'pronto-flay'
+  #gem 'pronto'
+  #gem 'pronto-rubocop'
+  #gem 'pronto-flay'
   gem 'rubocop'
   gem 'rubocop-rspec'
 
