@@ -1,4 +1,4 @@
-class CreateUnsubscribeLinks < ActiveRecord::Migration
+class CreateUnsubscribeLinks < ActiveRecord::Migration[4.2]
   def change
     create_table :unsubscribe_links do |t|
       t.references :user, null: false

@@ -1,4 +1,4 @@
-class AddCourseToCategory < ActiveRecord::Migration
+class AddCourseToCategory < ActiveRecord::Migration[4.2]
   def up
     add_column :categories, :course_id, :integer
     Category.connection.execute "update categories c set course_id =

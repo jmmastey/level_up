@@ -1,4 +1,4 @@
-class AddDeadlineModel < ActiveRecord::Migration
+class AddDeadlineModel < ActiveRecord::Migration[4.2]
   def change
     create_table(:deadlines) do |t|
       t.integer :user_id, null: false
